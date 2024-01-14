@@ -1,7 +1,7 @@
 import { createTheme } from "@mui/material";
 
 const theme= createTheme({
-    direction: 'ltr',
+  direction:"rtl",
     components: {
       MuiButton: {
         styleOverrides: {

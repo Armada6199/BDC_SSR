@@ -1,7 +1,7 @@
 import { Grid,Button } from '@mui/material'
 import React from 'react'
 
-function StepperNavigationButtons({handleRest,handleBack,activeStep}) {
+function StepperNavigationButtons({handleRest,pageContent,handleBack,activeStep}) {
   return (
     <Grid container item  xs={12} maxHeight={'100%'}  alignItems={'center'}  spacing={2}  >
     <Grid container   item xs={4}  md={4}>

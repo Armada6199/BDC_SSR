@@ -18,7 +18,8 @@ function MonthsSlider({
   errors,
   currentLoan,
   handleSliderChange,
-  validateGreaterThanSalary
+  validateGreaterThanSalary,
+  loanInformationContent
 }) {
   const isMobile=useMediaQuery('(max-width:600px)');
   // const debouncedMonths=useDebounce(currentLoan.numberOfMonths_Input||currentLoan.numberOfMonths_Slider);
@@ -36,7 +37,7 @@ function MonthsSlider({
         <Grid container flexDirection={isMobile?'column':"row"} gap={2} justifyContent={"space-between"} item md={12}>
           <Grid item md={6}>
             <Typography fontWeight={"600"} variant="h5">
-              For so long:
+            {  loanInformationContent.monthsLabel}
             </Typography>
           </Grid>
           <Grid item md={4}>

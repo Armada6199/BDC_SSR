@@ -1,5 +1,5 @@
 "use client";
-import React, { createContext, useEffect, useState } from "react";
+import React, { createContext,  useState } from "react";
 import { loanDetailsData } from "@public/loans";
 
 export const CurrentLoanContext = createContext();

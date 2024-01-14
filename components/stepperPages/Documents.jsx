@@ -16,6 +16,7 @@ function Documents({
   hanldeSubmitAttatchments,
   uploadProgress,
   setUploadProgress,
+  documentsContent
 })
  {
   async function handleAddAttatchments(e) {
@@ -53,13 +54,13 @@ function Documents({
       <Grid container justifyContent={{textAlign:{xs:'center',md:"start"},xs:"center",md:"flex-start"}} item md={6} spacing={12}>
         <Grid item md={12}>
           <Typography variant="h5" fontWeight="700" color={"gray"}>
-            Attatchments
+            {documentsContent.sectionTitle}
           </Typography>
         </Grid>
         <Grid item md={12}>
           <Typography variant="body2" fontWeight={"500"} color={"darkgray"}>
-            Please Sign the template related to each file,or download it via the
-            download template button, then save it .{" "}
+          {documentsContent.uploadInstruction}
+
           </Typography>
         </Grid>
         <Grid item md={12}>
@@ -92,8 +93,8 @@ function Documents({
                 >
                   <CloudUploadIcon style={{ fontSize: 60, color: "#BE9952" }} />
                 </IconButton>
-                <Typography>Upload Bulk of Beneficiaries</Typography>
-                <Typography>Use a csv file</Typography>
+                <Typography>{documentsContent.uploadNumberLabel}</Typography>
+                <Typography>{documentsContent.uploadTypeLabel}</Typography>
               </Box>
             </label>
           </Paper>
@@ -106,6 +107,7 @@ function Documents({
           hanldeSubmitAttatchments={hanldeSubmitAttatchments}
           attatchments={currentLoan.loan_attatchments}
           setUploadProgress={setUploadProgress}
+          attatchmenPreviewContent={documentsContent.attachmentPreview}
         />
       </Grid>
     </Grid>

@@ -25,6 +25,7 @@ function LoanInformation({
   register,
   errors,
   setValue,
+  loanInformationContent
 }) {
   const {currentLoan,setCurrentLoan}=useContext(CurrentLoanContext);
     const handleSliderChange = (e) => {
@@ -108,8 +109,8 @@ function LoanInformation({
         <Grid container item md={12} gap={4}>
           <Grid item xs={12} md={12}>
             <Typography variant="h5" fontWeight={"600"}>
-              I want to apply
-            </Typography>
+            {loanInformationContent.applyTitle}
+              </Typography>
           </Grid>
           <Grid container item justifyContent={"space-between"} md={10} lg={12}>
             {isMobile ? (
@@ -137,6 +138,7 @@ function LoanInformation({
               validateGreaterThanSalary={validateGreaterThanSalary}
               register={register}
               errors={errors}
+              loanInformationContent={loanInformationContent}
             />
           </Grid>
           <Grid container item>
@@ -146,6 +148,7 @@ function LoanInformation({
               validateGreaterThanSalary={validateGreaterThanSalary}
               register={register}
               errors={errors}
+              loanInformationContent={loanInformationContent}
             />
           </Grid>
           <Grid container item>
@@ -155,6 +158,8 @@ function LoanInformation({
               validateGreaterThanSalary={validateGreaterThanSalary}
               register={register}
               errors={errors}
+              loanInformationContent={loanInformationContent}
+
             />
           </Grid>
         </Grid>
@@ -165,7 +170,7 @@ function LoanInformation({
             error={errors.isCurrentLoan?.message ? true : false}
           >
             <FormLabel id="demo-radio-buttons-group-label">
-              Do You have an active current Loan from BDC{" "}
+             {loanInformationContent.currentLoanLabel}{" "}
             </FormLabel>
             <RadioGroup
               aria-labelledby="demo-radio-buttons-group-label"
@@ -212,7 +217,7 @@ function LoanInformation({
                       }}
                     />
                   }
-                  label="Yes"
+                  label= {loanInformationContent.yesLabel}
                 />
               </Grid>
               <Grid item md={2}>
@@ -234,7 +239,7 @@ function LoanInformation({
                       }}
                     />
                   }
-                  label="No"
+                  label= {loanInformationContent.noLabel}
                 />
               </Grid>
             </RadioGroup>

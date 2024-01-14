@@ -6,15 +6,16 @@ import { glassmorphismStyle } from "@styles/styles.js";
 import Person2OutlinedIcon from "@mui/icons-material/Person2Outlined";
 import "@styles/styles.css";
 import LoginModal from "@components/LoginModal";
-import HomeLayout from "@components/layout/HomeLayout";
 import { useRouter } from "next/navigation";
 import { signIn } from "next-auth/react";
 import { CurrentLoanContext } from "@hooks/CurrentLoanProvider";
-import { LoginContext } from "@hooks/LoginProvider";
-function LoginPage() {
+import  getDictionary  from "@lib/dictionary";
+import Loader from "@components/Loader";
+ function HomeLogin({params:{lang}}) {
   const router = useRouter();
-  const isMobile = useMediaQuery("(max-width:600)");
+   const isMobile = useMediaQuery("(max-width:600)");
   const { setCurrentLoan } = useContext(CurrentLoanContext);
+  const [pageContent,setPageContent]=useState('');
   const [loginCredindtials, setLoginCredindtials] = useState({
     email: "",
     password: "",
@@ -22,7 +23,8 @@ function LoginPage() {
   const [openStaff, setOpenStaff] = React.useState(false);
   const handleOpenStaffLogin = () => setOpenStaff(true);
   const handleCloseStaffLogin = () => setOpenStaff(false);
-
+  const currentDirection=lang==="en"?'ltr':'rtl'
+  let page={}
   async function handleLogin() {
     try {
       const loginResponse = await signIn("credentials", {
@@ -41,8 +43,17 @@ function LoginPage() {
       (error);
     }
   }
+  useEffect(()=>{
+    const getPage=async ()=>{
+      const pageContent= await getDictionary(lang)
+      setPageContent(pageContent)
+      page=pageContent;
+    }
+    getPage();
+  },[])
   return (
-    <HomeLayout>
+    <Box sx={{direction:currentDirection}}>
+      {pageContent.loginPage?
       <Grid container maxHeight={"calc(100vh - 200px)"} item md={12}>
         <Grid
           container
@@ -69,24 +80,22 @@ function LoginPage() {
               position={"absolute"}
             />
             <Grid container zIndex={2} gap={4} item md={12}>
+              {console.log(pageContent)}
               <Grid container alignItems={"center"} item md={12} gap={3}>
                 <Grid item md={12}>
                   <Typography variant="h4" fontWeight={"400"} color={"white"}>
-                    WELCOME TO
+                    {pageContent.loginPage.welcomeText.main}
                   </Typography>
                 </Grid>
                 <Grid item>
                   <Typography variant="h3" fontWeight={"600"} color={"#F05030"}>
-                    BANQUE DU CARIE
+                  {pageContent.loginPage.welcomeText.bankName}
                   </Typography>
                 </Grid>
               </Grid>
               <Grid item>
                 <Typography variant="h6" fontWeight={"400"} color={"white"}>
-                  kindly let us know if you are an esteemed client of our bank
-                  or a valued member of our dedicated staff. Your selection will
-                  help us direct you to the right resources and support. Thank
-                  you for choosing us!
+               {pageContent.loginPage.staffLoginModalDescription}
                 </Typography>
               </Grid>
             </Grid>
@@ -118,7 +127,7 @@ function LoginPage() {
                   variant="h5"
                   fontWeight={"600"}
                 >
-                  Select one of the following options to continue
+                  {pageContent.loginPage.selectOptionText}
                 </Typography>
               </Grid>
               <Grid
@@ -164,7 +173,7 @@ function LoginPage() {
                   md={8}
                 >
                   <Typography variant="h6" fontWeight={"500"}>
-                    Apply as a Staff
+                   {pageContent.loginPage.staffOptionText}
                   </Typography>
                 </Grid>
               </Grid>
@@ -207,7 +216,7 @@ function LoginPage() {
                   md={8}
                 >
                   <Typography variant="h6" fontWeight={"500"}>
-                    Apply as a Client
+                  {pageContent.loginPage.clientOptionText}
                   </Typography>
                 </Grid>
               </Grid>
@@ -231,12 +240,16 @@ function LoginPage() {
               handleCloseStaffLogin={handleCloseStaffLogin}
               setLoginCredindtials={setLoginCredindtials}
               handleLogin={handleLogin}
+              pageContent={pageContent}
             />
           </Grid>
         </Modal>
-      </Grid>
-    </HomeLayout>
+      </Grid>:
+      <Grid container height={'100vh'} maxHeight={"calc(100vh - 200px)"} item md={12}>
+        <Loader/>
+      </Grid>}
+    </Box>
   );
 }
 
-export default LoginPage;
+export default HomeLogin;

@@ -1,0 +1,282 @@
+{
+  "stepperSteps": [
+    "1. معلومات القرض",
+    "2. الأهلية للقرض",
+    "3. المعلومات الشخصية",
+    "4. المرفقات",
+    "5. اتفاقية القرض"
+  ],
+  "stepperTitle": "تقديم القرض",
+  "loanInformation": {
+    "applyTitle": "أرغب في التقديم",
+    "loanDetailsTitle": "تفاصيل القرض",
+    "loanTypeLabel": "اختر نوع القرض",
+    "loanAmountLabel": "قيمة القرض",
+    "monthsLabel": "عدد الأشهر",
+    "salaryLabel": "الراتب الحالي",
+    "currentLoanLabel": "هل لديك قرض حالي من BDC؟",
+    "yesLabel": "نعم",
+    "noLabel": "لا",
+    "activeLoanTitle": "القروض الحالية",
+    "minimumTermMessage": "الحد الأدنى لطلبك هو {term}",
+    "ineligibleMessage": "غير مؤهل لهذا المبلغ",
+    "activeLoanMessage": "هل لديك قرض حالي من BDC؟",
+    "activeLoanSubmessage": "في حال كان لديك قرض حالي، يرجى إدخال تفاصيله أدناه."
+  },
+  "loanEligibility": {
+    "applyTitle": "قرضي",
+    "everyMonthPayTitle": "الدفعة الشهرية",
+    "loanTypeLabel": "نوع القرض",
+    "loanAmountLabel": "قيمة القرض",
+    "loanTermLabel": "مدة القرض (بالشهور)",
+    "loanDetailsTitle": "تفاصيل القرض",
+    "emiAmountLabel": "مبلغ التقسيط الشهري",
+    "interestPayableLabel": "الفائدة المستحقة",
+    "loanTypeSubtitle": "نوع القرض",
+    "loanAmountSubtitle": "قيمة القرض",
+    "loanTermSubtitle": "مدة القرض (بالشهور)"
+  },
+  "loginPage": {
+    "pageTitle": "صفحة تسجيل الدخول",
+    "welcomeText": {
+      "main": "مرحبًا بك في",
+      "bankName": "بنك القاهرة"
+    },
+    "clientOptionText": "تقديم كعميل",
+    "staffOptionText": "تقديم كموظف",
+    "selectOptionText": "حدد إحدى الخيارات للمتابعة",
+    "staffLoginModalTitle": "تسجيل الدخول كموظف",
+    "staffLoginModalDescription": "أدخل بيانات تسجيل الدخول لتسجيل الدخول كموظف",
+    "applyAsStaff": "تقديم كموظف",
+    "forgotPassword": "نسيت كلمة السر",
+    "modalPassword": "كلمة السر",
+    "modalEmail": "البريد الألكتروني",
+    "rememberMe": "تذكرني",
+    "loginButtonText": "تسجيل ألدخول"
+  },
+  "personalInformation": {
+    "sectionTitle": "معلومات شخصية",
+    "employeeNameLabel": "اسم الموظف",
+    "fileNumberLabel": "رقم الملف",
+    "jobTitleLabel": "الوظيفة",
+    "joiningDateLabel": "تاريخ الانضمام",
+    "employeeLevelLabel": "مستوى الموظف",
+    "jobLevelLabel": "مستوى الوظيفة",
+    "employeeNumberLabel": "رقم الموظف",
+    "workPlaceLabel": "مكان العمل",
+    "errors": {
+      "personalInfoInput": "هذا الحقل مطلوب"
+    }
+  },
+  "documents": {
+    "sectionTitle": "المستندات المطلوبة",
+    "uploadInstruction": "يرجى تحميل المستندات المطلوبة لاستكمال طلب القرض.",
+    "uploadButtonLabel": "تحميل المستندات",
+    "submitButtonLabel": "تقديم الطلب",
+    "uploadNumberLabel": "تحميل مجموعة من الوثائق",
+    "uploadTypeLabel": "يرجى تحميل الوثائل بصيغة ...",
+    "attachmentPreview": {
+      "selectedFilesTitle": "الملفات المختارة",
+      "noFilesMessage": "ستظهر المرفقات هنا عند اختيارها",
+      "fileUploadSuccessMessage": "تم تحميل الملفات بنجاح",
+      "fileUploadErrorMessage": "فشل تحميل بعض الملفات، يرجى المحاولة مرة أخرى",
+      "uploadingLabel": "جارٍ التحميل...",
+      "uploadButtonLabel": "تحميل",
+      "deleteButtonLabel": "حذف"
+    }
+  },
+  "interactiveAttatchments": {
+    "documentTitle": "اتفاقية  القرض",
+    "partiesTitle": "الأطراف",
+    "lenderLabel": "المقرض",
+    "lenderName": "بنك القاهرة",
+    "lenderLocation": "عمان",
+    "borrowerLabel": "المقترض",
+    "borrowerName": "{currentLoan?.formData?.employeeName}",
+    "borrowerWorkPlace": "{currentLoan?.formData?.workPlace}",
+    "agreementTitle": "الاتفاقية",
+    "agreementContent": "أنا، {currentLoan?.formData?.employeeName}، أقر وأقبل الشروط المذكورة في اتفاقية القرض، حيث ألتزم بسداد مبلغ القرض {currentLoan.EMI} على مدار الفترة المحددة {currentLoan.numberOfMonths} شهرًا كما تم الاتفاق، مع الالتزام بدفع أقساط شهرية قدرها {currentLoan.payPerMonth.toFixed(3)}، وأنا أفهم تمامًا وأوافق على الالتزام بهذه الشروط والتزاماتها، وأنا ملتزم بتحقيق هذا الاتفاق المالي في الإطار الزمني المحدد.",
+    "layersDetailsTitle": "تفاصيل الشرائح",
+    "signaturesTitle": "التواقيع",
+    "borrowerSignatureLabel": "توقيع المقترض",
+    "lenderSignatureLabel": "توقيع المقرض",
+    "addSignatureButton": "إضافة التوقيع",
+    "loanAgreementParagraph":"أتعهد أنا، [اسم العميل]، بدفع مبلغ القرض الإجمالي المتفق عليه خلال فترة [عدد الأشهر] شهرًا، بمعدل دفع شهري قدره [المبلغ الشهري]. أنا ملتزم بالالتزام الكامل بهذه الشروط والتزاماتها، وأتعهد بسداد هذه الالتزامات المالية خلال الفترة المحددة."
+    ,
+    "documentToolbar": {
+      "zoomIn": "تكبير",
+      "zoomOut": "تصغير",
+      "signButton": "توقيع",
+      "downloadButton": "تحميل",
+      "clearButton":"أزالة",
+      "signatureModalTitle":"الرجاء أضافة توقيعك ",
+      "saveButton":"حفظ"
+    }
+  },
+  "loansInformation": [
+    {
+      "title": "قرض شخصي",
+      "description": "امتلك سيارتك الحلم بفائدة تنافسية واحصل على امتيازات منتج القرض الخاص بنا.",
+      "privileges": [
+        "تمويل يصل إلى 150,000 دينار أردني",
+        "تمويل يصل إلى 100٪ من قيمة السيارة المقدرة.",
+        "فترة قرض تصل إلى 8 سنوات بما في ذلك فترة السماح",
+        "فترة سماح تصل إلى 3 أشهر"
+      ],
+      "termsAndConditions": [
+        "الحد الأدنى لمبلغ القرض هو 3,000 دينار أردني",
+        "الحد الأدنى لفترة القرض هو 12 شهرًا.",
+        "الدخل الأدنى هو 250 دينار أردني",
+        "الحد الأقصى لنسبة الدين للدخل (DBR) يصل إلى 50٪ ولمتقاعدي الضمان الاجتماعي يصل إلى 60٪"
+      ],
+      "isStaff": false,
+      "minIncomeAmount": 250,
+      "minAmount": 5000,
+      "intrestRates": [
+        { "title": "الشريحة الأولى", "interestRate": 0.0325, "min": 5000, "max": 400000 },
+        { "title": "الشريحة الثانية", "interestRate": 0.04, "min": 5000, "max": 160000 },
+        { "title": "الشريحة الثالثة", "interestRate": 0.06, "min": 5000, "max": 15000 },
+        { "title": "الشريحة الرابعة", "interestRate": 0.105, "min": 5000, "max": 190000 }
+      ],
+      "EMI": 0,
+      "payPerMonth": 0,
+      "numberOfMonths": 0,
+      "loanAmount": 0,
+      "interestPayable": 0,
+      "minMonths": 12,
+      "maxMonths": 300,
+      "hasPrevLoan": false,
+      "loan_attatchments": [],
+      "activeLoans": [{ "activeLoanLeftMonths": null, "activeLoanLayer": null, "activeLoanPayPerMonthInput": null, "activeLoanType": null }],
+      "currentSalary": 0,
+      "normalDBR": 0.5,
+      "socialSecurityDBR": 0.6,
+      "Minimumtenor": 12,
+      "totalAppliedLayers": [],
+      "activeLoansDeductions": [],
+      "maxAmountAfterDeduction": 0
+    },
+    {
+      "title": "قرض المنزل",
+      "description": "امتلك سيارتك الحلم بفائدة تنافسية واحصل على امتيازات منتج القرض الخاص بنا.",
+      "privileges": [
+        "تمويل يصل إلى 150,000 دينار أردني",
+        "تمويل يصل إلى 100٪ من قيمة السيارة المقدرة.",
+        "فترة قرض تصل إلى 8 سنوات بما في ذلك فترة السماح",
+        "فترة سماح تصل إلى 3 أشهر"
+      ],
+      "termsAndConditions": [
+        "الحد الأدنى لمبلغ القرض هو 3,000 دينار أردني",
+        "الحد الأدنى لفترة القرض هو 12 شهرًا.",
+        "الدخل الأدنى هو 250 دينار أردني",
+        "الحد الأقصى لنسبة الدين للدخل (DBR) يصل إلى 50٪ ولمتقاعدي الضمان الاجتماعي يصل إلى 60٪"
+      ],
+      "minIncomeAmount": 250,
+      "maxAmount": "(intrestRates) => {let initialValue=0; return  intrestRates.reduce((accumulator, currentValue) => accumulator+currentValue.max, initialValue)}",
+      "minAmount": 5000,
+      "intrestRates": [
+        { "title": "الشريحة الأولى", "interestRate": 0.0325, "min": 5000, "max": 400000 },
+        { "title": "الشريحة الثانية", "interestRate": 0.04, "min": 5000, "max": 160000 },
+        { "title": "الشريحة الثالثة", "interestRate": 0.06, "min": 5000, "max": 15000 },
+        { "title": "الشريحة الرابعة", "interestRate": 0.105, "min": 5000, "max": 190000 }
+      ],
+      "EMI": 0,
+      "payPerMonth": 0,
+      "numberOfMonths": 0,
+      "loanAmount": 0,
+      "interestPayable": 0,
+      "minMonths": 12,
+      "maxMonths": 300},
+      {
+        "title": "قرض السيارة",
+        "description": "امتلك سيارة أحلامك بفائدة تنافسية واحصل على امتيازات إضافية لمنتج قرض السيارة الخاص بنا.",
+        "privileges": [
+          "تمويل يصل إلى 150,000 دينار أردني",
+          "تمويل يصل إلى 100% من قيمة السيارة المقدرة.",
+          "فترة سداد القرض تصل إلى 8 سنوات بما في ذلك فترة السماح",
+          "فترة سماح تصل إلى 3 أشهر"
+        ],
+        "termsAndConditions": [
+          "الحد الأدنى لمبلغ القرض هو 3,000 دينار أردني",
+          "الحد الأدنى لفترة القرض هو 12 شهرًا.",
+          "الدخل الأدنى هو 250 دينار أردني",
+          "الدين إلى الدخل الشهري يصل إلى 50% وللمتقاعدين من الضمان الاجتماعي يصل إلى 60%"
+        ],
+        "minAmount": 5000,
+        "intrestRates": [
+          { "title": "الطبقة الأولى", "interestRate": 0.0325, "min": 5000, "max": 40000 },
+          { "title": "الطبقة الثانية", "interestRate": 0.04, "min": 5000, "max": 160000 },
+          { "title": "الطبقة الثالثة", "interestRate": 0.06, "min": 5000, "max": 15000 },
+          { "title": "الطبقة الرابعة", "interestRate": 0.105, "min": 5000, "max": 190000 }
+        ],
+        "EMI": 0,
+        "payPerMonth": 0,
+        "numberOfMonths": 0,
+        "loanAmount": 0,
+        "interestPayable": 0,
+        "minIncomeAmount": 250,
+        "minMonths": 12,
+        "maxMonths": 300,
+        "totalInterest": 0,
+        "isStaff": false,
+        "activeLoans": [
+          { "activeLoanLeftMonths": 0, "activeLoanLayer": 0, "activeLoanPayPerMonthInput": 0, "activeLoanType": 0 }
+        ],
+        "currentSalary": 0,
+        "hasPrevLoan": false,
+        "normalDBR": 0.5,
+        "Minimumtenor": 12,
+        "socialSecurityDBR": 0.6,
+        "totalAppliedLayers": [],
+        "activeLoansDeductions": [],
+        "loan_attatchments": [],
+        "maxAmountAfterDeduction": 0,
+        "loadIcon": "(props) => <DirectionsCarFilledOutlinedIcon sx={props} />"
+      },
+      {
+        "title": "قرض الأرض",
+        "description": "امتلك أرض أحلامك بفائدة تنافسية واحصل على امتيازات إضافية لمنتج قرض السيارة الخاص بنا.",
+        "privileges": [
+          "تمويل يصل إلى 150,000 دينار أردني",
+          "تمويل يصل إلى 100% من قيمة السيارة المقدرة.",
+          "فترة سداد القرض تصل إلى 8 سنوات بما في ذلك فترة السماح",
+          "فترة سماح تصل إلى 3 أشهر"
+        ],
+        "termsAndConditions": [
+          "الحد الأدنى لمبلغ القرض هو 3,000 دينار أردني",
+          "الحد الأدنى لفترة القرض هو 12 شهرًا.",
+          "الدخل الأدنى هو 250 دينار أردني",
+          "الدين إلى الدخل الشهري يصل إلى 50% وللمتقاعدين من الضمان الاجتماعي يصل إلى 60%"
+        ],
+        "minAmount": 5000,
+        "intrestRates": [
+          { "title": "الطبقة الأولى", "interestRate": 0.0325, "min": 5000, "max": 40000 },
+          { "title": "الطبقة الثانية", "interestRate": 0.04, "min": 5000, "max": 160000 },
+          { "title": "الطبقة الثالثة", "interestRate": 0.06, "min": 5000, "max": 15000 },
+          { "title": "الطبقة الرابعة", "interestRate": 0.105, "min": 5000, "max": 190000 }
+        ],
+        "EMI": 0,
+        "Minimumtenor": 12,
+        "payPerMonth": 0,
+        "numberOfMonths": 0,
+        "loanAmount": 0,
+        "interestPayable": 0,
+        "minIncomeAmount": 250,
+        "normalDBR": 0.5,
+        "socialSecurityDBR": 0.6,
+        "minMonths": 12,
+        "maxMonths": 300,
+        "totalInterest": 0,
+        "activeLoansDeductions": [],
+        "maxAmountAfterDeduction": 0,
+        "loan_loan_attatchments": [],
+        "activeLoans": [
+          { "activeLoanLeftMonths": null, "activeLoanLayer": null, "activeLoanPayPerMonthInput": null, "activeLoanType": null }
+        ],
+        "currentSalary": 0,
+        "hasPrevLoan": false,
+        "totalAppliedLayers": [],
+        "loadIcon": "(props) => <LandscapeOutlinedIcon sx={props} />"
+      }
+      ]
+}

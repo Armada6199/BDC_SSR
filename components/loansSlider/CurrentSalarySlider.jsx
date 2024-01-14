@@ -17,6 +17,7 @@ function CurrentSalarySlider({
   currentLoan,
   handleSliderChange,
   errors,
+  loanInformationContent
 }) 
 {
   const isMobile=useMediaQuery('(max-width:600px)');
@@ -27,7 +28,7 @@ function CurrentSalarySlider({
       <Grid container  flexDirection={isMobile?'column':"row"} gap={2} justifyContent={"space-between"} item md={12}>
         <Grid item md={6}>
           <Typography variant="h5" fontWeight={"600"}>
-            Current Salary:
+          {  loanInformationContent.salaryLabel}
           </Typography>
         </Grid>
         <Grid item md={4}>

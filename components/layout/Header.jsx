@@ -1,9 +1,21 @@
-
-import React from "react";
-import { Box, Grid, Typography } from "@mui/material";
+"use client";
+import React, { useContext, useEffect } from "react";
+import { Grid, Typography } from "@mui/material";
 // import bankLogo from "next/assets/Banque_du_caire_Logowhite.svg";
 import Image from "next/image";
-function Header() {
+import { LanguageContext } from "@hooks/LanguageProvider";
+import { usePathname, useRouter } from "next/navigation";
+
+function Header({lang}) {
+  const pathName=usePathname();
+  const {push}=useRouter();
+ const redirectedPathName=(locale)=>{
+  if(!pathName)  push('/');
+  const segments=pathName.split('/');
+  segments[1]=locale;
+  push(segments.join('/'))
+ };
+
   return (
     <Grid
       container
@@ -18,18 +30,28 @@ function Header() {
       md={12}
     >
       <Grid item md={6}>
-      {/* <Box
+        {/* <Box
           component={"img"}
           height={"60px"}
           sx={{ fill: "white" }}
           src={bankLogo}
         /> */}
         {/* <img src={bankLogo} alt="Bank Logo" height={"60px"} /> */}
-        <Image src={'/assets/Banque_du_caire_Logowhite.svg'} alt="bankLogo" width="152" height="60"/>
+        <Image
+          src={"/assets/Banque_du_caire_Logowhite.svg"}
+          alt="bankLogo"
+          width="152"
+          height="60"
+        />
       </Grid>
-      <Grid item md={6}>
+      <Grid
+        item
+        md={6}
+        sx={{ cursor: "pointer" }}
+        onClick={() => redirectedPathName(lang=='en'?'ar':'en')}
+      >
         <Typography variant="h6" textAlign={"end"} color={"white"}>
-          EN
+          {lang=='en'?'AR':'EN'}
         </Typography>
       </Grid>
     </Grid>

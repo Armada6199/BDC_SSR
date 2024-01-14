@@ -1,5 +1,5 @@
 'use client'
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Box from "@mui/material/Box";
 import Stepper from "@mui/material/Stepper";
 import Typography from "@mui/material/Typography";
@@ -12,8 +12,8 @@ import MobileStepper from "@mui/material/MobileStepper";
 import axios from "axios";
 import { loanDetailsData } from "@public/loans";
 import '@styles/styles.css'
-import { LoginContext } from "@hooks/LoginProvider";
 import { CurrentLoanContext } from "@hooks/CurrentLoanProvider";
+import  getDictionary  from "@lib/dictionary";
 const steps = [
   "1. Load information",
   "2. Loan Eligibility ",
@@ -21,13 +21,16 @@ const steps = [
   "4. Attatchments",
   "5. Loan Agreement",
 ];
-function LoanStepperPage() {
-  const [activeStep, setActiveStep] = React.useState(0);
+ function LoanStepperPage({params:{lang}}) {
+  const [activeStep, setActiveStep] = React.useState(0
+    
+    );
   const [loans, setLoans] = React.useState(loanDetailsData);
   // const [currentLoan,setCurrentLoan]=useState(loans[1]);
   const {currentLoan,setCurrentLoan}=useContext(CurrentLoanContext); 
-   (currentLoan)
+  // const {page}=await getDictionary(lang);
   const isMobile = useMediaQuery("(max-width:650px)");
+  const [pageContent,setPageContent]=useState('');
   const [uploadProgress, setUploadProgress] = useState({
     started: false,
     pc: 0,
@@ -49,6 +52,15 @@ function LoanStepperPage() {
       currentSalary_Input: currentLoan.currentSalary,
     },
   });
+  useEffect(()=>{
+    const getPage=async ()=>{
+      const page= await getDictionary(lang);
+      console.log(page)
+      setPageContent(page)
+    }
+    getPage();
+  }
+  ,[])
   async function hanldeSubmitAttatchments() {
     const formData = new FormData();
     for (let i = 0; i < currentLoan.loan_attatchments.length; i++) {
@@ -139,6 +151,7 @@ function LoanStepperPage() {
   };
   return (
     <form noValidate onSubmit={handleSubmit(handleNext)}>
+      {pageContent.loanInformation&&
       <Grid
         container
         item
@@ -154,7 +167,7 @@ function LoanStepperPage() {
               sx={{ textAlign: { xs: "center", md: "start" } }}
               variant="h4"
             >
-              Apply Loan
+              {pageContent.stepperTitle}
             </Typography>
           </Grid>
           <Grid container={isMobile ? true : false} item xs={12}>
@@ -184,15 +197,12 @@ function LoanStepperPage() {
                     style={{
                       backgroundColor: '#f0f0f0', // Set a background color for the progress bar
                     }}
-                    
-                 
-                  
                   />
                 </Grid>
               </Grid>
             ) : (
               <Stepper activeStep={activeStep}>
-                {steps.map((label, index) => {
+                {pageContent.stepperSteps.map((label, index) => {
                   return (
                     <Box
                       width={"100%"}
@@ -252,6 +262,7 @@ function LoanStepperPage() {
               hanldeSubmitAttatchments={hanldeSubmitAttatchments}
               uploadProgress={uploadProgress}
               setUploadProgress={setUploadProgress}
+              pageContent={pageContent}
             />
           </Grid>
         </Grid>
@@ -273,10 +284,11 @@ function LoanStepperPage() {
               handleBack={handleBack}
               activeStep={activeStep}
               handleRest={handleReset}
+              pageContent={pageContent}
             />
           </Grid>
         </Box>
-      </Grid>
+      </Grid>}
     </form>
   );
 }

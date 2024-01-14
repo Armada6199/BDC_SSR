@@ -1,4 +1,12 @@
-import { Button, Grid, Typography, Modal, Box, useMediaQuery, Divider } from "@mui/material";
+import {
+  Button,
+  Grid,
+  Typography,
+  Modal,
+  Box,
+  useMediaQuery,
+  Divider,
+} from "@mui/material";
 import React from "react";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
@@ -19,10 +27,11 @@ function DocumentToolbar({
   handleClose,
   openModal,
   downloading,
+  toolbarContent,
 }) {
   const clear = () => sigPad.clear();
   let sigPad = {};
-  const isMobile=useMediaQuery('(max-width:600px)')
+  const isMobile = useMediaQuery("(max-width:600px)");
   return (
     <Grid
       position={"sticky"}
@@ -96,10 +105,17 @@ function DocumentToolbar({
             />
           </Box>
         </Grid>
-        <Grid container item justifyContent={"flex-end"} spacing={2} xs={4} md={4}>
+        <Grid
+          container
+          item
+          justifyContent={"flex-end"}
+          spacing={2}
+          xs={4}
+          md={4}
+        >
           <Grid item xs={6} md={6}>
             <Button
-            fullWidth
+              fullWidth
               sx={{
                 fontWeight: "600",
                 ":hover": { backgroundColor: "secondary.light" },
@@ -108,18 +124,18 @@ function DocumentToolbar({
               startIcon={<GestureIcon />}
               variant="text"
             >
-              {isMobile?'':'SIGN'}
+              {isMobile ? "" : toolbarContent.signButton}
             </Button>
           </Grid>
           <Grid container alignItems={"center"} item xs={6} md={6}>
             <Grid item xs={12} md={2}>
               {downloading ? (
-                <Grid container justifyContent={'center'} item xs={12}>
+                <Grid container justifyContent={"center"} item xs={12}>
                   <div className="download_loader"></div>
                 </Grid>
               ) : (
                 <Button
-                fullWidth
+                  fullWidth
                   sx={{
                     fontWeight: "600",
                     ":hover": { backgroundColor: "secondary.light" },
@@ -128,9 +144,8 @@ function DocumentToolbar({
                   onClick={() => handleDownloadDocument(sigPad)}
                   startIcon={<SaveAltIcon />}
                   variant="text"
-                  
                 >
-                  {isMobile?'':'DOWNLOAD'}
+                  {isMobile ? "" : toolbarContent.downloadButton}
                 </Button>
               )}
             </Grid>
@@ -149,11 +164,16 @@ function DocumentToolbar({
           border: "none",
         }}
       >
-        <Grid sx={{ ...glassmorphismStyle,textAlign:'center' }} container  item md={6}>
+        <Grid
+          sx={{ ...glassmorphismStyle, textAlign: "center" }}
+          container
+          item
+          md={6}
+        >
           <Grid container item md={12} height={"100%"} gap={4} p={4}>
             <Grid item xs={12}>
-              <Typography variant="h6" >
-                Kindly Add Your Signature
+              <Typography variant="h6">
+                {toolbarContent.signatureModalTitle}
               </Typography>
             </Grid>
             <Grid container className="sigContainer" item xs={12}>
@@ -165,7 +185,7 @@ function DocumentToolbar({
                 canvasProps={{ className: "sigPad" }}
               />
             </Grid>
-            <Grid container item xs={12} justifyContent={'center'} spacing={4}>
+            <Grid container item xs={12} justifyContent={"center"} spacing={4}>
               <Grid item md={6}>
                 <Button
                   onClick={clear}
@@ -178,7 +198,7 @@ function DocumentToolbar({
                   fullWidth
                   variant="outlined"
                 >
-                  Clear
+                  {toolbarContent.clearButton}
                 </Button>
               </Grid>
               <Grid item md={6}>
@@ -194,7 +214,7 @@ function DocumentToolbar({
                   fullWidth
                   variant="contained"
                 >
-                  Save
+                  {toolbarContent.saveButton}
                 </Button>
               </Grid>
             </Grid>

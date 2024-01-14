@@ -14,7 +14,8 @@ function StepperComponentsHOC({
   handleSetEMI,
   uploadProgress,
   hanldeSubmitAttatchments,
-  setUploadProgress
+  setUploadProgress,
+  pageContent
 }) {
   switch (activeStep) {
     case 0:
@@ -25,12 +26,15 @@ function StepperComponentsHOC({
           errors={errors}
           setValue={setValue}
           handleSetEMI={handleSetEMI}
-        />
+          loanInformationContent={pageContent.loanInformation}
+          />
       );
     case 1:
       return (
         <LoanEligibility
           register={register}
+          loanEligibilityContent={pageContent.loanEligibility}
+
         />
       );
     case 2:
@@ -38,6 +42,8 @@ function StepperComponentsHOC({
         <PersonalInformation
           register={register}
           errors={errors}
+          personalInformationContent={pageContent.personalInformation}
+
         />
       );
     case 3:
@@ -49,6 +55,8 @@ function StepperComponentsHOC({
           hanldeSubmitAttatchments={hanldeSubmitAttatchments}
           uploadProgress={uploadProgress}
           setUploadProgress={setUploadProgress}
+          documentsContent={pageContent.documents}
+
         />
       );
       case 4 :
@@ -56,6 +64,8 @@ function StepperComponentsHOC({
           <InteractiveAttatchments  
           register={register}
           errors={errors}
+          interactiveAttatchmentsContent={pageContent.interactiveAttatchments}
+
           />
         )
   }

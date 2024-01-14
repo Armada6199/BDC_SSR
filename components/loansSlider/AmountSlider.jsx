@@ -16,6 +16,7 @@ function AmountSlider({
   currentLoan,
   handleSliderChange,
   errors,
+  loanInformationContent
 }) {
   const maxAmount=currentLoan.maxAmountAfterDeduction||currentLoan.maxAmount(currentLoan.intrestRates);
   const isMobile=useMediaQuery('(max-width:600px)');
@@ -26,7 +27,8 @@ function AmountSlider({
         <Grid container flexDirection={isMobile?'column':"row"} gap={2} justifyContent={"space-between"} item md={12}>
           <Grid item md={6}>
             <Typography fontWeight={"600"} variant="h5">
-              I want to borrow:
+            {  loanInformationContent.loanAmountLabel}
+
             </Typography>
           </Grid>
           <Grid item md={4}>

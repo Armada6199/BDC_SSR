@@ -1,0 +1,116 @@
+{
+  "stepperSteps": [
+    "1. Load information",
+    "2. Loan Eligibility",
+    "3. Personal Information",
+    "4. Attachments",
+    "5. Loan Agreement"
+  ],
+  "stepperTitle": "Apply Loan",
+  "loginPage": {
+    "pageTitle": "Login Page",
+    "welcomeText": {
+      "main": "Welcome to",
+      "bankName": "Banque du Carie"
+    },
+    "clientOptionText": "Apply as Client",
+    "staffOptionText": "Apply as Staff",
+    "selectOptionText": "Select one of the following options to continue",
+    "staffLoginModalTitle": "Staff Login",
+    "staffLoginModalDescription": "Enter your login credentials to log in as staff",
+    "applyAsStaff": "Apply as Staff",
+    "forgotPassword": "Forgot Password",
+    "modalPassword": "Password",
+    "modalEmail": "Email",
+    "rememberMe": "Remember me"
+  },
+
+  "loanEligibility": {
+    "applyTitle": "My Loan",
+    "everyMonthPayTitle": "Every Month I Pay",
+    "loanTypeLabel": "Loan Type",
+    "loanAmountLabel": "Loan Amount",
+    "loanTermLabel": "Loan Term (in months)",
+    "loanDetailsTitle": "Loan Details",
+    "emiAmountLabel": "Monthly EMI Amount",
+    "interestPayableLabel": "Interest Payable",
+    "loanTypeSubtitle": "Loan Type",
+    "loanAmountSubtitle": "Loan Amount",
+    "loanTermSubtitle": "Loan Term (in months)"
+  },
+
+  "loanInformation": {
+    "applyTitle": "I want to apply",
+    "loanDetailsTitle": "Loan Details",
+    "loanTypeLabel": "Choose Loan Type",
+    "loanAmountLabel": "Loan Amount",
+    "monthsLabel": "Number of Months",
+    "salaryLabel": "Current Salary",
+    "currentLoanLabel": "Do you have a current loan from BDC?",
+    "yesLabel": "Yes",
+    "noLabel": "No",
+    "activeLoanTitle": "Active Loans",
+    "minimumTermMessage": "The minimum term for your request is {term}",
+    "ineligibleMessage": "Not eligible for this amount",
+    "activeLoanMessage": "Do you have a current loan from Banque du Carie",
+    "activeLoanSubmessage": "If you have a current loan, please enter its details below."
+  },
+  "personalInformation": {
+    "sectionTitle": "Personal Information",
+    "employeeNameLabel": "Employee Name",
+    "fileNumberLabel": "File Number",
+    "jobTitleLabel": "Job Title",
+    "joiningDateLabel": "Joining Date",
+    "employeeLevelLabel": "Employee Level",
+    "jobLevelLabel": "Job Level",
+    "employeeNumberLabel": "Employee Number",
+    "workPlaceLabel": "Work Place",
+    "errors": {
+      "personalInfoInput": "This field is required"
+    }
+  },
+  "documents": {
+    "sectionTitle": "Required Documents",
+    "uploadInstruction": "Please upload the required documents to complete the loan application.",
+    "uploadButtonLabel": "Upload Documents",
+    "submitButtonLabel": "Submit Application",
+    "attachmentPreview": {
+      "selectedFilesTitle": "Selected Files",
+      "noFilesMessage": "Attachments will appear here once selected",
+      "fileUploadSuccessMessage": "Files uploaded successfully",
+      "fileUploadErrorMessage": "Some files failed to upload, please try again",
+      "uploadingLabel": "Uploading...",
+      "uploadButtonLabel": "Upload",
+      "deleteButtonLabel": "Delete"
+    }
+  },
+
+  "interactiveAttatchments": {
+    "documentTitle": "Loan Agreement",
+    "partiesTitle": "Parties",
+    "lenderLabel": "Lender",
+    "lenderName": "Banque Du Caire",
+    "lenderLocation": "Amman",
+    "borrowerLabel": "Borrower",
+    "borrowerName": "{currentLoan?.formData?.employeeName}",
+    "borrowerWorkPlace": "{currentLoan?.formData?.workPlace}",
+    "agreementTitle": "Agreement",
+    "agreementContent": "I, {currentLoan?.formData?.employeeName}, hereby acknowledge and accept the terms outlined in the loan agreement, wherein I commit to repaying the loan amount of {currentLoan.EMI} over the specified period of {currentLoan.numberOfMonths} months as agreed upon, making monthly payments of {currentLoan.payPerMonth.toFixed(3)}. I fully understand and agree to abide by these terms and obligations, and I am committed to fulfilling this financial agreement within the stipulated timeframe.",
+    "layersDetailsTitle": "Layers Details",
+    "signaturesTitle": "Signatures",
+    "borrowerSignatureLabel": "Borrower's Signature",
+    "lenderSignatureLabel": "Lender's Signature",
+    "addSignatureButton": "Add Signature",
+    "loanAgreementParagraph": "I, [Client Name], hereby commit to pay the total agreed loan amount over a period of [Number of Months] months, with a monthly payment of [Monthly Amount]. I fully understand and agree to abide by these terms and obligations, and I am committed to fulfilling these financial commitments within the specified timeframe.",
+    "documentToolbar": {
+      "zoomIn": "Zoom In",
+      "zoomOut": "Zoom Out",
+      "signButton": "Sign",
+      "downloadButton": "Download",
+      "clearButton":"Clear",
+      "signatureModalTitle":"kindly add your signature",
+      "saveButton":"save"
+
+    }
+  }
+}

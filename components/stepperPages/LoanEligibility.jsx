@@ -7,7 +7,7 @@ import ElibiblityLayerTable from "../ElibiblityLayerTable";
 import { CustomBarChat } from "../charts/CustomBarChat";
 import { CurrentLoanContext } from "@hooks/CurrentLoanProvider";
 
-function LoanEligibility() {
+function LoanEligibility({loanEligibilityContent}) {
   const isMobile = useMediaQuery("(max-width:650px)");
   const {currentLoan}=useContext(CurrentLoanContext);
   // useEffect(() => {
@@ -57,7 +57,7 @@ function LoanEligibility() {
           sx={{ justifyContent: { xs: "center", md: "flex-start" } }}
           alignItems={"center"}
         >
-          <Typography variant="h4">My loan</Typography>
+          <Typography variant="h4">{loanEligibilityContent.applyTitle}</Typography>
           <InfoIcon sx={{ width: "31px", height: "41px", color: "#C4B28F" }} />
         </Grid>
         <Grid
@@ -72,7 +72,7 @@ function LoanEligibility() {
           }}
           direction={"column"}
         >
-          <Typography variant="h6">EVERY MONTH I PAY</Typography>
+          <Typography variant="h6">{loanEligibilityContent.everyMonthPayTitle}</Typography>
           <Typography variant="h4" fontWeight={"600"}>
             {parseFloat(currentLoan.payPerMonth.toFixed(3))} JD
           </Typography>
@@ -92,7 +92,7 @@ function LoanEligibility() {
         >
           <Grid container item xs={12} md={3}>
             <Grid item xs={12}>
-              <Typography variant="h6">Loan Type</Typography>
+              <Typography variant="h6">{loanEligibilityContent.loanTypeLabel}</Typography>
             </Grid>
             <Grid
               container
@@ -117,7 +117,7 @@ function LoanEligibility() {
           /> */}
           <Grid container justifyContent={"center"} item xs={12} md={3}>
             <Grid item xs={12}>
-              <Typography variant="h6">Loan Amount</Typography>
+              <Typography variant="h6">{loanEligibilityContent.loanAmountLabel}</Typography>
             </Grid>
             <Grid item xs={12}>
               <Typography variant="h5" fontWeight={"600"}>
@@ -130,7 +130,7 @@ function LoanEligibility() {
           /> */}
           <Grid container xs={12} justifyContent={"center"} gap={2} item md={4}>
             <Grid item md={12}>
-              <Typography variant="h6">Loan term (in months)</Typography>
+              <Typography variant="h6">{loanEligibilityContent.loanTermLabel}</Typography>
               <Typography variant="h5" fontWeight={"600"}>
                 {currentLoan.numberOfMonths}
               </Typography>
@@ -144,7 +144,7 @@ function LoanEligibility() {
           sx={{ justifyContent: { xs: "center", md: "flex-start" } }}
           alignItems={"center"}
         >
-          <Typography variant="h4">Loan Details</Typography>
+          <Typography variant="h4">{loanEligibilityContent.loanDetailsTitle}</Typography>
           <InfoIcon sx={{ width: "31px", height: "41px", color: "#C4B28F" }} />
         </Grid>
 
@@ -177,7 +177,7 @@ function LoanEligibility() {
               <Typography variant="h5">{currentLoan.EMI}</Typography>
             </Grid>
             <Grid item md={5}>
-              <Typography variant="h6">Interest Payable</Typography>
+              <Typography variant="h6">{loanEligibilityContent.interestPayableLabel}</Typography>
               <Typography variant="h5">
                 {currentLoan.interestPayable}
               </Typography>

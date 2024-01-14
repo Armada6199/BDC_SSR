@@ -13,6 +13,7 @@ function LoanAttatchmentsPreview({
   uploadProgress,
   handleDeleteAttatchment,
   setUploadProgress,
+  attatchmenPreviewContent
 }) {
   useEffect(() => {
     setUploadProgress((prev) => ({
@@ -39,8 +40,8 @@ function LoanAttatchmentsPreview({
       <Grid item md={12}>
         <Typography variant="h6" textAlign={"center"}>
           {attatchments.length > 0
-            ? "Selected Files"
-            : "Attatchments will appear here once selected"}
+            ? attatchmenPreviewContent.selectedFilesTitle
+            : attatchmenPreviewContent.noFilesMessage}
         </Typography>
       </Grid>
       <List sx={{ mt: 1,width:'100%' }}>
@@ -152,7 +153,7 @@ function LoanAttatchmentsPreview({
                 fontWeight={"600"}
                 variant="body1"
               >
-                Uploading
+               {attatchmenPreviewContent.uploadingLabel}
               </Typography>
             </Grid>
             <Grid item md={2}>
@@ -165,7 +166,7 @@ function LoanAttatchmentsPreview({
           <Grid container item md={12}>
             <Grid item md={12}>
               <Typography variant="h6" textAlign={"center"}>
-                Some Files Failed To Upload Please Try Again
+              {attatchmenPreviewContent.fileUploadErrorMessage}
               </Typography>
             </Grid>
           </Grid>
@@ -174,7 +175,7 @@ function LoanAttatchmentsPreview({
           <Grid container item md={12}>
             <Grid item md={12}>
               <Typography variant="h6" textAlign={"center"}>
-                Files Uploaded Successfully
+              {attatchmenPreviewContent.fileUploadSuccessMessage}
               </Typography>
             </Grid>
           </Grid>
@@ -187,7 +188,7 @@ function LoanAttatchmentsPreview({
             sx={{ bgcolor: "secondary.dark", color: "primary.main" }}
           >
             {" "}
-            Upload
+              {attatchmenPreviewContent.uploadButtonLabel}
           </Button>
         )}
       </Grid>

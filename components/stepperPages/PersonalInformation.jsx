@@ -3,9 +3,10 @@ import React, { useContext } from "react";
 import CustomDatePicker from "../CustomDatePicker";
 import { CurrentLoanContext } from "@hooks/CurrentLoanProvider";
 
-function PersonalInformation({ register, errors}) {
+function PersonalInformation({ register, errors,personalInformationContent}) {
   const isMobile = useMediaQuery("(max-width:650px)");
   const {currentLoan}=useContext(CurrentLoanContext);
+  console.log(personalInformationContent)
   return (
     <Grid
       container
@@ -18,7 +19,7 @@ function PersonalInformation({ register, errors}) {
       <Grid container   item md={12}>
       <Grid item md={12}>
         <Typography variant="h5" fontWeight={"600"}>
-          Personal Information
+          {personalInformationContent.sectionTitle}
         </Typography>
       </Grid>
         <Grid
@@ -31,7 +32,7 @@ function PersonalInformation({ register, errors}) {
         >
           <Grid item xs={12} md={6}>
             <Typography variant="body1" fontWeight={"600"}>
-              Employee Name
+            {personalInformationContent.employeeNameLabel}
             </Typography>
             <TextField
               fullWidth
@@ -39,13 +40,14 @@ function PersonalInformation({ register, errors}) {
               error={!!errors.employeeName}
               helperText={errors.employeeName?.message}
               {...register("employeeName", {
-                required: "This field is required",
+                required:  personalInformationContent.errors?.personalInfoInput
+,
               })}
             />
           </Grid>
           <Grid item xs={12} md={6}>
             <Typography variant="body1" fontWeight={"600"}>
-              File Number
+            {personalInformationContent.fileNumberLabel}
             </Typography>
             <TextField
               fullWidth
@@ -54,7 +56,8 @@ function PersonalInformation({ register, errors}) {
               error={!!errors.fileNumber}
               helperText={errors.fileNumber?.message}
               {...register("fileNumber", {
-                required: "This field is required",
+                required:  personalInformationContent.errors?.personalInfoInput
+,
               })}
             />
           </Grid>
@@ -68,7 +71,7 @@ function PersonalInformation({ register, errors}) {
         >
           <Grid item xs={12} md={6}>
             <Typography variant="body1" fontWeight={"600"}>
-              Job Title
+            {personalInformationContent.jobTitleLabel}
             </Typography>
             <TextField
               fullWidth
@@ -76,13 +79,14 @@ function PersonalInformation({ register, errors}) {
               error={!!errors.jobTitle}
               helperText={errors.jobTitle?.message}
               {...register("jobTitle", {
-                required: "This field is required",
+                required:  personalInformationContent.errors?.personalInfoInput
+,
               })}
             />
           </Grid>
           <Grid item xs={12} md={6}>
             <Typography variant="body1" fontWeight={"600"}>
-              Joining Date
+            {personalInformationContent.joiningDateLabel}
             </Typography>
             <CustomDatePicker
               value={currentLoan.joiningDate}
@@ -101,7 +105,7 @@ function PersonalInformation({ register, errors}) {
         >
           <Grid item xs={12} md={6}>
             <Typography variant="body1" fontWeight={"600"}>
-              Employee Level
+            {personalInformationContent.employeeLevelLabel}
             </Typography>
             <TextField
               fullWidth
@@ -109,13 +113,14 @@ function PersonalInformation({ register, errors}) {
               error={!!errors.employeeLevel}
               helperText={errors.employeeLevel?.message}
               {...register("employeeLevel", {
-                required: "This field is required",
+                required:  personalInformationContent.errors.personalInfoInput
+,
               })}
             />
           </Grid>
           <Grid item xs={12} md={6}>
             <Typography variant="body1" fontWeight={"600"}>
-              Job Level
+            {personalInformationContent.jobLevelLabel}
             </Typography>
             <TextField
               fullWidth
@@ -123,7 +128,8 @@ function PersonalInformation({ register, errors}) {
               error={!!errors.jobLevel}
               helperText={errors.jobLevel?.message}
               {...register("jobLevel", {
-                required: "This field is required",
+                required:  personalInformationContent.errors.personalInfoInput
+,
               })}
             />
           </Grid>
@@ -137,7 +143,7 @@ function PersonalInformation({ register, errors}) {
         >
           <Grid item xs={12} md={6}>
             <Typography variant="body1" fontWeight={"600"}>
-              Employee Number
+            {personalInformationContent.employeeNumberLabel}
             </Typography>
             <TextField
               fullWidth
@@ -146,14 +152,15 @@ function PersonalInformation({ register, errors}) {
               error={!!errors.employeeNumber}
               helperText={errors.employeeNumber?.message}
               {...register("employeeNumber", {
-                required: "This field is required",
+                required:  personalInformationContent.errors.personalInfoInput
+,
               })}
             />
           </Grid>
           <Grid    item xs={12} md={6}>
             <Grid item xs={12}>
               <Typography variant="body1" fontWeight={"600"}>
-                Work Place
+              {personalInformationContent.workPlaceLabel}
               </Typography>
             </Grid>
             <Grid item xs={12}>
@@ -163,7 +170,8 @@ function PersonalInformation({ register, errors}) {
                 error={!!errors.workPlace}
                 helperText={errors.workPlace?.message}
                 {...register("workPlace", {
-                  required: "This field is required",
+                  required:  personalInformationContent.errors.personalInfoInput
+,
                 })}
               />
             </Grid>

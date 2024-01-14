@@ -8,7 +8,7 @@ import axios from "axios";
 import GestureIcon from "@mui/icons-material/Gesture";
 import DocumentToolbar from "../DocumentToolbar";
 import { CurrentLoanContext } from "@hooks/CurrentLoanProvider";
-const InteractiveAttatchments = () => {
+const InteractiveAttatchments = ({interactiveAttatchmentsContent}) => {
   const isMobile = useMediaQuery("(max-width:600px)");
   const {currentLoan,setCurrentLoan}=useContext(CurrentLoanContext);
   const [pdfString, setPdfString] = useState("f");
@@ -121,6 +121,7 @@ const InteractiveAttatchments = () => {
           handleClose={handleClose}
           openModal={openModal}
           downloading={downloading}
+          toolbarContent={interactiveAttatchmentsContent.documentToolbar}
         />
 
         <Grid
@@ -137,7 +138,7 @@ const InteractiveAttatchments = () => {
         >
           <Grid item xs={12}>
             <Typography textAlign={"center"} fontWeight={"700"} variant="h3">
-              {currentLoan.title} Loan Agreement
+              {currentLoan.title} {interactiveAttatchmentsContent.documentTitle}
             </Typography>
           </Grid>
           <Grid item xs={12}>
@@ -152,14 +153,15 @@ const InteractiveAttatchments = () => {
               }}
               textAlign={"center"}
             >
-              Parties
+              {interactiveAttatchmentsContent.partiesTitle}
             </Typography>
           </Grid>
           {/* Lender Details */}
           <Grid container justifyContent={"space-between"} item xs={12}>
             <Grid item xs={6}>
               <Typography fontWeight={"700"} variant="subtitle1">
-                Lender:
+              {interactiveAttatchmentsContent.lenderLabel}
+
               </Typography>
             </Grid>
             <Grid container item xs={6}>
@@ -169,7 +171,7 @@ const InteractiveAttatchments = () => {
                   fontWeight={500}
                   textAlign={"end"}
                 >
-                  Banque Du Caire
+              {interactiveAttatchmentsContent.lenderName}
                 </Typography>
               </Grid>
               <Grid item xs={6}>
@@ -178,7 +180,7 @@ const InteractiveAttatchments = () => {
                   textAlign={"end"}
                   fontWeight={500}
                 >
-                  Amman
+              {interactiveAttatchmentsContent.lenderLocation}
                 </Typography>
               </Grid>
             </Grid>
@@ -187,7 +189,7 @@ const InteractiveAttatchments = () => {
           <Grid container justifyContent={"space-between"} item xs={12}>
             <Grid item xs={6}>
               <Typography fontWeight={"700"} variant="subtitle1">
-                Borrower:
+              {interactiveAttatchmentsContent.borrowerLabel}
               </Typography>
             </Grid>
             <Grid container item xs={6}>
@@ -222,20 +224,12 @@ const InteractiveAttatchments = () => {
                 }}
                 textAlign={"center"}
               >
-                Agreement
+                {interactiveAttatchmentsContent.agreementTitle}
               </Typography>
             </Grid>
             <Grid item xs={12}>
               <Typography variant="subtitle1" fontWeight={"500"}>
-                I, {currentLoan?.formData?.employeeName}, hereby acknowledge and
-                accept the terms outlined in the loan agreement, wherein I
-                commit to repaying the loan amount of {currentLoan.EMI} over the
-                specified period of {currentLoan.numberOfMonths} months as
-                agreed upon, making monthly payments of{" "}
-                {currentLoan.payPerMonth.toFixed(3)}. I fully understand and
-                agree to abide by these terms and obligations, and I am
-                committed to fulfilling this financial agreement within the
-                stipulated timeframe.
+             {interactiveAttatchmentsContent.loanAgreementParagraph}
               </Typography>
             </Grid>
           </Grid>
@@ -251,7 +245,7 @@ const InteractiveAttatchments = () => {
                   }}
                   textAlign={"center"}
                 >
-                  Layers Details
+                {interactiveAttatchmentsContent.layersDetailsTitle}
                 </Typography>
               </Grid>
             </Grid>
@@ -270,7 +264,7 @@ const InteractiveAttatchments = () => {
                 }}
                 textAlign={"center"}
               >
-                Signatures
+              {interactiveAttatchmentsContent.signaturesTitle}
               </Typography>
             </Grid>
             <Grid item xs={6}>
@@ -281,7 +275,7 @@ const InteractiveAttatchments = () => {
                   fontWeight={"600"}
                   textAlign={"center"}
                 >
-                  Borrower Signature
+              {interactiveAttatchmentsContent.borrowerSignatureLabel}
                 </Typography>
                 {signatureState.length > 0 ? (
                   <Box
@@ -308,7 +302,7 @@ const InteractiveAttatchments = () => {
                       fullWidth
                       variant="text"
                     >
-                      Add Signature
+              {interactiveAttatchmentsContent.addSignatureButton}
                     </Button>
                   </Box>
                 )}
@@ -322,7 +316,7 @@ const InteractiveAttatchments = () => {
                   variant="subtitle1"
                   fontWeight={"600"}
                 >
-                  Lender Signature
+              {interactiveAttatchmentsContent.lenderSignatureLabel}
                 </Typography>
                 {signatureState.length > 0 ? (
                   <Box
@@ -349,7 +343,7 @@ const InteractiveAttatchments = () => {
                       variant="text"
                       onClick={handleOpen}
                     >
-                      Add Signature
+              {interactiveAttatchmentsContent.addSignatureButton}
                     </Button>
                   </Box>
                 )}
