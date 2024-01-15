@@ -1,21 +1,24 @@
 "use client";
 import React, { useContext, useEffect } from "react";
 import { Grid, Typography } from "@mui/material";
-// import bankLogo from "next/assets/Banque_du_caire_Logowhite.svg";
 import Image from "next/image";
 import { LanguageContext } from "@hooks/LanguageProvider";
+// import bankLogo from "next/assets/Banque_du_caire_Logowhite.svg";
 import { usePathname, useRouter } from "next/navigation";
-
+import bankWhite from '@public/assets/Banque_du_caire_Logowhite.svg'
+import { CurrentLoanContext } from "@hooks/CurrentLoanProvider";
 function Header({lang}) {
   const pathName=usePathname();
   const {push}=useRouter();
+  const {changeDirection}=useContext(CurrentLoanContext)
  const redirectedPathName=(locale)=>{
   if(!pathName)  push('/');
   const segments=pathName.split('/');
   segments[1]=locale;
+  changeDirection(locale)
   push(segments.join('/'))
  };
-
+ 
   return (
     <Grid
       container
@@ -28,7 +31,8 @@ function Header({lang}) {
       alignItems={"center"}
       item
       md={12}
-    >
+      sx={{direction:lang==="en"?'ltr':'rtl'}}
+      >
       <Grid item md={6}>
         {/* <Box
           component={"img"}
@@ -38,7 +42,7 @@ function Header({lang}) {
         /> */}
         {/* <img src={bankLogo} alt="Bank Logo" height={"60px"} /> */}
         <Image
-          src={"/assets/Banque_du_caire_Logowhite.svg"}
+          src={bankWhite}
           alt="bankLogo"
           width="152"
           height="60"

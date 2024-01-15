@@ -1,7 +1,6 @@
 
 import Providers from "@components/Providers";
 import "./globals.css";
-import CurrentLoanProvider from "@hooks/CurrentLoanProvider";
 import Header from "@components/layout/Header";
 import Footer from "@components/layout/Footer";
 // export const metadata = {
@@ -13,13 +12,14 @@ export async function generateStaticParams(){
 };
 export default function RootLayout({ children,params:{lang} }) {
   return (
-    <html lang="en">
+    <html lang={lang}>
       <body>
-      <Providers>
-        <Header lang={lang}/>
+        <Providers>
+      <Header lang={lang}/>
           {children}
-          <Footer/>
-      </Providers>
+          <Footer lang={lang}/>
+          </Providers>
+
       </body>
     </html>
   );

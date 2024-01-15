@@ -14,21 +14,10 @@ import { loanDetailsData } from "@public/loans";
 import '@styles/styles.css'
 import { CurrentLoanContext } from "@hooks/CurrentLoanProvider";
 import  getDictionary  from "@lib/dictionary";
-const steps = [
-  "1. Load information",
-  "2. Loan Eligibility ",
-  "3. Personal Information",
-  "4. Attatchments",
-  "5. Loan Agreement",
-];
  function LoanStepperPage({params:{lang}}) {
-  const [activeStep, setActiveStep] = React.useState(0
-    
-    );
+  const [activeStep, setActiveStep] = React.useState(0);
   const [loans, setLoans] = React.useState(loanDetailsData);
-  // const [currentLoan,setCurrentLoan]=useState(loans[1]);
-  const {currentLoan,setCurrentLoan}=useContext(CurrentLoanContext); 
-  // const {page}=await getDictionary(lang);
+  const {currentLoan,setCurrentLoan,changeLoanDetailsLocale}=useContext(CurrentLoanContext); 
   const isMobile = useMediaQuery("(max-width:650px)");
   const [pageContent,setPageContent]=useState('');
   const [uploadProgress, setUploadProgress] = useState({
@@ -55,12 +44,12 @@ const steps = [
   useEffect(()=>{
     const getPage=async ()=>{
       const page= await getDictionary(lang);
-      console.log(page)
-      setPageContent(page)
+      setPageContent(page);
+      changeLoanDetailsLocale(page.loansInformation);
     }
     getPage();
   }
-  ,[])
+  ,[currentLoan]);
   async function hanldeSubmitAttatchments() {
     const formData = new FormData();
     for (let i = 0; i < currentLoan.loan_attatchments.length; i++) {
@@ -119,7 +108,7 @@ const steps = [
       activeLoansDeductions: activeLoansDeductions,
     }));
   }
-  const handleNext = async (formData) => {
+  const handleNext = async (formData) => {1
     if (activeStep == 0) {
       handleSetEMI();
       setActiveStep((prevActiveStep) => prevActiveStep + 1);
@@ -130,7 +119,7 @@ const steps = [
         (error);
       }
     }
-    if (activeStep !== steps.length - 1 && activeStep !== 0) {
+    if (activeStep !== pageContent.stepperSteps.length - 1 && activeStep !== 0) {
       setCurrentLoan((prev) => ({ ...prev, formData }));
       setActiveStep((prevActiveStep) => prevActiveStep + 1);
     } else {
@@ -160,6 +149,7 @@ const steps = [
         justifyContent={isMobile ? "center" : "flex-start"}
         bgcolor={"background.default"}
         xs={12}
+        sx={{direction:lang==="ar"?'rtl':'ltr'}}
       >
         <Grid container minHeight={"20vh"} item xs={12} p={4} gap={2}>
           <Grid item xs={12}>
@@ -263,6 +253,7 @@ const steps = [
               uploadProgress={uploadProgress}
               setUploadProgress={setUploadProgress}
               pageContent={pageContent}
+              lang={lang}
             />
           </Grid>
         </Grid>
@@ -284,7 +275,7 @@ const steps = [
               handleBack={handleBack}
               activeStep={activeStep}
               handleRest={handleReset}
-              pageContent={pageContent}
+              navigationContent={pageContent.navigation}
             />
           </Grid>
         </Box>

@@ -19,7 +19,8 @@ function MonthsSlider({
   currentLoan,
   handleSliderChange,
   validateGreaterThanSalary,
-  loanInformationContent
+  loanDetailsLocale,
+  label,
 }) {
   const isMobile=useMediaQuery('(max-width:600px)');
   // const debouncedMonths=useDebounce(currentLoan.numberOfMonths_Input||currentLoan.numberOfMonths_Slider);
@@ -37,7 +38,7 @@ function MonthsSlider({
         <Grid container flexDirection={isMobile?'column':"row"} gap={2} justifyContent={"space-between"} item md={12}>
           <Grid item md={6}>
             <Typography fontWeight={"600"} variant="h5">
-            {  loanInformationContent.monthsLabel}
+            { label}
             </Typography>
           </Grid>
           <Grid item md={4}>
@@ -71,8 +72,8 @@ function MonthsSlider({
                   </InputAdornment>
                 ),
                 sx:{fontWeight:700},
-                defaultValue:currentLoan.numberOfMonths||currentLoan.maxMonths/2
               }}
+              value={currentLoan.numberOfMonths||currentLoan.maxMonths/2}
               variant="outlined"
             />
           </Grid>

@@ -1,12 +1,13 @@
 import { Grid, Typography, useMediaQuery } from "@mui/material";
 import { Box } from "@mui/system";
-import React from "react";
+import React, { useContext } from "react";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import { glassmorphismStyle } from "@styles/styles.js";
 import TermsTable from "./TermsTable";
 import ClearIcon from "@mui/icons-material/Clear";
-function LoanDetails({ currentLoan, handleClose }) {
-  const isMobile=useMediaQuery('(max-width:600px)')
+import { LoginContext } from "@hooks/LoginProvider";
+function LoanDetails({  handleClose,loanDetailsLocale }) {
+  const isMobile=useMediaQuery('(max-width:600px)');
   return (
     <Grid container item p={4} height={'100%'} overflow={'scroll'} gap={4} sx={glassmorphismStyle}>
       {isMobile && (
@@ -22,21 +23,21 @@ function LoanDetails({ currentLoan, handleClose }) {
       )}
       <Grid item md={12}>
         <Typography variant="h6" fontWeight={"bold"} color={"#215190"}>
-          {currentLoan.title}
+          {loanDetailsLocale.title}
         </Typography>
       </Grid>
       <Grid item md={12}>
         <Typography variant="body1" fontWeight={"500"}>
-          {currentLoan.description}
+        {loanDetailsLocale.description}
         </Typography>
       </Grid>
       <Grid item md={12}>
-        <Typography variant="h6" fontWeight={"bold"} color={"#215190"}>
-          Privileges
+          <Typography variant="h6" fontWeight={"bold"} color={"#215190"}>
+          {loanDetailsLocale.privilegesTitle}
         </Typography>
       </Grid>
       <Grid container item gap={2}>
-        {currentLoan.privileges.map((priv) => (
+        {loanDetailsLocale.privileges.map((priv) => (
           <Grid item md={12} lg={5} key={priv}>
             <Box key={priv} display={"flex"} gap={1}>
               <CheckCircleIcon color="secondary" />
@@ -47,11 +48,11 @@ function LoanDetails({ currentLoan, handleClose }) {
       </Grid>
       <Grid item md={12}>
         <Typography variant="h6" fontWeight={"bold"} color={"#215190"}>
-          Terms and Conditions
+          {loanDetailsLocale.termsTitle}
         </Typography>
       </Grid>
       <Grid container item>
-        <TermsTable currentLoan={currentLoan} />
+        <TermsTable loanDetailsLocale={loanDetailsLocale} />
       </Grid>
     </Grid>
   );

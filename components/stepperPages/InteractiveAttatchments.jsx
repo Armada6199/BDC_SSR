@@ -8,9 +8,13 @@ import axios from "axios";
 import GestureIcon from "@mui/icons-material/Gesture";
 import DocumentToolbar from "../DocumentToolbar";
 import { CurrentLoanContext } from "@hooks/CurrentLoanProvider";
-const InteractiveAttatchments = ({interactiveAttatchmentsContent}) => {
+const InteractiveAttatchments = ({
+  interactiveAttatchmentsContent,
+  loanEligibilityTable,
+}) => {
   const isMobile = useMediaQuery("(max-width:600px)");
-  const {currentLoan,setCurrentLoan}=useContext(CurrentLoanContext);
+  const { currentLoan, setCurrentLoan, loanDetailsLocale } =
+    useContext(CurrentLoanContext);
   const [pdfString, setPdfString] = useState("f");
   const [signatureState, setSignatureState] = useState("");
   const [downloading, setDownloading] = useState(false);
@@ -55,7 +59,7 @@ const InteractiveAttatchments = ({interactiveAttatchmentsContent}) => {
       setSignatureState(sigPad.getTrimmedCanvas().toDataURL());
       setOpenModal(false);
     } catch (error) {
-      (error);
+      error;
     }
   }
   async function handleDownloadDocument() {
@@ -90,7 +94,7 @@ const InteractiveAttatchments = ({interactiveAttatchmentsContent}) => {
       window.URL.revokeObjectURL(url);
       setDownloading(false);
     } catch (error) {
-      (error);
+      error;
     }
   }
   const increaseZoom = () => setZoomState((prev) => prev + 25);
@@ -138,7 +142,7 @@ const InteractiveAttatchments = ({interactiveAttatchmentsContent}) => {
         >
           <Grid item xs={12}>
             <Typography textAlign={"center"} fontWeight={"700"} variant="h3">
-              {currentLoan.title} {interactiveAttatchmentsContent.documentTitle}
+              {loanDetailsLocale.title}{" "}
             </Typography>
           </Grid>
           <Grid item xs={12}>
@@ -160,8 +164,7 @@ const InteractiveAttatchments = ({interactiveAttatchmentsContent}) => {
           <Grid container justifyContent={"space-between"} item xs={12}>
             <Grid item xs={6}>
               <Typography fontWeight={"700"} variant="subtitle1">
-              {interactiveAttatchmentsContent.lenderLabel}
-
+                {interactiveAttatchmentsContent.lenderLabel}
               </Typography>
             </Grid>
             <Grid container item xs={6}>
@@ -171,7 +174,7 @@ const InteractiveAttatchments = ({interactiveAttatchmentsContent}) => {
                   fontWeight={500}
                   textAlign={"end"}
                 >
-              {interactiveAttatchmentsContent.lenderName}
+                  {interactiveAttatchmentsContent.lenderName}
                 </Typography>
               </Grid>
               <Grid item xs={6}>
@@ -180,7 +183,7 @@ const InteractiveAttatchments = ({interactiveAttatchmentsContent}) => {
                   textAlign={"end"}
                   fontWeight={500}
                 >
-              {interactiveAttatchmentsContent.lenderLocation}
+                  {interactiveAttatchmentsContent.lenderLocation}
                 </Typography>
               </Grid>
             </Grid>
@@ -189,7 +192,7 @@ const InteractiveAttatchments = ({interactiveAttatchmentsContent}) => {
           <Grid container justifyContent={"space-between"} item xs={12}>
             <Grid item xs={6}>
               <Typography fontWeight={"700"} variant="subtitle1">
-              {interactiveAttatchmentsContent.borrowerLabel}
+                {interactiveAttatchmentsContent.borrowerLabel}
               </Typography>
             </Grid>
             <Grid container item xs={6}>
@@ -229,7 +232,7 @@ const InteractiveAttatchments = ({interactiveAttatchmentsContent}) => {
             </Grid>
             <Grid item xs={12}>
               <Typography variant="subtitle1" fontWeight={"500"}>
-             {interactiveAttatchmentsContent.loanAgreementParagraph}
+                {interactiveAttatchmentsContent.loanAgreementParagraph}
               </Typography>
             </Grid>
           </Grid>
@@ -245,12 +248,16 @@ const InteractiveAttatchments = ({interactiveAttatchmentsContent}) => {
                   }}
                   textAlign={"center"}
                 >
-                {interactiveAttatchmentsContent.layersDetailsTitle}
+                  {interactiveAttatchmentsContent.layersDetailsTitle}
                 </Typography>
               </Grid>
             </Grid>
             <Grid item xs={12}>
-              <ElibiblityLayerTable currentLoan={currentLoan} />
+              <ElibiblityLayerTable
+                loanDetailsLocale={loanDetailsLocale}
+                loanEligibilityTable={loanEligibilityTable}
+                currentLoan={currentLoan}
+              />
             </Grid>
           </Grid>
           <Grid container item xs={12} spacing={4}>
@@ -264,7 +271,7 @@ const InteractiveAttatchments = ({interactiveAttatchmentsContent}) => {
                 }}
                 textAlign={"center"}
               >
-              {interactiveAttatchmentsContent.signaturesTitle}
+                {interactiveAttatchmentsContent.signaturesTitle}
               </Typography>
             </Grid>
             <Grid item xs={6}>
@@ -275,7 +282,7 @@ const InteractiveAttatchments = ({interactiveAttatchmentsContent}) => {
                   fontWeight={"600"}
                   textAlign={"center"}
                 >
-              {interactiveAttatchmentsContent.borrowerSignatureLabel}
+                  {interactiveAttatchmentsContent.borrowerSignatureLabel}
                 </Typography>
                 {signatureState.length > 0 ? (
                   <Box
@@ -302,7 +309,7 @@ const InteractiveAttatchments = ({interactiveAttatchmentsContent}) => {
                       fullWidth
                       variant="text"
                     >
-              {interactiveAttatchmentsContent.addSignatureButton}
+                      {interactiveAttatchmentsContent.addSignatureButton}
                     </Button>
                   </Box>
                 )}
@@ -316,7 +323,7 @@ const InteractiveAttatchments = ({interactiveAttatchmentsContent}) => {
                   variant="subtitle1"
                   fontWeight={"600"}
                 >
-              {interactiveAttatchmentsContent.lenderSignatureLabel}
+                  {interactiveAttatchmentsContent.lenderSignatureLabel}
                 </Typography>
                 {signatureState.length > 0 ? (
                   <Box
@@ -343,7 +350,7 @@ const InteractiveAttatchments = ({interactiveAttatchmentsContent}) => {
                       variant="text"
                       onClick={handleOpen}
                     >
-              {interactiveAttatchmentsContent.addSignatureButton}
+                      {interactiveAttatchmentsContent.addSignatureButton}
                     </Button>
                   </Box>
                 )}

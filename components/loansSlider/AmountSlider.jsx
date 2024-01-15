@@ -16,7 +16,8 @@ function AmountSlider({
   currentLoan,
   handleSliderChange,
   errors,
-  loanInformationContent
+  loanDetailsLocale,
+  label,
 }) {
   const maxAmount=currentLoan.maxAmountAfterDeduction||currentLoan.maxAmount(currentLoan.intrestRates);
   const isMobile=useMediaQuery('(max-width:600px)');
@@ -27,8 +28,7 @@ function AmountSlider({
         <Grid container flexDirection={isMobile?'column':"row"} gap={2} justifyContent={"space-between"} item md={12}>
           <Grid item md={6}>
             <Typography fontWeight={"600"} variant="h5">
-            {  loanInformationContent.loanAmountLabel}
-
+            {label}
             </Typography>
           </Grid>
           <Grid item md={4}>
@@ -50,10 +50,9 @@ function AmountSlider({
               })}
               onChange={(e) => handleSliderChange(e)}
               type="number"
-              inputProps={{
+              inputProps={{ 
                 min: currentLoan.minAmount,
                 max: maxAmount,
-
             }}
               InputProps={{
                 startAdornment: (
@@ -61,11 +60,10 @@ function AmountSlider({
                     <EditIcon sx={{ color: "#C4B28F" }} />
                   </InputAdornment>
                 ),
-                defaultValue:currentLoan.loanAmount||maxAmount/2,
                 sx:{fontWeight:700},
               }}  
               variant="outlined"
-
+              value={currentLoan.loanAmount||maxAmount/2}
             />
           </Grid>
           <Grid item md={12}>
@@ -95,7 +93,7 @@ function AmountSlider({
                 fontWeight={"bold"}
                 color={"darkgray"}
               >
-                {currentLoan.minAmount} JD
+                {loanDetailsLocale.minLoanAmountTitle} 
               </Typography>
             </Grid>
                 <Grid item md={5}>

@@ -15,18 +15,21 @@ function StepperComponentsHOC({
   uploadProgress,
   hanldeSubmitAttatchments,
   setUploadProgress,
-  pageContent
+  pageContent,
+  lang
 }) {
   switch (activeStep) {
     case 0:
       return (
         <LoanInformation
-          loans={loans}
           register={register}
           errors={errors}
           setValue={setValue}
           handleSetEMI={handleSetEMI}
           loanInformationContent={pageContent.loanInformation}
+          loans={loans}
+          localeLoans={pageContent.loansInformation}
+          lang={lang}
           />
       );
     case 1:
@@ -34,7 +37,8 @@ function StepperComponentsHOC({
         <LoanEligibility
           register={register}
           loanEligibilityContent={pageContent.loanEligibility}
-
+          loanEligibilityTable={pageContent.loanEligibilityTable}
+          lang={lang}
         />
       );
     case 2:
@@ -43,6 +47,7 @@ function StepperComponentsHOC({
           register={register}
           errors={errors}
           personalInformationContent={pageContent.personalInformation}
+          lang={lang}
 
         />
       );
@@ -56,6 +61,8 @@ function StepperComponentsHOC({
           uploadProgress={uploadProgress}
           setUploadProgress={setUploadProgress}
           documentsContent={pageContent.documents}
+          lang={lang}
+
 
         />
       );
@@ -65,6 +72,8 @@ function StepperComponentsHOC({
           register={register}
           errors={errors}
           interactiveAttatchmentsContent={pageContent.interactiveAttatchments}
+          lang={lang}
+          loanEligibilityTable={pageContent.loanEligibilityTable}
 
           />
         )

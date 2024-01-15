@@ -14,7 +14,7 @@ import Loader from "@components/Loader";
  function HomeLogin({params:{lang}}) {
   const router = useRouter();
    const isMobile = useMediaQuery("(max-width:600)");
-  const { setCurrentLoan } = useContext(CurrentLoanContext);
+  const { currentLoan,setCurrentLoan } = useContext(CurrentLoanContext);
   const [pageContent,setPageContent]=useState('');
   const [loginCredindtials, setLoginCredindtials] = useState({
     email: "",
@@ -23,8 +23,8 @@ import Loader from "@components/Loader";
   const [openStaff, setOpenStaff] = React.useState(false);
   const handleOpenStaffLogin = () => setOpenStaff(true);
   const handleCloseStaffLogin = () => setOpenStaff(false);
-  const currentDirection=lang==="en"?'ltr':'rtl'
-  let page={}
+// useEffect(()=>{
+// },[])
   async function handleLogin() {
     try {
       const loginResponse = await signIn("credentials", {
@@ -46,13 +46,12 @@ import Loader from "@components/Loader";
   useEffect(()=>{
     const getPage=async ()=>{
       const pageContent= await getDictionary(lang)
-      setPageContent(pageContent)
-      page=pageContent;
-    }
+      setPageContent(pageContent);
+    };
     getPage();
-  },[])
+  },[currentLoan]);
   return (
-    <Box sx={{direction:currentDirection}}>
+    <Box sx={{direction:lang=='ar'?'rtl':'ltr'}}>
       {pageContent.loginPage?
       <Grid container maxHeight={"calc(100vh - 200px)"} item md={12}>
         <Grid
@@ -74,13 +73,12 @@ import Loader from "@components/Loader";
           >
             <Box
               width={"100%"}
-              height={"100"}
-              bgcolor={"rgba(1,1,1,.4)"}
-              zIndex={0}
+              height={"100%"}
+              zIndex={1}
+              bgcolor={"rgb(1,1,1,.5)"}
               position={"absolute"}
             />
             <Grid container zIndex={2} gap={4} item md={12}>
-              {console.log(pageContent)}
               <Grid container alignItems={"center"} item md={12} gap={3}>
                 <Grid item md={12}>
                   <Typography variant="h4" fontWeight={"400"} color={"white"}>

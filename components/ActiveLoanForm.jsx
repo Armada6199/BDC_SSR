@@ -9,19 +9,26 @@ import {
 } from "@mui/material";
 import { Box } from "@mui/system";
 import Grid from "@mui/system/Unstable_Grid/Grid";
-import React, { useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import { loanInfoInputStyle } from "@styles/styles";
 import AddIcon from "@mui/icons-material/Add";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import Slide from "@mui/material/Slide";
+import { CurrentLoanContext } from "@hooks/CurrentLoanProvider";
+import { dir } from "i18next";
 function ActiveLoanForm({
   register,
   currentLoan,
   setCurrentLoan,
   index,
   activeLoan,
-}) {
+  activeFormLocale,
+  lang
+}) 
+
+{
+  const {direction}=useContext(CurrentLoanContext)
   function handleAddNewLoan() {
     const newActiveLoans = currentLoan.activeLoans;
     newActiveLoans.push({
@@ -66,12 +73,12 @@ function ActiveLoanForm({
       setCurrentLoan((prev) => ({ ...prev, activeLoans: newActiveLoans }));
     }
   }
-  return (
-    <Slide in={true} direction="right" mountOnEnter unmountOnExit>
-      <Grid container item md={12} spacing={2}>
+  return (  
+    <Slide  in={true} direction={lang==='en'?'right':'left'} mountOnEnter unmountOnExit>
+      <Grid container  item md={12} spacing={2}>
         <Grid item xs={12} md={6} xl={3}>
-          <FormControl fullWidth>
-            <InputLabel>Loan Type</InputLabel>
+          <FormControl   fullWidth>
+            <InputLabel >{activeFormLocale.loanType}</InputLabel>
             <Select
               labelId="activeLoanType"
               label="Loan Type"
@@ -79,17 +86,16 @@ function ActiveLoanForm({
               onChange={(e) => handleLoanInputChange(e)}
               value={currentLoan.activeLoans[index].activeLoanType}
               disabled={currentLoan.isStaff}
-            >
-              <MenuItem value={"Home Loan"}>Home Loan</MenuItem>
-              <MenuItem value={"Land Loan"}>Land Loan</MenuItem>
-              <MenuItem value={"Car Loan"}>Car Loan</MenuItem>
-              <MenuItem value={"Personal Loan"}>Personal</MenuItem>
+>
+            {activeFormLocale.loanTypes.map((type) => (
+                <MenuItem sx={{direction:lang=='en'?'ltr':'rtl'}} value={type.value}>{type.localeContent}</MenuItem>
+              ))}
             </Select>
           </FormControl>
         </Grid>
         <Grid item xs={12} md={6} xl={3}>
           <FormControl fullWidth>
-            <InputLabel>Loan Layer</InputLabel>
+            <InputLabel>{activeFormLocale.layer}</InputLabel>
             <Select
               labelId="activeLoanLayer"
               label="Loan Layer"
@@ -104,10 +110,9 @@ function ActiveLoanForm({
                   : true
               }
             >
-              <MenuItem value={"First Layer"}>First Layer</MenuItem>
-              <MenuItem value={"Second Layer"}>Second Layer</MenuItem>
-              <MenuItem value={"Third Layer"}>Third Layer</MenuItem>
-              <MenuItem value={"Forth Layer"}>Forth Layer</MenuItem>
+              {activeFormLocale.layers.map((layer) => (
+                <MenuItem  sx={{direction:lang=='en'?'ltr':'rtl'}} value={layer.value}>{layer.localeContent}</MenuItem>
+              ))}
             </Select>
           </FormControl>
         </Grid>
@@ -116,7 +121,7 @@ function ActiveLoanForm({
             // sx={loanInfoInputStyle}
             fullWidth
             id="activeLoanPayPerMonthInput"
-            label={"Pay Per Month"}
+            label={activeFormLocale.payPerMonth}
             InputProps={{
               startAdornment: (
                 <InputAdornment position="start">
@@ -151,7 +156,7 @@ function ActiveLoanForm({
             // sx={loanInfoInputStyle}
             fullWidth
             id="activeLoanLeftMonths"
-            label={"Left Months"}
+            label={activeFormLocale.leftMonths}
             InputProps={{
               startAdornment: (
                 <InputAdornment position="start">
@@ -181,8 +186,15 @@ function ActiveLoanForm({
             }
           />
         </Grid>
-        <Grid container item sx={{justifyContent:{xs:'center',md:'flex-end'}}} xs={12}  md={4} xl={2}>
-          <Grid item  md={6}>
+        <Grid
+          container
+          item
+          sx={{ justifyContent: { xs: "center", md: "flex-end" } }}
+          xs={12}
+          md={4}
+          xl={2}
+        >
+          <Grid item md={6}>
             <Box
               sx={{
                 display: "flex",

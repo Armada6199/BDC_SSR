@@ -25,9 +25,11 @@ function LoanInformation({
   register,
   errors,
   setValue,
-  loanInformationContent
+  loanInformationContent,
+  localeLoans,
+  lang
 }) {
-  const {currentLoan,setCurrentLoan}=useContext(CurrentLoanContext);
+  const {currentLoan,setCurrentLoan,loanDetailsLocale}=useContext(CurrentLoanContext);
     const handleSliderChange = (e) => {
     let { name, value } = e.target;
     setValue(name, value);
@@ -85,6 +87,7 @@ function LoanInformation({
   };
   function handleChangeCurrentLoan(title) {
     const targetLoan = loans.find((e) => e.title === title);
+    console.log(targetLoan)
     setCurrentLoan(targetLoan);
   }
   const isMobile = useMediaQuery("(max-width:600px)");
@@ -108,7 +111,7 @@ function LoanInformation({
       >
         <Grid container item md={12} gap={4}>
           <Grid item xs={12} md={12}>
-            <Typography variant="h5" fontWeight={"600"}>
+            <Typography textAlign={{xs:'center',md:'start'}} variant="h5" fontWeight={"600"}>
             {loanInformationContent.applyTitle}
               </Typography>
           </Grid>
@@ -117,14 +120,14 @@ function LoanInformation({
               <LoanTypesSlider
                 currentLoan={currentLoan}
                 setCurrentLoan={setCurrentLoan}
-                loans={loans}
+                localeLoans={localeLoans}
                 handleChangeCurrentLoan={handleChangeCurrentLoan}
               />
             ) : (
               <LoanTypes
                 currentLoan={currentLoan}
                 setCurrentLoan={setCurrentLoan}
-                loans={loans}
+                localeLoans={localeLoans}
                 handleChangeCurrentLoan={handleChangeCurrentLoan}
               />
             )}
@@ -138,8 +141,8 @@ function LoanInformation({
               validateGreaterThanSalary={validateGreaterThanSalary}
               register={register}
               errors={errors}
-              loanInformationContent={loanInformationContent}
-            />
+              loanDetailsLocale={loanDetailsLocale}
+              label={loanInformationContent.loanAmountLabel}            />
           </Grid>
           <Grid container item>
             <MonthsSlider
@@ -148,7 +151,8 @@ function LoanInformation({
               validateGreaterThanSalary={validateGreaterThanSalary}
               register={register}
               errors={errors}
-              loanInformationContent={loanInformationContent}
+              loanDetailsLocale={loanDetailsLocale}
+              label={loanInformationContent.monthsLabel}
             />
           </Grid>
           <Grid container item>
@@ -158,8 +162,8 @@ function LoanInformation({
               validateGreaterThanSalary={validateGreaterThanSalary}
               register={register}
               errors={errors}
-              loanInformationContent={loanInformationContent}
-
+              loanDetailsLocale={loanDetailsLocale}
+              label={loanInformationContent.salaryLabel}
             />
           </Grid>
         </Grid>
@@ -169,7 +173,7 @@ function LoanInformation({
             disabled={currentLoan.isStaff}
             error={errors.isCurrentLoan?.message ? true : false}
           >
-            <FormLabel id="demo-radio-buttons-group-label">
+            <FormLabel sx={{textAlign:'start'}} id="demo-radio-buttons-group-label">
              {loanInformationContent.currentLoanLabel}{" "}
             </FormLabel>
             <RadioGroup
@@ -256,6 +260,8 @@ function LoanInformation({
                 register={register}
                 currentLoan={currentLoan}
                 setCurrentLoan={setCurrentLoan}
+                activeFormLocale={loanInformationContent.activeLoans}
+                lang
               />
             ))}
           </Grid>
@@ -263,7 +269,7 @@ function LoanInformation({
       </Grid>
       {!isMobile && (
         <Grid container alignItems={"center"} item md={6}>
-          <LoanDetails currentLoan={currentLoan} />
+          <LoanDetails loanDetailsLocale={loanDetailsLocale} currentLoan={currentLoan} />
         </Grid>
       )}
     </Grid>

@@ -7,9 +7,9 @@ import ElibiblityLayerTable from "../ElibiblityLayerTable";
 import { CustomBarChat } from "../charts/CustomBarChat";
 import { CurrentLoanContext } from "@hooks/CurrentLoanProvider";
 
-function LoanEligibility({loanEligibilityContent}) {
+function LoanEligibility({ loanEligibilityContent, loanEligibilityTable,lang }) {
   const isMobile = useMediaQuery("(max-width:650px)");
-  const {currentLoan}=useContext(CurrentLoanContext);
+  const { currentLoan, loanDetailsLocale } = useContext(CurrentLoanContext);
   // useEffect(() => {
   //   // const temp = [
   //   //   {
@@ -57,7 +57,9 @@ function LoanEligibility({loanEligibilityContent}) {
           sx={{ justifyContent: { xs: "center", md: "flex-start" } }}
           alignItems={"center"}
         >
-          <Typography variant="h4">{loanEligibilityContent.applyTitle}</Typography>
+          <Typography variant="h4">
+            {loanEligibilityContent.applyTitle}
+          </Typography>
           <InfoIcon sx={{ width: "31px", height: "41px", color: "#C4B28F" }} />
         </Grid>
         <Grid
@@ -66,13 +68,14 @@ function LoanEligibility({loanEligibilityContent}) {
           xs={12}
           md={12}
           sx={{
-            textAlign: { xs: "center", md: "left" },
-
+            textAlign: { xs: "center", md:lang=='en'?'left':'right' },
             justifyContent: { xs: "center", md: "flex-start" },
           }}
           direction={"column"}
         >
-          <Typography variant="h6">{loanEligibilityContent.everyMonthPayTitle}</Typography>
+          <Typography variant="h6">
+            {loanEligibilityContent.everyMonthPayTitle}
+          </Typography>
           <Typography variant="h4" fontWeight={"600"}>
             {parseFloat(currentLoan.payPerMonth.toFixed(3))} JD
           </Typography>
@@ -92,12 +95,14 @@ function LoanEligibility({loanEligibilityContent}) {
         >
           <Grid container item xs={12} md={3}>
             <Grid item xs={12}>
-              <Typography variant="h6">{loanEligibilityContent.loanTypeLabel}</Typography>
+              <Typography variant="h6">
+                {loanEligibilityContent.loanTypeLabel}
+              </Typography>
             </Grid>
             <Grid
               container
               alignItems={"center"}
-              justifyContent={{xs:'center',md:"flex-start"}}
+              justifyContent={{ xs: "center", md: "flex-start" }}
               gap={2}
               item
               xs={12}
@@ -108,7 +113,7 @@ function LoanEligibility({loanEligibilityContent}) {
                 color: "black",
               })}
               <Typography variant="h5" fontWeight={"600"}>
-                {currentLoan.title}
+                {loanDetailsLocale.title}
               </Typography>
             </Grid>
           </Grid>
@@ -117,7 +122,9 @@ function LoanEligibility({loanEligibilityContent}) {
           /> */}
           <Grid container justifyContent={"center"} item xs={12} md={3}>
             <Grid item xs={12}>
-              <Typography variant="h6">{loanEligibilityContent.loanAmountLabel}</Typography>
+              <Typography variant="h6">
+                {loanEligibilityContent.loanAmountLabel}
+              </Typography>
             </Grid>
             <Grid item xs={12}>
               <Typography variant="h5" fontWeight={"600"}>
@@ -130,7 +137,9 @@ function LoanEligibility({loanEligibilityContent}) {
           /> */}
           <Grid container xs={12} justifyContent={"center"} gap={2} item md={4}>
             <Grid item md={12}>
-              <Typography variant="h6">{loanEligibilityContent.loanTermLabel}</Typography>
+              <Typography variant="h6">
+                {loanEligibilityContent.loanTermLabel}
+              </Typography>
               <Typography variant="h5" fontWeight={"600"}>
                 {currentLoan.numberOfMonths}
               </Typography>
@@ -144,12 +153,18 @@ function LoanEligibility({loanEligibilityContent}) {
           sx={{ justifyContent: { xs: "center", md: "flex-start" } }}
           alignItems={"center"}
         >
-          <Typography variant="h4">{loanEligibilityContent.loanDetailsTitle}</Typography>
+          <Typography variant="h4">
+            {loanEligibilityContent.loanDetailsTitle}
+          </Typography>
           <InfoIcon sx={{ width: "31px", height: "41px", color: "#C4B28F" }} />
         </Grid>
 
         <Grid container item gap={4}>
-          <ElibiblityLayerTable currentLoan={currentLoan} />
+          <ElibiblityLayerTable
+            loanEligibilityTable={loanEligibilityTable}
+            currentLoan={currentLoan}
+            loanDetailsLocale={loanDetailsLocale}
+          />
         </Grid>
       </Grid>
       <Grid p={4} container item justifyContent={"flex-start"} md={4} gap={4}>
@@ -163,7 +178,7 @@ function LoanEligibility({loanEligibilityContent}) {
           md={12}
           p={4}
         >
-          <Grid container maxHeight={'300px'} item md={12}>
+          <Grid container maxHeight={"300px"} item md={12}>
             {(currentLoan.loanAmount, currentLoan.loanAmount)}
             <CustomChart
               interestPayable={currentLoan.interestPayable}
@@ -177,7 +192,9 @@ function LoanEligibility({loanEligibilityContent}) {
               <Typography variant="h5">{currentLoan.EMI}</Typography>
             </Grid>
             <Grid item md={5}>
-              <Typography variant="h6">{loanEligibilityContent.interestPayableLabel}</Typography>
+              <Typography variant="h6">
+                {loanEligibilityContent.interestPayableLabel}
+              </Typography>
               <Typography variant="h5">
                 {currentLoan.interestPayable}
               </Typography>
@@ -198,7 +215,7 @@ function LoanEligibility({loanEligibilityContent}) {
         >
           <CustomBarChat
             totalAppliedLayers={currentLoan.totalAppliedLayers}
-             //change this to calculate the highest layer max plus the total interst applied to the max layer
+            //change this to calculate the highest layer max plus the total interst applied to the max layer
           />
         </Grid>
       </Grid>

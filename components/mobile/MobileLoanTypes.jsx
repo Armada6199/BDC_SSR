@@ -1,6 +1,11 @@
 import React, { useState } from "react";
 import Carousel from "react-material-ui-carousel";
 import { Paper, Button, Box, Grid, Typography, Modal } from "@mui/material";
+import Person2OutlinedIcon from "@mui/icons-material/Person2Outlined";
+import HouseOutlinedIcon from "@mui/icons-material/HouseOutlined";
+import DirectionsCarFilledOutlinedIcon from "@mui/icons-material/DirectionsCarFilledOutlined";
+import LandscapeOutlinedIcon from "@mui/icons-material/LandscapeOutlined";
+
 import {
   loansIconStyle,
   loanIconContStyle,
@@ -8,10 +13,10 @@ import {
 } from "@styles/styles.js";
 import { InfoRounded } from "@mui/icons-material";
 import LoanDetails from "../LoanDetails";
-
-export default function LoanTypesSlider({ loans, handleChangeCurrentLoan }) {
-const indecatorIcons=loans.map(loan=>(
-  loan.loadIcon()
+const loanIcons=[<Person2OutlinedIcon/>,<HouseOutlinedIcon/>,<DirectionsCarFilledOutlinedIcon/>,<LandscapeOutlinedIcon/>]
+export default function LoanTypesSlider({ localeLoans, handleChangeCurrentLoan }) {
+const indecatorIcons=loans.map(icon=>(
+  icon
 ))
   return (
     <Carousel
@@ -37,14 +42,14 @@ const indecatorIcons=loans.map(loan=>(
       }
   }}
     >
-      {loans.map((loan, index) => (
-        <Item key={index} loan={loan} />
+      {localeLoans.map((loan, index) => (
+        <Item key={index} index={index} loan={loan} />
       ))}
     </Carousel>
   );
 }
 
-function Item({ loan }) {
+function Item({ loan,index }) {
   const [detailsMobileModal, setDetailsMobileModal] = useState(false);
   const handleOpen = () => {
     setDetailsMobileModal(true)
@@ -69,7 +74,7 @@ function Item({ loan }) {
         justifyContent={"center"}
       >
         <Grid container justifyContent={"center"} item md={12}>
-          <Box sx={loanIconContStyle}>{loan.loadIcon(loansIconStyle)}</Box>
+          <Box sx={loanIconContStyle}>{loanIcons[index]}</Box>
         </Grid>
         <Grid container justifyContent={"center"} item md={12}>
           <Typography variant="body1" fontWeight={"bold"}>
