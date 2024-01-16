@@ -10,15 +10,14 @@ export const glassmorphismStyle = {
     minWidth:'165px',
     height: "139px",
     padding: 1,
-    gap: 1,
     ...glassmorphismStyle,
     borderRadius: "20px",
+    boxShadow:"-1px 2px 10px -1px rgba(0,0,0,0.24)"
   };
   export  const loanIconContStyle = {
     display: "flex",
     borderRadius: "50%",
     height: "58px",
-    bgcolor: "#C4B28F",
     width: "58px",
     justifyContent: "center",
     alignItems: "center",

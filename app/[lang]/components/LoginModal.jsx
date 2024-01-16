@@ -1,15 +1,12 @@
 import React from "react";
-import bankLogo from "@public/assets/Banque_du_caire_Logodark.svg";
+import bankLogoDark from "@public/assets/Banque_du_caire_Logodark.svg";
 import {
-  Box,
   Grid,
   Typography,
-  Modal,
   TextField,
   Checkbox,
   FormControlLabel,
   Button,
-  useMediaQuery,
 } from "@mui/material";
 import { glassmorphismStyle } from "@styles/styles.js";
 import ClearIcon from "@mui/icons-material/Clear";
@@ -44,7 +41,7 @@ function LoginModal({
       />
       <Grid container justifyContent={"center"} item md={12}>
         <Image
-          src={"/assets/Banque_du_caire_Logodark.svg"}
+          src={bankLogoDark}
           alt="loginImg"
           width={"200"}
           height={"40"}

@@ -144,7 +144,7 @@ import { CurrentLoanContext } from "@hooks/CurrentLoanProvider";
                       onClick={() => handleAddSignature()}
                       sx={{
                         fontWeight: "600",
-                        bgcolor: "#C4B28F",
+                        bgcolor: "secondary.dark",
                         color: "primary.main",
                       }}
                       startIcon={<SaveIcon />}
@@ -201,7 +201,7 @@ import { CurrentLoanContext } from "@hooks/CurrentLoanProvider";
       <Grid item md={6}>
         <Button
           fullWidth
-          sx={{ fontWeight: "600",bgcolor:'#C4B28F',color:"primary.main" }}
+          sx={{ fontWeight: "600",bgcolor:'secondary.dark',color:"primary.main" }}
           onClick={handleDownloadDocument}
           startIcon={<SaveAltIcon />}
           variant="contained"
@@ -232,7 +232,7 @@ import { CurrentLoanContext } from "@hooks/CurrentLoanProvider";
             <Paper
               variant="outlined"
               style={{
-                border: true ? "2px dashed #C4B28F" : "2px dashed #C4B28F",
+                border: true ? "2px dashed secondary.dark" : "2px dashed secondary.dark",
                 padding: 20,
                 textAlign: "center",
                 cursor: "pointer",
@@ -298,7 +298,7 @@ import { CurrentLoanContext } from "@hooks/CurrentLoanProvider";
   //     <Grid item md={6}>
   //       <Button
   //         fullWidth
-  //         sx={{ fontWeight: "600",bgcolor:'#C4B28F',color:"primary.main" }}
+  //         sx={{ fontWeight: "600",bgcolor:'secondary.dark',color:"primary.main" }}
   //         onClick={handleDownloadDocument}
   //         startIcon={<SaveAltIcon />}
   //         variant="contained"
@@ -378,7 +378,7 @@ import { CurrentLoanContext } from "@hooks/CurrentLoanProvider";
   //   <Grid item md={6}>
   //     <Button
   //       onClick={() => handleAddSignature()}
-  //       sx={{ fontWeight: "600",bgcolor:'#C4B28F',color:"primary.main" }}
+  //       sx={{ fontWeight: "600",bgcolor:'secondary.dark',color:"primary.main" }}
   //       startIcon={<SaveIcon />}
   //       fullWidth
   //       variant="contained"
@@ -456,7 +456,7 @@ import { CurrentLoanContext } from "@hooks/CurrentLoanProvider";
     <Grid item md={6}>
       <Button
         onClick={() => handleAddSignature()}
-        sx={{ fontWeight: "600",bgcolor:'#C4B28F',color:"primary.main" }}
+        sx={{ fontWeight: "600",bgcolor:'secondary.dark',color:"primary.main" }}
         startIcon={<SaveIcon />}
         fullWidth
         variant="contained"
@@ -505,7 +505,7 @@ import { CurrentLoanContext } from "@hooks/CurrentLoanProvider";
   // <Grid item md={6}>
   //   <Button
   //     fullWidth
-  //     sx={{ fontWeight: "600",bgcolor:'#C4B28F',color:"primary.main" }}
+  //     sx={{ fontWeight: "600",bgcolor:'secondary.dark',color:"primary.main" }}
   //     onClick={handleDownloadDocument}
   //     startIcon={<SaveAltIcon />}
   //     variant="contained"

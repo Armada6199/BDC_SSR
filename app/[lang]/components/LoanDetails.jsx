@@ -22,7 +22,7 @@ function LoanDetails({  handleClose,loanDetailsLocale }) {
         />
       )}
       <Grid item md={12}>
-        <Typography variant="h6" fontWeight={"bold"} color={"#215190"}>
+        <Typography variant="h6" fontWeight={"bold"} color={"secondary.dark"}>
           {loanDetailsLocale.title}
         </Typography>
       </Grid>
@@ -32,7 +32,7 @@ function LoanDetails({  handleClose,loanDetailsLocale }) {
         </Typography>
       </Grid>
       <Grid item md={12}>
-          <Typography variant="h6" fontWeight={"bold"} color={"#215190"}>
+          <Typography variant="h6" fontWeight={"bold"} color={"secondary.dark"}>
           {loanDetailsLocale.privilegesTitle}
         </Typography>
       </Grid>
@@ -47,7 +47,7 @@ function LoanDetails({  handleClose,loanDetailsLocale }) {
         ))}
       </Grid>
       <Grid item md={12}>
-        <Typography variant="h6" fontWeight={"bold"} color={"#215190"}>
+        <Typography variant="h6" fontWeight={"bold"} color={"secondary.dark"}>
           {loanDetailsLocale.termsTitle}
         </Typography>
       </Grid>

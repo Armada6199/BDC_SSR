@@ -5,15 +5,16 @@ import BusinessCenterOutlinedIcon from "@mui/icons-material/BusinessCenterOutlin
 import { glassmorphismStyle } from "@styles/styles.js";
 import Person2OutlinedIcon from "@mui/icons-material/Person2Outlined";
 import "@styles/styles.css";
-import LoginModal from "@components/LoginModal";
-import { useRouter } from "next/navigation";
+import LoginModal from "./components/LoginModal";
 import { signIn } from "next-auth/react";
 import { CurrentLoanContext } from "@hooks/CurrentLoanProvider";
 import  getDictionary  from "@lib/dictionary";
-import Loader from "@components/Loader";
+import { usePathname, useRouter } from "next/navigation";
+
+import Loader from "./components/Loader";
  function HomeLogin({params:{lang}}) {
-  const router = useRouter();
-   const isMobile = useMediaQuery("(max-width:600)");
+  const {push}=useRouter();
+  const pathName=usePathname();
   const { currentLoan,setCurrentLoan } = useContext(CurrentLoanContext);
   const [pageContent,setPageContent]=useState('');
   const [loginCredindtials, setLoginCredindtials] = useState({
@@ -25,6 +26,13 @@ import Loader from "@components/Loader";
   const handleCloseStaffLogin = () => setOpenStaff(false);
 // useEffect(()=>{
 // },[])
+ const redirectedPathName=(locale)=>{
+  if(!pathName)  push('/');
+  const segments=pathName.split('/');
+  console.log(locale)
+  segments[1]=locale;
+  push(segments.join('/')+'/loan')
+ };
   async function handleLogin() {
     try {
       const loginResponse = await signIn("credentials", {
@@ -37,7 +45,7 @@ import Loader from "@components/Loader";
       } else {
         const mockData = loginResponse.data;
         setCurrentLoan((prev) => ({ ...prev, ...mockData, isStaff: true }));
-        router.push("/loan");
+        redirectedPathName(lang)
       }
     } catch (error) {
       (error);
@@ -51,7 +59,7 @@ import Loader from "@components/Loader";
     getPage();
   },[currentLoan]);
   return (
-    <Box sx={{direction:lang=='ar'?'rtl':'ltr'}}>
+    <Box >
       {pageContent.loginPage?
       <Grid container maxHeight={"calc(100vh - 200px)"} item md={12}>
         <Grid
@@ -182,7 +190,7 @@ import Loader from "@components/Loader";
                 minHeight={"120px"}
                 height={{ xs: "120px" }}
                 maxHeight={"40%"}
-                onClick={() => router.push("/loan")}
+                onClick={() =>redirectedPathName(lang)}
                 sx={{
                   cursor: "pointer",
                   ...glassmorphismStyle,
@@ -230,10 +238,9 @@ import Loader from "@components/Loader";
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            border: "none",
           }}
         >
-          <Grid container item xs={12} md={6} xl={4} margin={"auto"}>
+          <Grid container item xs={12} md={6} xl={4}  sx={{outline: 'none',border:"none"}}>
             <LoginModal
               handleCloseStaffLogin={handleCloseStaffLogin}
               setLoginCredindtials={setLoginCredindtials}
@@ -243,7 +250,7 @@ import Loader from "@components/Loader";
           </Grid>
         </Modal>
       </Grid>:
-      <Grid container height={'100vh'} maxHeight={"calc(100vh - 200px)"} item md={12}>
+      <Grid container height={'100vh'}   maxHeight={"calc(100vh - 200px)"} item md={12}>
         <Loader/>
       </Grid>}
     </Box>

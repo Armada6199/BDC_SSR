@@ -1,8 +1,7 @@
 "use client";
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import { Grid, Typography } from "@mui/material";
 import Image from "next/image";
-import { LanguageContext } from "@hooks/LanguageProvider";
 // import bankLogo from "next/assets/Banque_du_caire_Logowhite.svg";
 import { usePathname, useRouter } from "next/navigation";
 import bankWhite from '@public/assets/Banque_du_caire_Logowhite.svg'
@@ -14,6 +13,7 @@ function Header({lang}) {
  const redirectedPathName=(locale)=>{
   if(!pathName)  push('/');
   const segments=pathName.split('/');
+  console.log(locale)
   segments[1]=locale;
   changeDirection(locale)
   push(segments.join('/'))
@@ -31,7 +31,6 @@ function Header({lang}) {
       alignItems={"center"}
       item
       md={12}
-      sx={{direction:lang==="en"?'ltr':'rtl'}}
       >
       <Grid item md={6}>
         {/* <Box

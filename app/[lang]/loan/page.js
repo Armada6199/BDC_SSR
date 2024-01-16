@@ -4,10 +4,10 @@ import Box from "@mui/material/Box";
 import Stepper from "@mui/material/Stepper";
 import Typography from "@mui/material/Typography";
 import { Button, Grid, useMediaQuery } from "@mui/material";
-import StepperComponentsHOC from "@components/StepperComponentsHOC.jsx";
+import StepperComponentsHOC from "../components/StepperComponentsHOC.jsx";
 import { useForm } from "react-hook-form";
 import calculateEMI from "@utils/calculateEMI";
-import StepperNavigationButtons from "@components/StepperNavigationButtons.jsx";
+import StepperNavigationButtons from "../components/StepperNavigationButtons.jsx";
 import MobileStepper from "@mui/material/MobileStepper";
 import axios from "axios";
 import { loanDetailsData } from "@public/loans";
@@ -108,7 +108,7 @@ import  getDictionary  from "@lib/dictionary";
       activeLoansDeductions: activeLoansDeductions,
     }));
   }
-  const handleNext = async (formData) => {1
+  const handleNext = async (formData) => {
     if (activeStep == 0) {
       handleSetEMI();
       setActiveStep((prevActiveStep) => prevActiveStep + 1);
@@ -127,7 +127,6 @@ import  getDictionary  from "@lib/dictionary";
       (currentLoan);
     }
   };
-
   const handleBack = () => {
     if (activeStep > 0) {
       setActiveStep((prevActiveStep) => prevActiveStep - 1);
@@ -149,7 +148,6 @@ import  getDictionary  from "@lib/dictionary";
         justifyContent={isMobile ? "center" : "flex-start"}
         bgcolor={"background.default"}
         xs={12}
-        sx={{direction:lang==="ar"?'rtl':'ltr'}}
       >
         <Grid container minHeight={"20vh"} item xs={12} p={4} gap={2}>
           <Grid item xs={12}>
@@ -165,13 +163,13 @@ import  getDictionary  from "@lib/dictionary";
               <Grid container gap={2} item xs={12}>
                 <Grid container justifyContent={"center"} item xs={12}>
                   <Typography variant="h6">
-                    {steps[activeStep].slice(2)}
+                    {pageContent.stepperSteps[activeStep].slice(2)}
                   </Typography>
                 </Grid>
                 <Grid container item xs={12}>
                   <MobileStepper
                     variant="progress"
-                    steps={steps.length}
+                    steps={pageContent.stepperSteps.length}
                     position="static"
                     activeStep={activeStep}
                     classes={{ dotActive: 'progress_active' }}
@@ -206,7 +204,7 @@ import  getDictionary  from "@lib/dictionary";
                         variant="body1"
                         color={
                           activeStep == index
-                            ? "#C4B28F"
+                            ? "secondary.dark"
                             : activeStep > index
                             ? "#215190"
                             : "darkgray"
@@ -219,7 +217,7 @@ import  getDictionary  from "@lib/dictionary";
                         height={"5px"}
                         backgroundColor={
                           activeStep == index
-                            ? "#C4B28F"
+                            ? "secondary.dark"
                             : activeStep > index
                             ? "#215190"
                             : "darkgray"

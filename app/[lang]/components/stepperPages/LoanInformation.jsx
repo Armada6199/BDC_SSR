@@ -27,14 +27,16 @@ function LoanInformation({
   setValue,
   loanInformationContent,
   localeLoans,
-  lang
+  lang,
 }) {
-  const {currentLoan,setCurrentLoan,loanDetailsLocale}=useContext(CurrentLoanContext);
-    const handleSliderChange = (e) => {
+  const { currentLoan, setCurrentLoan, loanDetailsLocale } =
+    useContext(CurrentLoanContext);
+  const handleSliderChange = (e) => {
     let { name, value } = e.target;
     setValue(name, value);
     name = name.split("_")[0];
     setCurrentLoan((prev) => ({ ...prev, [name]: value }));
+    console.log(currentLoan);
   };
   useEffect(() => {
     setCurrentLoan((prev) => ({ ...prev }));
@@ -50,6 +52,7 @@ function LoanInformation({
     } = currentLoan;
     if (numberOfMonths && loanAmount && currentSalary) {
       loanAmount = Number(loanAmount);
+
       let { isEligible } = calculateEMI(
         loanAmount,
         intrestRates,
@@ -87,7 +90,6 @@ function LoanInformation({
   };
   function handleChangeCurrentLoan(title) {
     const targetLoan = loans.find((e) => e.title === title);
-    console.log(targetLoan)
     setCurrentLoan(targetLoan);
   }
   const isMobile = useMediaQuery("(max-width:600px)");
@@ -111,9 +113,13 @@ function LoanInformation({
       >
         <Grid container item md={12} gap={4}>
           <Grid item xs={12} md={12}>
-            <Typography textAlign={{xs:'center',md:'start'}} variant="h5" fontWeight={"600"}>
-            {loanInformationContent.applyTitle}
-              </Typography>
+            <Typography
+              textAlign={{ xs: "center", md: "start" }}
+              variant="h5"
+              fontWeight={"600"}
+            >
+              {loanInformationContent.applyTitle}
+            </Typography>
           </Grid>
           <Grid container item justifyContent={"space-between"} md={10} lg={12}>
             {isMobile ? (
@@ -122,6 +128,9 @@ function LoanInformation({
                 setCurrentLoan={setCurrentLoan}
                 localeLoans={localeLoans}
                 handleChangeCurrentLoan={handleChangeCurrentLoan}
+                viewDetailsButtonLabel={
+                  loanInformationContent.viewDetailsButtonLabel
+                }
               />
             ) : (
               <LoanTypes
@@ -142,7 +151,8 @@ function LoanInformation({
               register={register}
               errors={errors}
               loanDetailsLocale={loanDetailsLocale}
-              label={loanInformationContent.loanAmountLabel}            />
+              label={loanInformationContent.loanAmountLabel}
+            />
           </Grid>
           <Grid container item>
             <MonthsSlider
@@ -173,8 +183,11 @@ function LoanInformation({
             disabled={currentLoan.isStaff}
             error={errors.isCurrentLoan?.message ? true : false}
           >
-            <FormLabel sx={{textAlign:'start'}} id="demo-radio-buttons-group-label">
-             {loanInformationContent.currentLoanLabel}{" "}
+            <FormLabel
+              sx={{ textAlign: "start" }}
+              id="demo-radio-buttons-group-label"
+            >
+              {loanInformationContent.currentLoanLabel}{" "}
             </FormLabel>
             <RadioGroup
               aria-labelledby="demo-radio-buttons-group-label"
@@ -215,13 +228,13 @@ function LoanInformation({
                       sx={{
                         color: "#215190",
                         "&.Mui-checked": {
-                          color: "#C4B28F",
+                          color: "secondary.dark",
                           transition: "all 0.3s ease",
                         },
                       }}
                     />
                   }
-                  label= {loanInformationContent.yesLabel}
+                  label={loanInformationContent.yesLabel}
                 />
               </Grid>
               <Grid item md={2}>
@@ -238,12 +251,12 @@ function LoanInformation({
                       sx={{
                         color: "#215190",
                         "&.Mui-checked": {
-                          color: "#C4B28F",
+                          color: "secondary.dark",
                         },
                       }}
                     />
                   }
-                  label= {loanInformationContent.noLabel}
+                  label={loanInformationContent.noLabel}
                 />
               </Grid>
             </RadioGroup>
@@ -269,7 +282,10 @@ function LoanInformation({
       </Grid>
       {!isMobile && (
         <Grid container alignItems={"center"} item md={6}>
-          <LoanDetails loanDetailsLocale={loanDetailsLocale} currentLoan={currentLoan} />
+          <LoanDetails
+            loanDetailsLocale={loanDetailsLocale}
+            currentLoan={currentLoan}
+          />
         </Grid>
       )}
     </Grid>

@@ -24,6 +24,8 @@ function MonthsSlider({
 }) {
   const isMobile=useMediaQuery('(max-width:600px)');
   // const debouncedMonths=useDebounce(currentLoan.numberOfMonths_Input||currentLoan.numberOfMonths_Slider);
+  const value=currentLoan.numberOfMonths?currentLoan.numberOfMonths:currentLoan.maxMonths/2
+
   return (
     <FormControl
       fullWidth
@@ -68,12 +70,12 @@ function MonthsSlider({
               InputProps={{
                 startAdornment: (
                   <InputAdornment position="start">
-                    <EditIcon sx={{ color: "#C4B28F" }} />
+                    <EditIcon sx={{ color: "secondary.dark" }} />
                   </InputAdornment>
                 ),
                 sx:{fontWeight:700},
               }}
-              value={currentLoan.numberOfMonths||currentLoan.maxMonths/2}
+              value={value}
               variant="outlined"
             />
           </Grid>

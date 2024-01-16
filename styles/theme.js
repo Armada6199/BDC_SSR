@@ -1,13 +1,11 @@
 import { createTheme } from "@mui/material";
-
-const theme= createTheme({
-  direction:"rtl",
+const theme= (dir)=>createTheme({
+  direction:dir,
     components: {
       MuiButton: {
         styleOverrides: {
           root: {
             height:'50px',
-          
           },
           '&:hover': {
             backgroundColor: 'secondary.light !important'
@@ -37,12 +35,13 @@ const theme= createTheme({
         bluish:'#215190'
       },
       secondary:{
-        main:'#C4B28F',
-        dark:'#b0a080',
-        light:"#D5C9B0",
+        main:'#F58232',
+        dark:'#dd752d',
+        light:"#f58232",
       },
       background: {
-        default: "#F1F3F4"
+        default: "#F1F3F4",
+        lightBlack:"#424242"
       },
       // secondary: purple,
     },

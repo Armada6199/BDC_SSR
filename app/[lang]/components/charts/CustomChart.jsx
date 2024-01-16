@@ -5,7 +5,7 @@ import { Doughnut } from 'react-chartjs-2';
 ChartJS.register(ArcElement, Tooltip);
 
 
-export default function CustomChart({interestPayable,loanAmount}) {
+export default function CustomChart({interestPayable,loanAmount,originalLoanAmountLabel,interestPayableLabel}) {
   // const appliedInterests=totalAppliedLayers.map(ele=>{
   //   return ele.totalInterestApplied;
   // })
@@ -14,19 +14,18 @@ export default function CustomChart({interestPayable,loanAmount}) {
   // })
   (interestPayable,loanAmount)
   const data = {
-    labels: ['Original Loan Amount','Intersts'],
+    labels: [originalLoanAmountLabel,interestPayableLabel],
     datasets: [
       {
         label: 'EMI Details',
         data: [interestPayable,loanAmount],
         backgroundColor: [
-          '#215190',
-          '#C4B28F',
-         
+          '#424242',
+          '#dd752d',
         ],
         borderColor: [
-          '#215190',
-          '#C4B28F',
+          '#424242',
+          '#dd752d',
         ],
         borderWidth: 1,
       },

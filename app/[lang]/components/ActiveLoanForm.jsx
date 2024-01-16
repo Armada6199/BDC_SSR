@@ -10,13 +10,11 @@ import {
 import { Box } from "@mui/system";
 import Grid from "@mui/system/Unstable_Grid/Grid";
 import React, { useContext, useEffect } from "react";
-import { loanInfoInputStyle } from "@styles/styles";
 import AddIcon from "@mui/icons-material/Add";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import Slide from "@mui/material/Slide";
 import { CurrentLoanContext } from "@hooks/CurrentLoanProvider";
-import { dir } from "i18next";
 function ActiveLoanForm({
   register,
   currentLoan,
@@ -86,9 +84,10 @@ function ActiveLoanForm({
               onChange={(e) => handleLoanInputChange(e)}
               value={currentLoan.activeLoans[index].activeLoanType}
               disabled={currentLoan.isStaff}
+              
 >
             {activeFormLocale.loanTypes.map((type) => (
-                <MenuItem sx={{direction:lang=='en'?'ltr':'rtl'}} value={type.value}>{type.localeContent}</MenuItem>
+                <MenuItem  value={type.value}>{type.localeContent}</MenuItem>
               ))}
             </Select>
           </FormControl>
@@ -111,7 +110,7 @@ function ActiveLoanForm({
               }
             >
               {activeFormLocale.layers.map((layer) => (
-                <MenuItem  sx={{direction:lang=='en'?'ltr':'rtl'}} value={layer.value}>{layer.localeContent}</MenuItem>
+                <MenuItem   value={layer.value}>{layer.localeContent}</MenuItem>
               ))}
             </Select>
           </FormControl>
@@ -125,7 +124,7 @@ function ActiveLoanForm({
             InputProps={{
               startAdornment: (
                 <InputAdornment position="start">
-                  <EditIcon sx={{ color: "#C4B28F" }} />
+                  <EditIcon sx={{ color: "secondary.dark" }} />
                 </InputAdornment>
               ),
             }}
@@ -160,7 +159,7 @@ function ActiveLoanForm({
             InputProps={{
               startAdornment: (
                 <InputAdornment position="start">
-                  <EditIcon sx={{ color: "#C4B28F" }} />
+                  <EditIcon sx={{ color: "secondary.dark" }} />
                 </InputAdornment>
               ),
             }}
@@ -215,7 +214,7 @@ function ActiveLoanForm({
                 handleAddNewLoan()
               }
             >
-              <AddIcon sx={{ fontSize: 42, color: "#C4B28F" }} />
+              <AddIcon sx={{ fontSize: 42, color: "secondary.dark" }} />
             </Box>
           </Grid>
           {index !== 0 && (
@@ -239,7 +238,7 @@ function ActiveLoanForm({
                   cursor: "pointer",
                 }}
               >
-                <DeleteIcon sx={{ fontSize: 42, color: "#C4B28F" }} />
+                <DeleteIcon sx={{ fontSize: 42, color: "secondary.dark" }} />
               </Box>
             </Grid>
           )}

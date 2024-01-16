@@ -19,10 +19,10 @@ ChartJS.register(
   Legend
 );
 
-const labels = ["First Layer", "Second Layer", "Third Layer", "Forth Layer"];
-
-export function CustomBarChat({ totalAppliedLayers }) {
+export function CustomBarChat({ totalAppliedLayers,layersLocale,totalAppliedLabel,appliedInterestLabel }) {
   const lastIncludedLayer = totalAppliedLayers[totalAppliedLayers.length - 1];
+  const labels=layersLocale.map(e=>(e.localeContent))
+
   const maxAmount =
     lastIncludedLayer.totalInterestApplied + lastIncludedLayer.max;
   const options = {
@@ -43,14 +43,14 @@ export function CustomBarChat({ totalAppliedLayers }) {
     labels,
     datasets: [
       {
-        label: "Total Applied",
+        label: totalAppliedLabel,
         data: totalAppliedLayers.map((ele) => ele.deductedAmount),
-        backgroundColor: "#215190",
+        backgroundColor: "#dd752d",
       },
       {
-        label: "Applied Interests",
+        label: appliedInterestLabel,
         data: totalAppliedLayers.map((ele) => ele.totalInterestApplied),
-        backgroundColor: "#C4B28F",
+        backgroundColor: "#424242",
       },
     ],
   };

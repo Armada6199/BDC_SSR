@@ -22,16 +22,17 @@
     "ineligibleMessage": "غير مؤهل لهذا المبلغ",
     "activeLoanMessage": "هل لديك قرض حالي من BDC؟",
     "activeLoanSubmessage": "في حال كان لديك قرض حالي، يرجى إدخال تفاصيله أدناه.",
+    "viewDetailsButtonLabel":"عرض التفاصيل",
     "activeLoans": {
       "layer": "شريحة",
       "leftMonths": "الأشهر المتبقية",
       "payPerMonth": "الدفعة الشهرية",
       "loanType": "نوع القرض",
       "layers": [
-     {"value":"First Layer","localeContent":"ألشريحة الأولى"},
-     {"value":"Second Layer","localeContent":"ألشريحة الثانية"},
-     {"value":"Third Layer","localeContent":"ألشريحة الثالثة"},
-     {"value":"Forth Layer","localeContent":"ألشريحة الرابعة"}
+        { "value": "First Layer", "localeContent": "الشريحة الأولى" },
+        { "value": "Second Layer", "localeContent": "الشريحة الثانية" },
+        { "value": "Third Layer", "localeContent": "الشريحة الثالثة" },
+        { "value": "Forth Layer", "localeContent": "الشريحة الرابعة" }
       ],
       "loanTypes": [
         { "value": "Personal Loan", "localeContent": " قرض  شخصي" },
@@ -52,7 +53,14 @@
     "interestPayableLabel": "الفائدة المستحقة",
     "loanTypeSubtitle": "نوع القرض",
     "loanAmountSubtitle": "قيمة القرض",
-    "loanTermSubtitle": "مدة القرض (بالشهور)"
+    "loanTermSubtitle": "مدة القرض (بالشهور)",
+    "charts": {
+      "originalLoanAmountLabel": "قيمة القرض ",
+      "EMILabel": "القسط الشهري المتساوي",
+      "EMIExplainationLabel": " الفائدة + قيمة القرض ",
+      "appliedInterestLabel": " الفائدة المطبقة",
+      "totalAppliedLabel": "القيمة المطبقة "
+    }
   },
   "loginPage": {
     "pageTitle": "صفحة تسجيل الدخول",
@@ -135,33 +143,31 @@
     "backButton": "رجوع",
     "nextButton": "التالي"
   },
-  
-  
-    "loanEligibilityTable": {
-        "layer": "الطبقة",
-        "loanType": "نوع القرض",
-        "loanStatus": "حالة الشريحة",
-        "appliedAmount": "المبلغ  المخصوم",
-        "appliedInterest": "الفائدة المطبقة",
-        "layerInterestRate": "فائدة الطبقة",
-        "range": "الحد الأدنى والأعلى",
-        "active": "نشط",
-        "requested": "مطلوب",
-        "layers": [
-          {"value":"First Layer","localeContent":"ألشريحة الأولى"},
-          {"value":"Second Layer","localeContent":"ألشريحة الثانية"},
-          {"value":"Third Layer","localeContent":"ألشريحة الثالثة"},
-          {"value":"Forth Layer","localeContent":"ألشريحة الرابعة"}
-           ],
-           "loanTypes": [
-             { "value": "Personal Loan", "localeContent": " قرض  شخصي" },
-             { "value": "Home Loan", "localeContent": "قرض منزل" },
-             { "value": "Car Loan", "localeContent": "قرض مركبة" },
-             { "value": "Lnad Loan", "localeContent": "قرض أرض" }
-           ]
+
+  "loanEligibilityTable": {
+    "layer": "الطبقة",
+    "loanType": "نوع القرض",
+    "loanStatus": "حالة الشريحة",
+    "appliedAmount": "المبلغ  المخصوم",
+    "appliedInterest": "الفائدة المطبقة",
+    "layerInterestRate": "فائدة الطبقة",
+    "range": "الحد الأدنى والأعلى",
+    "active": "نشط",
+    "requested": "مطلوب",
+    "layers": [
+      { "value": "First Layer", "localeContent": "الشريحة الأولى" },
+      { "value": "Second Layer", "localeContent": "الشريحة الثانية" },
+      { "value": "Third Layer", "localeContent": "الشريحة الثالثة" },
+      { "value": "Forth Layer", "localeContent": "الشريحة الرابعة" }
+    ],
+    "loanTypes": [
+      { "value": "Personal Loan", "localeContent": " قرض  شخصي" },
+      { "value": "Home Loan", "localeContent": "قرض منزل" },
+      { "value": "Car Loan", "localeContent": "قرض مركبة" },
+      { "value": "Lnad Loan", "localeContent": "قرض أرض" }
+    ]
   },
-  
-    
+
   "loansInformation": [
     {
       "title": " قرض شخصي",

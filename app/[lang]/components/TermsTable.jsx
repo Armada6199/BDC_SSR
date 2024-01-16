@@ -11,7 +11,6 @@ function TermsTable({ loanDetailsLocale }) {
   function createData(minAmount, maxAmount, minMonths, maxMonths, normalDBR,socialSecurityDBR) {
     return { minAmount, maxAmount, minMonths, maxMonths, normalDBR,socialSecurityDBR };
   }
-  console.log(loanDetailsLocale.minLoanAmountTitle)
   const rows = [
     createData(
       loanDetailsLocale.minLoanAmountTitle,

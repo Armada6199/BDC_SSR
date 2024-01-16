@@ -178,7 +178,7 @@ function DocumentToolbar({
             </Grid>
             <Grid container className="sigContainer" item xs={12}>
               <ReactSignatureCanvas
-                penColor="#215190"
+                penColor="#dd752d "
                 ref={(ref) => {
                   sigPad = ref;
                 }}
@@ -206,7 +206,7 @@ function DocumentToolbar({
                   onClick={() => handleAddSignature(sigPad)}
                   sx={{
                     fontWeight: "600",
-                    bgcolor: "#C4B28F",
+                    bgcolor: "secondary.dark",
                     color: "primary.main",
                     ":hover": { backgroundColor: "secondary.dark" },
                   }}

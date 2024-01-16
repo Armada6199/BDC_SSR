@@ -20,13 +20,14 @@ export const loanDetailsData = [
       "Minimum income is 250 JOD",
       "Maximum DBR is up to 50% and for social security retirees up to 60%",
     ],
-        isStaff:false,
+    isStaff: false,
     minIncomeAmount: 250,
-    maxAmount: (intrestRates) =>{
-      let initialValue=0;
-      return  intrestRates.reduce(
-        (accumulator, currentValue) => accumulator+currentValue.max,initialValue
-      )
+    maxAmount: (intrestRates) => {
+      let initialValue = 0;
+      return intrestRates.reduce(
+        (accumulator, currentValue) => accumulator + currentValue.max,
+        initialValue
+      );
     },
     minAmount: 5000,
     intrestRates: [
@@ -43,19 +44,23 @@ export const loanDetailsData = [
     minMonths: 12,
     maxMonths: 300,
     hasPrevLoan: false,
-    loan_attatchments:[],
+    loan_attatchments: [],
     activeLoans: [
-      { activeLoanLeftMonths: null, activeLoanLayer: null,activeLoanPayPerMonthInput:null, activeLoanType: null }
-,
+      {
+        activeLoanLeftMonths: null,
+        activeLoanLayer: null,
+        activeLoanPayPerMonthInput: null,
+        activeLoanType: null,
+      },
     ],
     currentSalary: 0,
     normalDBR: 0.5,
     socialSecurityDBR: 0.6,
     Minimumtenor: 12,
     totalAppliedLayers: [],
-    activeLoansDeductions:[],
-    maxAmountAfterDeduction:0,
-    isStaff:false,
+    activeLoansDeductions: [],
+    maxAmountAfterDeduction: 0,
+    isStaff: false,
     loadIcon: (props) => <Person2OutlinedIcon sx={props} />,
   },
   {
@@ -75,11 +80,12 @@ export const loanDetailsData = [
       "Maximum DBR is up to 50% and for social security retirees up to 60%",
     ],
     minIncomeAmount: 250,
-    maxAmount: (intrestRates) =>{
-      let initialValue=0;
-      return  intrestRates.reduce(
-        (accumulator, currentValue) => accumulator+currentValue.max,initialValue
-      )
+    maxAmount: (intrestRates) => {
+      let initialValue = 0;
+      return intrestRates.reduce(
+        (accumulator, currentValue) => accumulator + currentValue.max,
+        initialValue
+      );
     },
     minAmount: 5000,
     intrestRates: [
@@ -98,18 +104,23 @@ export const loanDetailsData = [
     totalInterest: 0,
     normalDBR: 0.5,
     socialSecurityDBR: 0.6,
-    loan_attatchments:[],
+    loan_attatchments: [],
     activeLoans: [
-      { activeLoanLeftMonths: 0, activeLoanLayer: 0,activeLoanPayPerMonthInput:0, activeLoanType: 0 }
-,
+      {
+        activeLoanLeftMonths: 0,
+        activeLoanLayer: 0,
+        activeLoanPayPerMonthInput: 0,
+        activeLoanType: 0,
+      },
     ],
     currentSalary: 0,
     hasPrevLoan: false,
     Minimumtenor: 12,
-    isStaff:false,
+    isStaff: false,
     totalAppliedLayers: [],
-    activeLoansDeductions:[],
- maxAmountAfterDeduction:0,    loadIcon: (props) => <HouseOutlinedIcon sx={props} />,
+    activeLoansDeductions: [],
+    maxAmountAfterDeduction: 0,
+    loadIcon: (props) => <HouseOutlinedIcon sx={props} />,
   },
   {
     title: "Car Loan",
@@ -134,11 +145,12 @@ export const loanDetailsData = [
       { title: "Third Layer", interestRate: 0.06, min: 5000, max: 1500_0 },
       { title: "Forth Layer", interestRate: 0.105, min: 5000, max: 190_000 },
     ],
-    maxAmount: (intrestRates) =>{
-      let initialValue=0;
-      return  intrestRates.reduce(
-        (accumulator, currentValue) => accumulator+currentValue.max,initialValue
-      )
+    maxAmount: (intrestRates) => {
+      let initialValue = 0;
+      return intrestRates.reduce(
+        (accumulator, currentValue) => accumulator + currentValue.max,
+        initialValue
+      );
     },
     EMI: 0,
     payPerMonth: 0,
@@ -149,10 +161,14 @@ export const loanDetailsData = [
     minMonths: 12,
     maxMonths: 300,
     totalInterest: 0,
-    isStaff:false,
+    isStaff: false,
     activeLoans: [
-      { activeLoanLeftMonths: 0, activeLoanLayer: 0,activeLoanPayPerMonthInput:0, activeLoanType: 0 }
-,
+      {
+        activeLoanLeftMonths: 0,
+        activeLoanLayer: 0,
+        activeLoanPayPerMonthInput: 0,
+        activeLoanType: 0,
+      },
     ],
     currentSalary: 0,
     hasPrevLoan: false,
@@ -160,12 +176,12 @@ export const loanDetailsData = [
     Minimumtenor: 12,
     socialSecurityDBR: 0.6,
     totalAppliedLayers: [],
-    activeLoansDeductions:[],
-    loan_attatchments:[],
- maxAmountAfterDeduction:0,    
- loadIcon: (props) => <DirectionsCarFilledOutlinedIcon sx={props} />,
+    activeLoansDeductions: [],
+    loan_attatchments: [],
+    maxAmountAfterDeduction: 0,
+    loadIcon: (props) => <DirectionsCarFilledOutlinedIcon sx={props} />,
   },
-  
+
   {
     title: "Land Loan",
     description:
@@ -189,11 +205,12 @@ export const loanDetailsData = [
       { title: "Third Layer", interestRate: 0.06, min: 5000, max: 1500_0 },
       { title: "Forth Layer", interestRate: 0.105, min: 5000, max: 190_000 },
     ],
-    maxAmount: (intrestRates) =>{
-      let initialValue=0;
-      return  intrestRates.reduce(
-        (accumulator, currentValue) => accumulator+currentValue.max,initialValue
-      )
+    maxAmount: (intrestRates) => {
+      let initialValue = 0;
+      return intrestRates.reduce(
+        (accumulator, currentValue) => accumulator + currentValue.max,
+        initialValue
+      );
     },
     EMI: 0,
     Minimumtenor: 12,
@@ -209,12 +226,16 @@ export const loanDetailsData = [
     totalInterest: 0,
     normalDBR: 0.5,
     socialSecurityDBR: 0.6,
-    activeLoansDeductions:[],
-    maxAmountAfterDeduction:0,
-    loan_loan_attatchments:[],
-        activeLoans: [
-      { activeLoanLeftMonths: null, activeLoanLayer: null,activeLoanPayPerMonthInput:null, activeLoanType: null }
-,
+    activeLoansDeductions: [],
+    maxAmountAfterDeduction: 0,
+    loan_loan_attatchments: [],
+    activeLoans: [
+      {
+        activeLoanLeftMonths: null,
+        activeLoanLayer: null,
+        activeLoanPayPerMonthInput: null,
+        activeLoanType: null,
+      },
     ],
     currentSalary: 0,
     hasPrevLoan: false,

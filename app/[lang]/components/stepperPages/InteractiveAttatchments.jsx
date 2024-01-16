@@ -149,11 +149,11 @@ const InteractiveAttatchments = ({
             <Typography
               variant="h5"
               fontWeight={"600"}
-              color={"primary.bluish"}
+              color={"secondary.dark"}
               sx={{
                 marginBottom: "15px",
                 textTransform: "uppercase",
-                color: "#215190",
+                color: "secondary.dark",
               }}
               textAlign={"center"}
             >
@@ -221,7 +221,7 @@ const InteractiveAttatchments = ({
               <Typography
                 variant="h5"
                 fontWeight={"600"}
-                color={"primary.bluish"}
+                color={"secondary.dark"}
                 sx={{
                   textTransform: "uppercase",
                 }}
@@ -242,7 +242,7 @@ const InteractiveAttatchments = ({
                 <Typography
                   variant="h5"
                   fontWeight={"600"}
-                  color={"primary.bluish"}
+                  color={"secondary.dark"}
                   sx={{
                     textTransform: "uppercase",
                   }}
@@ -264,7 +264,7 @@ const InteractiveAttatchments = ({
             <Grid item xs={12}>
               <Typography
                 variant="h5"
-                color={"primary.bluish"}
+                color={"secondary.dark"}
                 fontWeight={600}
                 sx={{
                   textTransform: "uppercase",

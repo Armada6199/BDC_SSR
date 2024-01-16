@@ -7,11 +7,11 @@ const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
     height: 10,
     borderRadius: 5,
     [`&.${linearProgressClasses.colorPrimary}`]: {
-      backgroundColor: theme.palette.secondary.dark,
+      backgroundColor: theme.palette.background.lightBlack,
     },
     [`& .${linearProgressClasses.bar}`]: {
       borderRadius: 5,
-      backgroundColor:  theme.palette.primary.bluish,
+      backgroundColor:  theme.palette.secondary.dark,
     },
   }));
 export default function ProgressBar({progress}) {
@@ -26,7 +26,7 @@ export default function ProgressBar({progress}) {
   });
   return (
     <Box sx={{ width: '100%' }}>
-      <BorderLinearProgress sx={{backgroundColor:"secondary.dark"}} variant="buffer" value={progress} valueBuffer={buffer} />
+      <BorderLinearProgress  variant="buffer" value={progress} valueBuffer={buffer} />
     </Box>
   );
 }

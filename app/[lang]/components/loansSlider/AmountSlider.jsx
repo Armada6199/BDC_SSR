@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   FormControl,
   FormHelperText,
@@ -21,6 +21,7 @@ function AmountSlider({
 }) {
   const maxAmount=currentLoan.maxAmountAfterDeduction||currentLoan.maxAmount(currentLoan.intrestRates);
   const isMobile=useMediaQuery('(max-width:600px)');
+  const value=currentLoan.loanAmount?currentLoan.loanAmount:maxAmount/2;
   return (  
     <FormControl fullWidth error={errors.loanAmount_Slider?.message &&
       errors.loanAmount_Input?.message ?true:false}>
@@ -41,7 +42,7 @@ function AmountSlider({
                   : "Kindly Choose loan amount",
                   min: {
                     value: currentLoan.minAmount,
-                    message: 'Minimum Loan Amount is 5000', 
+                    message: `Minimum Loan Amount is ${currentLoan.minAmount}`, 
                   },
                   max: {
                     value: maxAmount,
@@ -57,13 +58,13 @@ function AmountSlider({
               InputProps={{
                 startAdornment: (
                   <InputAdornment position="start">
-                    <EditIcon sx={{ color: "#C4B28F" }} />
+                    <EditIcon sx={{ color: "secondary.dark" }} />
                   </InputAdornment>
                 ),
                 sx:{fontWeight:700},
               }}  
               variant="outlined"
-              value={currentLoan.loanAmount||maxAmount/2}
+              value={value}
             />
           </Grid>
           <Grid item md={12}>
@@ -81,9 +82,7 @@ function AmountSlider({
                   : "Kindly Choose loan amount",
                 onChange: (e) => handleSliderChange(e),
               })}
-              value={
-                currentLoan.loanAmount ? currentLoan.loanAmount : maxAmount / 2
-              }
+              value={value}
             />
           </Grid>
           <Grid container item justifyContent={"space-between"}>

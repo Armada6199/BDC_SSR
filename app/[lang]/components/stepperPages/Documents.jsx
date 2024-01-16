@@ -58,16 +58,15 @@ function Documents({
           </Typography>
         </Grid>
         <Grid item md={12}>
-          <Typography variant="body2" fontWeight={"500"} color={"darkgray"}>
+          <Typography variant="body2" fontWeight={"600"} color={"darkgray"}>
           {documentsContent.uploadInstruction}
-
           </Typography>
         </Grid>
         <Grid item md={12}>
           <Paper
             variant="outlined"
             style={{
-              border: true ? "2px dashed #C4B28F" : "2px dashed #C4B28F",
+              border: true ? "2px dashed secondary.dark" : "2px dashed #C4B28F",
               padding: 20,
               textAlign: "center",
               cursor: "pointer",
@@ -91,7 +90,7 @@ function Documents({
                   aria-label="upload picture"
                   component="span"
                 >
-                  <CloudUploadIcon style={{ fontSize: 60, color: "#BE9952" }} />
+                  <CloudUploadIcon sx={{ fontSize: 60,color: "secondary.dark" }} />
                 </IconButton>
                 <Typography>{documentsContent.uploadNumberLabel}</Typography>
                 <Typography>{documentsContent.uploadTypeLabel}</Typography>

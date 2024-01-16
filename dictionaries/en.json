@@ -24,7 +24,6 @@
     "modalEmail": "Email",
     "rememberMe": "Remember me"
   },
-
   "loanEligibility": {
     "applyTitle": "My Loan",
     "everyMonthPayTitle": "Every Month I Pay",
@@ -36,7 +35,14 @@
     "interestPayableLabel": "Interest Payable",
     "loanTypeSubtitle": "Loan Type",
     "loanAmountSubtitle": "Loan Amount",
-    "loanTermSubtitle": "Loan Term (in months)"
+    "loanTermSubtitle": "Loan Term (in months)",
+    "charts": {
+      "originalLoanAmountLabel": "OriginalLoanAmount",
+      "EMILabel": "EMI",
+      "EMIExplainationLabel": "Principal + Interset",
+      "appliedInterestLabel": "Applied Interest",
+      "totalAppliedLabel": "Total Applied"
+    }
   },
   "loanEligibilityTable": {
     "layer": "Layer",
@@ -49,18 +55,18 @@
     "active": "Active",
     "requested": "Requested",
     "layers": [
-      {"value":"First Layer","localeContent":"First Layer"},
-      {"value":"Second Layer","localeContent":"Second Layer "},
-      {"value":"Third Layer","localeContent":"Third Layer "},
-      {"value":"Forth Layer","localeContent":" Forth Layer"}
-       ],
-       "loanTypes": [
-         { "value": "Personal Loan", "localeContent": " Personal Loan" },
-         { "value": "Home Loan", "localeContent": " Home Loan" },
-         { "value": "Car Loan", "localeContent": "Car Loan " },
-         { "value": "Land Loan", "localeContent": "Land Loan " }
-       ]
-},
+      { "value": "First Layer", "localeContent": "First Layer" },
+      { "value": "Second Layer", "localeContent": "Second Layer " },
+      { "value": "Third Layer", "localeContent": "Third Layer " },
+      { "value": "Forth Layer", "localeContent": " Forth Layer" }
+    ],
+    "loanTypes": [
+      { "value": "Personal Loan", "localeContent": " Personal Loan" },
+      { "value": "Home Loan", "localeContent": " Home Loan" },
+      { "value": "Car Loan", "localeContent": "Car Loan " },
+      { "value": "Land Loan", "localeContent": "Land Loan " }
+    ]
+  },
   "loanInformation": {
     "applyTitle": "I want to apply",
     "loanDetailsTitle": "Loan Details",
@@ -76,23 +82,24 @@
     "ineligibleMessage": "Not eligible for this amount",
     "activeLoanMessage": "Do you have a current loan from Banque du Carie",
     "activeLoanSubmessage": "If you have a current loan, please enter its details below.",
-    "activeLoans":{
-      "layer":"Layer",
-      "leftMonths":"Left Months ",
-     "payPerMonth": "Monthly Payment ",
-     "loanType":"Loan Type ",
-     "layers": [
-      {"value":"First Layer","localeContent":"First Layer"},
-      {"value":"Second Layer","localeContent":"Second Layer "},
-      {"value":"Third Layer","localeContent":"Third Layer "},
-      {"value":"Forth Layer","localeContent":" Forth Layer"}
-       ],
-       "loanTypes": [
-         { "value": "Personal Loan", "localeContent": " Personal Loan" },
-         { "value": "Home Loan", "localeContent": " Home Loan" },
-         { "value": "Car Loan", "localeContent": "Car Loan " },
-         { "value": "Land Loan", "localeContent": "Land Loan " }
-       ]
+    "viewDetailsButtonLabel":"View Details ",
+    "activeLoans": {
+      "layer": "Layer",
+      "leftMonths": "Left Months ",
+      "payPerMonth": "Monthly Payment ",
+      "loanType": "Loan Type ",
+      "layers": [
+        { "value": "First Layer", "localeContent": "First Layer" },
+        { "value": "Second Layer", "localeContent": "Second Layer " },
+        { "value": "Third Layer", "localeContent": "Third Layer " },
+        { "value": "Forth Layer", "localeContent": " Forth Layer" }
+      ],
+      "loanTypes": [
+        { "value": "Personal Loan", "localeContent": " Personal Loan" },
+        { "value": "Home Loan", "localeContent": " Home Loan" },
+        { "value": "Car Loan", "localeContent": "Car Loan " },
+        { "value": "Land Loan", "localeContent": "Land Loan " }
+      ]
     }
   },
   "personalInformation": {
@@ -147,179 +154,259 @@
       "zoomOut": "Zoom Out",
       "signButton": "Sign",
       "downloadButton": "Download",
-      "clearButton":"Clear",
-      "signatureModalTitle":"kindly add your signature",
-      "saveButton":"save"
-
+      "clearButton": "Clear",
+      "signatureModalTitle": "kindly add your signature",
+      "saveButton": "save"
     }
   },
   "navigation": {
-      "cancelButton": "Cancel",
-      "backButton": "Back",
-      "nextButton": "Next"
-    },
-   
-      "loansInformation": [
+    "cancelButton": "Cancel",
+    "backButton": "Back",
+    "nextButton": "Next"
+  },
+
+  "loansInformation": [
+    {
+      "title": "Personal Loan",
+      "description": "Own your dream land with a competitive interest rate and get additional benefits from our car loan product.",
+      "privileges": [
+        "Financing up to 150,000 Jordanian Dinars",
+        "Financing up to 100% of the estimated land value",
+        "Loan repayment period up to 8 years, including a grace period",
+        "Grace period up to 3 months"
+      ],
+      "privilegesTitle": "Privileges",
+      "termsAndConditions": [
+        "Minimum loan amount is 3,000 Jordanian Dinars",
+        "Minimum loan period is 12 months",
+        "Minimum income is 250 Jordanian Dinars",
+        "Debt-to-Income ratio up to 50%, and for Social Security retirees, it's up to 60%"
+      ],
+      "minAmountTitle": "Minimum Amount",
+      "maxAmountTitle": "Maximum Amount ",
+      "minTenorTitle": "Minimum Tenor",
+      "maxTenorTitle": "Max Tenor",
+      "DBRTitle": "DBR",
+      "socialSecurityDBRTitle": "Social Security DBR",
+      "minLoanAmountTitle": "5000 JD",
+      "termsTitle": " Terms And Conditions",
+      "interestRates": [
         {
-          "title": "Personal Loan",
-          "description": "Own your dream land with a competitive interest rate and get additional benefits from our car loan product.",
-          "privileges": [
-            "Financing up to 150,000 Jordanian Dinars",
-            "Financing up to 100% of the estimated land value",
-            "Loan repayment period up to 8 years, including a grace period",
-            "Grace period up to 3 months"
-          ],
-            "privilegesTitle":"الميزات",
-          "termsAndConditions": [
-            "Minimum loan amount is 3,000 Jordanian Dinars",
-            "Minimum loan period is 12 months",
-            "Minimum income is 250 Jordanian Dinars",
-            "Debt-to-Income ratio up to 50%, and for Social Security retirees, it's up to 60%"
-          ],
-          "minAmountTitle":"Minimum Amount",
-          "maxAmountTitle":"Maximum Amount ",
-          "minTenorTitle":"Minimum Tenor",
-          "maxTenorTitle":"Max Tenor",
-          "DBRTitle":"DBR",
-          "socialSecurityDBRTitle":"Social Security DBR",
-          "minLoanAmountTitle": "5000 دينار",
-          "termsTitle":" Terms And Conditions",
-          "interestRates": [
-            { "title": "Layer 1", "interestRate": 0.0325, "min": 5000, "max": 40000 },
-            { "title": "Layer 2", "interestRate": 0.04, "min": 5000, "max": 160000 },
-            { "title": "Layer 3", "interestRate": 0.06, "min": 5000, "max": 15000 },
-            { "title": "Layer 4", "interestRate": 0.105, "min": 5000, "max": 190000 }
-          ],
-          "minTenorAmounTitle": "12 Months",
-          "minIncomeAmount": 250,
-          "normalDBR": "50%",
-          "socialSecurityDBR": "60%",
-          "maxTenorAmounTitle":"300 Months (25 years)",
-          "activeLoans": [
-            { "activeLoanLeftMonths": null, "activeLoanLayer": null, "activeLoanPayPerMonthInput": null, "activeLoanType": null }
-          ]
+          "title": "Layer 1",
+          "interestRate": 0.0325,
+          "min": 5000,
+          "max": 40000
         },
         {
-          "title": "Home Loan",
-          "description": "Own your dream land with a competitive interest rate and get additional benefits from our car loan product.",
-          "privileges": [
-            "Financing up to 150,000 Jordanian Dinars",
-            "Financing up to 100% of the estimated land value",
-            "Loan repayment period up to 8 years, including a grace period",
-            "Grace period up to 3 months"
-          ],
-                    "privilegesTitle":"الميزات",
-
-          "termsAndConditions": [
-            "Minimum loan amount is 3,000 Jordanian Dinars",
-            "Minimum loan period is 12 months",
-            "Minimum income is 250 Jordanian Dinars",
-            "Debt-to-Income ratio up to 50%, and for Social Security retirees, it's up to 60%"
-          ],
-          "minAmountTitle":"Minimum Amount",
-          "maxAmountTitle":"Maximum Amount ",
-          "minTenorTitle":"Minimum Tenor",
-          "maxTenorTitle":"Max Tenor",
-          "DBRTitle":"DBR",
-          "socialSecurityDBRTitle":"Social Security DBR",
-          "minLoanAmountTitle": "5000 دينار",
-          "termsTitle":" Terms And Conditions",
-
-          "interestRates": [
-            { "title": "Layer 1", "interestRate": 0.0325, "min": 5000, "max": 40000 },
-            { "title": "Layer 2", "interestRate": 0.04, "min": 5000, "max": 160000 },
-            { "title": "Layer 3", "interestRate": 0.06, "min": 5000, "max": 15000 },
-            { "title": "Layer 4", "interestRate": 0.105, "min": 5000, "max": 190000 }
-          ],
-          "minTenorAmounTitle": "12 Months",
-          "minIncomeAmount": 250,
-          "normalDBR": "50%",
-          "socialSecurityDBR": "60%",
-          "maxTenorAmounTitle":"300 Months (25 years)",
-          "activeLoans": [
-            { "activeLoanLeftMonths": null, "activeLoanLayer": null, "activeLoanPayPerMonthInput": null, "activeLoanType": null }
-          ]
+          "title": "Layer 2",
+          "interestRate": 0.04,
+          "min": 5000,
+          "max": 160000
         },
+        { "title": "Layer 3", "interestRate": 0.06, "min": 5000, "max": 15000 },
         {
-          "title": "Car Loan",
-          "description": "Own your dream land with a competitive interest rate and get additional benefits from our car loan product.",
-          "privileges": [
-            "Financing up to 150,000 Jordanian Dinars",
-            "Financing up to 100% of the estimated land value",
-            "Loan repayment period up to 8 years, including a grace period",
-            "Grace period up to 3 months"
-          ],
-                    "privilegesTitle":"الميزات",
-
-          "termsAndConditions": [
-            "Minimum loan amount is 3,000 Jordanian Dinars",
-            "Minimum loan period is 12 months",
-            "Minimum income is 250 Jordanian Dinars",
-            "Debt-to-Income ratio up to 50%, and for Social Security retirees, it's up to 60%"
-          ],
-          "minAmountTitle":"Minimum Amount",
-          "maxAmountTitle":"Maximum Amount ",
-          "minTenorTitle":"Minimum Tenor",
-          "maxTenorTitle":"Max Tenor",
-          "DBRTitle":"DBR",
-          "socialSecurityDBRTitle":"Social Security DBR",
-          "minLoanAmountTitle": "5000 دينار",
-          "termsTitle":" Terms And Conditions",
-
-          "interestRates": [
-            { "title": "Layer 1", "interestRate": 0.0325, "min": 5000, "max": 40000 },
-            { "title": "Layer 2", "interestRate": 0.04, "min": 5000, "max": 160000 },
-            { "title": "Layer 3", "interestRate": 0.06, "min": 5000, "max": 15000 },
-            { "title": "Layer 4", "interestRate": 0.105, "min": 5000, "max": 190000 }
-          ],
-          "minTenorAmounTitle": "12 Months",
-          "minIncomeAmount": 250,
-          "normalDBR": "50%",
-          "socialSecurityDBR": "60%",
-          "maxTenorAmounTitle":"300 Months (25 years)",
-          "activeLoans": [
-            { "activeLoanLeftMonths": null, "activeLoanLayer": null, "activeLoanPayPerMonthInput": null, "activeLoanType": null }
-          ]
-        },  {
-          "title": "Land Loan",
-          "description": "Own your dream land with a competitive interest rate and get additional benefits from our car loan product.",
-          "privileges": [
-            "Financing up to 150,000 Jordanian Dinars",
-            "Financing up to 100% of the estimated land value",
-            "Loan repayment period up to 8 years, including a grace period",
-            "Grace period up to 3 months"
-          ],
-                    "privilegesTitle":"الميزات",
-
-          "termsAndConditions": [
-            "Minimum loan amount is 3,000 Jordanian Dinars",
-            "Minimum loan period is 12 months",
-            "Minimum income is 250 Jordanian Dinars",
-            "Debt-to-Income ratio up to 50%, and for Social Security retirees, it's up to 60%"
-          ],
-          "minAmountTitle":"Minimum Amount",
-          "maxAmountTitle":"Maximum Amount ",
-          "minTenorTitle":"Minimum Tenor",
-          "maxTenorTitle":"Max Tenor",
-          "DBRTitle":"DBR",
-          "socialSecurityDBRTitle":"Social Security DBR",
-          "minLoanAmountTitle": "5000 دينار",
-          "termsTitle":" Terms And Conditions",
-
-          "interestRates": [
-            { "title": "Layer 1", "interestRate": 0.0325, "min": 5000, "max": 40000 },
-            { "title": "Layer 2", "interestRate": 0.04, "min": 5000, "max": 160000 },
-            { "title": "Layer 3", "interestRate": 0.06, "min": 5000, "max": 15000 },
-            { "title": "Layer 4", "interestRate": 0.105, "min": 5000, "max": 190000 }
-          ],
-          "minTenorAmounTitle": "12 Months",
-          "minIncomeAmount": 250,
-          "normalDBR": "50%",
-          "socialSecurityDBR": "60%",
-          "maxTenorAmounTitle":"300 Months (25 years)",
-          "activeLoans": [
-            { "activeLoanLeftMonths": null, "activeLoanLayer": null, "activeLoanPayPerMonthInput": null, "activeLoanType": null }
-          ]
+          "title": "Layer 4",
+          "interestRate": 0.105,
+          "min": 5000,
+          "max": 190000
+        }
+      ],
+      "minTenorAmounTitle": "12 Months",
+      "minIncomeAmount": 250,
+      "normalDBR": "50%",
+      "socialSecurityDBR": "60%",
+      "maxTenorAmounTitle": "300 Months (25 years)",
+      "activeLoans": [
+        {
+          "activeLoanLeftMonths": null,
+          "activeLoanLayer": null,
+          "activeLoanPayPerMonthInput": null,
+          "activeLoanType": null
         }
       ]
+    },
+    {
+      "title": "Home Loan",
+      "description": "Own your dream land with a competitive interest rate and get additional benefits from our car loan product.",
+      "privileges": [
+        "Financing up to 150,000 Jordanian Dinars",
+        "Financing up to 100% of the estimated land value",
+        "Loan repayment period up to 8 years, including a grace period",
+        "Grace period up to 3 months"
+      ],
+      "privilegesTitle": "Privileges",
+
+      "termsAndConditions": [
+        "Minimum loan amount is 3,000 Jordanian Dinars",
+        "Minimum loan period is 12 months",
+        "Minimum income is 250 Jordanian Dinars",
+        "Debt-to-Income ratio up to 50%, and for Social Security retirees, it's up to 60%"
+      ],
+      "minAmountTitle": "Minimum Amount",
+      "maxAmountTitle": "Maximum Amount ",
+      "minTenorTitle": "Minimum Tenor",
+      "maxTenorTitle": "Max Tenor",
+      "DBRTitle": "DBR",
+      "socialSecurityDBRTitle": "Social Security DBR",
+      "minLoanAmountTitle": "5000 JD",
+      "termsTitle": " Terms And Conditions",
+
+      "interestRates": [
+        {
+          "title": "Layer 1",
+          "interestRate": 0.0325,
+          "min": 5000,
+          "max": 40000
+        },
+        {
+          "title": "Layer 2",
+          "interestRate": 0.04,
+          "min": 5000,
+          "max": 160000
+        },
+        { "title": "Layer 3", "interestRate": 0.06, "min": 5000, "max": 15000 },
+        {
+          "title": "Layer 4",
+          "interestRate": 0.105,
+          "min": 5000,
+          "max": 190000
+        }
+      ],
+      "minTenorAmounTitle": "12 Months",
+      "minIncomeAmount": 250,
+      "normalDBR": "50%",
+      "socialSecurityDBR": "60%",
+      "maxTenorAmounTitle": "300 Months (25 years)",
+      "activeLoans": [
+        {
+          "activeLoanLeftMonths": null,
+          "activeLoanLayer": null,
+          "activeLoanPayPerMonthInput": null,
+          "activeLoanType": null
+        }
+      ]
+    },
+    {
+      "title": "Car Loan",
+      "description": "Own your dream land with a competitive interest rate and get additional benefits from our car loan product.",
+      "privileges": [
+        "Financing up to 150,000 Jordanian Dinars",
+        "Financing up to 100% of the estimated land value",
+        "Loan repayment period up to 8 years, including a grace period",
+        "Grace period up to 3 months"
+      ],
+      "privilegesTitle": "الميزات",
+
+      "termsAndConditions": [
+        "Minimum loan amount is 3,000 Jordanian Dinars",
+        "Minimum loan period is 12 months",
+        "Minimum income is 250 Jordanian Dinars",
+        "Debt-to-Income ratio up to 50%, and for Social Security retirees, it's up to 60%"
+      ],
+      "minAmountTitle": "Minimum Amount",
+      "maxAmountTitle": "Maximum Amount ",
+      "minTenorTitle": "Minimum Tenor",
+      "maxTenorTitle": "Max Tenor",
+      "DBRTitle": "DBR",
+      "socialSecurityDBRTitle": "Social Security DBR",
+      "minLoanAmountTitle": "5000 دينار",
+      "termsTitle": " Terms And Conditions",
+
+      "interestRates": [
+        {
+          "title": "Layer 1",
+          "interestRate": 0.0325,
+          "min": 5000,
+          "max": 40000
+        },
+        {
+          "title": "Layer 2",
+          "interestRate": 0.04,
+          "min": 5000,
+          "max": 160000
+        },
+        { "title": "Layer 3", "interestRate": 0.06, "min": 5000, "max": 15000 },
+        {
+          "title": "Layer 4",
+          "interestRate": 0.105,
+          "min": 5000,
+          "max": 190000
+        }
+      ],
+      "minTenorAmounTitle": "12 Months",
+      "minIncomeAmount": 250,
+      "normalDBR": "50%",
+      "socialSecurityDBR": "60%",
+      "maxTenorAmounTitle": "300 Months (25 years)",
+      "activeLoans": [
+        {
+          "activeLoanLeftMonths": null,
+          "activeLoanLayer": null,
+          "activeLoanPayPerMonthInput": null,
+          "activeLoanType": null
+        }
+      ]
+    },
+    {
+      "title": "Land Loan",
+      "description": "Own your dream land with a competitive interest rate and get additional benefits from our car loan product.",
+      "privileges": [
+        "Financing up to 150,000 Jordanian Dinars",
+        "Financing up to 100% of the estimated land value",
+        "Loan repayment period up to 8 years, including a grace period",
+        "Grace period up to 3 months"
+      ],
+      "privilegesTitle": "الميزات",
+
+      "termsAndConditions": [
+        "Minimum loan amount is 3,000 Jordanian Dinars",
+        "Minimum loan period is 12 months",
+        "Minimum income is 250 Jordanian Dinars",
+        "Debt-to-Income ratio up to 50%, and for Social Security retirees, it's up to 60%"
+      ],
+      "minAmountTitle": "Minimum Amount",
+      "maxAmountTitle": "Maximum Amount ",
+      "minTenorTitle": "Minimum Tenor",
+      "maxTenorTitle": "Max Tenor",
+      "DBRTitle": "DBR",
+      "socialSecurityDBRTitle": "Social Security DBR",
+      "minLoanAmountTitle": "5000 دينار",
+      "termsTitle": " Terms And Conditions",
+
+      "interestRates": [
+        {
+          "title": "Layer 1",
+          "interestRate": 0.0325,
+          "min": 5000,
+          "max": 40000
+        },
+        {
+          "title": "Layer 2",
+          "interestRate": 0.04,
+          "min": 5000,
+          "max": 160000
+        },
+        { "title": "Layer 3", "interestRate": 0.06, "min": 5000, "max": 15000 },
+        {
+          "title": "Layer 4",
+          "interestRate": 0.105,
+          "min": 5000,
+          "max": 190000
+        }
+      ],
+      "minTenorAmounTitle": "12 Months",
+      "minIncomeAmount": 250,
+      "normalDBR": "50%",
+      "socialSecurityDBR": "60%",
+      "maxTenorAmounTitle": "300 Months (25 years)",
+      "activeLoans": [
+        {
+          "activeLoanLeftMonths": null,
+          "activeLoanLayer": null,
+          "activeLoanPayPerMonthInput": null,
+          "activeLoanType": null
+        }
+      ]
+    }
+  ]
 }

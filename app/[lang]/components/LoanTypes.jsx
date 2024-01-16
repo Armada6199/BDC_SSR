@@ -26,6 +26,8 @@ function LoanTypes({
             backgroundColor:
               currentLoan.title === loan.enTitle ? "#E8E8E8" : "#fff",
             cursor: "pointer",
+            justifyContent:'center',
+            alignItems:"center"
           }}
           item
           md={6}
@@ -33,11 +35,9 @@ function LoanTypes({
           key={loan.title}
           onClick={() => handleChangeCurrentLoan(loan.enTitle||loan.title)}
         >
-          <Grid container justifyContent={"center"} item md={12}>
-            <Box sx={loanIconContStyle}>{loanIcons[index]}</Box>
-          </Grid>
-          <Grid container justifyContent={"center"} item md={12}>
-            <Typography variant="body1" fontWeight={"bold"}>
+          <Grid container direction={'column'} justifyContent={'center'} alignItems={'center'} gap={1} item>
+          <Box sx={{...loanIconContStyle,bgcolor:'secondary.dark',color:"#FFF"}}>{loanIcons[index]}</Box>
+          <Typography variant="body1" textAlign={'center'} fontWeight={"bold"}>
               {loan.title}
             </Typography>
           </Grid>

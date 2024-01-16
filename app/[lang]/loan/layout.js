@@ -1,13 +1,11 @@
 'use client'
-import { LanguageContext } from '@hooks/LanguageProvider';
 import { Box } from '@mui/material'
-import React, { useContext } from 'react'
+import React from 'react'
 
-function LoanLayout({children}) {
-    const {currentLanguage}=useContext(LanguageContext);
-    const currentDirection=currentLanguage==='en'?'ltr':'rtl';
+function LoanLayout({children,params:{lang}}) {
+    // const {currentLanguage}=useContext(LanguageContext);
   return (
-    <Box sx={{direction:currentDirection}}>
+    <Box >
         {children}
     </Box>
     )

@@ -24,7 +24,6 @@ const CurrentLoanProvider = ({ children }) => {
         changeLoanDetailsLocale,
         loanDetailsLocale,
         changeDirection,
-        direction,
       }}
     >
       {children}
