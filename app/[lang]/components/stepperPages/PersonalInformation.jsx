@@ -10,12 +10,10 @@ function PersonalInformation({ register, errors,personalInformationContent}) {
   return (
     <Grid
       container
-      spacing={4}
       justifyContent={{ xs: "center", md: "flex-start" }}
       item
       xs={12}
     >
-    
       <Grid container   item md={12}>
       <Grid item md={12}>
         <Typography variant="h5" fontWeight={"600"}>

@@ -6,6 +6,7 @@ const CurrentLoanProvider = ({ children }) => {
   const [currentLoan, setCurrentLoan] = useState(loanDetailsData[1]);
   const [loanDetailsLocale, setLoanDetailsLocale] = useState("");
   const [direction, setDirection] = useState("ltr");
+  const [userType,setUserType]=useState('staff')
   function changeLoanDetailsLocale(loans) {
     setLoanDetailsLocale(
       loans.filter((e) => e.enTitle === currentLoan.title|| e.title === currentLoan.title)[0]
@@ -24,6 +25,8 @@ const CurrentLoanProvider = ({ children }) => {
         changeLoanDetailsLocale,
         loanDetailsLocale,
         changeDirection,
+        userType,
+        setUserType
       }}
     >
       {children}

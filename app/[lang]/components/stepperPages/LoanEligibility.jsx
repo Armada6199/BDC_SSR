@@ -6,6 +6,7 @@ import { glassmorphismStyle } from "@styles/styles.js";
 import ElibiblityLayerTable from "../ElibiblityLayerTable";
 import { CustomBarChat } from "../charts/CustomBarChat";
 import { CurrentLoanContext } from "@hooks/CurrentLoanProvider";
+import { loanIcons } from "@public/icons";
 
 function LoanEligibility({
   loanEligibilityContent,
@@ -116,11 +117,8 @@ function LoanEligibility({
               item
               xs={12}
             >
-              {currentLoan.loadIcon({
-                width: "25px",
-                height: "25px",
-                color: "black",
-              })}
+         
+              {loanIcons[currentLoan.title]}
               <Typography variant="h5" fontWeight={"600"}>
                 {loanDetailsLocale.title}
               </Typography>

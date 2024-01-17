@@ -5,11 +5,8 @@ import {
   loanIconContStyle,
   loanTypesBoxesStyle,
 } from "@styles/styles.js";
-import Person2OutlinedIcon from "@mui/icons-material/Person2Outlined";
-import HouseOutlinedIcon from "@mui/icons-material/HouseOutlined";
-import DirectionsCarFilledOutlinedIcon from "@mui/icons-material/DirectionsCarFilledOutlined";
-import LandscapeOutlinedIcon from "@mui/icons-material/LandscapeOutlined";
-const loanIcons=[<Person2OutlinedIcon/>,<HouseOutlinedIcon/>,<DirectionsCarFilledOutlinedIcon/>,<LandscapeOutlinedIcon/>]
+import { loanIcons } from "@public/icons";
+
 
 function LoanTypes({
   localeLoans,
@@ -36,7 +33,7 @@ function LoanTypes({
           onClick={() => handleChangeCurrentLoan(loan.enTitle||loan.title)}
         >
           <Grid container direction={'column'} justifyContent={'center'} alignItems={'center'} gap={1} item>
-          <Box sx={{...loanIconContStyle,bgcolor:'secondary.dark',color:"#FFF"}}>{loanIcons[index]}</Box>
+          <Box sx={{...loanIconContStyle,bgcolor:'secondary.dark',color:"#FFF"}}>{loanIcons[loan.title]}</Box>
           <Typography variant="body1" textAlign={'center'} fontWeight={"bold"}>
               {loan.title}
             </Typography>

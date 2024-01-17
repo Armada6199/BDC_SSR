@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import React, { useContext, useEffect, useState } from "react";
 import Box from "@mui/material/Box";
 import Stepper from "@mui/material/Stepper";
@@ -11,15 +11,25 @@ import StepperNavigationButtons from "../components/StepperNavigationButtons.jsx
 import MobileStepper from "@mui/material/MobileStepper";
 import axios from "axios";
 import { loanDetailsData } from "@public/loans";
-import '@styles/styles.css'
+import "@styles/styles.css";
 import { CurrentLoanContext } from "@hooks/CurrentLoanProvider";
-import  getDictionary  from "@lib/dictionary";
- function LoanStepperPage({params:{lang}}) {
+import getDictionary from "@lib/dictionary";
+import { useSession } from "next-auth/react";
+import { redirect } from "next/navigation";
+import Loader from "../components/Loader.jsx";
+function LoanStepperPage({ params: { lang } }) {
   const [activeStep, setActiveStep] = React.useState(0);
   const [loans, setLoans] = React.useState(loanDetailsData);
-  const {currentLoan,setCurrentLoan,changeLoanDetailsLocale}=useContext(CurrentLoanContext); 
+  const { currentLoan, setCurrentLoan, changeLoanDetailsLocale } =
+    useContext(CurrentLoanContext);
   const isMobile = useMediaQuery("(max-width:650px)");
-  const [pageContent,setPageContent]=useState('');
+  const [pageContent, setPageContent] = useState("");
+  const { data: session } = useSession({
+    required: true,
+    onUnauthenticated() {
+      if (currentLoan.userType === "staff") redirect(`/${lang}`);
+    },
+  });
   const [uploadProgress, setUploadProgress] = useState({
     started: false,
     pc: 0,
@@ -41,15 +51,23 @@ import  getDictionary  from "@lib/dictionary";
       currentSalary_Input: currentLoan.currentSalary,
     },
   });
-  useEffect(()=>{
-    const getPage=async ()=>{
-      const page= await getDictionary(lang);
+  useEffect(() => {
+    const getPage = async () => {
+      const page = await getDictionary(lang);
       setPageContent(page);
       changeLoanDetailsLocale(page.loansInformation);
-    }
+    };
     getPage();
+  }, [currentLoan]);
+ useEffect(()=>{
+  if(localStorage.getItem('currentLoan')){
+    const localeData=JSON.parse(localStorage.getItem('currentLoan'));
+    setCurrentLoan(localeData)
+  }else {
+    localStorage.setItem('currentLoan',JSON.stringify(currentLoan));
   }
-  ,[currentLoan]);
+  // return localStorage.clear('currentLoan')
+ },[])
   async function hanldeSubmitAttatchments() {
     const formData = new FormData();
     for (let i = 0; i < currentLoan.loan_attatchments.length; i++) {
@@ -60,20 +78,16 @@ import  getDictionary  from "@lib/dictionary";
     formData.append("fileNumber", currentLoan.formData.fileNumber);
     try {
       setUploadProgress((prev) => ({ ...prev, started: true }));
-      const postAttatchments = await axios.post(
-        `/api/attatchments`,
-        formData,
-        {
-          onUploadProgress: (progressEvent) =>
-            setUploadProgress((prev) => ({
-              ...prev,
-              pc: progressEvent.progress * 100,
-            })),
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }
-      );
+      const postAttatchments = await axios.post(`/api/attatchments`, formData, {
+        onUploadProgress: (progressEvent) =>
+          setUploadProgress((prev) => ({
+            ...prev,
+            pc: progressEvent.progress * 100,
+          })),
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
       if (postAttatchments.status === 200) {
         setUploadProgress((prev) => ({
           ...prev,
@@ -116,15 +130,18 @@ import  getDictionary  from "@lib/dictionary";
       try {
         await hanldeSubmitAttatchments();
       } catch (error) {
-        (error);
+        error;
       }
     }
-    if (activeStep !== pageContent.stepperSteps.length - 1 && activeStep !== 0) {
+    if (
+      activeStep !== pageContent.stepperSteps.length - 1 &&
+      activeStep !== 0
+    ) {
       setCurrentLoan((prev) => ({ ...prev, formData }));
       setActiveStep((prevActiveStep) => prevActiveStep + 1);
     } else {
       ///submit data  here
-      (currentLoan);
+      currentLoan;
     }
   };
   const handleBack = () => {
@@ -139,145 +156,148 @@ import  getDictionary  from "@lib/dictionary";
   };
   return (
     <form noValidate onSubmit={handleSubmit(handleNext)}>
-      {pageContent.loanInformation&&
-      <Grid
-        container
-        item
-        maxWidth={"100vw"}
-        minHeight={"100vh"}
-        justifyContent={isMobile ? "center" : "flex-start"}
-        bgcolor={"background.default"}
-        xs={12}
-      >
-        <Grid container minHeight={"20vh"} item xs={12} p={4} gap={2}>
-          <Grid item xs={12}>
-            <Typography
-              sx={{ textAlign: { xs: "center", md: "start" } }}
-              variant="h4"
-            >
-              {pageContent.stepperTitle}
-            </Typography>
-          </Grid>
-          <Grid container={isMobile ? true : false} item xs={12}>
-            {isMobile ? (
-              <Grid container gap={2} item xs={12}>
-                <Grid container justifyContent={"center"} item xs={12}>
-                  <Typography variant="h6">
-                    {pageContent.stepperSteps[activeStep].slice(2)}
-                  </Typography>
-                </Grid>
-                <Grid container item xs={12}>
-                  <MobileStepper
-                    variant="progress"
-                    steps={pageContent.stepperSteps.length}
-                    position="static"
-                    activeStep={activeStep}
-                    classes={{ dotActive: 'progress_active' }}
-                    sx={{
-                      width: "100%",
-                      flexGrow: 1,
-                      justifyContent: "center",
-                      ".MuiMobileStepper-progress": {
-                        width: "100%",
-                        backgroundColor: "secondary.dark",
-                      }
-                    }}
-                    style={{
-                      backgroundColor: '#f0f0f0', // Set a background color for the progress bar
-                    }}
-                  />
-                </Grid>
-              </Grid>
-            ) : (
-              <Stepper activeStep={activeStep}>
-                {pageContent.stepperSteps.map((label, index) => {
-                  return (
-                    <Box
-                      width={"100%"}
-                      mr={"2px"}
-                      display={"flex"}
-                      flexDirection={"column"}
-                      gap={2}
-                      key={label}
-                    >
-                      <Typography
-                        variant="body1"
-                        color={
-                          activeStep == index
-                            ? "secondary.dark"
-                            : activeStep > index
-                            ? "#215190"
-                            : "darkgray"
-                        }
-                      >
-                        {label}
-                      </Typography>
-                      <Box
-                        width={"100%"}
-                        height={"5px"}
-                        backgroundColor={
-                          activeStep == index
-                            ? "secondary.dark"
-                            : activeStep > index
-                            ? "#215190"
-                            : "darkgray"
-                        }
-                      ></Box>
-                    </Box>
-                  );
-                })}
-              </Stepper>
-            )}
-          </Grid>
-        </Grid>
+      {pageContent.loanInformation ? (
         <Grid
           container
           item
-          p={4}
-          md={12}
-          minHeight={"75vh"}
-          gap={4}
-          bgcolor={"#fff"}
+          maxWidth={"100vw"}
+          minHeight={"100vh"}
+          justifyContent={isMobile ? "center" : "flex-start"}
+          bgcolor={"background.default"}
+          xs={12}
         >
-          <Grid container item md={12}>
-            <StepperComponentsHOC
-              loans={loans}
-              activeStep={activeStep}
-              register={register}
-              errors={errors}
-              setValue={setValue}
-              handleSetEMI={handleSetEMI}
-              hanldeSubmitAttatchments={hanldeSubmitAttatchments}
-              uploadProgress={uploadProgress}
-              setUploadProgress={setUploadProgress}
-              pageContent={pageContent}
-              lang={lang}
-            />
+          <Grid container minHeight={"20vh"} item xs={12} p={4} gap={2}>
+            <Grid item xs={12}>
+              <Typography
+                sx={{ textAlign: { xs: "center", md: "start" } }}
+                variant="h4"
+              >
+                {pageContent.stepperTitle}
+              </Typography>
+            </Grid>
+            <Grid container={isMobile ? true : false} item xs={12}>
+              {isMobile ? (
+                <Grid container gap={2} item xs={12}>
+                  <Grid container justifyContent={"center"} item xs={12}>
+                    <Typography variant="h6">
+                      {pageContent.stepperSteps[activeStep].slice(2)}
+                    </Typography>
+                  </Grid>
+                  <Grid container item xs={12}>
+                    <MobileStepper
+                      variant="progress"
+                      steps={pageContent.stepperSteps.length}
+                      position="static"
+                      activeStep={activeStep}
+                      classes={{ dotActive: "progress_active" }}
+                      sx={{
+                        width: "100%",
+                        flexGrow: 1,
+                        justifyContent: "center",
+                        ".MuiMobileStepper-progress": {
+                          width: "100%",
+                          backgroundColor: "secondary.dark",
+                        },
+                      }}
+                      style={{
+                        backgroundColor: "#f0f0f0", // Set a background color for the progress bar
+                      }}
+                    />
+                  </Grid>
+                </Grid>
+              ) : (
+                <Stepper activeStep={activeStep}>
+                  {pageContent.stepperSteps.map((label, index) => {
+                    return (
+                      <Box
+                        width={"100%"}
+                        mr={"2px"}
+                        display={"flex"}
+                        flexDirection={"column"}
+                        gap={2}
+                        key={label}
+                      >
+                        <Typography
+                          variant="body1"
+                          color={
+                            activeStep == index
+                              ? "secondary.dark"
+                              : activeStep > index
+                              ? "#215190"
+                              : "darkgray"
+                          }
+                        >
+                          {label}
+                        </Typography>
+                        <Box
+                          width={"100%"}
+                          height={"5px"}
+                          backgroundColor={
+                            activeStep == index
+                              ? "secondary.dark"
+                              : activeStep > index
+                              ? "#215190"
+                              : "darkgray"
+                          }
+                        ></Box>
+                      </Box>
+                    );
+                  })}
+                </Stepper>
+              )}
+            </Grid>
           </Grid>
+          <Grid
+            container
+            item
+            p={4}
+            md={12}
+            minHeight={"75vh"}
+            gap={4}
+            bgcolor={"#fff"}
+          >
+            <Grid container item md={12}>
+              <StepperComponentsHOC
+                loans={loans}
+                activeStep={activeStep}
+                register={register}
+                errors={errors}
+                setValue={setValue}
+                handleSetEMI={handleSetEMI}
+                hanldeSubmitAttatchments={hanldeSubmitAttatchments}
+                uploadProgress={uploadProgress}
+                setUploadProgress={setUploadProgress}
+                pageContent={pageContent}
+                lang={lang}
+              />
+            </Grid>
+          </Grid>
+          <Box
+            sx={{
+              backgroundColor: "#fff",
+              transition: "all ease-in-out 1s",
+              zIndex: "99",
+            }}
+            width={"100%"}
+            p={4}
+            mt={isMobile ? "100px" : "0"}
+            maxHeight={"60px"}
+            position={"sticky"}
+            bottom={"0px"}
+          >
+            <Grid container item md={12}>
+              <StepperNavigationButtons
+                handleBack={handleBack}
+                activeStep={activeStep}
+                handleRest={handleReset}
+                navigationContent={pageContent.navigation}
+              />
+            </Grid>
+          </Box>
         </Grid>
-        <Box
-          sx={{
-            backgroundColor: "#fff",
-            transition: "all ease-in-out 1s",
-            zIndex: "99",
-          }}
-          width={"100%"}
-          p={4}
-          mt={isMobile?"100px":'0'}
-          maxHeight={'60px'}
-          position={"sticky"}
-          bottom={"0px"}
-        >
-          <Grid container item md={12}>
-            <StepperNavigationButtons
-              handleBack={handleBack}
-              activeStep={activeStep}
-              handleRest={handleReset}
-              navigationContent={pageContent.navigation}
-            />
-          </Grid>
-        </Box>
-      </Grid>}
+      ):<Grid container height={'calc(100vh - 200px)'}>
+        <Loader/>
+        </Grid>}
     </form>
   );
 }

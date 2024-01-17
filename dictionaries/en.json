@@ -22,7 +22,9 @@
     "forgotPassword": "Forgot Password",
     "modalPassword": "Password",
     "modalEmail": "Email",
-    "rememberMe": "Remember me"
+    "rememberMe": "Remember me",
+    "loginButtonText": " Login"
+
   },
   "loanEligibility": {
     "applyTitle": "My Loan",

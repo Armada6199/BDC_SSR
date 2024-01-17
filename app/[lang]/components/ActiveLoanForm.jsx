@@ -43,14 +43,12 @@ function ActiveLoanForm({
     if (activeLoan.activeLoanType === currentLoan.title) {
       let deductionValue = e?.target.value || activeLoan.activeLoanAmount;
       const maxAmountAfterDeduction =
-        currentLoan.maxAmount(currentLoan.intrestRates) - deductionValue;
+        currentLoan.maxAmount - deductionValue;
       setCurrentLoan((prev) => ({ ...prev, maxAmountAfterDeduction }));
     } else {
       setCurrentLoan((prev) => ({
         ...prev,
-        maxAmountAfterDeduction: currentLoan.maxAmount(
-          currentLoan.intrestRates
-        ),
+        maxAmountAfterDeduction: currentLoan.maxAmount,
       }));
     }
   }

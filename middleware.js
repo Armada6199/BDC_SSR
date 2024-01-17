@@ -4,8 +4,8 @@ import { i18n } from '@/i18n.config'
 
 import { match as matchLocale } from '@formatjs/intl-localematcher'
 import Negotiator from 'negotiator'
-
-function getLocale(request) {
+export {default } from 'next-auth/middleware'
+function getLocale(request) { 
   const negotiatorHeaders = {}
   request.headers.forEach((value, key) => (negotiatorHeaders[key] = value))
 
@@ -35,6 +35,5 @@ export function middleware(request) {
 }
 
 export const config = {
-  // Matcher ignoring `/_next/` and `/api/`
-  matcher: ['/((?!api|_next/static|_next/image|favicon.ico).*)']
+  matcher: ['/((?!api|_next/static|_next/image|favicon.ico).*)','/loan']
 }

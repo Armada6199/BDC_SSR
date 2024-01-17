@@ -22,13 +22,7 @@ export const loanDetailsData = [
     ],
     isStaff: false,
     minIncomeAmount: 250,
-    maxAmount: (intrestRates) => {
-      let initialValue = 0;
-      return intrestRates.reduce(
-        (accumulator, currentValue) => accumulator + currentValue.max,
-        initialValue
-      );
-    },
+    maxAmount: 410000,
     minAmount: 5000,
     intrestRates: [
       { title: "First Layer", interestRate: 0.0325, min: 5000, max: 400_00 },
@@ -79,14 +73,9 @@ export const loanDetailsData = [
       "Minimum income is 250 JOD",
       "Maximum DBR is up to 50% and for social security retirees up to 60%",
     ],
+    isStaff: false,
     minIncomeAmount: 250,
-    maxAmount: (intrestRates) => {
-      let initialValue = 0;
-      return intrestRates.reduce(
-        (accumulator, currentValue) => accumulator + currentValue.max,
-        initialValue
-      );
-    },
+    maxAmount: 410000,
     minAmount: 5000,
     intrestRates: [
       { title: "First Layer", interestRate: 0.0325, min: 5000, max: 400_00 },
@@ -101,26 +90,25 @@ export const loanDetailsData = [
     interestPayable: 0,
     minMonths: 12,
     maxMonths: 300,
-    totalInterest: 0,
-    normalDBR: 0.5,
-    socialSecurityDBR: 0.6,
+    hasPrevLoan: false,
     loan_attatchments: [],
     activeLoans: [
       {
-        activeLoanLeftMonths: 0,
-        activeLoanLayer: 0,
-        activeLoanPayPerMonthInput: 0,
-        activeLoanType: 0,
+        activeLoanLeftMonths: null,
+        activeLoanLayer: null,
+        activeLoanPayPerMonthInput: null,
+        activeLoanType: null,
       },
     ],
     currentSalary: 0,
-    hasPrevLoan: false,
+    normalDBR: 0.5,
+    socialSecurityDBR: 0.6,
     Minimumtenor: 12,
-    isStaff: false,
     totalAppliedLayers: [],
     activeLoansDeductions: [],
     maxAmountAfterDeduction: 0,
-    loadIcon: (props) => <HouseOutlinedIcon sx={props} />,
+    isStaff: false,
+    loadIcon: (props) => <Person2OutlinedIcon sx={props} />,
   },
   {
     title: "Car Loan",
@@ -138,6 +126,9 @@ export const loanDetailsData = [
       "Minimum income is 250 JOD",
       "Maximum DBR is up to 50% and for social security retirees up to 60%",
     ],
+    isStaff: false,
+    minIncomeAmount: 250,
+    maxAmount: 410000,
     minAmount: 5000,
     intrestRates: [
       { title: "First Layer", interestRate: 0.0325, min: 5000, max: 400_00 },
@@ -145,43 +136,33 @@ export const loanDetailsData = [
       { title: "Third Layer", interestRate: 0.06, min: 5000, max: 1500_0 },
       { title: "Forth Layer", interestRate: 0.105, min: 5000, max: 190_000 },
     ],
-    maxAmount: (intrestRates) => {
-      let initialValue = 0;
-      return intrestRates.reduce(
-        (accumulator, currentValue) => accumulator + currentValue.max,
-        initialValue
-      );
-    },
     EMI: 0,
     payPerMonth: 0,
     numberOfMonths: 0,
     loanAmount: 0,
     interestPayable: 0,
-    minIncomeAmount: 250,
     minMonths: 12,
     maxMonths: 300,
-    totalInterest: 0,
-    isStaff: false,
+    hasPrevLoan: false,
+    loan_attatchments: [],
     activeLoans: [
       {
-        activeLoanLeftMonths: 0,
-        activeLoanLayer: 0,
-        activeLoanPayPerMonthInput: 0,
-        activeLoanType: 0,
+        activeLoanLeftMonths: null,
+        activeLoanLayer: null,
+        activeLoanPayPerMonthInput: null,
+        activeLoanType: null,
       },
     ],
     currentSalary: 0,
-    hasPrevLoan: false,
     normalDBR: 0.5,
-    Minimumtenor: 12,
     socialSecurityDBR: 0.6,
+    Minimumtenor: 12,
     totalAppliedLayers: [],
     activeLoansDeductions: [],
-    loan_attatchments: [],
     maxAmountAfterDeduction: 0,
-    loadIcon: (props) => <DirectionsCarFilledOutlinedIcon sx={props} />,
+    isStaff: false,
+    loadIcon: (props) => <Person2OutlinedIcon sx={props} />,
   },
-
   {
     title: "Land Loan",
     description:
@@ -198,6 +179,9 @@ export const loanDetailsData = [
       "Minimum income is 250 JOD",
       "Maximum DBR is up to 50% and for social security retirees up to 60%",
     ],
+    isStaff: false,
+    minIncomeAmount: 250,
+    maxAmount: 410000,
     minAmount: 5000,
     intrestRates: [
       { title: "First Layer", interestRate: 0.0325, min: 5000, max: 400_00 },
@@ -205,30 +189,15 @@ export const loanDetailsData = [
       { title: "Third Layer", interestRate: 0.06, min: 5000, max: 1500_0 },
       { title: "Forth Layer", interestRate: 0.105, min: 5000, max: 190_000 },
     ],
-    maxAmount: (intrestRates) => {
-      let initialValue = 0;
-      return intrestRates.reduce(
-        (accumulator, currentValue) => accumulator + currentValue.max,
-        initialValue
-      );
-    },
     EMI: 0,
-    Minimumtenor: 12,
     payPerMonth: 0,
     numberOfMonths: 0,
     loanAmount: 0,
     interestPayable: 0,
-    minIncomeAmount: 250,
-    normalDBR: 0.5,
-    socialSecurityDBR: 0.6,
     minMonths: 12,
     maxMonths: 300,
-    totalInterest: 0,
-    normalDBR: 0.5,
-    socialSecurityDBR: 0.6,
-    activeLoansDeductions: [],
-    maxAmountAfterDeduction: 0,
-    loan_loan_attatchments: [],
+    hasPrevLoan: false,
+    loan_attatchments: [],
     activeLoans: [
       {
         activeLoanLeftMonths: null,
@@ -238,9 +207,13 @@ export const loanDetailsData = [
       },
     ],
     currentSalary: 0,
-    hasPrevLoan: false,
+    normalDBR: 0.5,
+    socialSecurityDBR: 0.6,
     Minimumtenor: 12,
     totalAppliedLayers: [],
-    loadIcon: (props) => <LandscapeOutlinedIcon sx={props} />,
+    activeLoansDeductions: [],
+    maxAmountAfterDeduction: 0,
+    isStaff: false,
+    loadIcon: (props) => <Person2OutlinedIcon sx={props} />,
   },
 ];

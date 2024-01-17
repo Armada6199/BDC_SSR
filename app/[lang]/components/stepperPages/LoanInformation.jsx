@@ -38,9 +38,7 @@ function LoanInformation({
     setCurrentLoan((prev) => ({ ...prev, [name]: value }));
     console.log(currentLoan);
   };
-  useEffect(() => {
-    setCurrentLoan((prev) => ({ ...prev }));
-  }, []);
+
   const validateGreaterThanSalary = () => {
     let {
       loanAmount,
@@ -90,8 +88,18 @@ function LoanInformation({
   };
   function handleChangeCurrentLoan(title) {
     const targetLoan = loans.find((e) => e.title === title);
-    setCurrentLoan(targetLoan);
+    setCurrentLoan((prev) => ({
+      ...targetLoan,
+      currentSalary: prev.currentSalary,
+      isStaff: prev.isStaff,
+      hasPrevLoan: prev.hasPrevLoan,
+      activeLoans: prev.activeLoans,
+      maxAmountAfterDeduction: prev.maxAmountAfterDeduction,
+    }));
   }
+  // useEffect(()=>{
+  //   console.log(currentLoan)
+  // },[])
   const isMobile = useMediaQuery("(max-width:600px)");
   return (
     <Grid

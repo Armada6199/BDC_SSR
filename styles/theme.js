@@ -6,10 +6,12 @@ const theme= (dir)=>createTheme({
         styleOverrides: {
           root: {
             height:'50px',
+            '&:hover': {
+              background: '#dd752d',
+              color:"#fff"
+           },
           },
-          '&:hover': {
-            backgroundColor: 'secondary.light !important'
-          }
+        
         },
         
       },

@@ -4,7 +4,7 @@ import React from 'react'
 function StepperNavigationButtons({handleRest,handleBack,activeStep,navigationContent}) {
   return (
     <Grid container item  xs={12} maxHeight={'100%'} justifyContent={'space-between'}  alignItems={'center'}  spacing={4}  >
-      <Grid container spacing={4} item xs={6}>
+      <Grid container spacing={4} item xs={3}>
       <Grid item xs={6}>
       <Button
         fullWidth
@@ -15,6 +15,8 @@ function StepperNavigationButtons({handleRest,handleBack,activeStep,navigationCo
         {navigationContent.cancelButton}
       </Button>
       </Grid>
+      </Grid>
+      <Grid container justifyContent={'flex-end'} item xs={6}  >
       {activeStep>0&&
       <Grid item xs={6}  >
         <Button
@@ -26,8 +28,6 @@ function StepperNavigationButtons({handleRest,handleBack,activeStep,navigationCo
         {navigationContent.backButton}
         </Button>
       </Grid>}
-      </Grid>
-      <Grid container justifyContent={'flex-end'} item xs={3} bg >
         <Button
         fullWidth
           variant="contained"

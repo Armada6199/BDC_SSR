@@ -128,25 +128,27 @@ function DocumentToolbar({
             </Button>
           </Grid>
           <Grid container alignItems={"center"} item xs={6} md={6}>
-            <Grid item xs={12} md={2}>
+            <Grid item xs={12} >
               {downloading ? (
                 <Grid container justifyContent={"center"} item xs={12}>
                   <div className="download_loader"></div>
                 </Grid>
               ) : (
-                <Button
-                  fullWidth
-                  sx={{
-                    fontWeight: "600",
-                    ":hover": { backgroundColor: "secondary.light" },
-                  }}
-                  disabled={downloading}
-                  onClick={() => handleDownloadDocument(sigPad)}
-                  startIcon={<SaveAltIcon />}
-                  variant="text"
-                >
-                  {isMobile ? "" : toolbarContent.downloadButton}
-                </Button>
+                <Grid item xs={12}  >
+                  <Button
+                    fullWidth
+                    sx={{
+                      fontWeight: "600",
+                      ":hover": { backgroundColor: "secondary.light" },
+                    }}
+                    disabled={downloading}
+                    onClick={() => handleDownloadDocument(sigPad)}
+                    startIcon={<SaveAltIcon />}
+                    variant="text"
+                  >
+                    {isMobile ? "" : toolbarContent.downloadButton}
+                  </Button>
+                </Grid>
               )}
             </Grid>
           </Grid>
@@ -186,7 +188,7 @@ function DocumentToolbar({
               />
             </Grid>
             <Grid container item xs={12} justifyContent={"center"} spacing={4}>
-              <Grid item md={6}>
+              <Grid item xs={6}>
                 <Button
                   onClick={clear}
                   sx={{
@@ -201,8 +203,9 @@ function DocumentToolbar({
                   {toolbarContent.clearButton}
                 </Button>
               </Grid>
-              <Grid item md={6}>
+              <Grid item xs={6}>
                 <Button
+                fullWidth
                   onClick={() => handleAddSignature(sigPad)}
                   sx={{
                     fontWeight: "600",
@@ -211,7 +214,6 @@ function DocumentToolbar({
                     ":hover": { backgroundColor: "secondary.dark" },
                   }}
                   startIcon={<SaveIcon />}
-                  fullWidth
                   variant="contained"
                 >
                   {toolbarContent.saveButton}

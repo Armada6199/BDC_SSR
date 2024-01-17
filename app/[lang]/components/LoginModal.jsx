@@ -11,13 +11,16 @@ import {
 import { glassmorphismStyle } from "@styles/styles.js";
 import ClearIcon from "@mui/icons-material/Clear";
 import Image from "next/image";
+import "@/styles/styles.css";
 
 function LoginModal({
   setLoginCredindtials,
   handleLogin,
   handleCloseStaffLogin,
   pageContent,
+  isLoginingIn,
 }) {
+
   return (
     <Grid
       container
@@ -26,7 +29,7 @@ function LoginModal({
       p={4}
       justifyContent={"center"}
       gap={4}
-      sx={{ ...glassmorphismStyle, borderRadius: "30px"}}
+      sx={{ ...glassmorphismStyle, borderRadius: "30px" }}
       height={{ xs: "90vh", md: "95vh", xl: "80vh" }}
     >
       <ClearIcon
@@ -40,12 +43,7 @@ function LoginModal({
         }}
       />
       <Grid container justifyContent={"center"} item md={12}>
-        <Image
-          src={bankLogoDark}
-          alt="loginImg"
-          width={"200"}
-          height={"40"}
-        />
+        <Image src={bankLogoDark} alt="loginImg" width={"200"} height={"40"} />
       </Grid>
       <Grid item xs={12}>
         <Typography textAlign={"center"} variant="h4" fontWeight={"600"}>
@@ -66,7 +64,7 @@ function LoginModal({
         <Grid item xs={12} md={12}>
           <TextField
             fullWidth
-            label= {pageContent.loginPage.modalEmail}
+            label={pageContent.loginPage.modalEmail}
             onChange={(e) =>
               setLoginCredindtials((prev) => ({
                 ...prev,
@@ -80,8 +78,7 @@ function LoginModal({
         <Grid item xs={12} md={12}>
           <TextField
             fullWidth
-            label= {pageContent.loginPage.modalPassword}
-
+            label={pageContent.loginPage.modalPassword}
             type="password"
             onChange={(e) =>
               setLoginCredindtials((prev) => ({
@@ -106,13 +103,12 @@ function LoginModal({
                   defaultChecked
                 />
               }
-              label= {pageContent.loginPage.rememberMe}
-
+              label={pageContent.loginPage.rememberMe}
             />
           </Grid>
           <Grid item xs={6} md={6}>
             <Typography fontWeight={"600"} textAlign={"end"}>
-            {pageContent.loginPage.forgotPassword}
+              {pageContent.loginPage.forgotPassword}
             </Typography>
           </Grid>
         </Grid>
@@ -120,10 +116,15 @@ function LoginModal({
           <Button
             fullWidth
             onClick={handleLogin}
+            disabled={isLoginingIn}
             variant="contained"
             sx={{ bgcolor: "#F58232" }}
           >
-          {pageContent.loginPage.loginButtonText}
+            {isLoginingIn ? (
+              <div  style={{color:'#fff'}} className="download_loader"></div>
+            ) : (
+              pageContent.loginPage.loginButtonText
+            )}
           </Button>
         </Grid>
       </Grid>
