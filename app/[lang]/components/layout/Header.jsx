@@ -1,63 +1,69 @@
 "use client";
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { Grid, Typography } from "@mui/material";
 import Image from "next/image";
 // import bankLogo from "next/assets/Banque_du_caire_Logowhite.svg";
 import { usePathname, useRouter } from "next/navigation";
-import bankWhite from '@public/assets/Banque_du_caire_Logowhite.svg'
+import bankWhite from "@public/assets/Banque_du_caire_Logowhite.svg";
 import { CurrentLoanContext } from "@hooks/CurrentLoanProvider";
-function Header({lang}) {
-  const pathName=usePathname();
-  const {push}=useRouter();
-  const {changeDirection}=useContext(CurrentLoanContext)
- const redirectedPathName=(locale)=>{
-  if(!pathName)  push('/');
-  const segments=pathName.split('/');
-  console.log(locale)
-  segments[1]=locale;
-  changeDirection(locale)
-  push(segments.join('/'))
- };
- 
+function Header({ lang }) {
+  const pathName = usePathname();
+  const { push } = useRouter();
+  const { localePageContent } = useContext(CurrentLoanContext);
+  const redirectedPathName = (locale, extPath = "") => {
+    if (!pathName) push("/");
+    const segments = pathName.split("/");
+    console.log(locale);
+    segments[1] = locale;
+     push(segments.join("/") + extPath);
+  };
+
   return (
-    <Grid
-      container
-      bgcolor={"#424242"}
-      height={"100px"}
-      borderBottom={"4px solid #F05030"}
-      p={0}
-      justifyContent={"space-between"}
-      px={4}
-      alignItems={"center"}
-      item
-      md={12}
-      >
-      <Grid item md={6}>
-        {/* <Box
-          component={"img"}
-          height={"60px"}
-          sx={{ fill: "white" }}
-          src={bankLogo}
-        /> */}
-        {/* <img src={bankLogo} alt="Bank Logo" height={"60px"} /> */}
-        <Image
-          src={bankWhite}
-          alt="bankLogo"
-          width="152"
-          height="60"
-        />
-      </Grid>
+    localePageContent && (
       <Grid
+        container
+        bgcolor={"#424242"}
+        height={"100px"}
+        borderBottom={"4px solid #F05030"}
+        alignItems={"center"}
         item
-        md={6}
-        sx={{ cursor: "pointer" }}
-        onClick={() => redirectedPathName(lang=='en'?'ar':'en')}
+        px={4}
+        xs={12}
       >
-        <Typography variant="h6" textAlign={"end"} color={"white"}>
-          {lang=='en'?'AR':'EN'}
-        </Typography>
+        <Grid
+          container
+          spacing={4}
+          alignItems={"center"}
+          item
+          xs={10}
+        >
+          <Grid item xs={2} md={4}>
+            <Image src={bankWhite} alt="bankLogo" width="152" height="60" />
+          </Grid>
+          <Grid
+            item
+            onClick={() => redirectedPathName(lang, "/profile")}
+            xs={10}
+            md={8}
+            sx={{ cursor: "pointer" }}
+          >
+            <Typography variant="h6" color={"white"}>
+              {localePageContent.heading.headerMyLoansLabel}
+            </Typography>
+          </Grid>
+        </Grid>
+        <Grid
+          item
+          xs={2}
+          sx={{ cursor: "pointer" }}
+          onClick={() => redirectedPathName(lang == "en" ? "ar" : "en")}
+        >
+          <Typography variant="h6" textAlign={"end"} color={"white"}>
+            {localePageContent.switchLanguageLabel}
+          </Typography>
+        </Grid>
       </Grid>
-    </Grid>
+    )
   );
 }
 

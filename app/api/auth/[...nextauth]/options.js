@@ -1,6 +1,9 @@
 import CredentialsProvider from "next-auth/providers/credentials";
 
 export const options = {
+  pages: {
+    signIn: "/",
+  },
   providers: [
     CredentialsProvider({
       name: "credentials",
@@ -30,34 +33,45 @@ export const options = {
               activeLoanPayPerMonthInput: 200,
               activeLoanType: "Home Loan",
               activeDeductedAmount: 2000,
-
             },
             // { activeLoanLeftMonths: 5000, activeLoanLayer: 'Second Layer',activeLoanPayPerMonthInput:233, activeLoanType: 'Land Loan' },
           ],
         };
-        const { email, password } = credentials;
-        const isValidUser =
-          mockUser.email == email && mockUser.password == password;
         try {
-          if (isValidUser) return mockUser;
-          else return null;
+          const { email, password, isGuest } = credentials;
+          if (!isGuest) {
+            const isValidUser =
+              mockUser.email == email && mockUser.password == password;
+            if (isValidUser) return mockUser;
+            else return null;
+          } else {
+            return {isGuest:true}
+          }
         } catch (error) {
-          error;
+          console.log(error);
+          throw new Error(error)
         }
       },
     }),
   ],
-  callbacks:{
-    jwt: async ({ token, user }) =>{
+  pages: {
+    signIn: "/",
+  },
+  callbacks: {
+    // signIn:async({user})=>{
+    //   console.log(user)
+    //   return user;
+    // },
+    jwt: async ({ token, user }) => {
       if (user) {
         token.employeeData = user;
       }
-      return token
+      return token;
     },
     session: async ({ session, token }) => {
-        session.userData = {
-          ...token
-        }
+      session.userData = {
+        ...token,
+      };
 
       return session;
     },

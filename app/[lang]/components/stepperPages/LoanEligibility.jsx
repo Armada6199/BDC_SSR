@@ -15,36 +15,7 @@ function LoanEligibility({
 }) {
   const isMobile = useMediaQuery("(max-width:650px)");
   const { currentLoan, loanDetailsLocale } = useContext(CurrentLoanContext);
-  // console.log(currentLoan)
-  // useEffect(() => {
-  //   // const temp = [
-  //   //   {
-  //   //     totalInterestApplied: 30000,
-  //   //     interestRate: 3.0 + "%",
-  //   //     title: "First Layer",
-  //   //     min: 5000,
-  //   //     max: 40000,
-  //   //     deductedAmount: 40000,
-  //   //   },
-  //   //   {
-  //   //     totalInterestApplied: 30000,
-  //   //     interestRate: 3.0 + "%",
-  //   //     title: "First Layer",
-  //   //     min: 5000,
-  //   //     max: 40000,
-  //   //     deductedAmount: 40000,
-  //   //   },
-  //   //   {
-  //   //     totalInterestApplied: 30000,
-  //   //     interestRate: 3.0 + "%",
-  //   //     title: "First Layer",
-  //   //     min: 5000,
-  //   //     max: 40000,
-  //   //     deductedAmount: 40000,
-  //   //   },
-  //   // ];
-  //   // setCurrentLoan((prev) => ({ ...prev ,totalAppliedLayers}));
-  // }, []);
+
   return (
     <Grid
       container
@@ -81,7 +52,7 @@ function LoanEligibility({
         >
           <Grid
             container
-            sx={{ borderBottom: isMobile ? "2px solid darkgray" : "" }}
+            sx={{ borderBottom: isMobile ? "1px solid lightgray" : "" }}
             p={{ xs: 2 }}
             direction={"column"}
             item
@@ -97,7 +68,7 @@ function LoanEligibility({
           </Grid>
           <Grid
             container
-            sx={{ borderBottom: isMobile ? "2px solid darkgray" : "" }}
+            sx={{ borderBottom: isMobile ? "1px solid lightgray" : "" }}
             p={{ xs: 2 }}
             alignItems={"center"}
             item
@@ -126,7 +97,7 @@ function LoanEligibility({
           </Grid>
           <Grid
             container
-            sx={{ borderBottom: isMobile ? "2px solid darkgray" : "" }}
+            sx={{ borderBottom: isMobile ? "1px solid lightgray" : "" }}
             p={{ xs: 2 }}
             justifyContent={"center"}
             item
@@ -167,8 +138,8 @@ function LoanEligibility({
         <Box
           sx={{
             width: "100%",
-            height: "3px",
-            bgcolor: "darkgray",
+            height: "1px",
+            bgcolor: "lightgray",
           }}
         />
 

@@ -24,7 +24,6 @@ function MonthsSlider({
 }) {
   const isMobile=useMediaQuery('(max-width:600px)');
   // const debouncedMonths=useDebounce(currentLoan.numberOfMonths_Input||currentLoan.numberOfMonths_Slider);
-  const value=currentLoan.numberOfMonths?currentLoan.numberOfMonths:currentLoan.maxMonths/2
 
   return (
     <FormControl
@@ -75,7 +74,7 @@ function MonthsSlider({
                 ),
                 sx:{fontWeight:700},
               }}
-              value={value}
+              value={currentLoan.numberOfMonths}
               variant="outlined"
             />
           </Grid>
@@ -95,9 +94,7 @@ function MonthsSlider({
                   onChange: (e) => handleSliderChange(e),
                   validate:(value)=>validateGreaterThanSalary(value,'months')
                 })}
-                value={
-                  currentLoan.numberOfMonths ? currentLoan.numberOfMonths : currentLoan.maxMonths / 2
-                }
+                value={currentLoan.numberOfMonths}
             />
           </Grid>
           <Grid container item justifyContent={"space-between"}>

@@ -18,18 +18,19 @@ import { useSession } from "next-auth/react";
 import { redirect } from "next/navigation";
 import Loader from "../components/Loader.jsx";
 function LoanStepperPage({ params: { lang } }) {
+  const { data: session } = useSession({
+    required: true,
+    onUnauthenticated() {
+      redirect(`/${lang}`);
+    },
+  });
   const [activeStep, setActiveStep] = React.useState(0);
   const [loans, setLoans] = React.useState(loanDetailsData);
   const { currentLoan, setCurrentLoan, changeLoanDetailsLocale } =
     useContext(CurrentLoanContext);
   const isMobile = useMediaQuery("(max-width:650px)");
   const [pageContent, setPageContent] = useState("");
-  const { data: session } = useSession({
-    required: true,
-    onUnauthenticated() {
-      if (currentLoan.userType === "staff") redirect(`/${lang}`);
-    },
-  });
+
   const [uploadProgress, setUploadProgress] = useState({
     started: false,
     pc: 0,
@@ -59,15 +60,26 @@ function LoanStepperPage({ params: { lang } }) {
     };
     getPage();
   }, [currentLoan]);
- useEffect(()=>{
-  if(localStorage.getItem('currentLoan')){
-    const localeData=JSON.parse(localStorage.getItem('currentLoan'));
-    setCurrentLoan(localeData)
-  }else {
-    localStorage.setItem('currentLoan',JSON.stringify(currentLoan));
-  }
-  // return localStorage.clear('currentLoan')
- },[])
+  useEffect(() => {
+    if (localStorage.getItem("currentLoan")) {
+      const storedData = JSON.parse(localStorage.getItem("currentLoan"));
+      setCurrentLoan(storedData);
+    } else {
+      if (currentLoan.isStaff) {
+        setCurrentLoan((prev) => ({
+          ...prev,
+          ...session.userData.employeeData,
+        }));
+
+        localStorage.setItem(
+          "currentLoan",
+          JSON.stringify({ ...currentLoan, ...session?.userData?.employeeData })
+        );
+      }
+    }
+
+    // return localStorage.clear('currentLoan')
+  }, []);
   async function hanldeSubmitAttatchments() {
     const formData = new FormData();
     for (let i = 0; i < currentLoan.loan_attatchments.length; i++) {
@@ -159,7 +171,7 @@ function LoanStepperPage({ params: { lang } }) {
       {pageContent.loanInformation ? (
         <Grid
           container
-          item
+          
           maxWidth={"100vw"}
           minHeight={"100vh"}
           justifyContent={isMobile ? "center" : "flex-start"}
@@ -295,9 +307,11 @@ function LoanStepperPage({ params: { lang } }) {
             </Grid>
           </Box>
         </Grid>
-      ):<Grid container height={'calc(100vh - 200px)'}>
-        <Loader/>
-        </Grid>}
+      ) : (
+        <Grid container height={"calc(100vh - 200px)"}>
+          <Loader />
+        </Grid>
+      )}
     </form>
   );
 }

@@ -6,7 +6,17 @@
     "4. Attachments",
     "5. Loan Agreement"
   ],
+  "switchLanguageLabel":"AR",
   "stepperTitle": "Apply Loan",
+  "currencyLabel":"JD",
+  "heading":{
+    "headerMyLoansLabel":"My Loans"
+  },
+  "profilePage":{
+    "welcomeLabel":"Hello ,",
+    "myLoansLabel":"My Information"
+
+  },
   "loginPage": {
     "pageTitle": "Login Page",
     "welcomeText": {

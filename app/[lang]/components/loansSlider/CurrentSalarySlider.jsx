@@ -21,7 +21,6 @@ function CurrentSalarySlider({
   label,
 }) {
   const isMobile = useMediaQuery("(max-width:600px)");
-  const value=currentLoan.currentSalary?currentLoan.currentSalary:100000/2
 
   return (
     <FormControl
@@ -57,7 +56,7 @@ function CurrentSalarySlider({
                 </InputAdornment>
               ),
               sx: { fontWeight: 700 },
-              value: value,
+              value: currentLoan.currentSalary,
             }}
             {...register("currentSalary_Input", {
               onChange: (e) => handleSliderChange(e),
@@ -75,7 +74,7 @@ function CurrentSalarySlider({
             step={50}
             inputProps={{
               min: 250,
-              max: 100000,
+              max: 10000,
             }}
             variant="outlined"
           />
@@ -83,7 +82,7 @@ function CurrentSalarySlider({
         <Grid item md={12}>
           <Slider
             min={250}
-            max={150_00}
+            max={10000}
             valueLabelDisplay="auto"
             color="secondary"
             size="medium"
@@ -97,8 +96,8 @@ function CurrentSalarySlider({
               onChange: (e) => handleSliderChange(e),
             })}
             disabled={currentLoan.isStaff}
-            value={value}
-          />
+            value={currentLoan.currentSalary}
+              />
         </Grid>
         <Grid container item justifyContent={"space-between"}>
           <Grid item>

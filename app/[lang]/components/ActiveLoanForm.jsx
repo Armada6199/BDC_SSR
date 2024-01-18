@@ -201,14 +201,14 @@ function ActiveLoanForm({
                 width: 52,
                 height: 54,
                 backgroundColor: "#EAEAEA",
-                cursor: "pointer",
+                cursor:  !currentLoan.isStaff?"pointer":'',
               }}
               onClick={() =>
                 // activeLoan.activeLoanLeftMonths &&
                 // activeLoan.activeLoanLayer&&
                 // activeLoan.activeLoanPayPerMonthInput &&
                 // activeLoan.activeLoanType&&
-                // !currentLoan.isStaff&&
+                !currentLoan.isStaff&&
                 handleAddNewLoan()
               }
             >

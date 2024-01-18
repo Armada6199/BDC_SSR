@@ -5,7 +5,6 @@ import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import { glassmorphismStyle } from "@styles/styles.js";
 import TermsTable from "./TermsTable";
 import ClearIcon from "@mui/icons-material/Clear";
-import { LoginContext } from "@hooks/LoginProvider";
 function LoanDetails({  handleClose,loanDetailsLocale }) {
   const isMobile=useMediaQuery('(max-width:600px)');
   return (

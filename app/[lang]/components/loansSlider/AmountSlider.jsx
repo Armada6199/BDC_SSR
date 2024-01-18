@@ -17,13 +17,12 @@ function AmountSlider({
   handleSliderChange,
   errors,
   loanDetailsLocale,
-  label,
+  label
 }) {
+
+  const isMobile = useMediaQuery("(max-width:600px)");
   const maxAmount =
     currentLoan.maxAmountAfterDeduction || currentLoan.maxAmount;
-  const isMobile = useMediaQuery("(max-width:600px)");
-  console.log(maxAmount)
-  const value = currentLoan.loanAmount ? currentLoan.loanAmount : maxAmount / 2;
   return (
     <FormControl
       fullWidth
@@ -79,7 +78,7 @@ function AmountSlider({
                 sx: { fontWeight: 700 },
               }}
               variant="outlined"
-              value={value}
+              value={currentLoan.loanAmount}
             />
           </Grid>
           <Grid item md={12}>
@@ -97,7 +96,7 @@ function AmountSlider({
                   : "Kindly Choose loan amount",
                 onChange: (e) => handleSliderChange(e),
               })}
-              value={value}
+              value={currentLoan.loanAmount}
             />
           </Grid>
           <Grid container item justifyContent={"space-between"}>

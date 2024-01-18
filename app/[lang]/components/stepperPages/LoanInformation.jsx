@@ -36,7 +36,6 @@ function LoanInformation({
     setValue(name, value);
     name = name.split("_")[0];
     setCurrentLoan((prev) => ({ ...prev, [name]: value }));
-    console.log(currentLoan);
   };
 
   const validateGreaterThanSalary = () => {
@@ -95,11 +94,30 @@ function LoanInformation({
       hasPrevLoan: prev.hasPrevLoan,
       activeLoans: prev.activeLoans,
       maxAmountAfterDeduction: prev.maxAmountAfterDeduction,
+      activeLoansDeductions: prev.activeLoansDeductions,
+      loanAmount:prev.loanAmount,
+      numberOfMonths:prev.numberOfMonths
     }));
   }
-  // useEffect(()=>{
-  //   console.log(currentLoan)
-  // },[])
+  useEffect(() => {
+    const maxAmount =
+    currentLoan.maxAmountAfterDeduction || currentLoan.maxAmount;
+    const loanAmount = currentLoan.loanAmount
+      ? currentLoan.loanAmount
+      : maxAmount / 2;
+    const numberOfMonths = currentLoan.numberOfMonths
+      ? currentLoan.numberOfMonths
+      : currentLoan.maxMonths / 2;
+    const currentSalary = currentLoan.currentSalary
+      ? currentLoan.currentSalary
+      : 100000 / 2;
+    setCurrentLoan((prev) => ({
+      ...prev,
+      loanAmount,
+      numberOfMonths,
+      currentSalary,
+    }));
+  }, []);
   const isMobile = useMediaQuery("(max-width:600px)");
   return (
     <Grid

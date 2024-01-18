@@ -15,9 +15,9 @@ import "@/styles/styles.css";
 
 function LoginModal({
   setLoginCredindtials,
-  handleLogin,
+  handleStaffLogin,
   handleCloseStaffLogin,
-  pageContent,
+  localePageContent,
   isLoginingIn,
 }) {
 
@@ -47,7 +47,7 @@ function LoginModal({
       </Grid>
       <Grid item xs={12}>
         <Typography textAlign={"center"} variant="h4" fontWeight={"600"}>
-          {pageContent.loginPage.staffLoginModalTitle}
+          {localePageContent.loginPage.staffLoginModalTitle}
         </Typography>
       </Grid>
       <Grid item md={12}>
@@ -57,14 +57,14 @@ function LoginModal({
           color={"gray"}
           fontWeight={"600"}
         >
-          {pageContent.loginPage.staffLoginModalDescription}
+          {localePageContent.loginPage.staffLoginModalDescription}
         </Typography>
       </Grid>
       <Grid container item justifyContent={"center"} xs={12} md={8} gap={4}>
         <Grid item xs={12} md={12}>
           <TextField
             fullWidth
-            label={pageContent.loginPage.modalEmail}
+            label={localePageContent.loginPage.modalEmail}
             onChange={(e) =>
               setLoginCredindtials((prev) => ({
                 ...prev,
@@ -78,7 +78,7 @@ function LoginModal({
         <Grid item xs={12} md={12}>
           <TextField
             fullWidth
-            label={pageContent.loginPage.modalPassword}
+            label={localePageContent.loginPage.modalPassword}
             type="password"
             onChange={(e) =>
               setLoginCredindtials((prev) => ({
@@ -103,19 +103,19 @@ function LoginModal({
                   defaultChecked
                 />
               }
-              label={pageContent.loginPage.rememberMe}
+              label={localePageContent.loginPage.rememberMe}
             />
           </Grid>
           <Grid item xs={6} md={6}>
             <Typography fontWeight={"600"} textAlign={"end"}>
-              {pageContent.loginPage.forgotPassword}
+              {localePageContent.loginPage.forgotPassword}
             </Typography>
           </Grid>
         </Grid>
         <Grid item xs={10} md={12}>
           <Button
             fullWidth
-            onClick={handleLogin}
+            onClick={handleStaffLogin}
             disabled={isLoginingIn}
             variant="contained"
             sx={{ bgcolor: "#F58232" }}
@@ -123,7 +123,7 @@ function LoginModal({
             {isLoginingIn ? (
               <div  style={{color:'#fff'}} className="download_loader"></div>
             ) : (
-              pageContent.loginPage.loginButtonText
+              localePageContent.loginPage.loginButtonText
             )}
           </Button>
         </Grid>

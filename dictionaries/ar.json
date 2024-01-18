@@ -6,7 +6,16 @@
     "4. المرفقات",
     "5. اتفاقية القرض"
   ],
+  "switchLanguageLabel":"EN",
+  "heading":{
+    "headerMyLoansLabel":"قروضي"
+  },
   "stepperTitle": "تقديم القرض",
+  "profilePage":{
+    "welcomeLabel":"مرحبا ,",
+    "myLoansLabel":"معلوماتي"
+
+  },
   "loanInformation": {
     "applyTitle": "أرغب في التقديم",
     "loanDetailsTitle": "تفاصيل القرض",

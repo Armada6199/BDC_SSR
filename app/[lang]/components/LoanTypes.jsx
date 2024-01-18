@@ -21,7 +21,7 @@ function LoanTypes({
           sx={{
             ...loanTypesBoxesStyle,
             backgroundColor:
-              currentLoan.title === loan.enTitle ? "#E8E8E8" : "#fff",
+              currentLoan.title === loan.title||currentLoan.title === loan.enTitle ? "#E8E8E8" : "#fff",
             cursor: "pointer",
             justifyContent:'center',
             alignItems:"center"
@@ -33,7 +33,7 @@ function LoanTypes({
           onClick={() => handleChangeCurrentLoan(loan.enTitle||loan.title)}
         >
           <Grid container direction={'column'} justifyContent={'center'} alignItems={'center'} gap={1} item>
-          <Box sx={{...loanIconContStyle,bgcolor:'secondary.dark',color:"#FFF"}}>{loanIcons[loan.title]}</Box>
+          <Box sx={{...loanIconContStyle,bgcolor:'secondary.dark',color:"#FFF"}}>{loanIcons[loan.enTitle||loan.title]}</Box>
           <Typography variant="body1" textAlign={'center'} fontWeight={"bold"}>
               {loan.title}
             </Typography>
