@@ -15,6 +15,10 @@
     top: 10px;
     left: 10px;
   }
+  .mui-style-ltr-ee20y-MuiPaper-root {
+  width: 100%;
+  };
+  
 /* 
   .react-pdf__Page__annotations .annotationLayer{
     display: none !important;

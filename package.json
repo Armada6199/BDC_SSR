@@ -26,6 +26,7 @@
     "events": "^3.3.0",
     "i18next": "^23.7.16",
     "jss-rtl": "^0.3.0",
+    "mui-datatables": "^4.3.0",
     "negotiator": "^0.6.3",
     "next": "14.0.4",
     "next-auth": "^4.24.5",

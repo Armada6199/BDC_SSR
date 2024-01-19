@@ -14,7 +14,10 @@
   },
   "profilePage":{
     "welcomeLabel":"Hello ,",
-    "myLoansLabel":"My Information"
+    "myInformation":{
+      "myLoansLabel":"My Information"
+
+    }
 
   },
   "loginPage": {
