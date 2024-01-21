@@ -23,12 +23,12 @@ function LoanTypes({
             backgroundColor:
               currentLoan.title === loan.title||currentLoan.title === loan.enTitle ? "#E8E8E8" : "#fff",
             cursor: "pointer",
-            justifyContent:'center',
-            alignItems:"center"
           }}
           item
-          md={6}
-          lg={2}
+          md={4}
+          xl={3}
+          justifyContent={'center'}
+          alignItems={'center'}
           key={loan.title}
           onClick={() => handleChangeCurrentLoan(loan.enTitle||loan.title)}
         >

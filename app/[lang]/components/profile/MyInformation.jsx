@@ -1,14 +1,30 @@
 import { Button, Grid, Typography } from "@mui/material";
 import { glassmorphismStyle } from "@styles/styles";
 import Image from "next/image";
-import React from "react";
+import React, { useContext } from "react";
 import profileImg from "@public/assets/profile.jpg";
 import InfoIcon from "@mui/icons-material/Info";
-
+import LinearProgress, {
+  linearProgressClasses,
+} from "@mui/material/LinearProgress";
+import styled from "@emotion/styled";
+import { CurrentLoanContext } from "@hooks/CurrentLoanProvider";
+const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
+  height: 10,
+  borderRadius: 5,
+  [`&.${linearProgressClasses.colorPrimary}`]: {
+    backgroundColor: "#424242",
+  },
+  [`& .${linearProgressClasses.bar}`]: {
+    borderRadius: 5,
+    backgroundColor: "#dd752d",
+  },
+}));
 function MyInformation({ myInformationLocale }) {
+  const { localePageContent } = useContext(CurrentLoanContext);
   return (
-    <Grid container item xs={12} gap={4}  p={4} sx={glassmorphismStyle}>
-      <Grid container gap={1} alignItems={"center"} item xs={12}>
+    <Grid container item p={4} sx={glassmorphismStyle} gap={4}>
+      <Grid container gap={1} item xs={12}>
         <Grid item>
           <Typography variant="h4" fontWeight={600}>
             {myInformationLocale.myLoansLabel}
@@ -29,52 +45,128 @@ function MyInformation({ myInformationLocale }) {
             style={{ borderRadius: "50%" }}
           />
         </Grid>
-        <Grid container item xs={3}  md={9}>
+        <Grid container item xs={3} md={9}>
           <Grid item xs={12}>
-            <Typography variant="body1" fontWeight={600}>
-              Mohamad Abdin
+            <Typography variant="body1" fontWeight={700}>
+              نور احمد 
             </Typography>
           </Grid>
           <Grid item xs={12}>
             <Typography variant="body2" fontWeight={"600"} color={"darkgray"}>
-              Software Developer
+              مهندس برمجيات
             </Typography>
           </Grid>
           <Grid item xs={12}>
-            <Typography variant="body1" fontWeight={'700'} sx={{color:'secondary.dark'}}>Amman</Typography>
-        </Grid>
+            <Typography
+              variant="body1"
+              fontWeight={"500"}
+              sx={{ color: "secondary.dark" }}
+            >
+              عمان
+            </Typography>
+          </Grid>
         </Grid>
       </Grid>
-      <Grid container spacing={4} item xs={12}>
+      <Grid container spacing={2} item xs={12}>
         <Grid item xs={12} md={6}>
-          <Typography variant="h6" fontWeight={500}>
-            3500 JD
+          <Typography variant="h6" fontWeight={600}>
+            2400 {localePageContent.currencyLabel}
           </Typography>
-          <Typography variant="body2" fontWeight={600} color={"darkgray"}>
-            Salary After Deductions
+          <Typography variant="body2" fontWeight={700} color={"darkgray"}>
+            {myInformationLocale.salaryAfterDeductionsLabel}
           </Typography>
         </Grid>
         <Grid item xs={12} md={6}>
-          <Typography variant="h6" fontWeight={500}>
+          <Typography variant="h6" fontWeight={600}>
             4
           </Typography>
-          <Typography variant="body2" fontWeight={600} color={"darkgray"}>
-            Active Loans
+          <Typography variant="body2" fontWeight={700} color={"darkgray"}>
+            {myInformationLocale.activeLoansLabel}
           </Typography>
         </Grid>
         <Grid item xs={12} md={6}>
-          <Typography variant="h6" fontWeight={500}>
+          <Typography variant="h6" fontWeight={600}>
             2
           </Typography>
-          <Typography variant="body2" fontWeight={600} color={"darkgray"}>
-            Previous Loans
+          <Typography variant="body2" fontWeight={700} color={"darkgray"}>
+            {myInformationLocale.previousLoansLabel}
           </Typography>
         </Grid>
         <Grid item xs={12} md={6}>
-          <Typography variant="h6" fontWeight={500}>232</Typography>
-          <Typography variant="body2" fontWeight={600} color={"darkgray"}>
-            Employee Number
+          <Typography variant="h6" fontWeight={600}>
+            232
           </Typography>
+          <Typography variant="body2" fontWeight={700} color={"darkgray"}>
+            {myInformationLocale.employeeNumberLabel}
+          </Typography>
+        </Grid>
+      </Grid>
+      <Grid container item xs={12} gap={4}>
+        <Grid container item xs={12}>
+          <Grid item xs={12}>
+            <Typography variant="body1" fontWeight={"600"}>
+              {myInformationLocale.salaryDeductionsLabel}
+            </Typography>
+          </Grid>
+          <Grid container item xs={12}>
+            <Grid item xs={12}>
+              <BorderLinearProgress variant="determinate" value={70} />
+            </Grid>
+            <Grid container justifyContent={"space-between"} item xs={12}>
+              <Grid item xs={4}>
+                <Typography
+                  variant="subtitle2"
+                  fontWeight={"600"}
+                  color={"darkgray"}
+                >
+                  3500 {localePageContent.currencyLabel}
+                </Typography>
+              </Grid>
+              <Grid item xs={4}>
+                <Typography
+                  variant="subtitle2"
+                  fontWeight={"600"}
+                  color={"darkgray"}
+                  textAlign={"end"}
+                >
+                  600 {localePageContent.currencyLabel}
+                </Typography>
+              </Grid>
+            </Grid>
+          </Grid>
+        </Grid>
+        <Grid container item xs={12}>
+          <Grid item xs={12}>
+            <Typography variant="body1" fontWeight={"600"}>
+              {myInformationLocale.loansLabel}
+            </Typography>
+          </Grid>
+          <Grid container item xs={12}>
+            <Grid item xs={12}>
+              <BorderLinearProgress variant="determinate" value={70} />
+            </Grid>
+            <Grid container justifyContent={"space-between"} item xs={12}>
+              <Grid item xs={4}>
+                <Typography
+                  variant="subtitle2"
+                  fontWeight={"600"}
+                  color={"darkgray"}
+                >
+                  3500 JD {localePageContent.currencyLabel}
+                </Typography>
+              </Grid>
+              <Grid item xs={4}>
+                <Typography
+                  variant="subtitle2"
+                  fontWeight={"600"}
+                  color={"darkgray"}
+                  textAlign={"end"}
+                >
+                  600 {localePageContent.currencyLabel}
+                </Typography>
+              </Grid>
+            </Grid>
+          </Grid>
         </Grid>
       </Grid>
     </Grid>

@@ -6,15 +6,44 @@
     "4. المرفقات",
     "5. اتفاقية القرض"
   ],
-  "switchLanguageLabel":"EN",
-  "heading":{
-    "headerMyLoansLabel":"قروضي"
+  "switchLanguageLabel": "EN",
+  "currencyLabel": "دينار",
+  "heading": {
+    "headerMyLoansLabel": "قروضي",
+    "applyLoanPageLabel":"تقديم قرض"
   },
   "stepperTitle": "تقديم القرض",
-  "profilePage":{
-    "welcomeLabel":"مرحبا ,",
-    "myLoansLabel":"معلوماتي"
-
+  "profilePage": {
+    "welcomeLabel": "مرحبا ,",
+    "myLoansLabel": "معلوماتي",
+    "myInformation": {
+      "myLoansLabel": "معلوماتي",
+      "salaryAfterDeductionsLabel": "الراتب بعد الخصومات",
+      "activeLoansLabel": "القروض النشطة",
+      "previousLoansLabel": "القروض السابقة",
+      "employeeNumberLabel": "رقم الموظف",
+      "salaryDeductionsLabel": "الراتب",
+      "loansLabel": "القروض"
+    },
+    "informationCards": {
+      "salaryLabel": "الراتب",
+      "activeLoansAmountLabel": "مبلغ القروض النشطة",
+      "totalLoansAmountLabel": "إجمالي مبلغ القروض"
+    },
+    "informationTabel": {
+      "myLoansLabel": "قروضي",
+      "loanTypeLabel": "نوع القرض",
+      "loanAmountLabel": " مبلغ القرض",
+      "remainingAmountLabel": "دين المبلغ المتبقي",
+      "remainingMonthsLabel": "الأشهر المتبقية",
+      "monthlyPaymentLabel": " الدفع الشهري",
+      "loanStatusLabel": "حالة القرض",
+      "statusButtons":{
+        "Rejected":"مرفوض",
+        "Processing":"قيد التنفيذ",
+        "Approved":"مقبول"
+      }
+    }
   },
   "loanInformation": {
     "applyTitle": "أرغب في التقديم",
@@ -31,7 +60,7 @@
     "ineligibleMessage": "غير مؤهل لهذا المبلغ",
     "activeLoanMessage": "هل لديك قرض حالي من BDC؟",
     "activeLoanSubmessage": "في حال كان لديك قرض حالي، يرجى إدخال تفاصيله أدناه.",
-    "viewDetailsButtonLabel":"عرض التفاصيل",
+    "viewDetailsButtonLabel": "عرض التفاصيل",
     "activeLoans": {
       "layer": "شريحة",
       "leftMonths": "الأشهر المتبقية",
@@ -87,7 +116,9 @@
     "modalPassword": "كلمة السر",
     "modalEmail": "البريد الألكتروني",
     "rememberMe": "تذكرني",
-    "loginButtonText": "تسجيل ألدخول"
+    "loginButtonText": "تسجيل ألدخول",
+    "guestWarningMessage":"يجب ان تكون موظف  لتراجع القروض السابقة"
+
   },
   "personalInformation": {
     "sectionTitle": "معلومات شخصية",
@@ -173,7 +204,7 @@
       { "value": "Personal Loan", "localeContent": " قرض  شخصي" },
       { "value": "Home Loan", "localeContent": "قرض منزل" },
       { "value": "Car Loan", "localeContent": "قرض مركبة" },
-      { "value": "Lnad Loan", "localeContent": "قرض أرض" }
+      { "value": "Land Loan", "localeContent": "قرض أرض" }
     ]
   },
 

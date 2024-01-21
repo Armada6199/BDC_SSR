@@ -1,84 +1,119 @@
 import { Grid, Typography } from "@mui/material";
 import { glassmorphismStyle } from "@styles/styles";
-import React from "react";
-
-function LoanInfoCards() {
+import React, { useContext } from "react";
+import savingIcon from "@public/icons/savings-yen-svgrepo-com (1).svg";
+import loanIcon from "@public/icons/dollar-finance-money-20-svgrepo-com.svg";
+import moneyBagIcon from "@public/icons/money-bag-svgrepo-com.svg";
+import Image from "next/image";
+import { CurrentLoanContext } from "@hooks/CurrentLoanProvider";
+function LoanInfoCards({informationCardsLocale}) {
+  const { localePageContent } = useContext(CurrentLoanContext);
   return (
-    <Grid
-      container
-      xs={12}
-      md={12}
-      item
-      alignItems={"center"}
-      justifyContent={"space-between"}
-    >
+    <Grid container item xs={12} justifyContent={"space-between"} wrap="nowrap" gap={4} >
+   <Grid
+        container
+        item
+        justifyContent={"center"}
+        md={4}
+        xl={4}
+        height={"180px"}
+        alignItems={'center'}
+        p={2}
+        sx={{
+          ...glassmorphismStyle,
+          borderLeft: "10px solid",
+          borderLeftColor: "secondary.dark",
+        }}
+      >
+        <Grid
+          container
+          direction={'column'}
+          justifyContent={'center'}
+          item
+          xs={12}
+          md={8}
+        >
+            <Typography variant="h4" fontWeight={700}>
+              3500 {localePageContent.currencyLabel}
+            </Typography>
+            <Typography variant="body1" color={"darkgray"} fontWeight={700}>
+              {informationCardsLocale.salaryLabel}
+            </Typography>
+        </Grid>
+        <Grid item xs={12} md={2}>
+          <Image src={moneyBagIcon} width={82} height={82} />
+        </Grid>
+      </Grid>
+
       <Grid
         container
         item
+        justifyContent={"center"}
         xs={12}
         md={4}
-        height={"200px"}
-        alignItems={"center"}
-        p={4}
+        xl={4}
+        height={"180px"}
+        alignItems={'center'}
+        p={2}
         sx={{
           ...glassmorphismStyle,
+          borderLeft: "10px solid",
+          borderLeftColor: "secondary.dark",
         }}
       >
-        <Grid item xs={12}>
-          <Typography variant="h4" fontWeight={700}>
-            3500
-          </Typography>
+        <Grid
+          container
+          direction={'column'}
+          justifyContent={'center'}
+          item
+          xs={12}
+          md={8}
+        >
+            <Typography variant="h4" fontWeight={700}>
+               20000 {localePageContent.currencyLabel}
+            </Typography>
+            <Typography variant="body1" color={"darkgray"} fontWeight={700}>
+            {informationCardsLocale.activeLoansAmountLabel}
+
+            </Typography>
         </Grid>
-        <Grid item xs={12}>
-          <Typography variant="h6" color={"darkgray"} fontWeight={700}>
-            Salary
-          </Typography>
+        <Grid item xs={12} md={2}>
+          <Image src={savingIcon} width={82} height={82} />
         </Grid>
       </Grid>
       <Grid
         container
         item
+        justifyContent={"center"}
         xs={12}
         md={4}
-        height={"200px"}
-        alignItems={"center"}
-        p={4}
+        xl={4}
+        height={"180px"}
+        alignItems={'center'}
+        p={2}
         sx={{
           ...glassmorphismStyle,
+          borderLeft: "10px solid",
+          borderLeftColor: "secondary.dark",
         }}
       >
-        <Grid item xs={12}>
-          <Typography variant="h4" fontWeight={700}>
-            42000
-          </Typography>
+        <Grid
+          container 
+          direction={'column'}
+          justifyContent={'center'}
+          item
+          xs={12}
+          md={8}
+        >
+            <Typography variant="h4" fontWeight={700}>
+              40200 {localePageContent.currencyLabel}
+            </Typography>
+            <Typography variant="body1" color={"darkgray"} fontWeight={700}>
+            {informationCardsLocale.totalLoansAmountLabel}
+            </Typography>
         </Grid>
-        <Grid item xs={12}>
-          <Typography variant="h6" color={"darkgray"} fontWeight={700}>
-            Total Loans Amount
-          </Typography>
-        </Grid>
-      </Grid>
-      <Grid
-        container
-        item
-        xs={12}
-        md={4}
-        height={"200px"}
-        alignItems={"center"}
-        p={4}
-        sx={{
-          ...glassmorphismStyle,
-        }}
-      >
-        <Grid item xs={12}>
-          <Typography variant="h4" fontWeight={700}>
-            42000
-          </Typography>
-        </Grid>
-        <Grid item xs={12}>
-          <Typography variant="h6" color={"darkgray"} fontWeight={700}>
-            Total Loans Amount
-          </Typography>
+        <Grid item xs={12} md={2}>
+          <Image src={loanIcon} width={82} height={82} />
         </Grid>
       </Grid>
     </Grid>

@@ -6,19 +6,43 @@
     "4. Attachments",
     "5. Loan Agreement"
   ],
-  "switchLanguageLabel":"AR",
+  "switchLanguageLabel": "AR",
   "stepperTitle": "Apply Loan",
-  "currencyLabel":"JD",
-  "heading":{
-    "headerMyLoansLabel":"My Loans"
+  "currencyLabel": "JD",
+  "heading": {
+    "headerMyLoansLabel": "My Loans",
+    "applyLoanPageLabel":"Loan Apply"
   },
-  "profilePage":{
-    "welcomeLabel":"Hello ,",
-    "myInformation":{
-      "myLoansLabel":"My Information"
-
+  "profilePage": {
+    "welcomeLabel": "Hello ,",
+    "myInformation": {
+      "myLoansLabel": "My Information",
+      "salaryAfterDeductionsLabel": "Salary After Deductions",
+      "activeLoansLabel": "Active Loans",
+      "previousLoansLabel": "Previous Loans",
+      "employeeNumberLabel": "EmployeeNumber",
+      "salaryDeductionsLabel": "Salary",
+      "loansLabel": "Loans"
+    },
+    "informationCards": {
+      "salaryLabel": "Salary",
+      "activeLoansAmountLabel": "Active Loans Amount",
+      "totalLoansAmountLabel": "Total Loans Amount"
+    },
+    "informationTabel": {
+      "myLoansLabel": "MY LOANS",
+      "loanTypeLabel": "Loan Type",
+      "loanAmountLabel": "Loan Amount",
+      "remainingAmountLabel": "Remaining Amount ",
+      "remainingMonthsLabel": "Remaining Months",
+      "monthlyPaymentLabel": "Monthly Payment",
+      "loanStatusLabel": "Loan Status",
+      "statusButtons":{
+        "rejected":"Rejected",
+        "processing":" Processing",
+        "approved":"Approved"
+      }
     }
-
   },
   "loginPage": {
     "pageTitle": "Login Page",
@@ -36,7 +60,8 @@
     "modalPassword": "Password",
     "modalEmail": "Email",
     "rememberMe": "Remember me",
-    "loginButtonText": " Login"
+    "loginButtonText": " Login",
+    "guestWarningMessage":"You have to be staff to view your loans  "
 
   },
   "loanEligibility": {
@@ -97,7 +122,7 @@
     "ineligibleMessage": "Not eligible for this amount",
     "activeLoanMessage": "Do you have a current loan from Banque du Carie",
     "activeLoanSubmessage": "If you have a current loan, please enter its details below.",
-    "viewDetailsButtonLabel":"View Details ",
+    "viewDetailsButtonLabel": "View Details ",
     "activeLoans": {
       "layer": "Layer",
       "leftMonths": "Left Months ",

@@ -147,7 +147,7 @@ function LoanInformation({
               {loanInformationContent.applyTitle}
             </Typography>
           </Grid>
-          <Grid container item justifyContent={"space-between"} md={10} lg={12}>
+          <Grid container item  wrap="nowrap" gap={4} md={10} lg={12}>
             {isMobile ? (
               <LoanTypesSlider
                 currentLoan={currentLoan}

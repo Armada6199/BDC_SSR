@@ -82,7 +82,7 @@ function CurrentSalarySlider({
         <Grid item md={12}>
           <Slider
             min={250}
-            max={10000}
+            max={100000}
             valueLabelDisplay="auto"
             color="secondary"
             size="medium"

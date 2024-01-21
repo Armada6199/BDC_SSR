@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import bankLogoDark from "@public/assets/Banque_du_caire_Logodark.svg";
 import {
   Grid,
@@ -7,20 +7,50 @@ import {
   Checkbox,
   FormControlLabel,
   Button,
+  Alert,
 } from "@mui/material";
+import Snackbar from '@mui/material/Snackbar';
 import { glassmorphismStyle } from "@styles/styles.js";
 import ClearIcon from "@mui/icons-material/Clear";
 import Image from "next/image";
 import "@/styles/styles.css";
-
+import { signIn } from "next-auth/react";
+import { CurrentLoanContext } from "@hooks/CurrentLoanProvider";
+import { usePathname } from "next/navigation";
 function LoginModal({
-  setLoginCredindtials,
-  handleStaffLogin,
-  handleCloseStaffLogin,
-  localePageContent,
-  isLoginingIn,
+  handleCloseStaffLogin=false,
+  lang
 }) {
-
+  const [isLoginingIn, setIsLogingin] = useState(false);
+  const pathName=usePathname()
+  const [loginCredindtials, setLoginCredindtials] = useState({
+    email: "",
+    password: "",
+  });
+  const showStaffMessage=pathName===`/${lang}/profile`;
+  const { currentLoan, setCurrentLoan, localePageContent } =
+    useContext(CurrentLoanContext);
+  async function handleStaffLogin() {
+    try {
+      setIsLogingin(true);
+      const loginResponse = await signIn("credentials", {
+        ...loginCredindtials,
+        redirect: false,
+      });
+      if (loginResponse.error) {
+        setIsLogingin(false);
+        throw new Error("Invalid Login");
+      } else {
+        setIsLogingin(false);
+        localStorage.removeItem("currentLoan");
+        setCurrentLoan((prev) => ({ ...prev, isStaff: true }));
+        redirectedPathName(lang);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+ 
   return (
     <Grid
       container
@@ -32,7 +62,7 @@ function LoginModal({
       sx={{ ...glassmorphismStyle, borderRadius: "30px" }}
       height={{ xs: "90vh", md: "95vh", xl: "80vh" }}
     >
-      <ClearIcon
+      {showStaffMessage&&<ClearIcon
         onClick={handleCloseStaffLogin}
         sx={{
           position: "absolute",
@@ -41,7 +71,7 @@ function LoginModal({
           fontSize: 32,
           cursor: "pointer",
         }}
-      />
+      />}
       <Grid container justifyContent={"center"} item md={12}>
         <Image src={bankLogoDark} alt="loginImg" width={"200"} height={"40"} />
       </Grid>
@@ -118,6 +148,7 @@ function LoginModal({
             onClick={handleStaffLogin}
             disabled={isLoginingIn}
             variant="contained"
+            severity="danger"
             sx={{ bgcolor: "#F58232" }}
           >
             {isLoginingIn ? (
@@ -128,6 +159,20 @@ function LoginModal({
           </Button>
         </Grid>
       </Grid>
+      {showStaffMessage&&
+      <Snackbar
+        open={true}
+        autoHideDuration={6000}
+        severity="danger"
+      >
+           <Alert
+          severity="warning"
+          variant="filled"
+          sx={{ width: '100%' }}
+        >
+            <Typography variant="body1" fontWeight={'500'} >{localePageContent.loginPage.guestWarningMessage}</Typography>
+        </Alert>
+      </Snackbar>}
     </Grid>
   );
 }

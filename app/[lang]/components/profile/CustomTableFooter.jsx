@@ -5,7 +5,6 @@ import { Box, Pagination } from "@mui/material";
 const CustomTableFooter = (props) => {
   const {
     count,
-    textLabels,
     rowsPerPage,
     page,
     changePage,
@@ -22,7 +21,7 @@ const CustomTableFooter = (props) => {
   return (
     <Box display={"flex"} mt={4} justifyContent={"space-between"}>
       <Box display={'flex'} gap={4} alignItems={'center'}>
-        <Select sx={{width:"4rem",height:'35px',backgroundColor:"#fff"}} onChange={handleRowChange} value={rowsPerPage} label={rowsPerPage}>
+        <Select sx={{width:"6rem",height:'35px',backgroundColor:"#fff"}} onChange={handleRowChange} value={rowsPerPage} label={rowsPerPage}>
           <MenuItem value={5}>5</MenuItem>
           <MenuItem value={10}>10</MenuItem>
           <MenuItem value={20}>20</MenuItem>

@@ -4,9 +4,7 @@ import Header from "./components/layout/Header";
 import Footer from "./components/layout/Footer";
 import { i18n } from "@i18n.config";
 import Head from "next/head";
-// export const metadata = {
-//   title: "BDC SSR",
-// };
+
 export async function generateStaticParams() {
   return i18n.locales.map((locale) => ({ lang: locale }));
 }
@@ -16,11 +14,10 @@ export default function RootLayout({ children, params: { lang } }) {
       <head>
         <meta name="BDC" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,100;9..40,200;9..40,300;9..40,400;9..40,500;9..40,600;9..40,700;9..40,800&display=swap" rel="stylesheet"></link>
-        <link rel="preconnect" href="https://fonts.googleapis.com"></link>
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
         <link
+          href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,100;9..40,400;9..40,500;9..40,600;9..40,700;9..40,800&display=swap"
           rel="stylesheet"
-          href="https://fonts.google.com/share?selection.family=DM+Sans:ital,opsz,wght@0,9..40,100;0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800;0,9..40,900;1,9..40,300;1,9..40,500|Noto+Sans+Arabic:wght@200;300;400;500;600;700|Poppins:ital,wght@0,100;0,300;0,500;0,700;0,800;0,900;1,600"
         />
       </head>
       <body>

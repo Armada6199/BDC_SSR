@@ -5,8 +5,9 @@ import BusinessCenterOutlinedIcon from "@mui/icons-material/BusinessCenterOutlin
 import { glassmorphismStyle } from "@styles/styles.js";
 import Person2OutlinedIcon from "@mui/icons-material/Person2Outlined";
 import "@styles/styles.css";
+import businessImage from "@public/assets/busnisse3.jpeg";
 import LoginModal from "./components/LoginModal";
-import { signIn } from "next-auth/react";
+import { signIn } from "next-auth/react"; 
 import { CurrentLoanContext } from "@hooks/CurrentLoanProvider";
 import getDictionary from "@lib/dictionary";
 import { usePathname, useRouter } from "next/navigation";
@@ -19,52 +20,25 @@ const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
 function HomeLogin({ params: { lang } }) {
-  const { data: session } = useSession({
-    required: false,
-  });
+  // const { data: session } = useSession({
+  //   required: false,
+  // });
   const { push } = useRouter();
   const pathName = usePathname();
-  const { currentLoan, setCurrentLoan,localePageContent } = useContext(CurrentLoanContext);
-  const { enqueueSnackbar } = useSnackbar();
-  const [isLoginingIn, setIsLogingin] = useState(false);
-  const [loginCredindtials, setLoginCredindtials] = useState({
-    email: "",
-    password: "",
-  });
+  const {  setCurrentLoan, localePageContent } =
+    useContext(CurrentLoanContext);
   const [openStaff, setOpenStaff] = React.useState(false);
   const handleOpenStaffLogin = () => setOpenStaff(true);
   const handleCloseStaffLogin = () => setOpenStaff(false);
   const redirectedPathName = (locale) => {
     if (!pathName) push("/");
     const segments = pathName.split("/");
-    console.log(locale);
     segments[1] = locale;
     push(segments.join("/") + "/loan");
   };
-  async function handleStaffLogin() {
-    try {
-      setIsLogingin(true);
-      const loginResponse = await signIn("credentials", {
-        ...loginCredindtials,
-        redirect: false,
-      });
-      if (loginResponse.error) {
-        setIsLogingin(false);
-        throw new Error("Invalid Login");
-      } else {
-        setIsLogingin(false);
-        localStorage.removeItem("currentLoan");
-        setCurrentLoan((prev) => ({ ...prev, isStaff: true }));
-        redirectedPathName(lang);
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  }
   async function handleGuestLogin() {
     try {
       const loginResponse = await signIn("credentials", {
-        ...loginCredindtials,
         redirect: false,
         isGuest: true,
       });
@@ -79,18 +53,11 @@ function HomeLogin({ params: { lang } }) {
       console.log(error);
     }
   }
-  // useEffect(() => {
-  //   const getPage = async () => {
-  //     const localePageContent = await getDictionary(lang);
-  //     setlocalePageContent(localePageContent);
-  //   };
-  //   getPage();
-  // }, [currentLoan]);
   return (
     <SnackbarProvider maxSnack={1}>
       <Box>
         {localePageContent.loginPage ? (
-          <Grid container  md={12}>
+          <Grid container>
             <Grid
               container
               md={12}
@@ -107,6 +74,7 @@ function HomeLogin({ params: { lang } }) {
                 maxHeight={"100%"}
                 alignItems={"center"}
                 className="loginBackground"
+          
               >
                 <Box
                   width={"100%"}
@@ -289,10 +257,8 @@ function HomeLogin({ params: { lang } }) {
               >
                 <LoginModal
                   handleCloseStaffLogin={handleCloseStaffLogin}
-                  setLoginCredindtials={setLoginCredindtials}
-                  handleStaffLogin={handleStaffLogin}
                   localePageContent={localePageContent}
-                  isLoginingIn={isLoginingIn}
+                  lang={lang}
                 />
               </Grid>
             </Modal>
