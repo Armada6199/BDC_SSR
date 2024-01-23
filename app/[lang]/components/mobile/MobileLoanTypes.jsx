@@ -5,7 +5,7 @@ import Person2OutlinedIcon from "@mui/icons-material/Person2Outlined";
 import HouseOutlinedIcon from "@mui/icons-material/HouseOutlined";
 import DirectionsCarFilledOutlinedIcon from "@mui/icons-material/DirectionsCarFilledOutlined";
 import LandscapeOutlinedIcon from "@mui/icons-material/LandscapeOutlined";
-
+import { handleChangeCurrentLoan } from "@utils/loanCalulation";
 import {
   loansIconStyle,
   loanIconContStyle,
@@ -21,17 +21,14 @@ const loanIcons = [
   <LandscapeOutlinedIcon />,
 ];
 export default function LoanTypesSlider({
-  localeLoans,
-  handleChangeCurrentLoan,
-  viewDetailsButtonLabel,
 }) {
   const indecatorIcons = loanIcons.map((icon) => icon);
-  console.log(localeLoans)
+  const {localePageContent:{loanInformation:{viewDetailsButtonLabel},loansInformation}}=useContext(CurrentLoanContext)
   return (
     <Carousel
       navButtonsAlwaysInvisible={true}
       height={"230px"}
-      onChange={(e) => handleChangeCurrentLoan(localeLoans[e].enTitle||localeLoans[e].title)}
+      onChange={(e) => handleChangeCurrentLoan(loansInformation[e].enTitle||loansInformation[e].title)}
       autoPlay={false}
       sx={{ width: "100%", backgroundColor: "#fff" }}
       IndicatorIcon={indecatorIcons}
@@ -48,7 +45,7 @@ export default function LoanTypesSlider({
         },
       }}
     >
-      {localeLoans.map((loan, index) => (
+      {loansInformation.map((loan, index) => (
         <Item
           key={index}
           viewDetailsButtonLabel={viewDetailsButtonLabel}

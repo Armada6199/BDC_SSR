@@ -20,14 +20,14 @@ const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
     backgroundColor: "#dd752d",
   },
 }));
-function MyInformation({ myInformationLocale }) {
+function myInformation({ myInformation }) {
   const { localePageContent } = useContext(CurrentLoanContext);
   return (
     <Grid container item p={4} sx={glassmorphismStyle} gap={4}>
       <Grid container gap={1} item xs={12}>
         <Grid item>
           <Typography variant="h4" fontWeight={600}>
-            {myInformationLocale.myLoansLabel}
+            {myInformation.myLoansLabel}
           </Typography>
         </Grid>
         <Grid item>
@@ -36,7 +36,7 @@ function MyInformation({ myInformationLocale }) {
           />
         </Grid>
       </Grid>
-      <Grid container item spacing={8} xs={12}>
+      <Grid container item spacing={12} xs={12}>
         <Grid item xs={12} md={3}>
           <Image
             src={profileImg}
@@ -73,7 +73,7 @@ function MyInformation({ myInformationLocale }) {
             2400 {localePageContent.currencyLabel}
           </Typography>
           <Typography variant="body2" fontWeight={700} color={"darkgray"}>
-            {myInformationLocale.salaryAfterDeductionsLabel}
+            {myInformation.salaryAfterDeductionsLabel}
           </Typography>
         </Grid>
         <Grid item xs={12} md={6}>
@@ -81,7 +81,7 @@ function MyInformation({ myInformationLocale }) {
             4
           </Typography>
           <Typography variant="body2" fontWeight={700} color={"darkgray"}>
-            {myInformationLocale.activeLoansLabel}
+            {myInformation.activeLoansLabel}
           </Typography>
         </Grid>
         <Grid item xs={12} md={6}>
@@ -89,7 +89,7 @@ function MyInformation({ myInformationLocale }) {
             2
           </Typography>
           <Typography variant="body2" fontWeight={700} color={"darkgray"}>
-            {myInformationLocale.previousLoansLabel}
+            {myInformation.previousLoansLabel}
           </Typography>
         </Grid>
         <Grid item xs={12} md={6}>
@@ -97,7 +97,7 @@ function MyInformation({ myInformationLocale }) {
             232
           </Typography>
           <Typography variant="body2" fontWeight={700} color={"darkgray"}>
-            {myInformationLocale.employeeNumberLabel}
+            {myInformation.employeeNumberLabel}
           </Typography>
         </Grid>
       </Grid>
@@ -105,7 +105,7 @@ function MyInformation({ myInformationLocale }) {
         <Grid container item xs={12}>
           <Grid item xs={12}>
             <Typography variant="body1" fontWeight={"600"}>
-              {myInformationLocale.salaryDeductionsLabel}
+              {myInformation.salaryDeductionsLabel}
             </Typography>
           </Grid>
           <Grid container item xs={12}>
@@ -138,7 +138,7 @@ function MyInformation({ myInformationLocale }) {
         <Grid container item xs={12}>
           <Grid item xs={12}>
             <Typography variant="body1" fontWeight={"600"}>
-              {myInformationLocale.loansLabel}
+              {myInformation.loansLabel}
             </Typography>
           </Grid>
           <Grid container item xs={12}>
@@ -173,4 +173,4 @@ function MyInformation({ myInformationLocale }) {
   );
 }
 
-export default MyInformation;
+export default myInformation;

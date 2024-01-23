@@ -9,12 +9,10 @@ import { CurrentLoanContext } from "@hooks/CurrentLoanProvider";
 import { loanIcons } from "@public/icons";
 
 function LoanEligibility({
-  loanEligibilityContent,
-  loanEligibilityTable,
   lang,
 }) {
   const isMobile = useMediaQuery("(max-width:650px)");
-  const { currentLoan, loanDetailsLocale } = useContext(CurrentLoanContext);
+  const { currentLoan, localePageContent:{loanEligibility,loanEligibilityTable},loanDetailsLocale } = useContext(CurrentLoanContext);
 
   return (
     <Grid
@@ -35,7 +33,7 @@ function LoanEligibility({
           alignItems={"center"}
         >
           <Typography variant="h4">
-            {loanEligibilityContent.applyTitle}
+            {loanEligibility.applyTitle}
           </Typography>
           <InfoIcon
             sx={{ width: "31px", height: "41px", color: "secondary.dark" }}
@@ -60,7 +58,7 @@ function LoanEligibility({
             md={3}
           >
             <Typography variant="h6">
-              {loanEligibilityContent.everyMonthPayTitle}
+              {loanEligibility.everyMonthPayTitle}
             </Typography>
             <Typography variant="h4" fontWeight={"600"}>
               {parseFloat(currentLoan.payPerMonth.toFixed(3))}
@@ -77,7 +75,7 @@ function LoanEligibility({
           >
             <Grid item xs={12}>
               <Typography variant="h6">
-                {loanEligibilityContent.loanTypeLabel}
+                {loanEligibility.loanTypeLabel}
               </Typography>
             </Grid>
             <Grid
@@ -106,7 +104,7 @@ function LoanEligibility({
           >
             <Grid item xs={12}>
               <Typography variant="h6">
-                {loanEligibilityContent.loanAmountLabel}
+                {loanEligibility.loanAmountLabel}
               </Typography>
             </Grid>
             <Grid item xs={12}>
@@ -127,7 +125,7 @@ function LoanEligibility({
           >
             <Grid item md={12}>
               <Typography variant="h6">
-                {loanEligibilityContent.loanTermLabel}
+                {loanEligibility.loanTermLabel}
               </Typography>
               <Typography variant="h5" fontWeight={"600"}>
                 {currentLoan.numberOfMonths}
@@ -151,7 +149,7 @@ function LoanEligibility({
           alignItems={"center"}
         >
           <Typography variant="h4">
-            {loanEligibilityContent.loanDetailsTitle}
+            {loanEligibility.loanDetailsTitle}
           </Typography>
           <InfoIcon
             sx={{ width: "31px", height: "41px", color: "secondary.dark" }}
@@ -182,26 +180,26 @@ function LoanEligibility({
               interestPayable={currentLoan.interestPayable}
               loanAmount={currentLoan.loanAmount}
               originalLoanAmountLabel={
-                loanEligibilityContent.charts.originalLoanAmountLabel
+                loanEligibility.charts.originalLoanAmountLabel
               }
               interestPayableLabel={
-                loanEligibilityContent.charts.appliedInterestLabel
+                loanEligibility.charts.appliedInterestLabel
               }
             />
           </Grid>
           <Grid container justifyContent={"center"} item spacing={4} md={12}>
             <Grid item xs={12} textAlign={"center"} md={6}>
               <Typography variant="h6">
-                {loanEligibilityContent.charts.EMILabel}
+                {loanEligibility.charts.EMILabel}
               </Typography>
               <Typography variant="body1">
-                {loanEligibilityContent.charts.EMIExplainationLabel}
+                {loanEligibility.charts.EMIExplainationLabel}
               </Typography>
               <Typography variant="h5">{currentLoan.EMI}</Typography>
             </Grid>
             <Grid item xs={12} textAlign={"center"} md={6}>
               <Typography variant="h6">
-                {loanEligibilityContent.interestPayableLabel}
+                {loanEligibility.interestPayableLabel}
               </Typography>
               <Typography variant="h5">
                 {currentLoan.interestPayable}
@@ -224,9 +222,9 @@ function LoanEligibility({
           <CustomBarChat
             totalAppliedLayers={currentLoan.totalAppliedLayers}
             layersLocale={loanEligibilityTable.layers}
-            totalAppliedLabel={loanEligibilityContent.charts.totalAppliedLabel}
+            totalAppliedLabel={loanEligibility.charts.totalAppliedLabel}
             appliedInterestLabel={
-              loanEligibilityContent.charts.appliedInterestLabel
+              loanEligibility.charts.appliedInterestLabel
             }
             //change this to calculate the highest layer max plus the total interst applied to the max layer
           />

@@ -1,21 +1,19 @@
 "use client";
-import { Box, Grid, Typography, Modal, useMediaQuery } from "@mui/material";
-import React, { useContext, useEffect, useState } from "react";
+import { Box, Grid, Typography, Modal,  } from "@mui/material";
+import React, { useContext} from "react";
 import BusinessCenterOutlinedIcon from "@mui/icons-material/BusinessCenterOutlined";
 import { glassmorphismStyle } from "@styles/styles.js";
 import Person2OutlinedIcon from "@mui/icons-material/Person2Outlined";
 import "@styles/styles.css";
-import businessImage from "@public/assets/busnisse3.jpeg";
+// import businessImage from "@public/assets/busnisse3.jpeg";
 import LoginModal from "./components/LoginModal";
-import { signIn } from "next-auth/react"; 
 import { CurrentLoanContext } from "@hooks/CurrentLoanProvider";
-import getDictionary from "@lib/dictionary";
 import { usePathname, useRouter } from "next/navigation";
 import Loader from "./components/Loader";
 import MuiAlert from "@mui/material/Alert";
-import { SnackbarProvider, useSnackbar } from "notistack";
-import { useSession } from "next-auth/react";
-import { loanDetailsData } from "@public/loans";
+import { SnackbarProvider } from "notistack";
+import { handleGuestLogin } from "@utils/apiRequests";
+import { redirectedPathName } from "@utils/loanCalulation";
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
@@ -30,29 +28,7 @@ function HomeLogin({ params: { lang } }) {
   const [openStaff, setOpenStaff] = React.useState(false);
   const handleOpenStaffLogin = () => setOpenStaff(true);
   const handleCloseStaffLogin = () => setOpenStaff(false);
-  const redirectedPathName = (locale) => {
-    if (!pathName) push("/");
-    const segments = pathName.split("/");
-    segments[1] = locale;
-    push(segments.join("/") + "/loan");
-  };
-  async function handleGuestLogin() {
-    try {
-      const loginResponse = await signIn("credentials", {
-        redirect: false,
-        isGuest: true,
-      });
-      if (loginResponse.error) {
-        throw new Error("Invalid Login");
-      } else {
-        localStorage.removeItem("currentLoan");
-        setCurrentLoan({ ...loanDetailsData[1], isStaff: false });
-        redirectedPathName(lang);
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  }
+ 
   return (
     <SnackbarProvider maxSnack={1}>
       <Box>
@@ -62,7 +38,7 @@ function HomeLogin({ params: { lang } }) {
               container
               md={12}
               item
-              sx={{ height: { sm: "100%", md: "calc(100vh - 200px)" } }}
+              sx={{ height: { sm: "100%", md: "calc(100vh - 140px)" } }}
             >
               <Grid
                 container
@@ -195,7 +171,10 @@ function HomeLogin({ params: { lang } }) {
                     minHeight={"120px"}
                     height={{ xs: "120px" }}
                     maxHeight={"40%"}
-                    onClick={() => handleGuestLogin()}
+                    onClick={() => {
+                      handleGuestLogin(setCurrentLoan);
+                      push(redirectedPathName(lang))
+                    }}
                     sx={{
                       cursor: "pointer",
                       ...glassmorphismStyle,

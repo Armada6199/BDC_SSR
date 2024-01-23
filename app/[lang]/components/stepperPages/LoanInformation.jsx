@@ -16,107 +16,23 @@ import LoanTypes from "../LoanTypes";
 import CurrentSalarySlider from "../loansSlider/CurrentSalarySlider";
 import MonthsSlider from "../loansSlider/MonthsSlider";
 import AmountSlider from "../loansSlider/AmountSlider";
-import calculateEMI from "@utils/calculateEMI";
 import "@styles/styles.css";
 import LoanTypesSlider from "../mobile/MobileLoanTypes";
 import { CurrentLoanContext } from "@hooks/CurrentLoanProvider";
-function LoanInformation({
-  loans,
-  register,
-  errors,
-  setValue,
-  loanInformationContent,
-  localeLoans,
-  lang,
-}) {
-  const { currentLoan, setCurrentLoan, loanDetailsLocale } =
-    useContext(CurrentLoanContext);
-  const handleSliderChange = (e) => {
-    let { name, value } = e.target;
-    setValue(name, value);
-    name = name.split("_")[0];
-    setCurrentLoan((prev) => ({ ...prev, [name]: value }));
-  };
+import {
+  handleSetDefaultLoanValues,
+  handleSliderChange,
+} from "@utils/loanCalulation";
+function LoanInformation({ register, errors }) {
+  const {
+    currentLoan,
+    setCurrentLoan,
+    localePageContent: { loanInformation },
+    loanDetailsLocale,
+  } = useContext(CurrentLoanContext);
 
-  const validateGreaterThanSalary = () => {
-    let {
-      loanAmount,
-      numberOfMonths,
-      intrestRates,
-      activeLoans,
-      currentSalary,
-      maxMonths,
-    } = currentLoan;
-    if (numberOfMonths && loanAmount && currentSalary) {
-      loanAmount = Number(loanAmount);
-
-      let { isEligible } = calculateEMI(
-        loanAmount,
-        intrestRates,
-        numberOfMonths,
-        currentLoan.title,
-        activeLoans,
-        currentSalary
-      );
-      if (isEligible) {
-        return true;
-      } else {
-        for (let i = numberOfMonths; i < maxMonths; i++) {
-          let { isEligible } = calculateEMI(
-            loanAmount,
-            intrestRates,
-            i,
-            currentLoan.title,
-            activeLoans,
-            currentSalary
-          );
-          if (isEligible) {
-            // (
-            //   `found pay per month is ${i} and pay per month ${
-            //     EMI / i
-            //   } for loan amount of${EMI} and half of your salary is ${
-            //     halfSalary
-            //   }`
-            // );
-            return `Minimum Term For your request is ${i}`;
-          }
-        }
-      }
-      return "You Arent Eligiable for this Amount";
-    }
-  };
-  function handleChangeCurrentLoan(title) {
-    const targetLoan = loans.find((e) => e.title === title);
-    setCurrentLoan((prev) => ({
-      ...targetLoan,
-      currentSalary: prev.currentSalary,
-      isStaff: prev.isStaff,
-      hasPrevLoan: prev.hasPrevLoan,
-      activeLoans: prev.activeLoans,
-      maxAmountAfterDeduction: prev.maxAmountAfterDeduction,
-      activeLoansDeductions: prev.activeLoansDeductions,
-      loanAmount:prev.loanAmount,
-      numberOfMonths:prev.numberOfMonths
-    }));
-  }
   useEffect(() => {
-    const maxAmount =
-    currentLoan.maxAmountAfterDeduction || currentLoan.maxAmount;
-    const loanAmount = currentLoan.loanAmount
-      ? currentLoan.loanAmount
-      : maxAmount / 2;
-    const numberOfMonths = currentLoan.numberOfMonths
-      ? currentLoan.numberOfMonths
-      : currentLoan.maxMonths / 2;
-    const currentSalary = currentLoan.currentSalary
-      ? currentLoan.currentSalary
-      : 100000 / 2;
-    setCurrentLoan((prev) => ({
-      ...prev,
-      loanAmount,
-      numberOfMonths,
-      currentSalary,
-    }));
+    handleSetDefaultLoanValues(currentLoan, setCurrentLoan);
   }, []);
   const isMobile = useMediaQuery("(max-width:600px)");
   return (
@@ -144,26 +60,20 @@ function LoanInformation({
               variant="h5"
               fontWeight={"600"}
             >
-              {loanInformationContent.applyTitle}
+              {loanInformation.applyTitle}
             </Typography>
           </Grid>
-          <Grid container item  wrap="nowrap" gap={4} md={10} lg={12}>
+          <Grid container item wrap="nowrap" gap={4} md={10} lg={12}>
             {isMobile ? (
               <LoanTypesSlider
                 currentLoan={currentLoan}
                 setCurrentLoan={setCurrentLoan}
-                localeLoans={localeLoans}
-                handleChangeCurrentLoan={handleChangeCurrentLoan}
-                viewDetailsButtonLabel={
-                  loanInformationContent.viewDetailsButtonLabel
-                }
+              
               />
             ) : (
               <LoanTypes
                 currentLoan={currentLoan}
                 setCurrentLoan={setCurrentLoan}
-                localeLoans={localeLoans}
-                handleChangeCurrentLoan={handleChangeCurrentLoan}
               />
             )}
           </Grid>
@@ -172,34 +82,29 @@ function LoanInformation({
           <Grid container item sm={12}>
             <AmountSlider
               currentLoan={currentLoan}
-              handleSliderChange={handleSliderChange}
-              validateGreaterThanSalary={validateGreaterThanSalary}
               register={register}
               errors={errors}
               loanDetailsLocale={loanDetailsLocale}
-              label={loanInformationContent.loanAmountLabel}
+              label={loanInformation.loanAmountLabel}
             />
           </Grid>
           <Grid container item>
             <MonthsSlider
               currentLoan={currentLoan}
-              handleSliderChange={handleSliderChange}
-              validateGreaterThanSalary={validateGreaterThanSalary}
               register={register}
               errors={errors}
               loanDetailsLocale={loanDetailsLocale}
-              label={loanInformationContent.monthsLabel}
+              label={loanInformation.monthsLabel}
             />
           </Grid>
           <Grid container item>
             <CurrentSalarySlider
               currentLoan={currentLoan}
               handleSliderChange={handleSliderChange}
-              validateGreaterThanSalary={validateGreaterThanSalary}
               register={register}
               errors={errors}
               loanDetailsLocale={loanDetailsLocale}
-              label={loanInformationContent.salaryLabel}
+              label={loanInformation.salaryLabel}
             />
           </Grid>
         </Grid>
@@ -213,7 +118,7 @@ function LoanInformation({
               sx={{ textAlign: "start" }}
               id="demo-radio-buttons-group-label"
             >
-              {loanInformationContent.currentLoanLabel}{" "}
+              {loanInformation.currentLoanLabel}{" "}
             </FormLabel>
             <RadioGroup
               aria-labelledby="demo-radio-buttons-group-label"
@@ -260,7 +165,7 @@ function LoanInformation({
                       }}
                     />
                   }
-                  label={loanInformationContent.yesLabel}
+                  label={loanInformation.yesLabel}
                 />
               </Grid>
               <Grid item md={2}>
@@ -282,7 +187,7 @@ function LoanInformation({
                       }}
                     />
                   }
-                  label={loanInformationContent.noLabel}
+                  label={loanInformation.noLabel}
                 />
               </Grid>
             </RadioGroup>
@@ -299,7 +204,7 @@ function LoanInformation({
                 register={register}
                 currentLoan={currentLoan}
                 setCurrentLoan={setCurrentLoan}
-                activeFormLocale={loanInformationContent.activeLoans}
+                activeFormLocale={loanInformation.activeLoans}
                 lang
               />
             ))}
@@ -308,10 +213,7 @@ function LoanInformation({
       </Grid>
       {!isMobile && (
         <Grid container alignItems={"center"} item md={6}>
-          <LoanDetails
-            loanDetailsLocale={loanDetailsLocale}
-            currentLoan={currentLoan}
-          />
+          <LoanDetails currentLoan={currentLoan} />
         </Grid>
       )}
     </Grid>

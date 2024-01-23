@@ -10,8 +10,11 @@
   "stepperTitle": "Apply Loan",
   "currencyLabel": "JD",
   "heading": {
-    "headerMyLoansLabel": "My Loans",
-    "applyLoanPageLabel":"Loan Apply"
+    "navigation":[
+      " Home",
+       "My Loans",
+      "Apply"
+    ]
   },
   "profilePage": {
     "welcomeLabel": "Hello ,",
@@ -29,6 +32,12 @@
       "activeLoansAmountLabel": "Active Loans Amount",
       "totalLoansAmountLabel": "Total Loans Amount"
     },
+    "subCalculator":{
+      "title":"Loan Calculator",
+      "loanRedirectButton":"أستكمال القرض",
+      "calculateButtonLabel":"Calculate"
+
+      },
     "informationTabel": {
       "myLoansLabel": "MY LOANS",
       "loanTypeLabel": "Loan Type",
@@ -41,6 +50,9 @@
         "rejected":"Rejected",
         "processing":" Processing",
         "approved":"Approved"
+      },
+      "footer":{
+        "loanPerPageLabel":"Loan Per Page"
       }
     }
   },

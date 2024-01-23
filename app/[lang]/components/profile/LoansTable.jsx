@@ -17,9 +17,10 @@ const options = {
   border: "none",
   search: false,
   viewColumns: false,
-  fullWidth: true,
   selectableRowsHeader: true,
   selectableRowsHideCheckboxes: true,
+  responsive: "vertical",
+
   customFooter: (
     count,
     page,
@@ -41,39 +42,31 @@ const options = {
   },
 };
 
-function LoansTable({ informationTabelLocale }) {
+function LoansTable({ informationTabel }) {
   const { localePageContent } = useContext(CurrentLoanContext);
   const data = [
     [
       localePageContent.loanEligibilityTable.loanTypes[1],
       "42000",
-      "200",
       "24",
-      "100",
       "Approved",
     ],
     [
       localePageContent.loanEligibilityTable.loanTypes[3],
       "2000",
-      "600",
       "12",
-      "24",
       "Processing",
     ],
     [
       localePageContent.loanEligibilityTable.loanTypes[2],
       "2000",
-      "600",
       "12",
-      "24",
       "Rejected",
     ],
     [
       localePageContent.loanEligibilityTable.loanTypes[0],
       "50000",
-      "200",
       "24",
-      "32",
       "Approved",
     ],
   ];
@@ -84,16 +77,9 @@ function LoansTable({ informationTabelLocale }) {
       options: {
         filter: false,
         customBodyRender: (loanTypeObj, tableMeta, updateValue) => (
-          <Grid
-            container
-            minWidth={"190px"}
-            width={"190px"}
-            maxWidth={"190px"}
-            alignItems={"center"}
-            item
-          >
+          <Grid container alignItems={"center"} gap={2} item>
             <Grid
-              container
+              
               item
               alignItems={"center"}
               sx={{ color: "secondary.dark" }}
@@ -101,7 +87,7 @@ function LoansTable({ informationTabelLocale }) {
             >
               {loanIcons[loanTypeObj.value]}
             </Grid>
-            <Grid item xs={10}>
+            <Grid item xs={8}>
               <Typography variant="body1" fontWeight={600}>
                 {loanTypeObj.localeContent}
               </Typography>
@@ -109,15 +95,9 @@ function LoansTable({ informationTabelLocale }) {
           </Grid>
         ),
         customHeadLabelRender: (value) => (
-          <Grid
-            item
-            textAlign={"start"}
-            minWidth={"190px"}
-            width={"190px"}
-            maxWidth={"190px"}
-          >
+          <Grid item textAlign={"start"}>
             <Typography variant="body1" fontWeight={600}>
-              {informationTabelLocale.loanTypeLabel}
+              {informationTabel.loanTypeLabel}
             </Typography>
           </Grid>
         ),
@@ -129,83 +109,43 @@ function LoansTable({ informationTabelLocale }) {
       options: {
         filter: true,
         customBodyRender: (value, tableMeta, updateValue) => (
-          <Grid item width={"100px"} minWidth={"100px"} maxWidth={"100px"}>
+          <Grid item>
             <Typography variant="body1" fontWeight={600}>
               {value + " "}
             </Typography>
           </Grid>
         ),
         customHeadLabelRender: (value) => (
-          <Grid
-            item
-            textAlign={"start"}
-            width={"100px"}
-            minWidth={"100px"}
-            maxWidth={"100px"}
-          >
+          <Grid item textAlign={"start"}>
             <Typography variant="body1" fontWeight={600}>
-              {informationTabelLocale.loanAmountLabel}
+              {informationTabel.loanAmountLabel}
             </Typography>
           </Grid>
         ),
       },
     },
-    {
-      name: "remainingAmount",
-      label: "Remaning Amount",
-      options: {
-        filter: true,
-        customBodyRender: (value, tableMeta, updateValue) => (
-          <Grid item width={"100px"} minWidth={"100px"} maxWidth={"100px"}>
-            <Typography variant="body1" fontWeight={600}>
-              {value}
-            </Typography>
-          </Grid>
-        ),
-        customHeadLabelRender: (value) => (
-          <Grid
-            item
-            textAlign={"start"}
-            width={"100px"}
-            minWidth={"100px"}
-            maxWidth={"100px"}
-          >
-            <Typography variant="body1" fontWeight={600}>
-              {informationTabelLocale.remainingAmountLabel}
-            </Typography>
-          </Grid>
-        ),
-      },
-    },
-    {
-      name: "remainingMonths",
-      label: "Remaning Months",
-      options: {
-        filter: true,
-        customBodyRender: (value, tableMeta, updateValue) => {
-          return (
-            <Grid item width={"120px"} minWidth={"120px"} maxWidth={"120px"}>
-              <Typography variant="body1" fontWeight={600}>
-                {value}
-              </Typography>
-            </Grid>
-          );
-        },
-        customHeadLabelRender: (value) => (
-          <Grid
-            item
-            textAlign={"start"}
-            width={"120px"}
-            minWidth={"120px"}
-            maxWidth={"120px"}
-          >
-            <Typography variant="body1" fontWeight={600}>
-              {informationTabelLocale.remainingMonthsLabel}
-            </Typography>
-          </Grid>
-        ),
-      },
-    },
+    // {
+    //   name: "remainingAmount",
+    //   label: "Remaning Amount",
+    //   options: {
+    //     filter: true,
+    //     customBodyRender: (value, tableMeta, updateValue) => (
+    //       <Grid item>
+    //         <Typography variant="body1" fontWeight={600}>
+    //           {value}
+    //         </Typography>
+    //       </Grid>
+    //     ),
+    //     customHeadLabelRender: (value) => (
+    //       <Grid item textAlign={"start"}>
+    //         <Typography variant="body1" fontWeight={600}>
+    //           {informationTabel.remainingAmountLabel}
+    //         </Typography>
+    //       </Grid>
+    //     ),
+    //   },
+    // },
+
     {
       name: "monthlyPayment",
       label: "Monthly Payment",
@@ -213,7 +153,7 @@ function LoansTable({ informationTabelLocale }) {
         filter: false,
         customBodyRender: (value, tableMeta, updateValue) => {
           return (
-            <Grid item width={"100px"} minWidth={"100px"} maxWidth={"100px"}>
+            <Grid item>
               <Typography variant="body1" fontWeight={600}>
                 {value}
               </Typography>
@@ -221,13 +161,9 @@ function LoansTable({ informationTabelLocale }) {
           );
         },
         customHeadLabelRender: (value) => (
-          <Grid
-            item
-            textAlign={"start"}
-            width={"100px"} minWidth={"100px"} maxWidth={"100px"}
-          >
+          <Grid item textAlign={"start"}>
             <Typography variant="body1" fontWeight={600}>
-              {informationTabelLocale.monthlyPaymentLabel}
+              {informationTabel.monthlyPaymentLabel}
             </Typography>
           </Grid>
         ),
@@ -240,7 +176,7 @@ function LoansTable({ informationTabelLocale }) {
         filter: false,
         customBodyRender: (value, tableMeta, updateValue) => {
           return (
-            <Grid item width={"140px"} minWidth={"140px"} maxWidth={"140px"}>
+            <Grid item>
               <Button
                 fullWidth
                 variant="text"
@@ -254,21 +190,15 @@ function LoansTable({ informationTabelLocale }) {
                   fontWeight: "600",
                 }}
               >
-                {informationTabelLocale.statusButtons[value]}
+                {informationTabel.statusButtons[value]}
               </Button>
             </Grid>
           );
         },
         customHeadLabelRender: (value) => (
-          <Grid
-            item
-            textAlign={"start"}
-            width={"140px"}
-            minWidth={"140px"}
-            maxWidth={"140px"}
-          >
+          <Grid item textAlign={"start"}>
             <Typography variant="body1" fontWeight={600}>
-              {informationTabelLocale.loanStatusLabel}
+              {informationTabel.loanStatusLabel}
             </Typography>
           </Grid>
         ),
@@ -277,13 +207,13 @@ function LoansTable({ informationTabelLocale }) {
   ];
 
   return (
-    <Grid container item sx={glassmorphismStyle} p={4} xs={12}>
-      <Grid item xs={12}>
-        <Typography variant="h4" fontWeight={"600"}>
-          {informationTabelLocale.myLoansLabel}
+    <Grid container sx={glassmorphismStyle}  item xs={12} p={4} md={7}>
+      <Typography variant="h4" fontWeight={"600"}>
+          {informationTabel.myLoansLabel}
         </Typography>
-      </Grid>
-      <MUIDataTable data={data} columns={columns} options={options} />
+        <Grid container item xs={12} height={'85%'} >
+        <MUIDataTable data={data} columns={columns} options={options} />
+        </Grid>
     </Grid>
   );
 }

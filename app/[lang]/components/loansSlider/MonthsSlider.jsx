@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import {
   FormControl,
   FormHelperText,
@@ -12,19 +12,16 @@ import {
 import EditIcon from "@mui/icons-material/Edit";
 import { loanInfoInputStyle } from "@styles/styles";
 // import { useDebounce } from "../../hooks/debounce";
-
-function MonthsSlider({
-  register,
-  errors,
-  currentLoan,
+import {
   handleSliderChange,
   validateGreaterThanSalary,
-  loanDetailsLocale,
-  label,
-}) {
-  const isMobile=useMediaQuery('(max-width:600px)');
-  // const debouncedMonths=useDebounce(currentLoan.numberOfMonths_Input||currentLoan.numberOfMonths_Slider);
+} from "@utils/loanCalulation";
+import { CurrentLoanContext } from "@hooks/CurrentLoanProvider";
 
+function MonthsSlider({ register, errors, currentLoan, label }) {
+  const isMobile = useMediaQuery("(max-width:600px)");
+  // const debouncedMonths=useDebounce(currentLoan.numberOfMonths_Input||currentLoan.numberOfMonths_Slider);
+  const { setCurrentLoan } = useContext(CurrentLoanContext);
   return (
     <FormControl
       fullWidth
@@ -36,10 +33,17 @@ function MonthsSlider({
       }
     >
       <Grid container item md={12}>
-        <Grid container flexDirection={isMobile?'column':"row"} gap={2} justifyContent={"space-between"} item md={12}>
+        <Grid
+          container
+          flexDirection={isMobile ? "column" : "row"}
+          gap={2}
+          justifyContent={"space-between"}
+          item
+          md={12}
+        >
           <Grid item md={6}>
             <Typography fontWeight={"600"} variant="h5">
-            { label}
+              {label}
             </Typography>
           </Grid>
           <Grid item md={4}>
@@ -58,9 +62,9 @@ function MonthsSlider({
                   value: currentLoan.maxMonths,
                   message: `Maximum Month Term is ${currentLoan.maxMonths}`,
                 },
-                validate:(value)=>validateGreaterThanSalary(value,'months')
+                validate: (value) => validateGreaterThanSalary(currentLoan),
               })}
-              onChange={(e) => handleSliderChange(e)}
+              onChange={(e) => handleSliderChange(e, setCurrentLoan)}
               type="number"
               inputProps={{
                 min: currentLoan.minAmount,
@@ -72,7 +76,7 @@ function MonthsSlider({
                     <EditIcon sx={{ color: "secondary.dark" }} />
                   </InputAdornment>
                 ),
-                sx:{fontWeight:700},
+                sx: { fontWeight: 700 },
               }}
               value={currentLoan.numberOfMonths}
               variant="outlined"
@@ -80,42 +84,50 @@ function MonthsSlider({
           </Grid>
           <Grid item md={12}>
             <Slider
-                min={currentLoan.minMonths}
-                max={currentLoan.maxMonths}
-                valueLabelDisplay="auto"
-                color="secondary"
-                size="medium"
-                name="numberOfMonths"
-                step={6}
-                {...register("numberOfMonths_Slider", {
-                  required: currentLoan.loanAmount
-                    ?false 
-                    : "Kindly Choose Number of Months",
-                  onChange: (e) => handleSliderChange(e),
-                  validate:(value)=>validateGreaterThanSalary(value,'months')
-                })}
-                value={currentLoan.numberOfMonths}
+              min={currentLoan.minMonths}
+              max={currentLoan.maxMonths}
+              valueLabelDisplay="auto"
+              color="secondary"
+              size="medium"
+              name="numberOfMonths"
+              step={6}
+              {...register("numberOfMonths_Slider", {
+                required: currentLoan.loanAmount
+                  ? false
+                  : "Kindly Choose Number of Months",
+                validate: (value) => validateGreaterThanSalary(currentLoan),
+              })}
+              onChange={(e) => handleSliderChange(e, setCurrentLoan)}
+              value={currentLoan.numberOfMonths}
             />
           </Grid>
           <Grid container item justifyContent={"space-between"}>
-      <Grid item>
-        <Typography variant="body1" fontWeight={"bold"} color={"darkgray"}>
-          {currentLoan.minMonths}
-        </Typography>
-      </Grid>
+            <Grid item>
+              <Typography
+                variant="body1"
+                fontWeight={"bold"}
+                color={"darkgray"}
+              >
+                {currentLoan.minMonths}
+              </Typography>
+            </Grid>
 
-      <Grid item md={5}>
-        <FormHelperText sx={{color:'red'}}>
-          {" "}
-          {errors.numberOfMonths_Input?.message}
-        </FormHelperText>
-      </Grid>
-      <Grid item>
-        <Typography variant="body1" fontWeight={"bold"} color={"darkgray"}>
-          {currentLoan.maxMonths}
-        </Typography>
-      </Grid>
-    </Grid>
+            <Grid item md={5}>
+              <FormHelperText sx={{ color: "red" }}>
+                {" "}
+                {errors.numberOfMonths_Input?.message}
+              </FormHelperText>
+            </Grid>
+            <Grid item>
+              <Typography
+                variant="body1"
+                fontWeight={"bold"}
+                color={"darkgray"}
+              >
+                {currentLoan.maxMonths}
+              </Typography>
+            </Grid>
+          </Grid>
         </Grid>
       </Grid>
     </FormControl>

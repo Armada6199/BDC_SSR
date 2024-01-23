@@ -6,14 +6,12 @@ import ClearIcon from "@mui/icons-material/Clear";
 import ProgressBar from "./ProgressBar";
 import axios from "axios";
 import { TransitionGroup } from "react-transition-group";
+import {handleSubmitAttatchments} from '@utils/apiRequests'
 
 function LoanAttatchmentsPreview({
   attatchments,
-  hanldeSubmitAttatchments,
   uploadProgress,
-  handleDeleteAttatchment,
   setUploadProgress,
-  attatchmenPreviewContent
 }) {
   useEffect(() => {
     setUploadProgress((prev) => ({
@@ -184,7 +182,7 @@ function LoanAttatchmentsPreview({
             fullWidth
             variant="contained"
             disabled={attatchments.length == 0}
-            onClick={() => hanldeSubmitAttatchments()}
+            onClick={() => handleSubmitAttatchments(currentLoan.setUploadProgress,)}
             sx={{ bgcolor: "secondary.dark", color: "primary.main" }}
           >
             {" "}

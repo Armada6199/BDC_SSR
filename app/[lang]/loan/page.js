@@ -6,10 +6,8 @@ import Typography from "@mui/material/Typography";
 import { Button, Grid, useMediaQuery } from "@mui/material";
 import StepperComponentsHOC from "../components/StepperComponentsHOC.jsx";
 import { useForm } from "react-hook-form";
-import calculateEMI from "@utils/calculateEMI";
 import StepperNavigationButtons from "../components/StepperNavigationButtons.jsx";
 import MobileStepper from "@mui/material/MobileStepper";
-import axios from "axios";
 import { loanDetailsData } from "@public/loans";
 import "@styles/styles.css";
 import { CurrentLoanContext } from "@hooks/CurrentLoanProvider";
@@ -17,6 +15,11 @@ import getDictionary from "@lib/dictionary";
 import { useSession } from "next-auth/react";
 import { redirect } from "next/navigation";
 import Loader from "../components/Loader.jsx";
+import {
+  handleNext,
+  handleSetEMI,
+  hanldeSubmitAttatchments,
+} from "@utils/loanCalulation.js";
 function LoanStepperPage({ params: { lang } }) {
   const { data: session } = useSession({
     required: true,
@@ -24,24 +27,27 @@ function LoanStepperPage({ params: { lang } }) {
       redirect(`/${lang}`);
     },
   });
-  const [activeStep, setActiveStep] = React.useState(0);
-  const [loans, setLoans] = React.useState(loanDetailsData);
-  const { currentLoan, setCurrentLoan, changeLoanDetailsLocale } =
-    useContext(CurrentLoanContext);
+  const {
+    currentLoan,
+    setCurrentLoan,
+    changeLoanDetailsLocale,
+    activeStep,
+    setActiveStep,
+    loans,
+  } = useContext(CurrentLoanContext);
   const isMobile = useMediaQuery("(max-width:650px)");
-  const [pageContent, setPageContent] = useState("");
-
   const [uploadProgress, setUploadProgress] = useState({
     started: false,
     pc: 0,
     finished: false,
     status: { errs: [] },
   });
+  const {localePageContent}=useContext(CurrentLoanContext);
+  console.log(localePageContent)
   const {
     register,
     handleSubmit,
     formState: { errors },
-    setValue,
   } = useForm({
     mode: "onSubmit",
     reValidateMode: "onSubmit",
@@ -52,14 +58,14 @@ function LoanStepperPage({ params: { lang } }) {
       currentSalary_Input: currentLoan.currentSalary,
     },
   });
-  useEffect(() => {
-    const getPage = async () => {
-      const page = await getDictionary(lang);
-      setPageContent(page);
-      changeLoanDetailsLocale(page.loansInformation);
-    };
-    getPage();
-  }, [currentLoan]);
+  // useEffect(() => {
+  //   const getPage = async () => {
+  //     const page = await getDictionary(lang);
+  //     setPageContent(page);
+  //     changeLoanDetailsLocale(page.loansInformation);
+  //   };
+  //   getPage();
+  // }, [currentLoan]);
   useEffect(() => {
     if (localStorage.getItem("currentLoan")) {
       const storedData = JSON.parse(localStorage.getItem("currentLoan"));
@@ -80,82 +86,7 @@ function LoanStepperPage({ params: { lang } }) {
 
     // return localStorage.clear('currentLoan')
   }, []);
-  async function hanldeSubmitAttatchments() {
-    const formData = new FormData();
-    for (let i = 0; i < currentLoan.loan_attatchments.length; i++) {
-      formData.append("loan_attatchments", currentLoan.loan_attatchments[i]);
-    }
-    formData.append("employeeName", currentLoan.formData.employeeName);
-    formData.append("employeeNumber", currentLoan.formData.employeeNumber);
-    formData.append("fileNumber", currentLoan.formData.fileNumber);
-    try {
-      setUploadProgress((prev) => ({ ...prev, started: true }));
-      const postAttatchments = await axios.post(`/api/attatchments`, formData, {
-        onUploadProgress: (progressEvent) =>
-          setUploadProgress((prev) => ({
-            ...prev,
-            pc: progressEvent.progress * 100,
-          })),
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      });
-      if (postAttatchments.status === 200) {
-        setUploadProgress((prev) => ({
-          ...prev,
-          started: false,
-          finished: true,
-          status: postAttatchments.data,
-        }));
-      }
-    } catch (error) {
-      throw new Error(error);
-    }
-  }
-  function handleSetEMI() {
-    let { loanAmount, numberOfMonths, intrestRates, activeLoans } = currentLoan;
-    loanAmount = Number(loanAmount);
-    const { EMI, totalInterests, totalInterestLayers, activeLoansDeductions } =
-      calculateEMI(
-        loanAmount,
-        intrestRates,
-        numberOfMonths,
-        currentLoan.title,
-        activeLoans
-      );
-    setCurrentLoan((prev) => ({
-      ...prev,
-      loanAmount: loanAmount,
-      numberOfMonths: numberOfMonths,
-      EMI: EMI,
-      interestPayable: totalInterests,
-      payPerMonth: EMI / Number(numberOfMonths),
-      totalAppliedLayers: totalInterestLayers,
-      activeLoansDeductions: activeLoansDeductions,
-    }));
-  }
-  const handleNext = async (formData) => {
-    if (activeStep == 0) {
-      handleSetEMI();
-      setActiveStep((prevActiveStep) => prevActiveStep + 1);
-    } else if (activeStep === 3) {
-      try {
-        await hanldeSubmitAttatchments();
-      } catch (error) {
-        error;
-      }
-    }
-    if (
-      activeStep !== pageContent.stepperSteps.length - 1 &&
-      activeStep !== 0
-    ) {
-      setCurrentLoan((prev) => ({ ...prev, formData }));
-      setActiveStep((prevActiveStep) => prevActiveStep + 1);
-    } else {
-      ///submit data  here
-      currentLoan;
-    }
-  };
+
   const handleBack = () => {
     if (activeStep > 0) {
       setActiveStep((prevActiveStep) => prevActiveStep - 1);
@@ -167,11 +98,10 @@ function LoanStepperPage({ params: { lang } }) {
     setActiveStep(0);
   };
   return (
-    <form noValidate onSubmit={handleSubmit(handleNext)}>
-      {pageContent.loanInformation ? (
+    <form noValidate onSubmit={handleSubmit((formData)=>handleNext(formData,activeStep,setCurrentLoan,setActiveStep,currentLoan))}>
+      {localePageContent.loanInformation ? (
         <Grid
           container
-          
           maxWidth={"100vw"}
           minHeight={"100vh"}
           justifyContent={isMobile ? "center" : "flex-start"}
@@ -184,7 +114,7 @@ function LoanStepperPage({ params: { lang } }) {
                 sx={{ textAlign: { xs: "center", md: "start" } }}
                 variant="h4"
               >
-                {pageContent.stepperTitle}
+                {localePageContent.stepperTitle}
               </Typography>
             </Grid>
             <Grid container={isMobile ? true : false} item xs={12}>
@@ -192,13 +122,13 @@ function LoanStepperPage({ params: { lang } }) {
                 <Grid container gap={2} item xs={12}>
                   <Grid container justifyContent={"center"} item xs={12}>
                     <Typography variant="h6">
-                      {pageContent.stepperSteps[activeStep].slice(2)}
+                      {localePageContent.stepperSteps[activeStep].slice(2)}
                     </Typography>
                   </Grid>
                   <Grid container item xs={12}>
                     <MobileStepper
                       variant="progress"
-                      steps={pageContent.stepperSteps.length}
+                      steps={localePageContent.stepperSteps.length}
                       position="static"
                       activeStep={activeStep}
                       classes={{ dotActive: "progress_active" }}
@@ -219,7 +149,7 @@ function LoanStepperPage({ params: { lang } }) {
                 </Grid>
               ) : (
                 <Stepper activeStep={activeStep}>
-                  {pageContent.stepperSteps.map((label, index) => {
+                  {localePageContent.stepperSteps.map((label, index) => {
                     return (
                       <Box
                         width={"100%"}
@@ -270,16 +200,10 @@ function LoanStepperPage({ params: { lang } }) {
           >
             <Grid container item md={12}>
               <StepperComponentsHOC
-                loans={loans}
-                activeStep={activeStep}
                 register={register}
                 errors={errors}
-                setValue={setValue}
-                handleSetEMI={handleSetEMI}
-                hanldeSubmitAttatchments={hanldeSubmitAttatchments}
-                uploadProgress={uploadProgress}
+                uploadProstickygress={uploadProgress}
                 setUploadProgress={setUploadProgress}
-                pageContent={pageContent}
                 lang={lang}
               />
             </Grid>
@@ -294,7 +218,7 @@ function LoanStepperPage({ params: { lang } }) {
             p={4}
             mt={isMobile ? "100px" : "0"}
             maxHeight={"60px"}
-            position={"sticky"}
+            position={""}
             bottom={"0px"}
           >
             <Grid container item md={12}>
@@ -302,7 +226,7 @@ function LoanStepperPage({ params: { lang } }) {
                 handleBack={handleBack}
                 activeStep={activeStep}
                 handleRest={handleReset}
-                navigationContent={pageContent.navigation}
+                navigationContent={localePageContent.navigation}
               />
             </Grid>
           </Box>

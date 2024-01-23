@@ -34,10 +34,14 @@ function TranslationWrapper({children,dir}) {
  const cacheRtl = createCache({
   key: "mui-style-rtl",
   stylisPlugins: [prefixer, rtlPlugin],
+  prepend: true,
+
 });
 
 const cacheLtr = createCache({
   key: "mui-style-ltr",
+  prepend: true,
+
 });
 
   useServerInsertedHTML(() => {
@@ -61,6 +65,7 @@ const cacheLtr = createCache({
   });
   useEffect(() => {
     document.body.dir = dir;
+    console.log('refresh')
   }, [dir]);
 const choosenCache=dir=='ltr'?cacheLtr:cacheRtl;
   return (

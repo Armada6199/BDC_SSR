@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import {
   FormControl,
   FormHelperText,
@@ -11,10 +11,11 @@ import {
 } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import { loanInfoInputStyle } from "@styles/styles.js";
+import { handleSliderChange } from "@utils/loanCalulation";
+import { CurrentLoanContext } from "@hooks/CurrentLoanProvider";
 function AmountSlider({
   register,
   currentLoan,
-  handleSliderChange,
   errors,
   loanDetailsLocale,
   label
@@ -23,6 +24,7 @@ function AmountSlider({
   const isMobile = useMediaQuery("(max-width:600px)");
   const maxAmount =
     currentLoan.maxAmountAfterDeduction || currentLoan.maxAmount;
+    const {setCurrentLoan}=useContext(CurrentLoanContext)
   return (
     <FormControl
       fullWidth
@@ -63,7 +65,7 @@ function AmountSlider({
                   message: `Maximum Loan Amount is ${maxAmount}`,
                 },
               })}
-              onChange={(e) => handleSliderChange(e)}
+              onChange={(e) => handleSliderChange(e,setCurrentLoan)}
               type="number"
               inputProps={{
                 min: currentLoan.minAmount,
@@ -94,8 +96,8 @@ function AmountSlider({
                 required: currentLoan.loanAmount
                   ? false
                   : "Kindly Choose loan amount",
-                onChange: (e) => handleSliderChange(e),
-              })}
+                })}
+                onChange={(e) => handleSliderChange(e,setCurrentLoan)}
               value={currentLoan.loanAmount}
             />
           </Grid>

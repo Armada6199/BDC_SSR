@@ -14,42 +14,26 @@ import { glassmorphismStyle } from "@styles/styles.js";
 import ClearIcon from "@mui/icons-material/Clear";
 import Image from "next/image";
 import "@/styles/styles.css";
-import { signIn } from "next-auth/react";
 import { CurrentLoanContext } from "@hooks/CurrentLoanProvider";
 import { usePathname } from "next/navigation";
+import { handleStaffLogin } from "@utils/apiRequests";
+import {redirectedPathName} from '@utils/loanCalulation'
+import { useRouter } from "next/navigation";
 function LoginModal({
   handleCloseStaffLogin=false,
   lang
 }) {
   const [isLoginingIn, setIsLogingin] = useState(false);
-  const pathName=usePathname()
+  const pathName=usePathname();
+  const {push}=useRouter()
   const [loginCredindtials, setLoginCredindtials] = useState({
     email: "",
     password: "",
   });
   const showStaffMessage=pathName===`/${lang}/profile`;
-  const { currentLoan, setCurrentLoan, localePageContent } =
+  const {  setCurrentLoan, localePageContent } =
     useContext(CurrentLoanContext);
-  async function handleStaffLogin() {
-    try {
-      setIsLogingin(true);
-      const loginResponse = await signIn("credentials", {
-        ...loginCredindtials,
-        redirect: false,
-      });
-      if (loginResponse.error) {
-        setIsLogingin(false);
-        throw new Error("Invalid Login");
-      } else {
-        setIsLogingin(false);
-        localStorage.removeItem("currentLoan");
-        setCurrentLoan((prev) => ({ ...prev, isStaff: true }));
-        redirectedPathName(lang);
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  }
+  
  
   return (
     <Grid
@@ -143,9 +127,13 @@ function LoginModal({
           </Grid>
         </Grid>
         <Grid item xs={10} md={12}>
-          <Button
+          <Button 
             fullWidth
-            onClick={handleStaffLogin}
+            onClick={()=>{
+              handleStaffLogin(setCurrentLoan,setIsLogingin);
+              push(redirectedPathName(lang))
+            }
+            }
             disabled={isLoginingIn}
             variant="contained"
             severity="danger"

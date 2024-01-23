@@ -5,10 +5,20 @@ import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import { glassmorphismStyle } from "@styles/styles.js";
 import TermsTable from "./TermsTable";
 import ClearIcon from "@mui/icons-material/Clear";
-function LoanDetails({  handleClose,loanDetailsLocale }) {
-  const isMobile=useMediaQuery('(max-width:600px)');
-  return (
-    <Grid container item p={4} height={'100%'} overflow={'scroll'} gap={4} sx={glassmorphismStyle}>
+import { CurrentLoanContext } from "@hooks/CurrentLoanProvider";
+function LoanDetails({ handleClose }) {
+  const isMobile = useMediaQuery("(max-width:600px)");
+  const { loanDetailsLocale } = useContext(CurrentLoanContext);
+  return (  
+    <Grid
+      container
+      item
+      p={4}
+      height={"100%"}
+      overflow={"scroll"}
+      gap={4}
+      sx={glassmorphismStyle}
+    >
       {isMobile && (
         <ClearIcon
           onClick={handleClose}
@@ -27,11 +37,11 @@ function LoanDetails({  handleClose,loanDetailsLocale }) {
       </Grid>
       <Grid item md={12}>
         <Typography variant="body1" fontWeight={"500"}>
-        {loanDetailsLocale.description}
+          {loanDetailsLocale.description}
         </Typography>
       </Grid>
       <Grid item md={12}>
-          <Typography variant="h6" fontWeight={"bold"} color={"secondary.dark"}>
+        <Typography variant="h6" fontWeight={"bold"} color={"secondary.dark"}>
           {loanDetailsLocale.privilegesTitle}
         </Typography>
       </Grid>

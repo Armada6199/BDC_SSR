@@ -1,21 +1,22 @@
 import { Box, Grid, Typography } from "@mui/material";
-import React from "react";
+import React, { useContext } from "react";
 import {
   loansIconStyle,
   loanIconContStyle,
   loanTypesBoxesStyle,
 } from "@styles/styles.js";
 import { loanIcons } from "@public/icons";
+import { handleChangeCurrentLoan } from "@utils/loanCalulation";
+import { CurrentLoanContext } from "@hooks/CurrentLoanProvider";
 
 
 function LoanTypes({
-  localeLoans,
   currentLoan,
-  handleChangeCurrentLoan,
 }) {
+  const {loans,setCurrentLoan,localePageContent:{loansInformation}}=useContext(CurrentLoanContext)
   return (
     <>
-      {localeLoans.map((loan,index) => (
+      {loansInformation.map((loan,index) => (
         <Grid
           container
           sx={{
@@ -30,7 +31,7 @@ function LoanTypes({
           justifyContent={'center'}
           alignItems={'center'}
           key={loan.title}
-          onClick={() => handleChangeCurrentLoan(loan.enTitle||loan.title)}
+          onClick={() => handleChangeCurrentLoan(loan.enTitle||loan.title,setCurrentLoan,loans)}
         >
           <Grid container direction={'column'} justifyContent={'center'} alignItems={'center'} gap={1} item>
           <Box sx={{...loanIconContStyle,bgcolor:'secondary.dark',color:"#FFF"}}>{loanIcons[loan.enTitle||loan.title]}</Box>

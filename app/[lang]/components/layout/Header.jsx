@@ -19,7 +19,6 @@ function Header({ lang }) {
     segments[1] = locale;
     push(segments.join("/") )
   };
-
   return (
     localePageContent && (
       <Grid

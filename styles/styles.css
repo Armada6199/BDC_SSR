@@ -1,37 +1,37 @@
 .sigContainer {
-    width: 100%;
-    height: 100%;
-    margin: 0 auto;
-    background-color: #fff;
-  }
-  .sigPad {
-    width: 100%;
-    min-height: 250px;
-    border: 1px solid lightgray;
-    border-radius: 10px;
-  }
-  .attatchments_sticky{
-    position:sticky;
-    top: 10px;
-    left: 10px;
-  }
-  .mui-style-ltr-ee20y-MuiPaper-root {
   width: 100%;
-  min-width: 100%,
-  };
-  
+  height: 100%;
+  margin: 0 auto;
+  background-color: #fff;
+}
+.sigPad {
+  width: 100%;
+  min-height: 250px;
+  border: 1px solid lightgray;
+  border-radius: 10px;
+}
+.attatchments_sticky {
+  position: sticky;
+  top: 10px;
+  left: 10px;
+}
+.mui-style-ltr-ee20y-MuiPaper-root {
+  width: 100%;
+  min-width: 100%;
+}
+
 /* 
   .react-pdf__Page__annotations .annotationLayer{
     display: none !important;
     height: 0px;
     background-color: red;
   } */
-  .loginBackground{
-    background-size:cover;
-    background-repeat: no-repeat;
-    background-image: url('../public/assets/busnisse3.jpeg');
-  }
-  /* .activeLoanForm-enter{
+.loginBackground {
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-image: url("../public/assets/busnisse3.jpeg");
+}
+/* .activeLoanForm-enter{
     opacity: 0;
   }
   .activeLoanForm-enter-active{
@@ -47,18 +47,34 @@
     transform: translateX(20%);
     transition: all 1s linear;
   } */
-.download_loader{
+.download_loader {
   border: 5px solid #f3f3f3;
-  border-top: 5px solid #C4B28F;
+  border-top: 5px solid #c4b28f;
   border-radius: 50%;
   width: 10px;
   height: 10px;
   animation: spin 2s linear infinite;
 }
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+/* .tss-1cdcmys-MUIDataTable-responsiveBase >  * {
+direction: ltr;
+overflow: auto;
+} */
+.tss-11quiee-MUIDataTable-paper{
+  width: 100%;
 }
-.progress_active{
-  backgroundColor: red;
+.tss-1opebqo-MUIDataTable-caption {
+    right:-1000px !important;
+    left: auto !important;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+.progress_active {
+  backgroundcolor: red;
 }

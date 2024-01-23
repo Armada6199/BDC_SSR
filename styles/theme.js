@@ -37,6 +37,7 @@ const theme = (dir) =>
     secondary: {
       main: "#F58232",
       dark: "#dd752d",
+      border:"#F05030",
       light: "#f58232",
     },
     background: {

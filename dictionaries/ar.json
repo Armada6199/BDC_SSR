@@ -9,8 +9,11 @@
   "switchLanguageLabel": "EN",
   "currencyLabel": "دينار",
   "heading": {
-    "headerMyLoansLabel": "قروضي",
-    "applyLoanPageLabel":"تقديم قرض"
+    "navigation":[
+      {"localeContent":"الصفحة الرئيسية","link":""},
+      {"localeContent":"قروضي","link":"/profile"},
+      {"localeContent":"تقديم قرض","link":"/loan"}
+    ]
   },
   "stepperTitle": "تقديم القرض",
   "profilePage": {
@@ -30,6 +33,11 @@
       "activeLoansAmountLabel": "مبلغ القروض النشطة",
       "totalLoansAmountLabel": "إجمالي مبلغ القروض"
     },
+    "subCalculator":{
+    "title":"الحاسبة",
+    "calculateButtonLabel":"أحتساب",
+    "loanRedirectButton":"أستكمال القرض"
+    },
     "informationTabel": {
       "myLoansLabel": "قروضي",
       "loanTypeLabel": "نوع القرض",
@@ -38,10 +46,13 @@
       "remainingMonthsLabel": "الأشهر المتبقية",
       "monthlyPaymentLabel": " الدفع الشهري",
       "loanStatusLabel": "حالة القرض",
-      "statusButtons":{
-        "Rejected":"مرفوض",
-        "Processing":"قيد التنفيذ",
-        "Approved":"مقبول"
+      "statusButtons": {
+        "Rejected": "مرفوض",
+        "Processing": "قيد التنفيذ",
+        "Approved": "مقبول"
+      },
+      "footer": {
+        "loanPerPageLabel": "Loan Per Page"
       }
     }
   },
@@ -117,8 +128,7 @@
     "modalEmail": "البريد الألكتروني",
     "rememberMe": "تذكرني",
     "loginButtonText": "تسجيل ألدخول",
-    "guestWarningMessage":"يجب ان تكون موظف  لتراجع القروض السابقة"
-
+    "guestWarningMessage": "يجب ان تكون موظف  لتراجع القروض السابقة"
   },
   "personalInformation": {
     "sectionTitle": "معلومات شخصية",
@@ -210,7 +220,7 @@
 
   "loansInformation": [
     {
-      "title": " قرض شخصي",
+      "title": "قرض شخصي",
       "enTitle": "Personal Loan",
       "description": "امتلك أرض أحلامك بفائدة تنافسية واحصل على امتيازات إضافية لمنتج قرض السيارة الخاص بنا.",
       "privileges": [
@@ -333,7 +343,7 @@
       ]
     },
     {
-      "title": " قرض سيارة",
+      "title": "قرض سيارة",
       "enTitle": "Car Loan",
       "description": "امتلك أرض أحلامك بفائدة تنافسية واحصل على امتيازات إضافية لمنتج قرض السيارة الخاص بنا.",
       "privileges": [
@@ -395,7 +405,7 @@
       ]
     },
     {
-      "title": " قرض ارض",
+      "title": "قرض ارض",
       "enTitle": "Land Loan",
 
       "description": "امتلك أرض أحلامك بفائدة تنافسية واحصل على امتيازات إضافية لمنتج قرض السيارة الخاص بنا.",

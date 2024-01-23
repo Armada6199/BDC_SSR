@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import {
   FormControl,
   FormHelperText,
@@ -11,17 +11,11 @@ import {
 } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import { loanInfoInputStyle } from "@styles/styles.js";
-
-function CurrentSalarySlider({
-  register,
-  currentLoan,
-  handleSliderChange,
-  errors,
-  loanDetailsLocale,
-  label,
-}) {
+import { handleSliderChange } from "@utils/loanCalulation";
+import { CurrentLoanContext } from "@hooks/CurrentLoanProvider";
+function CurrentSalarySlider({ register, currentLoan, errors, label }) {
   const isMobile = useMediaQuery("(max-width:600px)");
-
+  const {setCurrentLoan}=useContext(CurrentLoanContext)
   return (
     <FormControl
       fullWidth
@@ -59,7 +53,8 @@ function CurrentSalarySlider({
               value: currentLoan.currentSalary,
             }}
             {...register("currentSalary_Input", {
-              onChange: (e) => handleSliderChange(e),
+              onChange: (e) => handleSliderChange(e, setCurrentLoan),
+
               required:
                 currentLoan.currentSalary == 0
                   ? "Kindly Choose Salary amount"
@@ -93,11 +88,11 @@ function CurrentSalarySlider({
                 currentLoan.currentSalary === 0
                   ? "Kindly Choose Salary amount"
                   : "Kindly Choose Salary amount",
-              onChange: (e) => handleSliderChange(e),
-            })}
+                  onChange: (e) => handleSliderChange(e,setCurrentLoan),
+                })}
             disabled={currentLoan.isStaff}
             value={currentLoan.currentSalary}
-              />
+          />
         </Grid>
         <Grid container item justifyContent={"space-between"}>
           <Grid item>

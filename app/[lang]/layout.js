@@ -3,7 +3,7 @@ import "./globals.css";
 import Header from "./components/layout/Header";
 import Footer from "./components/layout/Footer";
 import { i18n } from "@i18n.config";
-import Head from "next/head";
+import ResponsiveHeader from "./components/layout/ResponsiveHeader";
 
 export async function generateStaticParams() {
   return i18n.locales.map((locale) => ({ lang: locale }));
@@ -14,7 +14,7 @@ export default function RootLayout({ children, params: { lang } }) {
       <head>
         <meta name="BDC" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin />
         <link
           href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,100;9..40,400;9..40,500;9..40,600;9..40,700;9..40,800&display=swap"
           rel="stylesheet"
@@ -22,7 +22,8 @@ export default function RootLayout({ children, params: { lang } }) {
       </head>
       <body>
         <Providers lang={lang}>
-          <Header lang={lang} />
+          {/* <Header lang={lang} /> */}
+          <ResponsiveHeader lang={lang}/>
           {children}
           <Footer lang={lang} />
         </Providers>

@@ -6,16 +6,15 @@ import loanIcon from "@public/icons/dollar-finance-money-20-svgrepo-com.svg";
 import moneyBagIcon from "@public/icons/money-bag-svgrepo-com.svg";
 import Image from "next/image";
 import { CurrentLoanContext } from "@hooks/CurrentLoanProvider";
-function LoanInfoCards({informationCardsLocale}) {
+function LoanInfoCards({informationCards}) {
   const { localePageContent } = useContext(CurrentLoanContext);
   return (
-    <Grid container item xs={12} justifyContent={"space-between"} wrap="nowrap" gap={4} >
+    <Grid container item xs={12} md={12}  wrap="nowrap" gap={8} >
    <Grid
         container
         item
         justifyContent={"center"}
         md={4}
-        xl={4}
         height={"180px"}
         alignItems={'center'}
         p={2}
@@ -37,7 +36,7 @@ function LoanInfoCards({informationCardsLocale}) {
               3500 {localePageContent.currencyLabel}
             </Typography>
             <Typography variant="body1" color={"darkgray"} fontWeight={700}>
-              {informationCardsLocale.salaryLabel}
+              {informationCards.salaryLabel}
             </Typography>
         </Grid>
         <Grid item xs={12} md={2}>
@@ -51,7 +50,6 @@ function LoanInfoCards({informationCardsLocale}) {
         justifyContent={"center"}
         xs={12}
         md={4}
-        xl={4}
         height={"180px"}
         alignItems={'center'}
         p={2}
@@ -73,7 +71,7 @@ function LoanInfoCards({informationCardsLocale}) {
                20000 {localePageContent.currencyLabel}
             </Typography>
             <Typography variant="body1" color={"darkgray"} fontWeight={700}>
-            {informationCardsLocale.activeLoansAmountLabel}
+            {informationCards.activeLoansAmountLabel}
 
             </Typography>
         </Grid>
@@ -87,7 +85,6 @@ function LoanInfoCards({informationCardsLocale}) {
         justifyContent={"center"}
         xs={12}
         md={4}
-        xl={4}
         height={"180px"}
         alignItems={'center'}
         p={2}
@@ -109,7 +106,7 @@ function LoanInfoCards({informationCardsLocale}) {
               40200 {localePageContent.currencyLabel}
             </Typography>
             <Typography variant="body1" color={"darkgray"} fontWeight={700}>
-            {informationCardsLocale.totalLoansAmountLabel}
+            {informationCards.totalLoansAmountLabel}
             </Typography>
         </Grid>
         <Grid item xs={12} md={2}>
