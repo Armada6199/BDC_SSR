@@ -23,7 +23,6 @@ const CurrentLoanProvider = ({ children, lang }) => {
       setLocalePageContent(localizedPagesContent);
       setLoanDetailsLocale(localizedPagesContent.loansInformation[1]);
       };
-      console.log('consoled')
     getPage();
   }, [lang]);
   return (

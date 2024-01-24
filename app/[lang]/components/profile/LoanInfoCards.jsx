@@ -9,7 +9,7 @@ import { CurrentLoanContext } from "@hooks/CurrentLoanProvider";
 function LoanInfoCards({informationCards}) {
   const { localePageContent } = useContext(CurrentLoanContext);
   return (
-    <Grid container item xs={12} md={12}  wrap="nowrap" gap={8} >
+    <Grid container item xs={12} md={12}  wrap="nowrap" gap={4} >
    <Grid
         container
         item

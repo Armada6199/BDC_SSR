@@ -43,7 +43,6 @@ function LoanStepperPage({ params: { lang } }) {
     status: { errs: [] },
   });
   const {localePageContent}=useContext(CurrentLoanContext);
-  console.log(localePageContent)
   const {
     register,
     handleSubmit,
@@ -106,7 +105,6 @@ function LoanStepperPage({ params: { lang } }) {
           minHeight={"100vh"}
           justifyContent={isMobile ? "center" : "flex-start"}
           bgcolor={"background.default"}
-          xs={12}
         >
           <Grid container minHeight={"20vh"} item xs={12} p={4} gap={2}>
             <Grid item xs={12}>

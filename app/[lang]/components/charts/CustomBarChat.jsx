@@ -22,7 +22,6 @@ ChartJS.register(
 export function CustomBarChat({ totalAppliedLayers,layersLocale,totalAppliedLabel,appliedInterestLabel }) {
   const lastIncludedLayer = totalAppliedLayers[totalAppliedLayers.length - 1];
   const labels=layersLocale.map(e=>(e.localeContent))
-
   const maxAmount =
     lastIncludedLayer.totalInterestApplied + lastIncludedLayer.max;
   const options = {

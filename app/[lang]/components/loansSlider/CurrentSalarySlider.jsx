@@ -77,7 +77,7 @@ function CurrentSalarySlider({ register, currentLoan, errors, label }) {
         <Grid item md={12}>
           <Slider
             min={250}
-            max={100000}
+            max={10000}
             valueLabelDisplay="auto"
             color="secondary"
             size="medium"
@@ -109,7 +109,7 @@ function CurrentSalarySlider({ register, currentLoan, errors, label }) {
           </Grid>
           <Grid item>
             <Typography variant="body1" fontWeight={"bold"} color={"darkgray"}>
-              100000 JD
+              10000 JD
             </Typography>
           </Grid>
         </Grid>

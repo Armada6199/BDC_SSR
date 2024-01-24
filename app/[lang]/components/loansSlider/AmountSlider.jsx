@@ -24,7 +24,7 @@ function AmountSlider({
   const isMobile = useMediaQuery("(max-width:600px)");
   const maxAmount =
     currentLoan.maxAmountAfterDeduction || currentLoan.maxAmount;
-    const {setCurrentLoan}=useContext(CurrentLoanContext)
+    const {setCurrentLoan}=useContext(CurrentLoanContext);
   return (
     <FormControl
       fullWidth

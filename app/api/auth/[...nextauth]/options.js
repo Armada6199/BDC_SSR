@@ -45,11 +45,11 @@ export const options = {
             if (isValidUser) return mockUser;
             else return null;
           } else {
-            return {isGuest:true}
+            return { isGuest: true };
           }
         } catch (error) {
           console.log(error);
-          throw new Error(error)
+          throw new Error(error);
         }
       },
     }),
@@ -58,10 +58,12 @@ export const options = {
     signIn: "/",
   },
   callbacks: {
-    // signIn:async({user})=>{
-    //   console.log(user)
-    //   return user;
-    // },
+    signIn: async ({ user }) => {
+      console.log(user);
+      if (user.isGuest) {
+      }
+      return user;
+    },
     jwt: async ({ token, user }) => {
       if (user) {
         token.employeeData = user;

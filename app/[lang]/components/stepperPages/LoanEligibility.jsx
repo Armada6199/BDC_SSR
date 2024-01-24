@@ -13,7 +13,7 @@ function LoanEligibility({
 }) {
   const isMobile = useMediaQuery("(max-width:650px)");
   const { currentLoan, localePageContent:{loanEligibility,loanEligibilityTable},loanDetailsLocale } = useContext(CurrentLoanContext);
-
+ console.log(currentLoan)
   return (
     <Grid
       container

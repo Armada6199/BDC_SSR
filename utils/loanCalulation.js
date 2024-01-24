@@ -1,7 +1,8 @@
 import calculateEMI from "./calculateEMI";
 export function handleSetEMI(currentLoan,setCurrentLoan) {
-    let { loanAmount, numberOfMonths, intrestRates, activeLoans } = currentLoan;
+  let { loanAmount, numberOfMonths, intrestRates, activeLoans } = currentLoan;
     loanAmount = Number(loanAmount);
+    console.log(loanAmount,numberOfMonths)
     const { EMI, totalInterests, totalInterestLayers, activeLoansDeductions } =
       calculateEMI(
         loanAmount,
@@ -14,7 +15,7 @@ export function handleSetEMI(currentLoan,setCurrentLoan) {
       ...prev,
       loanAmount: loanAmount,
       numberOfMonths: numberOfMonths,
-      EMI: EMI,
+      EMI,
       interestPayable: totalInterests,
       payPerMonth: EMI / Number(numberOfMonths),
       totalAppliedLayers: totalInterestLayers,
@@ -26,6 +27,8 @@ export function handleSetEMI(currentLoan,setCurrentLoan) {
   
   
   export const handleNext = async (formData,activeStep,setCurrentLoan,setActiveStep,currentLoan) => {
+    console.trace();
+
     if (activeStep == 0) {
       handleSetEMI(currentLoan,setCurrentLoan);
       setActiveStep((prevActiveStep) => prevActiveStep + 1);

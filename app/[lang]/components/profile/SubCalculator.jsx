@@ -5,19 +5,26 @@ import { Button, Grid, Typography } from "@mui/material";
 import MonthsSlider from "../loansSlider/MonthsSlider";
 import SubCalculatorTypeNav from "./SubCalculatorTypeNav";
 import { useForm } from "react-hook-form";
-import { handleSetDefaultLoanValues, handleSetEMI } from "@utils/loanCalulation";
+import {
+  handleNext,
+  handleSetDefaultLoanValues,
+  handleSetEMI,
+} from "@utils/loanCalulation";
 import Link from "next/link";
 import { glassmorphismStyle } from "@styles/styles";
+import { useDebounce } from "@hooks/debounc";
+import { useSession } from "next-auth/react";
 
 function SubCalculator({ lang }) {
+  const {data:session}=useSession();
   const {
     currentLoan,
     loanDetailsLocale,
     setCurrentLoan,
     localePageContent,
     setActiveStep,
+    activeStep
   } = useContext(CurrentLoanContext);
-  
   const {
     register,
     formState: { errors },
@@ -31,10 +38,9 @@ function SubCalculator({ lang }) {
       currentSalary_Input: currentLoan.currentSalary,
     },
   });
-  useEffect(()=>{
+  useEffect(() => {
     handleSetDefaultLoanValues(currentLoan, setCurrentLoan);
-
-  },[])
+  }, []);
   return (
     <Grid container sx={glassmorphismStyle} item xs={12} gap={4} p={4} md={5}>
       <Grid item xs={12}>
@@ -91,17 +97,14 @@ function SubCalculator({ lang }) {
             <Button
               fullWidth
               variant="outlined"
-              onClick={() => handleSetEMI(currentLoan, setCurrentLoan)}
               sx={{ fontWeight: 600, fontSize: 16, color: "secondary.dark" }}
+              onClick={()=>handleSetEMI(currentLoan,setCurrentLoan)}
             >
               {localePageContent.profilePage.subCalculator.calculateButtonLabel}
             </Button>
           </Grid>
           <Grid item xs={6}>
-            <Link
-              href={`/${lang.lang}/loan`}
-              onClick={() => setActiveStep(1)}
-            >
+            <Link href={`/${lang.lang}/loan`}   onClick={() => setActiveStep(1)}>
               <Button
                 fullWidth
                 variant="contained"

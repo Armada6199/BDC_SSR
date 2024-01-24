@@ -33,7 +33,7 @@ function LoanInformation({ register, errors }) {
 
   useEffect(() => {
     handleSetDefaultLoanValues(currentLoan, setCurrentLoan);
-  }, []);
+  }, [currentLoan.isStaff]);
   const isMobile = useMediaQuery("(max-width:600px)");
   return (
     <Grid

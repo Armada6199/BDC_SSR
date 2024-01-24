@@ -11,10 +11,11 @@
   "currencyLabel": "JD",
   "heading": {
     "navigation":[
-      " Home",
-       "My Loans",
-      "Apply"
-    ]
+      {"localeContent":" Home","link":""},
+      {"localeContent":"My Loans","link":"/profile"},
+      {"localeContent":" Apply","link":"/loan"}
+    ],
+    "logoutLabel":"Logout"
   },
   "profilePage": {
     "welcomeLabel": "Hello ,",

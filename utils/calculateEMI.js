@@ -7,6 +7,7 @@ export default function calculateEMI(
     currentSalary
   ) {
     let totalInterests = 0;
+    console.trace();
     let totalAmount = loanAmount;
     let activeLoansDeductions = [];
     const totalInterestLayers = [];

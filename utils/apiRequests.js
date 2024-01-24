@@ -1,6 +1,7 @@
 import { signIn } from 'next-auth/react';
-import {redirectedPathName} from './loanCalulation'
-export async function handleStaffLogin(setCurrentLoan,setIsLogingin) {
+import {redirectedPathName} from './loanCalulation';
+import { loanDetailsData } from '@public/loans';
+export async function handleStaffLogin(loginCredindtials,setCurrentLoan,setIsLogingin) {
     try {
       setIsLogingin(true);
       const loginResponse = await signIn("credentials", {
@@ -14,7 +15,6 @@ export async function handleStaffLogin(setCurrentLoan,setIsLogingin) {
         setIsLogingin(false);
         localStorage.removeItem("currentLoan");
         setCurrentLoan((prev) => ({ ...prev, isStaff: true }));
-        redirectedPathName(lang);
       }
     } catch (error) {
       console.log(error);

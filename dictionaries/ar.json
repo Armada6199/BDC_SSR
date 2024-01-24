@@ -13,7 +13,10 @@
       {"localeContent":"الصفحة الرئيسية","link":""},
       {"localeContent":"قروضي","link":"/profile"},
       {"localeContent":"تقديم قرض","link":"/loan"}
-    ]
+    ],
+    "logoutLabel":"تسجيل الخروج",
+    "changeLanguageLabel":"اللغة"
+
   },
   "stepperTitle": "تقديم القرض",
   "profilePage": {

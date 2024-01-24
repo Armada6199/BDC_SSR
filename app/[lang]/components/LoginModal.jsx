@@ -130,8 +130,8 @@ function LoginModal({
           <Button 
             fullWidth
             onClick={()=>{
-              handleStaffLogin(setCurrentLoan,setIsLogingin);
-              push(redirectedPathName(lang))
+              handleStaffLogin(loginCredindtials,setCurrentLoan,setIsLogingin);
+              push(redirectedPathName(lang)+'/profile')
             }
             }
             disabled={isLoginingIn}
