@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import LogoutIcon from "@mui/icons-material/Logout";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import SavingsIcon from "@mui/icons-material/Savings";
@@ -69,7 +69,7 @@ const NagiationsLinks = ({ localePageContent, lang, mobileOpen = false }) => {
                     <Grid item xs={2} display={{ xs: "grid", sm: "none" }}>
                       {navIcons[index]}
                     </Grid>
-                    <Grid item xs={10}>
+                    <Grid item >
                       <Typography textAlign={"start"} variant="h6">
                         {nav.localeContent}
                       </Typography>
@@ -89,7 +89,7 @@ const NagiationsLinks = ({ localePageContent, lang, mobileOpen = false }) => {
         xs={12}
         md={2}
         onClick={() => {
-          signOut({ callbackUrl: `http://localhost:3000/${lang}` });
+          signOut({ callbackUrl: `/${lang}` });
         }}
         display={{ xs: !isGuest ? "inherit" : "none", md: "none" }}
         borderBottom={{ xs: "1px solid darkgray", sm: "none" }}
@@ -128,7 +128,7 @@ const NagiationsLinks = ({ localePageContent, lang, mobileOpen = false }) => {
           item
           sx={{ color: "#fff", cursor: "pointer" }}
           onClick={() => {
-            signOut({ callbackUrl: `http://localhost:3000/${lang}` });
+            signOut({ callbackUrl: `/${lang}` });
           }}
           display={{
             xs: "none",
@@ -141,17 +141,30 @@ const NagiationsLinks = ({ localePageContent, lang, mobileOpen = false }) => {
           </Typography>
         </Grid>
       </Grid>
-      <Box position={"fixed"} bottom={0}>
-        <Grid
-          container
-          item
-          color={"#fff"}
-          xs={12}
-          md={2}
-          display={{ xs: "grid", sm: "none" }}
+      <Grid
+        container
+        item
+        color={"#fff"}
+        xs={12}
+        md={2}
+        display={{ xs: "grid", sm: "none" }}
+      >
+        <Box
+          maxWidth={240}
+          position={"fixed"}
+          left={0}
+          sx={{ direction: lang == "en" ? "ltr" : "rtl" }}
+          bottom={0}
         >
-          <Grid container justifyContent={"center"} item>
-            <Grid container gap={1} alignItems={"center"} item xs={4}>
+          <Grid container item xs={12} justifyContent={"center"}>
+            <Grid
+              container
+              gap={1}
+              justifyContent={"center"}
+              alignItems={"center"}
+              item
+              xs={12}
+            >
               <Grid item>
                 <LanguageIcon sx={{ fontSize: 24 }} />
               </Grid>
@@ -162,7 +175,7 @@ const NagiationsLinks = ({ localePageContent, lang, mobileOpen = false }) => {
                 </Typography>
               </Grid>
             </Grid>
-            <Grid container xs={12} alignItems={"center"} color={"#fff"} item>
+            <Grid container item xs={12} alignItems={"center"} color={"#fff"}>
               <Grid
                 item
                 component={Link}
@@ -198,8 +211,8 @@ const NagiationsLinks = ({ localePageContent, lang, mobileOpen = false }) => {
               </Grid>
             </Grid>
           </Grid>
-        </Grid>
-      </Box>
+        </Box>
+      </Grid>
     </Grid>
   );
 };

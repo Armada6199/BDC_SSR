@@ -15,7 +15,8 @@
       {"localeContent":"My Loans","link":"/profile"},
       {"localeContent":" Apply","link":"/loan"}
     ],
-    "logoutLabel":"Logout"
+    "logoutLabel":"Logout",
+    "changeLanguageLabel":"Language"
   },
   "profilePage": {
     "welcomeLabel": "Hello ,",

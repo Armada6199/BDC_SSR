@@ -17,8 +17,6 @@ import { redirect } from "next/navigation";
 import Loader from "../components/Loader.jsx";
 import {
   handleNext,
-  handleSetEMI,
-  hanldeSubmitAttatchments,
 } from "@utils/loanCalulation.js";
 function LoanStepperPage({ params: { lang } }) {
   const { data: session } = useSession({
@@ -200,7 +198,7 @@ function LoanStepperPage({ params: { lang } }) {
               <StepperComponentsHOC
                 register={register}
                 errors={errors}
-                uploadProstickygress={uploadProgress}
+                uploadProgress={uploadProgress}
                 setUploadProgress={setUploadProgress}
                 lang={lang}
               />

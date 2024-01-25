@@ -49,9 +49,7 @@ function StepperComponentsHOC({
         <InteractiveAttatchments
           register={register}
           errors={errors}
-          interactiveAttatchmentsContent={pageContent.interactiveAttatchments}
           lang={lang}
-          loanEligibilityTable={pageContent.loanEligibilityTable}
         />
       );
   }

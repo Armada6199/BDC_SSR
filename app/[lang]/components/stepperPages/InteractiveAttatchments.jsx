@@ -8,13 +8,13 @@ import axios from "axios";
 import GestureIcon from "@mui/icons-material/Gesture";
 import DocumentToolbar from "../DocumentToolbar";
 import { CurrentLoanContext } from "@hooks/CurrentLoanProvider";
-const InteractiveAttatchments = ({
-  interactiveAttatchmentsContent,
-  loanEligibilityTable,
-}) => {
+const InteractiveAttatchments = ({}) => {
   const isMobile = useMediaQuery("(max-width:600px)");
-  const { currentLoan, setCurrentLoan, loanDetailsLocale } =
-    useContext(CurrentLoanContext);
+  const {
+    currentLoan,
+    loanDetailsLocale,
+    localePageContent: { loanEligibilityTable, interactiveAttatchments },
+  } = useContext(CurrentLoanContext);
   const [pdfString, setPdfString] = useState("f");
   const [signatureState, setSignatureState] = useState("");
   const [downloading, setDownloading] = useState(false);
@@ -31,31 +31,9 @@ const InteractiveAttatchments = ({
       };
     });
   };
-  // const save=()=>setSignatureState(sigPad.getTrimmedCanvas().toBase64())
-  // useEffect(() => {
-  //   const postData = async () => {
-  //     const documentPost = await axios.post(
-  //       `${process.env.REACT_APP_API_URL}/loan`,
-  //       currentLoan
-  //     );
-  //     setPdfString(documentPost.data);
-  //   };
-  //   postData();
-  // }, []);
-  async function handleAddSignature(sigPad) {
-    // setPdfString("");
-    try {
-      // const response = await axios.post(
-      //   `${process.env.REACT_APP_API_URL}/signature`,
-      //   {
-      //     ...currentLoan,
-      //     signatureBase64: sigPad.getTrimmedCanvas().toDataURL(),
-      //   }
-      // );
-      // if (response.status === 200) {
-      //   // (response.data)
 
-      // }\
+  async function handleAddSignature(sigPad) {
+    try {
       setSignatureState(sigPad.getTrimmedCanvas().toDataURL());
       setOpenModal(false);
     } catch (error) {
@@ -63,7 +41,6 @@ const InteractiveAttatchments = ({
     }
   }
   async function handleDownloadDocument() {
-    // setPdfString("");
     setDownloading(true);
     try {
       const downloadResponse = await axios.post(
@@ -125,7 +102,7 @@ const InteractiveAttatchments = ({
           handleClose={handleClose}
           openModal={openModal}
           downloading={downloading}
-          toolbarContent={interactiveAttatchmentsContent.documentToolbar}
+          toolbarContent={interactiveAttatchments.documentToolbar}
         />
 
         <Grid
@@ -137,8 +114,6 @@ const InteractiveAttatchments = ({
           spacing={4}
           sx={{ height: "100%", zoom: zoomState / 100 }}
           xs={12}
-
-          // sx={{transform:`scaleX(${zoomState/100})`}}
         >
           <Grid item xs={12}>
             <Typography textAlign={"center"} fontWeight={"700"} variant="h3">
@@ -157,14 +132,14 @@ const InteractiveAttatchments = ({
               }}
               textAlign={"center"}
             >
-              {interactiveAttatchmentsContent.partiesTitle}
+              {interactiveAttatchments.partiesTitle}
             </Typography>
           </Grid>
           {/* Lender Details */}
           <Grid container justifyContent={"space-between"} item xs={12}>
             <Grid item xs={6}>
               <Typography fontWeight={"700"} variant="subtitle1">
-                {interactiveAttatchmentsContent.lenderLabel}
+                {interactiveAttatchments.lenderLabel}
               </Typography>
             </Grid>
             <Grid container item xs={6}>
@@ -174,7 +149,7 @@ const InteractiveAttatchments = ({
                   fontWeight={500}
                   textAlign={"end"}
                 >
-                  {interactiveAttatchmentsContent.lenderName}
+                  {interactiveAttatchments.lenderName}
                 </Typography>
               </Grid>
               <Grid item xs={6}>
@@ -183,7 +158,7 @@ const InteractiveAttatchments = ({
                   textAlign={"end"}
                   fontWeight={500}
                 >
-                  {interactiveAttatchmentsContent.lenderLocation}
+                  {interactiveAttatchments.lenderLocation}
                 </Typography>
               </Grid>
             </Grid>
@@ -192,7 +167,7 @@ const InteractiveAttatchments = ({
           <Grid container justifyContent={"space-between"} item xs={12}>
             <Grid item xs={6}>
               <Typography fontWeight={"700"} variant="subtitle1">
-                {interactiveAttatchmentsContent.borrowerLabel}
+                {interactiveAttatchments.borrowerLabel}
               </Typography>
             </Grid>
             <Grid container item xs={6}>
@@ -227,12 +202,12 @@ const InteractiveAttatchments = ({
                 }}
                 textAlign={"center"}
               >
-                {interactiveAttatchmentsContent.agreementTitle}
+                {interactiveAttatchments.agreementTitle}
               </Typography>
             </Grid>
             <Grid item xs={12}>
               <Typography variant="subtitle1" fontWeight={"500"}>
-                {interactiveAttatchmentsContent.loanAgreementParagraph}
+                {interactiveAttatchments.loanAgreementParagraph}
               </Typography>
             </Grid>
           </Grid>
@@ -248,7 +223,7 @@ const InteractiveAttatchments = ({
                   }}
                   textAlign={"center"}
                 >
-                  {interactiveAttatchmentsContent.layersDetailsTitle}
+                  {interactiveAttatchments.layersDetailsTitle}
                 </Typography>
               </Grid>
             </Grid>
@@ -271,7 +246,7 @@ const InteractiveAttatchments = ({
                 }}
                 textAlign={"center"}
               >
-                {interactiveAttatchmentsContent.signaturesTitle}
+                {interactiveAttatchments.signaturesTitle}
               </Typography>
             </Grid>
             <Grid item xs={6}>
@@ -282,7 +257,7 @@ const InteractiveAttatchments = ({
                   fontWeight={"600"}
                   textAlign={"center"}
                 >
-                  {interactiveAttatchmentsContent.borrowerSignatureLabel}
+                  {interactiveAttatchments.borrowerSignatureLabel}
                 </Typography>
                 {signatureState.length > 0 ? (
                   <Box
@@ -309,7 +284,7 @@ const InteractiveAttatchments = ({
                       fullWidth
                       variant="text"
                     >
-                      {interactiveAttatchmentsContent.addSignatureButton}
+                      {interactiveAttatchments.addSignatureButton}
                     </Button>
                   </Box>
                 )}
@@ -323,7 +298,7 @@ const InteractiveAttatchments = ({
                   variant="subtitle1"
                   fontWeight={"600"}
                 >
-                  {interactiveAttatchmentsContent.lenderSignatureLabel}
+                  {interactiveAttatchments.lenderSignatureLabel}
                 </Typography>
                 {signatureState.length > 0 ? (
                   <Box
@@ -350,7 +325,7 @@ const InteractiveAttatchments = ({
                       variant="text"
                       onClick={handleOpen}
                     >
-                      {interactiveAttatchmentsContent.addSignatureButton}
+                      {interactiveAttatchments.addSignatureButton}
                     </Button>
                   </Box>
                 )}

@@ -23,8 +23,17 @@ const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
 function myInformation({ myInformation }) {
   const { localePageContent } = useContext(CurrentLoanContext);
   return (
-    <Grid container item p={4} sx={glassmorphismStyle} gap={4}>
-      <Grid container gap={1} item xs={12}>
+    <Grid
+      container
+      item
+      p={4}
+      justifyContent={{ xs: "center", sm: "flex-start" }}
+      textAlign={{ xs: "center", sm: "start" }}
+      xs={12}
+      sx={{ ...glassmorphismStyle }}
+      gap={4}
+    >
+      <Grid container justifyContent={"inherit"} gap={1} item xs={12}>
         <Grid item>
           <Typography variant="h4" fontWeight={600}>
             {myInformation.myLoansLabel}
@@ -36,7 +45,14 @@ function myInformation({ myInformation }) {
           />
         </Grid>
       </Grid>
-      <Grid container item spacing={12} xs={12}>
+      <Grid
+        container
+        item
+        justifyContent={"center"}
+        textAlign={"inherit"}
+        spacing={{ xs: 4, sm: 12 }}
+        xs={12}
+      >
         <Grid item xs={12} md={3}>
           <Image
             src={profileImg}
@@ -45,10 +61,10 @@ function myInformation({ myInformation }) {
             style={{ borderRadius: "50%" }}
           />
         </Grid>
-        <Grid container item xs={3} md={9}>
+        <Grid container item textAlign={"inherit"} xs={12} md={9}>
           <Grid item xs={12}>
             <Typography variant="body1" fontWeight={700}>
-              نور احمد 
+              نور احمد
             </Typography>
           </Grid>
           <Grid item xs={12}>
@@ -67,7 +83,13 @@ function myInformation({ myInformation }) {
           </Grid>
         </Grid>
       </Grid>
-      <Grid container spacing={2} item xs={12}>
+      <Grid
+        container
+        textAlign={{ xs: "center", sm: "start" }}
+        spacing={2}
+        item
+        xs={12}
+      >
         <Grid item xs={12} md={6}>
           <Typography variant="h6" fontWeight={600}>
             2400 {localePageContent.currencyLabel}

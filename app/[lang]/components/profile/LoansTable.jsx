@@ -207,10 +207,12 @@ function LoansTable({ informationTabel }) {
   ];
 
   return (
-    <Grid container sx={glassmorphismStyle}  item xs={12} p={4} md={7}>
+    <Grid container sx={glassmorphismStyle}  item xs={12} gap={4} p={4} >
+      <Grid>
       <Typography variant="h4" fontWeight={"600"}>
           {informationTabel.myLoansLabel}
         </Typography>
+      </Grid>
         <Grid container item xs={12} height={'85%'} >
         <MUIDataTable data={data} columns={columns} options={options} />
         </Grid>

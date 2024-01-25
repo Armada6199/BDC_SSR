@@ -63,7 +63,9 @@ function Documents({ register, uploadProgress, setUploadProgress }) {
               type="file"
               {...register("loan_attatchments")}
               multiple
-              onChange={handleAddAttatchments}
+              onChange={(e) =>
+                handleAddAttatchments(e, currentLoan, setCurrentLoan)
+              }
             />
             <label htmlFor="raised-button-file">
               <Box display="flex" flexDirection="column" alignItems="center">

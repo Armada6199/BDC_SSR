@@ -42,7 +42,7 @@ function SubCalculator({ lang }) {
     handleSetDefaultLoanValues(currentLoan, setCurrentLoan);
   }, []);
   return (
-    <Grid container sx={glassmorphismStyle} item xs={12} gap={4} p={4} md={5}>
+    <Grid container sx={glassmorphismStyle} item xs={12} gap={4} p={4} >
       <Grid item xs={12}>
         <Typography variant="h4" fontWeight={"600"}>
           {localePageContent.profilePage.subCalculator.title}

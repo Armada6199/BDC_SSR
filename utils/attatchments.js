@@ -1,4 +1,4 @@
-export async function handleAddAttatchments(e) {
+export async function handleAddAttatchments(e,currentLoan,setCurrentLoan) {
     const file = e.target.files[0];
     // setUploadProgress((prev) => ({ ...prev,pc:0, finished: false }));
     try {
@@ -9,7 +9,6 @@ export async function handleAddAttatchments(e) {
         ...prev,
         loan_attatchments: newAttatchments,
       }));
-      setValue("loan_attatchments", [...currentLoan.loan_attatchments, file]);
     } catch (error) {
       error;
     }

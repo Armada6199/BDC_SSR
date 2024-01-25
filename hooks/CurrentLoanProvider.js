@@ -8,7 +8,7 @@ const CurrentLoanProvider = ({ children, lang }) => {
   const [loanDetailsLocale, setLoanDetailsLocale] = useState("");
   const [userType, setUserType] = useState("staff");
   const [localePageContent, setLocalePageContent] = useState("");
-  const [activeStep, setActiveStep] = useState(0);
+  const [activeStep, setActiveStep] = useState(3);
   const [loans, setLoans] = useState(loanDetailsData);
   function changeLoanDetailsLocale(loans) {
     setLoanDetailsLocale(

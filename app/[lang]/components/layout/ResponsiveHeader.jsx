@@ -6,10 +6,9 @@ import Drawer from "@mui/material/Drawer";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import Toolbar from "@mui/material/Toolbar";
-import { Grid,  useMediaQuery } from "@mui/material";
+import { Grid, useMediaQuery } from "@mui/material";
 import { CurrentLoanContext } from "@hooks/CurrentLoanProvider";
 import { useContext, useState } from "react";
-import Loader from "../Loader";
 import NagiationsLinks from "./NagiationsLinks";
 import Image from "next/image";
 import bankWhite from "@public/assets/Banque_du_caire_Logowhite.svg";
@@ -68,8 +67,8 @@ function ResponsiveHeader(props) {
           >
             <MenuIcon />
           </IconButton>
-          <Grid display={{xs:'grid',sm:'none'}} item xs={2}>
-          <Image src={bankWhite} alt="bankLogo" width="152" height="60" />
+          <Grid display={{ xs: "grid", sm: "none" }} item xs={2}>
+            <Image src={bankWhite} alt="bankLogo" width="152" height="60" />
           </Grid>
           <Grid container item alignItems={"center"} xs={10} md={12}>
             <Grid container item xs={12} md={12}>
@@ -106,10 +105,13 @@ function ResponsiveHeader(props) {
       <Box component="main" sx={{ p: 3 }}>
         <Toolbar />
       </Box>
-    </Box>  
+    </Box>
   ) : (
-    <Grid container   sx={{bgcolor:'background.lightBlack'}} height={'60px'}>
-    </Grid>
+    <Grid
+      container
+      sx={{ bgcolor: "background.lightBlack" }}
+      height={"60px"}
+    ></Grid>
   );
 }
 

@@ -43,20 +43,30 @@ function Profile({ params: lang }) {
           container
           item
           xs={12}
+          gap={4}
           alignItems={"flex-start"}
-          wrap="nowrap"
-          md={12}
-        >
-          <Grid container pr={4} item xs={12} md={4} xl={3}>
+          sx={{flexWrap:{xs:'wrap',sm:'nowrap'}}}
+          >
+          <Grid container  item xs={12} md={4} xl={3}>
             <MyInformation myInformation={myInformation} />
           </Grid>
           <Grid container item xs={12} gap={4} md={8} xl={9}>
             <Grid container item xs={12}>
               <LoanInfoCards informationCards={informationCards} />
             </Grid>
-            <Grid container wrap="nowrap" gap={4} item xs={12}>
-              <LoansTable informationTabel={informationTabel} />
-              <SubCalculator lang={lang} />
+            <Grid
+              container
+              sx={{flexWrap:{xs:'wrap',sm:'nowrap'}}}
+              gap={4}
+              item
+              xs={12}
+            >
+              <Grid item xs={12}  md={7}>
+                <LoansTable informationTabel={informationTabel} />
+              </Grid>
+              <Grid item md={5}> 
+                <SubCalculator lang={lang} />
+              </Grid>
             </Grid>
           </Grid>
         </Grid>

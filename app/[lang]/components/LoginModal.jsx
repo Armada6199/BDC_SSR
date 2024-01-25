@@ -46,7 +46,7 @@ function LoginModal({
       sx={{ ...glassmorphismStyle, borderRadius: "30px" }}
       height={{ xs: "90vh", md: "95vh", xl: "80vh" }}
     >
-      {showStaffMessage&&<ClearIcon
+      <ClearIcon
         onClick={handleCloseStaffLogin}
         sx={{
           position: "absolute",
@@ -55,7 +55,7 @@ function LoginModal({
           fontSize: 32,
           cursor: "pointer",
         }}
-      />}
+      />
       <Grid container justifyContent={"center"} item md={12}>
         <Image src={bankLogoDark} alt="loginImg" width={"200"} height={"40"} />
       </Grid>
