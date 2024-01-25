@@ -6,23 +6,31 @@ import Drawer from "@mui/material/Drawer";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import Toolbar from "@mui/material/Toolbar";
-import { Grid, useMediaQuery } from "@mui/material";
+import { Grid, Typography, useMediaQuery } from "@mui/material";
 import { CurrentLoanContext } from "@hooks/CurrentLoanProvider";
 import { useContext, useState } from "react";
 import NagiationsLinks from "./NagiationsLinks";
 import Image from "next/image";
 import bankWhite from "@public/assets/Banque_du_caire_Logowhite.svg";
+import { useSession } from "next-auth/react";
+import Link from "next/link";
+import { redirectedPathName } from "@utils/loanCalulation";
+import { usePathname } from "next/navigation";
 
 const drawerWidth = 240;
 
 function ResponsiveHeader(props) {
   const { window } = props;
+  const { data: session } = useSession();
   const [mobileOpen, setMobileOpen] = useState(false);
   const { localePageContent } = useContext(CurrentLoanContext);
   const isMobile = useMediaQuery("(max-width:600px)");
+  const pathName = usePathname();
   const handleDrawerToggle = () => {
+    s;
     setMobileOpen((prevState) => !prevState);
   };
+  const isGuest = session?.userData?.employeeData?.isGuest ? true : false;
   const drawer = (
     <Grid
       container
@@ -71,13 +79,45 @@ function ResponsiveHeader(props) {
             <Image src={bankWhite} alt="bankLogo" width="152" height="60" />
           </Grid>
           <Grid container item alignItems={"center"} xs={10} md={12}>
-            <Grid container item xs={12} md={12}>
+            <Grid container item xs={12} md={10}>
               {!isMobile && (
                 <NagiationsLinks
                   localePageContent={localePageContent}
                   lang={props.lang}
                 />
               )}
+            </Grid>
+            <Grid container item md={2} justifyContent={"flex-end"} gap={4}>
+              <Grid
+                item
+                component={Link}
+                color={"inherit"}
+                style={{ textDecoration: "none" }}
+                href={
+                  `/${redirectedPathName(props.lang == "en" ? "ar" : "en")}` +
+                  pathName.split("/").splice(2).join("/")
+                }
+                sx={{ cursor: "pointer" }}
+              >
+                <Typography variant="h6">
+                  {localePageContent.switchLanguageLabel}
+                </Typography>
+              </Grid>
+              <Grid
+                item
+                sx={{ color: "#fff", cursor: "pointer" }}
+                onClick={() => {
+                  signOut({ callbackUrl: `/${lang}` });
+                }}
+                display={{
+                  xs: "none",
+                  md: !isGuest && session ? "grid" : "none",
+                }}
+              >
+                <Typography variant="h6">
+                  {localePageContent.heading.logoutLabel}
+                </Typography>
+              </Grid>
             </Grid>
           </Grid>
         </Toolbar>

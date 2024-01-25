@@ -9,8 +9,6 @@ import bankWhite from "@public/assets/Banque_du_caire_Logowhite.svg";
 import Image from "next/image";
 import { Home } from "@mui/icons-material";
 import { signOut, useSession } from "next-auth/react";
-import LanguageIcon from "@mui/icons-material/Language";
-import { redirectedPathName } from "@utils/loanCalulation";
 const NagiationsLinks = ({ localePageContent, lang, mobileOpen = false }) => {
   const pathName = usePathname();
   const { push } = useRouter();
@@ -33,16 +31,14 @@ const NagiationsLinks = ({ localePageContent, lang, mobileOpen = false }) => {
       <Grid item xs={12} md={2} xl={2}>
         <Image src={bankWhite} alt="bankLogo" width="152" height="60" />
       </Grid>
-      <Grid container item xs={12} gap={{ xs: 4, sm: 0 }} md={6} xl={3}>
+      <Grid container item xs={12} gap={{ xs: 4, sm: 4 }} md={6} xl={4}>
         {localePageContent.heading.navigation.map(
           (nav, index) =>
             (nav.link !== "/profile" || (!isGuest && session)) && (
               <Grid
-                container
                 borderBottom={{ xs: "1px solid darkgray", sm: "none" }}
+                sx={{ width: { xs: "100%", sm: "fit-content" } }}
                 item
-                xs={12}
-                md={4}
                 key={index}
               >
                 <Link
@@ -69,7 +65,7 @@ const NagiationsLinks = ({ localePageContent, lang, mobileOpen = false }) => {
                     <Grid item xs={2} display={{ xs: "grid", sm: "none" }}>
                       {navIcons[index]}
                     </Grid>
-                    <Grid item >
+                    <Grid item>
                       <Typography textAlign={"start"} variant="h6">
                         {nav.localeContent}
                       </Typography>
@@ -94,7 +90,7 @@ const NagiationsLinks = ({ localePageContent, lang, mobileOpen = false }) => {
         display={{ xs: !isGuest ? "inherit" : "none", md: "none" }}
         borderBottom={{ xs: "1px solid darkgray", sm: "none" }}
       >
-        <Grid item display={{ xs: "block", sm: "none" }}>
+        <Grid item>
           <LogoutIcon sx={{ fontSize: 24 }} />
         </Grid>
         <Grid item>
@@ -103,115 +99,6 @@ const NagiationsLinks = ({ localePageContent, lang, mobileOpen = false }) => {
             {localePageContent.heading.logoutLabel}
           </Typography>
         </Grid>
-      </Grid>
-      <Grid
-        container
-        item
-        md={3}
-        xl={7}
-        justifyContent={"flex-end"}
-        textAlign={"end"}
-        display={{ xs: "none", md: "inherit" }}
-      >
-        <Grid
-          item
-          component={Link}
-          href={redirectedPathName(lang == "ar" ? "en" : "ar")}
-          md={2}
-          sx={{ cursor: "pointer", color: "#fff", textDecoration: "none" }}
-        >
-          <Typography variant="h6">
-            {localePageContent.switchLanguageLabel}
-          </Typography>
-        </Grid>
-        <Grid
-          item
-          sx={{ color: "#fff", cursor: "pointer" }}
-          onClick={() => {
-            signOut({ callbackUrl: `/${lang}` });
-          }}
-          display={{
-            xs: "none",
-            md: !isGuest && session ? "grid" : "none",
-          }}
-          md={2}
-        >
-          <Typography variant="h6">
-            {localePageContent.heading.logoutLabel}
-          </Typography>
-        </Grid>
-      </Grid>
-      <Grid
-        container
-        item
-        color={"#fff"}
-        xs={12}
-        md={2}
-        display={{ xs: "grid", sm: "none" }}
-      >
-        <Box
-          maxWidth={240}
-          position={"fixed"}
-          left={0}
-          sx={{ direction: lang == "en" ? "ltr" : "rtl" }}
-          bottom={0}
-        >
-          <Grid container item xs={12} justifyContent={"center"}>
-            <Grid
-              container
-              gap={1}
-              justifyContent={"center"}
-              alignItems={"center"}
-              item
-              xs={12}
-            >
-              <Grid item>
-                <LanguageIcon sx={{ fontSize: 24 }} />
-              </Grid>
-              <Grid item>
-                <Typography variant="h6">
-                  {" "}
-                  {localePageContent.heading.changeLanguageLabel}
-                </Typography>
-              </Grid>
-            </Grid>
-            <Grid container item xs={12} alignItems={"center"} color={"#fff"}>
-              <Grid
-                item
-                component={Link}
-                href={redirectedPathName(lang == "ar" ? "en" : "ar")}
-                xs={6}
-              >
-                {" "}
-                <Button
-                  fullWidth
-                  sx={{
-                    fontSize: 16,
-                    color: lang === "en" ? "secondary.dark" : "#fff",
-                  }}
-                >
-                  EN
-                </Button>
-              </Grid>
-              <Grid
-                component={Link}
-                href={redirectedPathName(lang == "ar" ? "en" : "ar")}
-                item
-                xs={6}
-              >
-                <Button
-                  fullWidth
-                  sx={{
-                    fontSize: 16,
-                    color: lang === "ar" ? "secondary.dark" : "#fff",
-                  }}
-                >
-                  AR
-                </Button>
-              </Grid>
-            </Grid>
-          </Grid>
-        </Box>
       </Grid>
     </Grid>
   );
