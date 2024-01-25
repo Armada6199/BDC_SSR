@@ -23,37 +23,21 @@ const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
 function myInformation({ myInformation }) {
   const { localePageContent } = useContext(CurrentLoanContext);
   return (
-    <Grid
-      container
-      item
-      p={4}
-      justifyContent={{ xs: "center", sm: "flex-start" }}
-      textAlign={{ xs: "center", sm: "start" }}
-      xs={12}
-      sx={{ ...glassmorphismStyle }}
-      gap={4}
-    >
-      <Grid container justifyContent={"inherit"} gap={1} item xs={12}>
+    <Grid container item p={4} xs={12} sx={{ ...glassmorphismStyle }} gap={4}>
+      <Grid container gap={1}  item xs={12}>
         <Grid item>
           <Typography variant="h4" fontWeight={600}>
             {myInformation.myLoansLabel}
           </Typography>
         </Grid>
-        <Grid item>
+        <Grid  item  >
           <InfoIcon
             sx={{ width: "31px", height: "41px", color: "secondary.dark" }}
           />
         </Grid>
       </Grid>
-      <Grid
-        container
-        item
-        justifyContent={"center"}
-        textAlign={"inherit"}
-        spacing={{ xs: 4, sm: 12 }}
-        xs={12}
-      >
-        <Grid item xs={12} md={3}>
+      <Grid container item spacing={{ xs: 4, sm: 12 }} xs={12}>
+        <Grid item xs={4} md={3}>
           <Image
             src={profileImg}
             width={82}
@@ -61,7 +45,7 @@ function myInformation({ myInformation }) {
             style={{ borderRadius: "50%" }}
           />
         </Grid>
-        <Grid container item textAlign={"inherit"} xs={12} md={9}>
+        <Grid container item xs={6} md={9}>
           <Grid item xs={12}>
             <Typography variant="body1" fontWeight={700}>
               نور احمد
@@ -83,14 +67,8 @@ function myInformation({ myInformation }) {
           </Grid>
         </Grid>
       </Grid>
-      <Grid
-        container
-        textAlign={{ xs: "center", sm: "start" }}
-        spacing={2}
-        item
-        xs={12}
-      >
-        <Grid item xs={12} md={6}>
+      <Grid container spacing={2} item xs={12}>
+        <Grid item xs={6}>
           <Typography variant="h6" fontWeight={600}>
             2400 {localePageContent.currencyLabel}
           </Typography>
@@ -98,7 +76,7 @@ function myInformation({ myInformation }) {
             {myInformation.salaryAfterDeductionsLabel}
           </Typography>
         </Grid>
-        <Grid item xs={12} md={6}>
+        <Grid item xs={6}>
           <Typography variant="h6" fontWeight={600}>
             4
           </Typography>
@@ -106,7 +84,7 @@ function myInformation({ myInformation }) {
             {myInformation.activeLoansLabel}
           </Typography>
         </Grid>
-        <Grid item xs={12} md={6}>
+        <Grid item xs={6}>
           <Typography variant="h6" fontWeight={600}>
             2
           </Typography>
@@ -114,7 +92,7 @@ function myInformation({ myInformation }) {
             {myInformation.previousLoansLabel}
           </Typography>
         </Grid>
-        <Grid item xs={12} md={6}>
+        <Grid item xs={6}>
           <Typography variant="h6" fontWeight={600}>
             232
           </Typography>

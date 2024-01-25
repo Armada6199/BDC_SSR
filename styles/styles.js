@@ -51,3 +51,20 @@ export const glassmorphismStyle = {
       borderColor:'#215190'
       },
   }
+  export const floatingIconContStyle={
+    m: "0 auto",
+    borderRadius: "50%",
+    width: 90,
+    height: 90,
+    transform: 'translate(-50%, -10%)',
+    left:"50%",
+    boxShadow: "sm",
+    bgcolor: "#fff",
+    border: "1px solid",
+    borderColor: "secondary.dark",
+    position: "absolute",
+    zIndex: "1",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+  }

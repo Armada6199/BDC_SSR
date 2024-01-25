@@ -27,7 +27,6 @@ function ResponsiveHeader(props) {
   const isMobile = useMediaQuery("(max-width:600px)");
   const pathName = usePathname();
   const handleDrawerToggle = () => {
-    s;
     setMobileOpen((prevState) => !prevState);
   };
   const isGuest = session?.userData?.employeeData?.isGuest ? true : false;

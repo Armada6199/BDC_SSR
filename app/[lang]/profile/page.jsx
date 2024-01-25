@@ -1,6 +1,6 @@
 "use client";
 import React, { useContext, useEffect } from "react";
-import { Grid } from "@mui/material";
+import { Grid, useMediaQuery } from "@mui/material";
 import { useSession } from "next-auth/react";
 import { CurrentLoanContext } from "@hooks/CurrentLoanProvider";
 import MyInformation from "../components/profile/MyInformation";
@@ -9,6 +9,8 @@ import LoansTable from "../components/profile/LoansTable";
 import SubCalculator from "../components/profile/SubCalculator";
 import { useRouter } from "next/navigation";
 import Loader from "../components/Loader";
+import LoansCard from "../components/profile/LoansCard";
+import { loanIcons } from "@public/icons";
 
 function Profile({ params: lang }) {
   const { push } = useRouter();
@@ -17,7 +19,8 @@ function Profile({ params: lang }) {
   });
   const isGuest =
     session?.userData?.employeeData?.isGuest || !session ? true : false;
-  if (status === "loading")
+    const isMobile = useMediaQuery("(max-width:600px)");
+    if (status === "loading")
     return (
       <Grid container xs={12} sx={{ height: "calc(100vh - 120px)" }}>
         <Loader />
@@ -45,26 +48,30 @@ function Profile({ params: lang }) {
           xs={12}
           gap={4}
           alignItems={"flex-start"}
-          sx={{flexWrap:{xs:'wrap',sm:'nowrap'}}}
-          >
-          <Grid container  item xs={12} md={4} xl={3}>
+          sx={{ flexWrap: { xs: "wrap", sm: "nowrap" } }}
+        >
+          <Grid container item xs={12} md={4} xl={3}>
             <MyInformation myInformation={myInformation} />
           </Grid>
-          <Grid container item xs={12} gap={4} md={8} xl={9}>
+          <Grid container item xs={12} gap={{xs:8,sm:4}} md={8} xl={9}>
             <Grid container item xs={12}>
               <LoanInfoCards informationCards={informationCards} />
             </Grid>
             <Grid
               container
-              sx={{flexWrap:{xs:'wrap',sm:'nowrap'}}}
+              sx={{ flexWrap: { xs: "wrap", sm: "nowrap" } }}
               gap={4}
               item
               xs={12}
             >
-              <Grid item xs={12}  md={7}>
-                <LoansTable informationTabel={informationTabel} />
+              <Grid item xs={12} md={7}>
+                {isMobile ? (
+                  <LoansCard />
+                ) : (
+                  <LoansTable informationTabel={informationTabel} />
+                )}
               </Grid>
-              <Grid item md={5}> 
+              <Grid item md={5}>
                 <SubCalculator lang={lang} />
               </Grid>
             </Grid>

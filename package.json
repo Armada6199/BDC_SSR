@@ -14,6 +14,7 @@
     "@emotion/styled": "^11.11.0",
     "@formatjs/intl-localematcher": "^0.5.2",
     "@mui/icons-material": "^5.14.19",
+    "@mui/joy": "^5.0.0-beta.24",
     "@mui/material": "^5.15.4",
     "@mui/x-date-pickers": "^6.18.6",
     "@next/font": "^14.0.4",

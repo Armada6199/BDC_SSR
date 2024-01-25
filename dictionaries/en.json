@@ -49,9 +49,9 @@
       "monthlyPaymentLabel": "Monthly Payment",
       "loanStatusLabel": "Loan Status",
       "statusButtons":{
-        "rejected":"Rejected",
-        "processing":" Processing",
-        "approved":"Approved"
+        "Rejected":"Rejected",
+        "Processing":" Processing",
+        "Approved":"Approved"
       },
       "footer":{
         "loanPerPageLabel":"Loan Per Page"
