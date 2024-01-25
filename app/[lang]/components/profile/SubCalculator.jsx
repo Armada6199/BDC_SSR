@@ -16,14 +16,14 @@ import { useDebounce } from "@hooks/debounc";
 import { useSession } from "next-auth/react";
 
 function SubCalculator({ lang }) {
-  const {data:session}=useSession();
+  const { data: session } = useSession();
   const {
     currentLoan,
     loanDetailsLocale,
     setCurrentLoan,
     localePageContent,
     setActiveStep,
-    activeStep
+    activeStep,
   } = useContext(CurrentLoanContext);
   const {
     register,
@@ -42,7 +42,7 @@ function SubCalculator({ lang }) {
     handleSetDefaultLoanValues(currentLoan, setCurrentLoan);
   }, []);
   return (
-    <Grid container sx={glassmorphismStyle} item xs={12} gap={4} p={4} >
+    <Grid container sx={glassmorphismStyle} item xs={12} gap={4} p={4}>
       <Grid item xs={12}>
         <Typography variant="h4" fontWeight={"600"}>
           {localePageContent.profilePage.subCalculator.title}
@@ -98,13 +98,13 @@ function SubCalculator({ lang }) {
               fullWidth
               variant="outlined"
               sx={{ fontWeight: 600, fontSize: 16, color: "secondary.dark" }}
-              onClick={()=>handleSetEMI(currentLoan,setCurrentLoan)}
+              onClick={() => handleSetEMI(currentLoan, setCurrentLoan)}
             >
               {localePageContent.profilePage.subCalculator.calculateButtonLabel}
             </Button>
           </Grid>
           <Grid item xs={6}>
-            <Link href={`/${lang.lang}/loan`}   onClick={() => setActiveStep(1)}>
+            <Link href={`/${lang.lang}/loan`} onClick={() => setActiveStep(1)}>
               <Button
                 fullWidth
                 variant="contained"

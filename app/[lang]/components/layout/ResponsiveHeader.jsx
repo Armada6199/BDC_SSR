@@ -36,7 +36,6 @@ function ResponsiveHeader(props) {
       item
       xs={12}
       onClick={handleDrawerToggle}
-      m={0}
       sx={{ textAlign: "center", backgroundColor: "background.lightBlack" }}
     >
       {localePageContent && (
@@ -55,7 +54,7 @@ function ResponsiveHeader(props) {
     window !== undefined ? () => window().document.body : undefined;
 
   return localePageContent.heading ? (
-    <Box display={"flex"} sx={{ boxSizing: "border-box" }} height={"70px"}>
+    <Box display={"flex"} sx={{ boxSizing: "border-box" }} height={"60px"}>
       <AppBar
         component="nav"
         sx={{

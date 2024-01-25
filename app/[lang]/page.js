@@ -5,7 +5,6 @@ import BusinessCenterOutlinedIcon from "@mui/icons-material/BusinessCenterOutlin
 import { glassmorphismStyle } from "@styles/styles.js";
 import Person2OutlinedIcon from "@mui/icons-material/Person2Outlined";
 import "@styles/styles.css";
-// import businessImage from "@public/assets/busnisse3.jpeg";
 import LoginModal from "./components/LoginModal";
 import { CurrentLoanContext } from "@hooks/CurrentLoanProvider";
 import { usePathname, useRouter } from "next/navigation";
@@ -28,8 +27,8 @@ function HomeLogin({ params: { lang } }) {
   const handleCloseStaffLogin = () => setOpenStaff(false);
 
   return localePageContent.loginPage ? (
-    <Grid container sx={{ height: { md: "calc(100vh - 140px)" } }}>
-      <Grid container md={12} item>
+    <Grid container   height={{xs:"calc(100% + 100px)",md:"calc(100vh - 140px)"}} >
+      <Grid container height={'100%'} md={12} item>
         <Grid
           container
           item
@@ -219,7 +218,15 @@ function HomeLogin({ params: { lang } }) {
       </Modal>
     </Grid>
   ) : (
-    <Grid container sx={{ minHeight: "calc(100vh - 140px)",maxHeight:'calc(100vh - 140px)' }} item md={12}>
+    <Grid
+      container
+      sx={{
+        minHeight: "calc(100vh - 140px)",
+        maxHeight: "calc(100vh - 140px)",
+      }}
+      item
+      md={12}
+    >
       <Loader />
     </Grid>
   );
