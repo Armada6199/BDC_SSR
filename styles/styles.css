@@ -20,34 +20,11 @@
   min-width: 100%;
 }
 
-/* 
-  .react-pdf__Page__annotations .annotationLayer{
-    display: none !important;
-    height: 0px;
-    background-color: red;
-  } */
 .loginBackground {
   background-size: cover;
   background-repeat: no-repeat;
   background-image: url("../public/assets/busnisse3.jpeg");
-  
 }
-/* .activeLoanForm-enter{
-    opacity: 0;
-  }
-  .activeLoanForm-enter-active{
-    opacity: 1;
-    transition: all 1s linear;
-  }
-  .activeLoanForm-exit{
-    opacity: 1;
-
-  }
-  .activeLoanForm-exit-active{
-    opacity: 0;
-    transform: translateX(20%);
-    transition: all 1s linear;
-  } */
 .download_loader {
   border: 5px solid #f3f3f3;
   border-top: 5px solid #c4b28f;
@@ -60,14 +37,13 @@
 direction: ltr;
 overflow: auto;
 } */
-.tss-11quiee-MUIDataTable-paper{
+.tss-11quiee-MUIDataTable-paper {
   width: 100%;
 }
 .tss-1opebqo-MUIDataTable-caption {
-    right:-1000px !important;
-    left: auto !important;
+  right: auto !important;
+  left: auto !important;
 }
-
 
 @keyframes spin {
   0% {
