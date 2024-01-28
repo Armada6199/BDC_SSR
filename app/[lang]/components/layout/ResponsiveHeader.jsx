@@ -105,7 +105,7 @@ function ResponsiveHeader(props) {
                 item
                 sx={{ color: "#fff", cursor: "pointer" }}
                 onClick={() => {
-                  signOut({ callbackUrl: `/ar}` });
+                  signOut({ callbackUrl: `/${props.lang}` });
                 }}
                 display={{
                   xs: "none",
