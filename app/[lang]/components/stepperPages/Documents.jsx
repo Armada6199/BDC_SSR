@@ -17,14 +17,10 @@ function Documents({ register, uploadProgress, setUploadProgress }) {
     localePageContent: { documents },
   } = useContext(CurrentLoanContext);
   return (
-    <Grid
-      container
-      sx={{ height: "calc(100% + 300px)" }}
-      alignItems={"flex-start"}
-      spacing={12}
-    >
+    <Grid container alignItems={"flex-start"} spacing={12}>
       <Grid
         container
+        alignItems={'flex-start'}
         justifyContent={{
           textAlign: { xs: "center", md: "start" },
           xs: "center",

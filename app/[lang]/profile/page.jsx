@@ -12,7 +12,7 @@ import LoansCard from "../components/profile/LoansCard";
 
 function Profile({ params: lang }) {
   const { data: session, status } = useSession({
-    required: true,
+    // required: true,
   });
   const isGuest =
     session?.userData?.employeeData?.isGuest || !session ? true : false;

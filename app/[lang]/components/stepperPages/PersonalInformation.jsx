@@ -5,16 +5,19 @@ import { CurrentLoanContext } from "@hooks/CurrentLoanProvider";
 
 function PersonalInformation({ register, errors }) {
   const isMobile = useMediaQuery("(max-width:650px)");
-  const { currentLoan,localePageContent:{personalInformation} } = useContext(CurrentLoanContext);
-  console.log(currentLoan);
+  const {
+    currentLoan,
+    localePageContent: { personalInformation },
+  } = useContext(CurrentLoanContext);
   return (
     <Grid
       container
       justifyContent={{ xs: "center", md: "flex-start" }}
+      alignItems={"flex-start"}
       item
       xs={12}
     >
-      <Grid container item md={12}>
+      <Grid container item md={12} gap={4}>
         <Grid item md={12}>
           <Typography variant="h5" fontWeight={"600"}>
             {personalInformation.sectionTitle}
@@ -39,8 +42,14 @@ function PersonalInformation({ register, errors }) {
               helperText={errors.employeeName?.message}
               {...register("employeeName", {
                 required: personalInformation.errors?.personalInfoInput,
-                value:currentLoan.employeeName
+                value: currentLoan.employeeName,
               })}
+              sx={{
+                "& .MuiInputBase-input.Mui-disabled": {
+                  WebkitTextFillColor: "gray",
+                  fontWeight: 600,
+                },
+              }}
             />
           </Grid>
           <Grid item xs={12} md={6}>
@@ -55,7 +64,7 @@ function PersonalInformation({ register, errors }) {
               helperText={errors.fileNumber?.message}
               {...register("fileNumber", {
                 required: personalInformation.errors?.personalInfoInput,
-                value:currentLoan.fileNumber
+                value: currentLoan.fileNumber,
               })}
             />
           </Grid>
@@ -78,8 +87,14 @@ function PersonalInformation({ register, errors }) {
               helperText={errors.jobTitle?.message}
               {...register("jobTitle", {
                 required: personalInformation.errors?.personalInfoInput,
-                value:currentLoan.jobTitle
+                value: currentLoan.jobTitle,
               })}
+              sx={{
+                "& .MuiInputBase-input.Mui-disabled": {
+                  WebkitTextFillColor: "gray",
+                  fontWeight: 600,
+                },
+              }}
             />
           </Grid>
           <Grid item xs={12} md={6}>
@@ -112,9 +127,14 @@ function PersonalInformation({ register, errors }) {
               helperText={errors.employeeLevel?.message}
               {...register("employeeLevel", {
                 required: personalInformation.errors.personalInfoInput,
-                value:currentLoan.employeeLevel
-
+                value: currentLoan.employeeLevel,
               })}
+              sx={{
+                "& .MuiInputBase-input.Mui-disabled": {
+                  WebkitTextFillColor: "gray",
+                  fontWeight: 600,
+                },
+              }}
             />
           </Grid>
           <Grid item xs={12} md={6}>
@@ -128,9 +148,14 @@ function PersonalInformation({ register, errors }) {
               helperText={errors.jobLevel?.message}
               {...register("jobLevel", {
                 required: personalInformation.errors.personalInfoInput,
-                value:currentLoan.jobLevel
-
+                value: currentLoan.jobLevel,
               })}
+              sx={{
+                "& .MuiInputBase-input.Mui-disabled": {
+                  WebkitTextFillColor: "gray",
+                  fontWeight: 600,
+                },
+              }}
             />
           </Grid>
         </Grid>
@@ -147,9 +172,14 @@ function PersonalInformation({ register, errors }) {
               helperText={errors.employeeNumber?.message}
               {...register("employeeNumber", {
                 required: personalInformation.errors.personalInfoInput,
-                value:currentLoan.employeeNumber
-
+                value: currentLoan.employeeNumber,
               })}
+              sx={{
+                "& .MuiInputBase-input.Mui-disabled": {
+                  WebkitTextFillColor: "gray",
+                  fontWeight: 600,
+                },
+              }}
             />
           </Grid>
           <Grid item xs={12} md={6}>
@@ -166,8 +196,14 @@ function PersonalInformation({ register, errors }) {
                 helperText={errors.workPlace?.message}
                 {...register("workPlace", {
                   required: personalInformation.errors.personalInfoInput,
-                  value:currentLoan.workPlace
+                  value: currentLoan.workPlace,
                 })}
+                sx={{
+                  "& .MuiInputBase-input.Mui-disabled": {
+                    WebkitTextFillColor: "gray",
+                    fontWeight: 600,
+                  },
+                }}
               />
             </Grid>
           </Grid>

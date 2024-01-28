@@ -10,13 +10,13 @@
   "stepperTitle": "Apply Loan",
   "currencyLabel": "JD",
   "heading": {
-    "navigation":[
-      {"localeContent":" Home","link":""},
-      {"localeContent":"My Loans","link":"/profile"},
-      {"localeContent":" Apply","link":"/loan"}
+    "navigation": [
+      { "localeContent": " Home", "link": "" },
+      { "localeContent": "My Loans", "link": "/profile" },
+      { "localeContent": " Apply", "link": "/loan" }
     ],
-    "logoutLabel":"Logout",
-    "changeLanguageLabel":"Language"
+    "logoutLabel": "Logout",
+    "changeLanguageLabel": "Language"
   },
   "profilePage": {
     "welcomeLabel": "Hello ,",
@@ -34,12 +34,11 @@
       "activeLoansAmountLabel": "Active Loans Amount",
       "totalLoansAmountLabel": "Total Loans Amount"
     },
-    "subCalculator":{
-      "title":"Loan Calculator",
-      "loanRedirectButton":"أستكمال القرض",
-      "calculateButtonLabel":"Calculate"
-
-      },
+    "subCalculator": {
+      "title": "Loan Calculator",
+      "loanRedirectButton": "أستكمال القرض",
+      "calculateButtonLabel": "Calculate"
+    },
     "informationTabel": {
       "myLoansLabel": "MY LOANS",
       "loanTypeLabel": "Loan Type",
@@ -48,13 +47,13 @@
       "remainingMonthsLabel": "Remaining Months",
       "monthlyPaymentLabel": "Monthly Payment",
       "loanStatusLabel": "Loan Status",
-      "statusButtons":{
-        "Rejected":"Rejected",
-        "Processing":" Processing",
-        "Approved":"Approved"
+      "statusButtons": {
+        "Rejected": "Rejected",
+        "Processing": " Processing",
+        "Approved": "Approved"
       },
-      "footer":{
-        "loanPerPageLabel":"Loan Per Page"
+      "footer": {
+        "loanPerPageLabel": "Loan Per Page"
       }
     }
   },
@@ -75,8 +74,7 @@
     "modalEmail": "Email",
     "rememberMe": "Remember me",
     "loginButtonText": " Login",
-    "guestWarningMessage":"You have to be staff to view your loans  "
-
+    "guestWarningMessage": "You have to be staff to view your loans  "
   },
   "loanEligibility": {
     "applyTitle": "My Loan",
@@ -171,10 +169,12 @@
     }
   },
   "documents": {
-    "sectionTitle": "Required Documents",
-    "uploadInstruction": "Please upload the required documents to complete the loan application.",
-    "uploadButtonLabel": "Upload Documents",
-    "submitButtonLabel": "Submit Application",
+    "sectionTitle": "Upload Documents ",
+    "uploadInstruction": "Upload A bulk of documents.",
+    "uploadButtonLabel": " Upload documents",
+    "submitButtonLabel": " Submit",
+    "uploadNumberLabel": "  Upload A bulk of documents",
+    "uploadTypeLabel": "Upload files in the CVS ,PDF...",
     "attachmentPreview": {
       "selectedFilesTitle": "Selected Files",
       "noFilesMessage": "Attachments will appear here once selected",

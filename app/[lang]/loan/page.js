@@ -99,6 +99,7 @@ function LoanStepperPage({ params: { lang } }) {
           maxWidth={"100vw"}
           minHeight={"100vh"}
           justifyContent={isMobile ? "center" : "flex-start"}
+          alignItems={'flex-start'}
           bgcolor={"background.default"}
         >
           <Grid container minHeight={"20vh"} item xs={12} p={4} gap={2}>
