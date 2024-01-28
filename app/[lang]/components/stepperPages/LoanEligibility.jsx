@@ -13,16 +13,16 @@ function LoanEligibility({
 }) {
   const isMobile = useMediaQuery("(max-width:650px)");
   const { currentLoan, localePageContent:{loanEligibility,loanEligibilityTable},loanDetailsLocale } = useContext(CurrentLoanContext);
- console.log(currentLoan)
   return (
     <Grid
       container
+      item
       sx={{
         height: "calc(100% + 200px)",
         justifyContent: { xs: "center", md: "flex-start" },
       }}
       alignItems={"flex-start"}
-      gap={4}
+      spacing={12}
     >
       <Grid container item gap={4} md={7}>
         <Grid
@@ -164,7 +164,7 @@ function LoanEligibility({
           />
         </Grid>
       </Grid>
-      <Grid p={4} container item justifyContent={"flex-start"} md={4} gap={4}>
+      <Grid  container item justifyContent={"flex-start"} md={5} gap={4}>
         <Grid
           container
           sx={glassmorphismStyle}

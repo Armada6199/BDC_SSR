@@ -98,13 +98,13 @@ function SubCalculator({ lang }) {
               fullWidth
               variant="outlined"
               sx={{ fontWeight: 600, fontSize: 16, color: "secondary.dark" }}
-              onClick={() => handleSetEMI(currentLoan, setCurrentLoan)}
+              onClick={() => handleSetEMI(currentLoan, setCurrentLoan,session.userData.employeeData)}
             >
               {localePageContent.profilePage.subCalculator.calculateButtonLabel}
             </Button>
           </Grid>
           <Grid item xs={6}>
-            <Link href={`/${lang.lang}/loan`} onClick={() => setActiveStep(1)}>
+            <Link href={`/${lang.lang}/loan`} onClick={()=>setActiveStep(1)}>
               <Button
                 fullWidth
                 variant="contained"

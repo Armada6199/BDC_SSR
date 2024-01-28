@@ -23,12 +23,12 @@ const loanIcons = [
 export default function LoanTypesSlider({
 }) {
   const indecatorIcons = loanIcons.map((icon) => icon);
-  const {localePageContent:{loanInformation:{viewDetailsButtonLabel},loansInformation}}=useContext(CurrentLoanContext)
+  const {setCurrentLoan,localePageContent:{loanInformation:{viewDetailsButtonLabel},loansInformation}}=useContext(CurrentLoanContext)
   return (
     <Carousel
       navButtonsAlwaysInvisible={true}
       height={"230px"}
-      onChange={(e) => handleChangeCurrentLoan(loansInformation[e].enTitle||loansInformation[e].title)}
+      onChange={(e) => handleChangeCurrentLoan(loansInformation[e].enTitle||loansInformation[e].title,setCurrentLoan)}
       autoPlay={false}
       sx={{ width: "100%", backgroundColor: "#fff" }}
       IndicatorIcon={indecatorIcons}

@@ -34,13 +34,14 @@ function LoanInformation({ register, errors }) {
   useEffect(() => {
     handleSetDefaultLoanValues(currentLoan, setCurrentLoan);
   }, [currentLoan.isStaff]);
+
   const isMobile = useMediaQuery("(max-width:600px)");
   return (
     <Grid
       container
       sx={{ height: "calc(100% + 200px)" }}
       alignItems={"flex-start"}
-      spacing={10}
+      spacing={12}
     >
       <Grid
         container
@@ -50,7 +51,7 @@ function LoanInformation({ register, errors }) {
         }}
         item
         sm={12}
-        md={6}
+        md={7}
         gap={4}
       >
         <Grid container item md={12} gap={4}>
@@ -63,12 +64,11 @@ function LoanInformation({ register, errors }) {
               {loanInformation.applyTitle}
             </Typography>
           </Grid>
-          <Grid container item wrap="nowrap" gap={4} md={10} lg={12}>
+          <Grid container item flexWrap={'nowrap'} gap={4} md={12} >
             {isMobile ? (
               <LoanTypesSlider
                 currentLoan={currentLoan}
                 setCurrentLoan={setCurrentLoan}
-              
               />
             ) : (
               <LoanTypes
@@ -212,7 +212,7 @@ function LoanInformation({ register, errors }) {
         )}
       </Grid>
       {!isMobile && (
-        <Grid container alignItems={"center"} item md={6}>
+        <Grid container alignItems={"center"} item md={5}>
           <LoanDetails currentLoan={currentLoan} />
         </Grid>
       )}

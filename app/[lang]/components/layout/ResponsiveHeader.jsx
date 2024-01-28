@@ -12,7 +12,7 @@ import { useContext, useState } from "react";
 import NagiationsLinks from "./NagiationsLinks";
 import Image from "next/image";
 import bankWhite from "@public/assets/Banque_du_caire_Logowhite.svg";
-import { useSession } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 import Link from "next/link";
 import { redirectedPathName } from "@utils/loanCalulation";
 import { usePathname } from "next/navigation";
@@ -105,7 +105,7 @@ function ResponsiveHeader(props) {
                 item
                 sx={{ color: "#fff", cursor: "pointer" }}
                 onClick={() => {
-                  signOut({ callbackUrl: `/${lang}` });
+                  signOut({ callbackUrl: `/ar}` });
                 }}
                 display={{
                   xs: "none",

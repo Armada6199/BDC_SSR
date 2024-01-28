@@ -7,7 +7,7 @@ import Person2OutlinedIcon from "@mui/icons-material/Person2Outlined";
 import "@styles/styles.css";
 import LoginModal from "./components/LoginModal";
 import { CurrentLoanContext } from "@hooks/CurrentLoanProvider";
-import { usePathname, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import Loader from "./components/Loader";
 import MuiAlert from "@mui/material/Alert";
 import { handleGuestLogin } from "@utils/apiRequests";
@@ -16,19 +16,18 @@ const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
 function HomeLogin({ params: { lang } }) {
-  // const { data: session } = useSession({
-  //   required: false,
-  // });
   const { push } = useRouter();
-  const pathName = usePathname();
   const { setCurrentLoan, localePageContent } = useContext(CurrentLoanContext);
   const [openStaff, setOpenStaff] = React.useState(false);
   const handleOpenStaffLogin = () => setOpenStaff(true);
   const handleCloseStaffLogin = () => setOpenStaff(false);
 
   return localePageContent.loginPage ? (
-    <Grid container   height={{xs:"calc(100% + 100px)",md:"calc(100vh - 140px)"}} >
-      <Grid container height={'100%'} md={12} item>
+    <Grid
+      container
+      height={{ xs: "calc(100% + 100px)", md: "calc(100vh - 120px)" }}
+    >
+      <Grid container height={"100%"} md={12} item>
         <Grid
           container
           item

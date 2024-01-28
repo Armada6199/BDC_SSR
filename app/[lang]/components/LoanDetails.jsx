@@ -15,7 +15,7 @@ function LoanDetails({ handleClose }) {
       item
       p={4}
       height={"100%"}
-      overflow={"scroll"}
+      overflow={"auto"}
       gap={4}
       sx={glassmorphismStyle}
     >

@@ -3,21 +3,17 @@ import React, { useContext, useEffect, useState } from "react";
 import Box from "@mui/material/Box";
 import Stepper from "@mui/material/Stepper";
 import Typography from "@mui/material/Typography";
-import { Button, Grid, useMediaQuery } from "@mui/material";
+import { Grid, useMediaQuery } from "@mui/material";
 import StepperComponentsHOC from "../components/StepperComponentsHOC.jsx";
 import { useForm } from "react-hook-form";
 import StepperNavigationButtons from "../components/StepperNavigationButtons.jsx";
 import MobileStepper from "@mui/material/MobileStepper";
-import { loanDetailsData } from "@public/loans";
 import "@styles/styles.css";
 import { CurrentLoanContext } from "@hooks/CurrentLoanProvider";
-import getDictionary from "@lib/dictionary";
 import { useSession } from "next-auth/react";
 import { redirect } from "next/navigation";
 import Loader from "../components/Loader.jsx";
-import {
-  handleNext,
-} from "@utils/loanCalulation.js";
+import { handleNext } from "@utils/loanCalulation.js";
 function LoanStepperPage({ params: { lang } }) {
   const { data: session } = useSession({
     required: true,
@@ -40,7 +36,7 @@ function LoanStepperPage({ params: { lang } }) {
     finished: false,
     status: { errs: [] },
   });
-  const {localePageContent}=useContext(CurrentLoanContext);
+  const { localePageContent } = useContext(CurrentLoanContext);
   const {
     register,
     handleSubmit,
@@ -55,14 +51,6 @@ function LoanStepperPage({ params: { lang } }) {
       currentSalary_Input: currentLoan.currentSalary,
     },
   });
-  // useEffect(() => {
-  //   const getPage = async () => {
-  //     const page = await getDictionary(lang);
-  //     setPageContent(page);
-  //     changeLoanDetailsLocale(page.loansInformation);
-  //   };
-  //   getPage();
-  // }, [currentLoan]);
   useEffect(() => {
     if (localStorage.getItem("currentLoan")) {
       const storedData = JSON.parse(localStorage.getItem("currentLoan"));
@@ -80,8 +68,6 @@ function LoanStepperPage({ params: { lang } }) {
         );
       }
     }
-
-    // return localStorage.clear('currentLoan')
   }, []);
 
   const handleBack = () => {
@@ -95,7 +81,18 @@ function LoanStepperPage({ params: { lang } }) {
     setActiveStep(0);
   };
   return (
-    <form noValidate onSubmit={handleSubmit((formData)=>handleNext(formData,activeStep,setCurrentLoan,setActiveStep,currentLoan))}>
+    <form
+      noValidate
+      onSubmit={handleSubmit((formData) =>
+        handleNext(
+          formData,
+          activeStep,
+          setCurrentLoan,
+          setActiveStep,
+          currentLoan
+        )
+      )}
+    >
       {localePageContent.loanInformation ? (
         <Grid
           container
@@ -214,7 +211,7 @@ function LoanStepperPage({ params: { lang } }) {
             p={4}
             mt={isMobile ? "100px" : "0"}
             maxHeight={"60px"}
-            position={""}
+            position={"sticky"}
             bottom={"0px"}
           >
             <Grid container item md={12}>

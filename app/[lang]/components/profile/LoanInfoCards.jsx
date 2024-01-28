@@ -6,8 +6,9 @@ import loanIcon from "@public/icons/dollar-finance-money-20-svgrepo-com.svg";
 import moneyBagIcon from "@public/icons/money-bag-svgrepo-com.svg";
 import Image from "next/image";
 import { CurrentLoanContext } from "@hooks/CurrentLoanProvider";
-function LoanInfoCards({ informationCards }) {
+function LoanInfoCards({ informationCards, session }) {
   const { localePageContent } = useContext(CurrentLoanContext);
+  const { currentSalary } = session.userData.employeeData;
   return (
     <Grid
       container
@@ -42,14 +43,14 @@ function LoanInfoCards({ informationCards }) {
           md={8}
         >
           <Typography variant="h4" fontWeight={700}>
-            3500 {localePageContent.currencyLabel}
+            {currentSalary} {localePageContent.currencyLabel}
           </Typography>
           <Typography variant="body1" color={"darkgray"} fontWeight={700}>
             {informationCards.salaryLabel}
           </Typography>
         </Grid>
         <Grid item xs={12} md={2}>
-          <Image src={moneyBagIcon} width={82} height={82} />
+          <Image src={moneyBagIcon} width={82} alt="money bag" height={82} />
         </Grid>
       </Grid>
 
@@ -85,7 +86,7 @@ function LoanInfoCards({ informationCards }) {
           </Typography>
         </Grid>
         <Grid item xs={12} md={2}>
-          <Image src={savingIcon} width={82} height={82} />
+          <Image src={savingIcon} width={82} height={82} alt="saving" />
         </Grid>
       </Grid>
       <Grid
@@ -120,7 +121,7 @@ function LoanInfoCards({ informationCards }) {
           </Typography>
         </Grid>
         <Grid item xs={12} md={2}>
-          <Image src={loanIcon} width={82} height={82} />
+          <Image src={loanIcon} width={82} alt="loan" height={82} />
         </Grid>
       </Grid>
     </Grid>

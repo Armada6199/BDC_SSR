@@ -1,4 +1,4 @@
-import { Button, Grid, Typography } from "@mui/material";
+import { Button, Grid, Typography, useMediaQuery } from "@mui/material";
 import { glassmorphismStyle } from "@styles/styles";
 import Image from "next/image";
 import React, { useContext } from "react";
@@ -20,8 +20,10 @@ const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
     backgroundColor: "#dd752d",
   },
 }));
-function myInformation({ myInformation }) {
+function myInformation({ myInformation,session }) {
   const { localePageContent } = useContext(CurrentLoanContext);
+  const {employeeName,jobTitle,workPlace,employeeNumber,activeLoans  } =session.userData.employeeData
+  const isMobile=useMediaQuery('(max-width:600px)')
   return (
     <Grid container item p={4} xs={12} sx={{ ...glassmorphismStyle }} gap={4}>
       <Grid container gap={1}  item xs={12}>
@@ -36,24 +38,25 @@ function myInformation({ myInformation }) {
           />
         </Grid>
       </Grid>
-      <Grid container item spacing={{ xs: 4, sm: 12 }} xs={12}>
+      <Grid container item  spacing={isMobile?4:12} xs={12}>
         <Grid item xs={4} md={3}>
           <Image
             src={profileImg}
             width={82}
             height={82}
+            alt="profile"
             style={{ borderRadius: "50%" }}
           />
         </Grid>
-        <Grid container item xs={6} md={9}>
+        <Grid container item xs={8} md={9}>
           <Grid item xs={12}>
             <Typography variant="body1" fontWeight={700}>
-              نور احمد
+            {employeeName}
             </Typography>
           </Grid>
           <Grid item xs={12}>
             <Typography variant="body2" fontWeight={"600"} color={"darkgray"}>
-              مهندس برمجيات
+              {jobTitle}
             </Typography>
           </Grid>
           <Grid item xs={12}>
@@ -62,7 +65,7 @@ function myInformation({ myInformation }) {
               fontWeight={"500"}
               sx={{ color: "secondary.dark" }}
             >
-              عمان
+              {workPlace}
             </Typography>
           </Grid>
         </Grid>
@@ -78,7 +81,7 @@ function myInformation({ myInformation }) {
         </Grid>
         <Grid item xs={6}>
           <Typography variant="h6" fontWeight={600}>
-            4
+            {activeLoans.length}
           </Typography>
           <Typography variant="body2" fontWeight={700} color={"darkgray"}>
             {myInformation.activeLoansLabel}
@@ -94,7 +97,7 @@ function myInformation({ myInformation }) {
         </Grid>
         <Grid item xs={6}>
           <Typography variant="h6" fontWeight={600}>
-            232
+            {employeeNumber}
           </Typography>
           <Typography variant="body2" fontWeight={700} color={"darkgray"}>
             {myInformation.employeeNumberLabel}

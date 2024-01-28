@@ -7,28 +7,27 @@ import MyInformation from "../components/profile/MyInformation";
 import LoanInfoCards from "../components/profile/LoanInfoCards";
 import LoansTable from "../components/profile/LoansTable";
 import SubCalculator from "../components/profile/SubCalculator";
-import { useRouter } from "next/navigation";
 import Loader from "../components/Loader";
 import LoansCard from "../components/profile/LoansCard";
-import { loanIcons } from "@public/icons";
 
 function Profile({ params: lang }) {
-  const { push } = useRouter();
   const { data: session, status } = useSession({
     required: true,
   });
   const isGuest =
     session?.userData?.employeeData?.isGuest || !session ? true : false;
-    const isMobile = useMediaQuery("(max-width:600px)");
-    if (status === "loading")
+  const isMobile = useMediaQuery("(max-width:600px)");
+  const {setActiveStep}=useContext(CurrentLoanContext);
+
+  if (status === "loading")
     return (
-      <Grid container xs={12} sx={{ height: "calc(100vh - 120px)" }}>
+      <Grid container sx={{ height: "calc(100vh - 120px)" }}>
         <Loader />
       </Grid>
     );
   else if (status == "unauthenticated" || isGuest) {
     return (
-      <Grid container xs={12} sx={{ height: "calc(100vh - 120px)" }}>
+      <Grid container sx={{ height: "calc(100vh - 120px)" }}>
         <Loader />
       </Grid>
     );
@@ -51,11 +50,14 @@ function Profile({ params: lang }) {
           sx={{ flexWrap: { xs: "wrap", sm: "nowrap" } }}
         >
           <Grid container item xs={12} md={4} xl={3}>
-            <MyInformation myInformation={myInformation} />
+            <MyInformation session={session} myInformation={myInformation} />
           </Grid>
-          <Grid container item xs={12} gap={{xs:8,sm:4}} md={8} xl={9}>
+          <Grid container item xs={12} gap={{ xs: 8, sm: 4 }} md={8} xl={9}>
             <Grid container item xs={12}>
-              <LoanInfoCards informationCards={informationCards} />
+              <LoanInfoCards
+                session={session}
+                informationCards={informationCards}
+              />
             </Grid>
             <Grid
               container
