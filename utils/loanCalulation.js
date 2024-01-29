@@ -37,9 +37,9 @@ export function handleSetEMI(currentLoan, setCurrentLoan, employeeData = {}) {
     activeLoansDeductions: activeLoansDeductions,
   }));
 }
-export const handleBack=(setActiveStep)=>{
-  setActiveStep(prev=>--prev)
-}
+export const handleBack = (setActiveStep) => {
+  setActiveStep((prev) => --prev);
+};
 export const handleNext = async (
   formData,
   activeStep,
@@ -47,8 +47,6 @@ export const handleNext = async (
   setActiveStep,
   currentLoan
 ) => {
-  console.trace();
-
   if (activeStep == 0) {
     handleSetEMI(currentLoan, setCurrentLoan);
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
@@ -60,7 +58,7 @@ export const handleNext = async (
     }
   }
   if (
-    //   activeStep !== pageContent.stepperSteps.length - 1 &&
+      activeStep !==  4 &&
     activeStep !== 0
   ) {
     setCurrentLoan((prev) => ({ ...prev, formData }));
@@ -153,9 +151,7 @@ export const handleSetDefaultLoanValues = (currentLoan, setCurrentLoan) => {
     currentSalary,
   }));
 };
-export const handleSetLocalStorage=()=>{
-
-}
+export const handleSetLocalStorage = () => {};
 export const handleReset = () => {
   setCurrentLoan(loans[0]);
   setActiveStep(0);

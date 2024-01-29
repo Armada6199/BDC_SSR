@@ -7,12 +7,15 @@ import ElibiblityLayerTable from "../ElibiblityLayerTable";
 import { CustomBarChat } from "../charts/CustomBarChat";
 import { CurrentLoanContext } from "@hooks/CurrentLoanProvider";
 import { loanIcons } from "@public/icons";
+import TestCards from "../Testcards";
 
-function LoanEligibility({
-  lang,
-}) {
+function LoanEligibility({ lang }) {
   const isMobile = useMediaQuery("(max-width:650px)");
-  const { currentLoan, localePageContent:{loanEligibility,loanEligibilityTable},loanDetailsLocale } = useContext(CurrentLoanContext);
+  const {
+    currentLoan,
+    localePageContent: { loanEligibility, loanEligibilityTable },
+    loanDetailsLocale,
+  } = useContext(CurrentLoanContext);
   return (
     <Grid
       container
@@ -32,9 +35,7 @@ function LoanEligibility({
           sx={{ justifyContent: { xs: "center", md: "flex-start" } }}
           alignItems={"center"}
         >
-          <Typography variant="h4">
-            {loanEligibility.applyTitle}
-          </Typography>
+          <Typography variant="h4">{loanEligibility.applyTitle}</Typography>
           <InfoIcon
             sx={{ width: "31px", height: "41px", color: "secondary.dark" }}
           />
@@ -86,7 +87,6 @@ function LoanEligibility({
               item
               xs={12}
             >
-         
               {loanIcons[currentLoan.title]}
               <Typography variant="h5" fontWeight={"600"}>
                 {loanDetailsLocale.title}
@@ -162,9 +162,14 @@ function LoanEligibility({
             currentLoan={currentLoan}
             loanDetailsLocale={loanDetailsLocale}
           />
+          {/* <TestCards 
+                    loanEligibilityTable={loanEligibilityTable}
+                    currentLoan={currentLoan}
+                    loanDetailsLocale={loanDetailsLocale}
+          /> */}
         </Grid>
       </Grid>
-      <Grid  container item justifyContent={"flex-start"} md={5} gap={4}>
+      <Grid container item justifyContent={"flex-start"} md={5} gap={4}>
         <Grid
           container
           sx={glassmorphismStyle}
@@ -182,9 +187,7 @@ function LoanEligibility({
               originalLoanAmountLabel={
                 loanEligibility.charts.originalLoanAmountLabel
               }
-              interestPayableLabel={
-                loanEligibility.charts.appliedInterestLabel
-              }
+              interestPayableLabel={loanEligibility.charts.appliedInterestLabel}
             />
           </Grid>
           <Grid container justifyContent={"center"} item spacing={4} md={12}>
@@ -223,9 +226,7 @@ function LoanEligibility({
             totalAppliedLayers={currentLoan.totalAppliedLayers}
             layersLocale={loanEligibilityTable.layers}
             totalAppliedLabel={loanEligibility.charts.totalAppliedLabel}
-            appliedInterestLabel={
-              loanEligibility.charts.appliedInterestLabel
-            }
+            appliedInterestLabel={loanEligibility.charts.appliedInterestLabel}
             //change this to calculate the highest layer max plus the total interst applied to the max layer
           />
         </Grid>
