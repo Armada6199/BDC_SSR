@@ -1,5 +1,5 @@
-import { signIn } from "next-auth/react";
 import { loanDetailsData } from "@public/loans";
+import  axios  from "axios";
 export async function handleStaffLogin(
   loginCredindtials,
   setCurrentLoan,
@@ -7,10 +7,10 @@ export async function handleStaffLogin(
 ) {
   try {
     setIsLogingin(true);
-    const loginResponse = await signIn("LDAP", {
-      ...loginCredindtials,
-      redirect: false,
-    });
+    const loginResponse = await axios.post(
+      "/api/ldap",
+      loginCredindtials
+    );
     console.log(loginResponse);
     if (loginResponse.error) {
       setIsLogingin(false);

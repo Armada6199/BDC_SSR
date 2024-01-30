@@ -17,7 +17,6 @@ import "@/styles/styles.css";
 import { CurrentLoanContext } from "@hooks/CurrentLoanProvider";
 import { usePathname } from "next/navigation";
 import { handleStaffLogin } from "@utils/apiRequests";
-import {redirectedPathName} from '@utils/loanCalulation'
 import { useRouter } from "next/navigation";
 function LoginModal({
   handleCloseStaffLogin=false,
@@ -27,7 +26,7 @@ function LoginModal({
   const pathName=usePathname();
   const {push}=useRouter()
   const [loginCredindtials, setLoginCredindtials] = useState({
-    email: "",
+    username: "",
     password: "",
   });
   const showStaffMessage=pathName===`/${lang}/profile`;
@@ -82,10 +81,10 @@ function LoginModal({
             onChange={(e) =>
               setLoginCredindtials((prev) => ({
                 ...prev,
-                email: e.target.value,
+                username: e.target.value,
               }))
             }
-            type="email"
+            type="text"
             variant="outlined"
           />
         </Grid>
@@ -131,7 +130,7 @@ function LoginModal({
             fullWidth
             onClick={()=>{
               handleStaffLogin(loginCredindtials,setCurrentLoan,setIsLogingin);
-              push(redirectedPathName(lang)+'/profile')
+              // push(redirectedPathName(lang)+'/profile')
             }
             }
             disabled={isLoginingIn}

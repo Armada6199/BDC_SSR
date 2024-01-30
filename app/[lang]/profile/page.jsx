@@ -1,5 +1,5 @@
 "use client";
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import { Grid, useMediaQuery } from "@mui/material";
 import { useSession } from "next-auth/react";
 import { CurrentLoanContext } from "@hooks/CurrentLoanProvider";
@@ -17,7 +17,7 @@ function Profile({ params: lang }) {
   const isGuest =
     session?.userData?.employeeData?.isGuest || !session ? true : false;
   const isMobile = useMediaQuery("(max-width:600px)");
-  const {setActiveStep}=useContext(CurrentLoanContext);
+  const { setActiveStep } = useContext(CurrentLoanContext);
 
   if (status === "loading")
     return (
