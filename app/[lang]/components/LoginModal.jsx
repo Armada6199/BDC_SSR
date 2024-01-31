@@ -9,7 +9,7 @@ import {
   Button,
   Alert,
 } from "@mui/material";
-import Snackbar from '@mui/material/Snackbar';
+import Snackbar from "@mui/material/Snackbar";
 import { glassmorphismStyle } from "@styles/styles.js";
 import ClearIcon from "@mui/icons-material/Clear";
 import Image from "next/image";
@@ -18,22 +18,18 @@ import { CurrentLoanContext } from "@hooks/CurrentLoanProvider";
 import { usePathname } from "next/navigation";
 import { handleStaffLogin } from "@utils/apiRequests";
 import { useRouter } from "next/navigation";
-function LoginModal({
-  handleCloseStaffLogin=false,
-  lang
-}) {
+import { redirectedPathName } from "@utils/loanCalulation";
+function LoginModal({ handleCloseStaffLogin = false, lang }) {
   const [isLoginingIn, setIsLogingin] = useState(false);
-  const pathName=usePathname();
-  const {push}=useRouter()
+  const pathName = usePathname();
+  const { push } = useRouter();
   const [loginCredindtials, setLoginCredindtials] = useState({
     username: "",
     password: "",
   });
-  const showStaffMessage=pathName===`/${lang}/profile`;
-  const {  setCurrentLoan, localePageContent } =
-    useContext(CurrentLoanContext);
-  
- 
+  const showStaffMessage = pathName === `/${lang}/profile`;
+  const { setCurrentLoan, localePageContent } = useContext(CurrentLoanContext);
+
   return (
     <Grid
       container
@@ -126,40 +122,38 @@ function LoginModal({
           </Grid>
         </Grid>
         <Grid item xs={10} md={12}>
-          <Button 
+          <Button
             fullWidth
-            onClick={()=>{
-              handleStaffLogin(loginCredindtials,setCurrentLoan,setIsLogingin);
-              // push(redirectedPathName(lang)+'/profile')
-            }
-            }
+            onClick={() => {
+              handleStaffLogin(
+                loginCredindtials,
+                setCurrentLoan,
+                setIsLogingin
+              );
+              // push(redirectedPathName(lang) + "/profile");
+            }}
             disabled={isLoginingIn}
             variant="contained"
             severity="danger"
             sx={{ bgcolor: "#F58232" }}
           >
             {isLoginingIn ? (
-              <div  style={{color:'#fff'}} className="download_loader"></div>
+              <div style={{ color: "#fff" }} className="download_loader"></div>
             ) : (
               localePageContent.loginPage.loginButtonText
             )}
           </Button>
         </Grid>
       </Grid>
-      {showStaffMessage&&
-      <Snackbar
-        open={true}
-        autoHideDuration={6000}
-        severity="danger"
-      >
-           <Alert
-          severity="warning"
-          variant="filled"
-          sx={{ width: '100%' }}
-        >
-            <Typography variant="body1" fontWeight={'500'} >{localePageContent.loginPage.guestWarningMessage}</Typography>
-        </Alert>
-      </Snackbar>}
+      {showStaffMessage && (
+        <Snackbar open={true} autoHideDuration={6000} severity="danger">
+          <Alert severity="warning" variant="filled" sx={{ width: "100%" }}>
+            <Typography variant="body1" fontWeight={"500"}>
+              {localePageContent.loginPage.guestWarningMessage}
+            </Typography>
+          </Alert>
+        </Snackbar>
+      )}
     </Grid>
   );
 }

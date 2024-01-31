@@ -9,16 +9,17 @@ import LoansTable from "../components/profile/LoansTable";
 import SubCalculator from "../components/profile/SubCalculator";
 import Loader from "../components/Loader";
 import LoansCard from "../components/profile/LoansCard";
+import { redirect } from "next/navigation";
 
 function Profile({ params: lang }) {
   const { data: session, status } = useSession({
-    // required: true,
+    required: true,
   });
   const isGuest =
     session?.userData?.employeeData?.isGuest || !session ? true : false;
   const isMobile = useMediaQuery("(max-width:600px)");
   const { setActiveStep } = useContext(CurrentLoanContext);
-
+  console.log(session);
   if (status === "loading")
     return (
       <Grid container sx={{ height: "calc(100vh - 120px)" }}>
@@ -26,11 +27,7 @@ function Profile({ params: lang }) {
       </Grid>
     );
   else if (status == "unauthenticated" || isGuest) {
-    return (
-      <Grid container sx={{ height: "calc(100vh - 120px)" }}>
-        <Loader />
-      </Grid>
-    );
+    redirect("/");
   }
 
   const { localePageContent } = useContext(CurrentLoanContext);
