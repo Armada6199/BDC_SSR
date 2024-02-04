@@ -30,7 +30,7 @@ function LoanInformation({ register, errors }) {
     localePageContent: { loanInformation },
     loanDetailsLocale,
   } = useContext(CurrentLoanContext);
-
+  console.log(currentLoan);
   useEffect(() => {
     handleSetDefaultLoanValues(currentLoan, setCurrentLoan);
   }, [currentLoan.isStaff]);
@@ -64,7 +64,7 @@ function LoanInformation({ register, errors }) {
               {loanInformation.applyTitle}
             </Typography>
           </Grid>
-          <Grid container item flexWrap={'nowrap'} gap={4} md={12} >
+          <Grid container item flexWrap={"nowrap"} gap={4} md={12}>
             {isMobile ? (
               <LoanTypesSlider
                 currentLoan={currentLoan}
@@ -152,9 +152,7 @@ function LoanInformation({ register, errors }) {
                   control={
                     <Radio
                       {...register("isCurrentLoan", {
-                        required: currentLoan.isStaff
-                          ? false
-                          : "current Loan amount",
+                        required: "current Loan amount",
                       })}
                       sx={{
                         color: "#215190",
@@ -175,9 +173,7 @@ function LoanInformation({ register, errors }) {
                     <Radio
                       size="small"
                       {...register("isCurrentLoan", {
-                        required: currentLoan.isStaff
-                          ? false
-                          : "current Loan amount",
+                        required: "This filed Is Required",
                       })}
                       sx={{
                         color: "#215190",

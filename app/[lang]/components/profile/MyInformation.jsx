@@ -22,7 +22,7 @@ const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
 }));
 function myInformation({ myInformation,session }) {
   const { localePageContent } = useContext(CurrentLoanContext);
-  const {employeeName,jobTitle,workPlace,employeeNumber,activeLoans  } =session.userData.employeeData
+  const {employeeName,jobTitle,workPlace,employeeNumber,activeLoans  } =session;
   const isMobile=useMediaQuery('(max-width:600px)')
   return (
     <Grid container item p={4} xs={12} sx={{ ...glassmorphismStyle }} gap={4}>

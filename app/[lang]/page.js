@@ -9,12 +9,8 @@ import LoginModal from "./components/LoginModal";
 import { CurrentLoanContext } from "@hooks/CurrentLoanProvider";
 import { useRouter } from "next/navigation";
 import Loader from "./components/Loader";
-import MuiAlert from "@mui/material/Alert";
-import { handleGuestLogin } from "@utils/apiRequests";
 import { redirectedPathName } from "@utils/loanCalulation";
-const Alert = React.forwardRef(function Alert(props, ref) {
-  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
-});
+
 function HomeLogin({ params: { lang } }) {
   const { push } = useRouter();
   const { setCurrentLoan, localePageContent } = useContext(CurrentLoanContext);
@@ -147,8 +143,8 @@ function HomeLogin({ params: { lang } }) {
               minHeight={"120px"}
               height={{ xs: "120px" }}
               maxHeight={"40%"}
-              onClick={() => {
-                handleGuestLogin(setCurrentLoan);
+              onClick={async () => {
+                setCurrentLoan((prev) => ({ ...prev }));
                 push(redirectedPathName(lang) + "/loan");
               }}
               sx={{

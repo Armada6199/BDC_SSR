@@ -21,13 +21,13 @@ export default function RootLayout({ children, params: { lang } }) {
           rel="stylesheet"
         />
       </head>
-      <body>
-        <Providers lang={lang}>
+      <Providers lang={lang}>
+        <body dir={lang == "en" ? "ltr" : "rtl"}>
           <ResponsiveHeader lang={lang} />
           {children}
           <Footer lang={lang} />
-        </Providers>
-      </body>
+        </body>
+      </Providers>
     </html>
   );
 }

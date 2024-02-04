@@ -2,9 +2,11 @@ import { Grid, TextField, Typography, useMediaQuery } from "@mui/material";
 import React, { useContext } from "react";
 import CustomDatePicker from "../CustomDatePicker";
 import { CurrentLoanContext } from "@hooks/CurrentLoanProvider";
+import { useSession } from "next-auth/react";
 
 function PersonalInformation({ register, errors }) {
   const isMobile = useMediaQuery("(max-width:650px)");
+  const { data: session } = useSession();
   const {
     currentLoan,
     localePageContent: { personalInformation },
@@ -37,7 +39,7 @@ function PersonalInformation({ register, errors }) {
             </Typography>
             <TextField
               fullWidth
-              disabled={currentLoan.isStaff}
+              disabled={session ? true : false}
               error={!!errors.employeeName}
               helperText={errors.employeeName?.message}
               {...register("employeeName", {
@@ -59,7 +61,7 @@ function PersonalInformation({ register, errors }) {
             <TextField
               fullWidth
               type="number"
-              disabled={currentLoan.isStaff}
+              disabled={session ? true : false}
               error={!!errors.fileNumber}
               helperText={errors.fileNumber?.message}
               {...register("fileNumber", {
@@ -82,7 +84,7 @@ function PersonalInformation({ register, errors }) {
             </Typography>
             <TextField
               fullWidth
-              disabled={currentLoan.isStaff}
+              disabled={session ? true : false}
               error={!!errors.jobTitle}
               helperText={errors.jobTitle?.message}
               {...register("jobTitle", {
@@ -103,7 +105,7 @@ function PersonalInformation({ register, errors }) {
             </Typography>
             <CustomDatePicker
               value={currentLoan.joiningDate}
-              disabled={currentLoan.isStaff}
+              disabled={session ? true : false}
             />
           </Grid>
         </Grid>
@@ -122,7 +124,7 @@ function PersonalInformation({ register, errors }) {
             </Typography>
             <TextField
               fullWidth
-              disabled={currentLoan.isStaff}
+              disabled={session ? true : false}
               error={!!errors.employeeLevel}
               helperText={errors.employeeLevel?.message}
               {...register("employeeLevel", {
@@ -143,7 +145,7 @@ function PersonalInformation({ register, errors }) {
             </Typography>
             <TextField
               fullWidth
-              disabled={currentLoan.isStaff}
+              disabled={session ? true : false}
               error={!!errors.jobLevel}
               helperText={errors.jobLevel?.message}
               {...register("jobLevel", {
@@ -167,7 +169,7 @@ function PersonalInformation({ register, errors }) {
             <TextField
               fullWidth
               type="number"
-              disabled={currentLoan.isStaff}
+              disabled={session ? true : false}
               error={!!errors.employeeNumber}
               helperText={errors.employeeNumber?.message}
               {...register("employeeNumber", {
@@ -191,7 +193,7 @@ function PersonalInformation({ register, errors }) {
             <Grid item xs={12}>
               <TextField
                 fullWidth
-                disabled={currentLoan.isStaff}
+                disabled={session ? true : false}
                 error={!!errors.workPlace}
                 helperText={errors.workPlace?.message}
                 {...register("workPlace", {

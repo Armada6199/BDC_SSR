@@ -6,13 +6,11 @@ import MonthsSlider from "../loansSlider/MonthsSlider";
 import SubCalculatorTypeNav from "./SubCalculatorTypeNav";
 import { useForm } from "react-hook-form";
 import {
-  handleNext,
   handleSetDefaultLoanValues,
   handleSetEMI,
 } from "@utils/loanCalulation";
 import Link from "next/link";
 import { glassmorphismStyle } from "@styles/styles";
-import { useDebounce } from "@hooks/debounc";
 import { useSession } from "next-auth/react";
 
 function SubCalculator({ lang }) {
@@ -98,13 +96,13 @@ function SubCalculator({ lang }) {
               fullWidth
               variant="outlined"
               sx={{ fontWeight: 600, fontSize: 16, color: "secondary.dark" }}
-              onClick={() => handleSetEMI(currentLoan, setCurrentLoan,session.userData.employeeData)}
+              onClick={() => handleSetEMI(currentLoan, setCurrentLoan, session)}
             >
               {localePageContent.profilePage.subCalculator.calculateButtonLabel}
             </Button>
           </Grid>
           <Grid item xs={6}>
-            <Link href={`/${lang.lang}/loan`} onClick={()=>setActiveStep(1)}>
+            <Link href={`/${lang}/loan`} onClick={() => setActiveStep(1)}>
               <Button
                 fullWidth
                 variant="contained"

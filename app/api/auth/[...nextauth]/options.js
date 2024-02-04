@@ -29,6 +29,7 @@ export const options = {
                     scope: "sub",
                     attributes: [
                       "cn",
+                      "sn",
                       "employeeNumber",
                       // "employeeType",
                       // "organization",
@@ -74,20 +75,42 @@ export const options = {
   },
   callbacks: {
     signIn: async ({ user }) => {
-      return user.userData;
+      return user;
     },
     jwt: async ({ token, user }) => {
       if (user) {
-        token.employeeData = user.userData;
+        const userValues = {};
+        user.userData.map(
+          (attribute) => (userValues[attribute.type] = attribute.values)
+        );
+        const mockUser = {
+          hasPrevLoan: true,
+          currentSalary: 6000,
+          employeeName: `${userValues.cn} ${userValues.sn}`,
+          fileNumber: 22,
+          jobTitle: "Software Developer",
+          joiningDate: "2019-4-17",
+          employeeLevel: 2,
+          employeeNumber: userValues.employeeNumber,
+          jobLevel: 1,
+          workPlace: "Inspire",
+          activeLoans: [
+            {
+              activeLoanLeftMonths: 10,
+              activeLoanLayer: "First Layer",
+              activeLoanPayPerMonthInput: 200,
+              activeLoanType: "Home Loan",
+              activeDeductedAmount: 2000,
+            },
+          ],
+        };
+        return { ...token, ...mockUser };
       }
       return token;
     },
     session: async ({ session, token }) => {
-      session.userData = {
-        ...token,
-      };
-
-      return session;
+      console.log("session : ", session, "token : ", token);
+      return { ...session, ...token };
     },
   },
 

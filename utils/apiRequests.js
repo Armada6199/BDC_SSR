@@ -3,44 +3,41 @@ import axios from "axios";
 import { signIn } from "next-auth/react";
 export async function handleStaffLogin(
   loginCredindtials,
-  setCurrentLoan,
   setIsLogingin
 ) {
   try {
     setIsLogingin(true);
-    const loginResponse = signIn("credentials", {
+    const loginResponse = await signIn("credentials", {
       ...loginCredindtials,
       redirect: false,
     });
-    console.log(loginResponse.status);
-    if ((await loginResponse).error) {
+    if (loginResponse.error) {
       setIsLogingin(false);
       throw new Error("Invalid Login");
     } else {
       setIsLogingin(false);
       localStorage.removeItem("currentLoan");
-      setCurrentLoan((prev) => ({ ...prev, isStaff: true }));
     }
   } catch (error) {
     console.log(error);
   }
 }
-export async function handleGuestLogin(setCurrentLoan) {
-  try {
-    const loginResponse = await signIn("credentials", {
-      redirect: false,
-      isGuest: true,
-    });
-    if (loginResponse.error) {
-      throw new Error("Invalid Login");
-    } else {
-      localStorage.removeItem("currentLoan");
-      setCurrentLoan({ ...loanDetailsData[1], isStaff: false });
-    }
-  } catch (error) {
-    throw new Error(error);
-  }
-}
+// export async function handleGuestLogin(setCurrentLoan) {
+//   try {
+//     const loginResponse = await signIn("credentials", {
+//       redirect: false,
+//       isGuest: true,
+//     });
+//     if (loginResponse.error) {
+//       throw new Error("Invalid Login");
+//     } else {
+//       localStorage.removeItem("currentLoan");
+//       setCurrentLoan({ ...loanDetailsData[1], isStaff: false });
+//     }
+//   } catch (error) {
+//     throw new Error(error);
+//   }
+// }
 export async function handleSubmitAttatchments(currentLoan, setUploadProgress) {
   const formData = new FormData();
   for (let i = 0; i < currentLoan.loan_attatchments.length; i++) {

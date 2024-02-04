@@ -8,7 +8,7 @@ import Image from "next/image";
 import { CurrentLoanContext } from "@hooks/CurrentLoanProvider";
 function LoanInfoCards({ informationCards, session }) {
   const { localePageContent } = useContext(CurrentLoanContext);
-  const { currentSalary } = session.userData.employeeData;
+  const { currentSalary } = session;
   return (
     <Grid
       container

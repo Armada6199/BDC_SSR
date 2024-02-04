@@ -125,12 +125,8 @@ function LoginModal({ handleCloseStaffLogin = false, lang }) {
           <Button
             fullWidth
             onClick={() => {
-              handleStaffLogin(
-                loginCredindtials,
-                setCurrentLoan,
-                setIsLogingin
-              );
-              // push(redirectedPathName(lang) + "/profile");
+              handleStaffLogin(loginCredindtials, setIsLogingin);
+              push(redirectedPathName(lang) + "/profile");
             }}
             disabled={isLoginingIn}
             variant="contained"

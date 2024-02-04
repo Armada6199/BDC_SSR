@@ -13,9 +13,11 @@ import EditIcon from "@mui/icons-material/Edit";
 import { loanInfoInputStyle } from "@styles/styles.js";
 import { handleSliderChange } from "@utils/loanCalulation";
 import { CurrentLoanContext } from "@hooks/CurrentLoanProvider";
+import { useSession } from "next-auth/react";
 function CurrentSalarySlider({ register, currentLoan, errors, label }) {
   const isMobile = useMediaQuery("(max-width:600px)");
-  const {setCurrentLoan}=useContext(CurrentLoanContext)
+  const { setCurrentLoan } = useContext(CurrentLoanContext);
+  const { data: session } = useSession();
   return (
     <FormControl
       fullWidth
@@ -64,7 +66,7 @@ function CurrentSalarySlider({ register, currentLoan, errors, label }) {
                 message: "Minimum Eligible Salary is 250 JD",
               },
             })}
-            disabled={currentLoan.isStaff}
+            disabled={session ? true : false}
             type="number"
             step={50}
             inputProps={{
@@ -88,9 +90,9 @@ function CurrentSalarySlider({ register, currentLoan, errors, label }) {
                 currentLoan.currentSalary === 0
                   ? "Kindly Choose Salary amount"
                   : "Kindly Choose Salary amount",
-                  onChange: (e) => handleSliderChange(e,setCurrentLoan),
-                })}
-            disabled={currentLoan.isStaff}
+              onChange: (e) => handleSliderChange(e, setCurrentLoan),
+            })}
+            disabled={session ? true : false}
             value={currentLoan.currentSalary}
           />
         </Grid>

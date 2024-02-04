@@ -22,7 +22,7 @@ const CurrentLoanProvider = ({ children, lang }) => {
       const localizedPagesContent = await getDictionary(lang);
       setLocalePageContent(localizedPagesContent);
       setLoanDetailsLocale(localizedPagesContent.loansInformation[1]);
-      };
+    };
     getPage();
   }, [lang]);
   return (

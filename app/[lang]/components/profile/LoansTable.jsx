@@ -79,7 +79,6 @@ function LoansTable({ informationTabel }) {
         customBodyRender: (loanTypeObj, tableMeta, updateValue) => (
           <Grid container alignItems={"center"} gap={2} item>
             <Grid
-              
               item
               alignItems={"center"}
               sx={{ color: "secondary.dark" }}
@@ -207,15 +206,15 @@ function LoansTable({ informationTabel }) {
   ];
 
   return (
-    <Grid container sx={glassmorphismStyle}  item xs={12} gap={4} p={4} >
+    <Grid container sx={glassmorphismStyle} item xs={12} gap={4} p={4}>
       <Grid>
-      <Typography variant="h4" fontWeight={"600"}>
+        <Typography variant="h4" fontWeight={"600"}>
           {informationTabel.myLoansLabel}
         </Typography>
       </Grid>
-        <Grid container item xs={12} height={'85%'} >
+      <Grid container item xs={12} height={"85%"}>
         <MUIDataTable data={data} columns={columns} options={options} />
-        </Grid>
+      </Grid>
     </Grid>
   );
 }

@@ -15,6 +15,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import Slide from "@mui/material/Slide";
 import { CurrentLoanContext } from "@hooks/CurrentLoanProvider";
+import { useSession } from "next-auth/react";
 function ActiveLoanForm({
   register,
   currentLoan,
@@ -22,11 +23,10 @@ function ActiveLoanForm({
   index,
   activeLoan,
   activeFormLocale,
-  lang
-}) 
-
-{
-  const {direction}=useContext(CurrentLoanContext)
+  lang,
+}) {
+  const { data: session } = useSession();
+  // const {}=useContext(CurrentLoanContext)
   function handleAddNewLoan() {
     const newActiveLoans = currentLoan.activeLoans;
     newActiveLoans.push({
@@ -42,8 +42,7 @@ function ActiveLoanForm({
   function handleChangeMaxLoanAmount(e) {
     if (activeLoan.activeLoanType === currentLoan.title) {
       let deductionValue = e?.target.value || activeLoan.activeLoanAmount;
-      const maxAmountAfterDeduction =
-        currentLoan.maxAmount - deductionValue;
+      const maxAmountAfterDeduction = currentLoan.maxAmount - deductionValue;
       setCurrentLoan((prev) => ({ ...prev, maxAmountAfterDeduction }));
     } else {
       setCurrentLoan((prev) => ({
@@ -69,23 +68,27 @@ function ActiveLoanForm({
       setCurrentLoan((prev) => ({ ...prev, activeLoans: newActiveLoans }));
     }
   }
-  return (  
-    <Slide  in={true} direction={lang==='en'?'right':'left'} mountOnEnter unmountOnExit>
-      <Grid container  item md={12} spacing={2}>
+  return (
+    <Slide
+      in={true}
+      direction={lang === "en" ? "right" : "left"}
+      mountOnEnter
+      unmountOnExit
+    >
+      <Grid container item md={12} spacing={2}>
         <Grid item xs={12} md={6} xl={3}>
-          <FormControl   fullWidth>
-            <InputLabel >{activeFormLocale.loanType}</InputLabel>
+          <FormControl fullWidth>
+            <InputLabel>{activeFormLocale.loanType}</InputLabel>
             <Select
               labelId="activeLoanType"
               label="Loan Type"
               {...register(`activeLoanType${index}`)}
               onChange={(e) => handleLoanInputChange(e)}
               value={currentLoan.activeLoans[index].activeLoanType}
-              disabled={currentLoan.isStaff}
-              
->
-            {activeFormLocale.loanTypes.map((type) => (
-                <MenuItem  value={type.value}>{type.localeContent}</MenuItem>
+              disabled={session ? true : false}
+            >
+              {activeFormLocale.loanTypes.map((type) => (
+                <MenuItem value={type.value}>{type.localeContent}</MenuItem>
               ))}
             </Select>
           </FormControl>
@@ -100,15 +103,11 @@ function ActiveLoanForm({
               onChange={(e) => handleLoanInputChange(e)}
               value={currentLoan.activeLoans[index].activeLoanLayer}
               disabled={
-                currentLoan.isStaff
-                  ? true
-                  : activeLoan.activeLoanType
-                  ? false
-                  : true
+                session ? true : activeLoan.activeLoanType ? false : true
               }
             >
               {activeFormLocale.layers.map((layer) => (
-                <MenuItem   value={layer.value}>{layer.localeContent}</MenuItem>
+                <MenuItem value={layer.value}>{layer.localeContent}</MenuItem>
               ))}
             </Select>
           </FormControl>
@@ -140,11 +139,7 @@ function ActiveLoanForm({
             value={currentLoan.activeLoans[index].activeLoanPayPerMonthInput}
             variant="outlined"
             disabled={
-              currentLoan.isStaff
-                ? true
-                : activeLoan.activeLoanLayer
-                ? false
-                : true
+              session ? true : activeLoan.activeLoanLayer ? false : true
             }
           />
         </Grid>
@@ -175,11 +170,7 @@ function ActiveLoanForm({
             value={currentLoan.activeLoans[index].activeLoanLeftMonths}
             variant="outlined"
             disabled={
-              currentLoan.isStaff
-                ? true
-                : activeLoan.activeLoanLayer
-                ? false
-                : true
+              session ? true : activeLoan.activeLoanLayer ? false : true
             }
           />
         </Grid>
@@ -201,15 +192,14 @@ function ActiveLoanForm({
                 width: 52,
                 height: 54,
                 backgroundColor: "#EAEAEA",
-                cursor:  !currentLoan.isStaff?"pointer":'',
+                cursor: !session ? "pointer" : "",
               }}
               onClick={() =>
                 // activeLoan.activeLoanLeftMonths &&
                 // activeLoan.activeLoanLayer&&
                 // activeLoan.activeLoanPayPerMonthInput &&
                 // activeLoan.activeLoanType&&
-                !currentLoan.isStaff&&
-                handleAddNewLoan()
+                !session && handleAddNewLoan()
               }
             >
               <AddIcon sx={{ fontSize: 42, color: "secondary.dark" }} />
@@ -219,9 +209,7 @@ function ActiveLoanForm({
             <Grid
               item
               sx={{ cursor: "pointer" }}
-              onClick={() =>
-                currentLoan.isStaff ? null : handleDeleteActiveLoan()
-              }
+              onClick={() => (session ? null : handleDeleteActiveLoan())}
               md={6}
             >
               <Box

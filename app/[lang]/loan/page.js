@@ -11,23 +11,22 @@ import MobileStepper from "@mui/material/MobileStepper";
 import "@styles/styles.css";
 import { CurrentLoanContext } from "@hooks/CurrentLoanProvider";
 import { useSession } from "next-auth/react";
-import { redirect } from "next/navigation";
 import Loader from "../components/Loader.jsx";
 import { handleNext } from "@utils/loanCalulation.js";
 function LoanStepperPage({ params: { lang } }) {
   const { data: session } = useSession({
-    required: true,
-    onUnauthenticated() {
-      redirect(`/${lang}`);
-    },
+    // required: true,
+    // onUnauthenticated() {
+    //   redirect(`/${lang}`);
+    // },
   });
   const {
     currentLoan,
     setCurrentLoan,
-    changeLoanDetailsLocale,
     activeStep,
     setActiveStep,
     loans,
+    localePageContent,
   } = useContext(CurrentLoanContext);
   const isMobile = useMediaQuery("(max-width:650px)");
   const [uploadProgress, setUploadProgress] = useState({
@@ -36,7 +35,6 @@ function LoanStepperPage({ params: { lang } }) {
     finished: false,
     status: { errs: [] },
   });
-  const { localePageContent } = useContext(CurrentLoanContext);
   const {
     register,
     handleSubmit,
@@ -51,24 +49,6 @@ function LoanStepperPage({ params: { lang } }) {
       currentSalary_Input: currentLoan.currentSalary,
     },
   });
-  useEffect(() => {
-    if (localStorage.getItem("currentLoan")) {
-      const storedData = JSON.parse(localStorage.getItem("currentLoan"));
-      setCurrentLoan(storedData);
-    } else {
-      if (currentLoan.isStaff) {
-        setCurrentLoan((prev) => ({
-          ...prev,
-          ...session.userData.employeeData,
-        }));
-
-        localStorage.setItem(
-          "currentLoan",
-          JSON.stringify({ ...currentLoan, ...session?.userData?.employeeData })
-        );
-      }
-    }
-  }, []);
 
   const handleBack = () => {
     if (activeStep > 0) {
@@ -80,6 +60,22 @@ function LoanStepperPage({ params: { lang } }) {
     setCurrentLoan(loans[0]);
     setActiveStep(0);
   };
+  useEffect(() => {
+    if (localStorage.getItem("currentLoan")) {
+      const storedData = JSON.parse(localStorage.getItem("currentLoan"));
+      setCurrentLoan(storedData);
+    } else {
+      setCurrentLoan((prev) => ({
+        ...prev,
+        ...session,
+      }));
+
+      localStorage.setItem(
+        "currentLoan",
+        JSON.stringify({ ...currentLoan, ...session })
+      );
+    }
+  }, []);
   return (
     <form
       noValidate
@@ -99,7 +95,7 @@ function LoanStepperPage({ params: { lang } }) {
           maxWidth={"100vw"}
           minHeight={"100vh"}
           justifyContent={isMobile ? "center" : "flex-start"}
-          alignItems={'flex-start'}
+          alignItems={"flex-start"}
           bgcolor={"background.default"}
         >
           <Grid container minHeight={"20vh"} item xs={12} p={4} gap={2}>
