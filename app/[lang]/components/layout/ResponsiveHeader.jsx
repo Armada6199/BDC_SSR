@@ -29,7 +29,6 @@ function ResponsiveHeader(props) {
   const handleDrawerToggle = () => {
     setMobileOpen((prevState) => !prevState);
   };
-  const isGuest = session?.userData?.employeeData?.isGuest ? true : false;
   const drawer = (
     <Grid
       container
@@ -109,7 +108,7 @@ function ResponsiveHeader(props) {
                 }}
                 display={{
                   xs: "none",
-                  md: !isGuest && session ? "grid" : "none",
+                  md: session ? "grid" : "none",
                 }}
               >
                 <Typography variant="h6">

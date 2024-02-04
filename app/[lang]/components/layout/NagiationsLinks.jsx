@@ -18,7 +18,6 @@ const NagiationsLinks = ({ localePageContent, lang, mobileOpen = false }) => {
     <AccountCircleIcon sx={{ fontSize: 24 }} />,
     <SavingsIcon sx={{ fontSize: 24 }} />,
   ];
-  const isGuest = session?.userData?.employeeData?.isGuest ? true : false;
   return (
     <Grid
       container
@@ -34,7 +33,7 @@ const NagiationsLinks = ({ localePageContent, lang, mobileOpen = false }) => {
       <Grid container item xs={12} gap={{ xs: 4, sm: 4 }} md={6} xl={4}>
         {localePageContent.heading.navigation.map(
           (nav, index) =>
-            (nav.link !== "/profile" || (!isGuest && session)) && (
+            (nav.link !== "/profile" || session) && (
               <Grid
                 borderBottom={{ xs: "1px solid darkgray", sm: "none" }}
                 sx={{ width: { xs: "100%", sm: "fit-content" } }}
@@ -87,7 +86,7 @@ const NagiationsLinks = ({ localePageContent, lang, mobileOpen = false }) => {
         onClick={() => {
           signOut({ callbackUrl: `/${lang}` });
         }}
-        display={{ xs: !isGuest ? "inherit" : "none", md: "none" }}
+        display={{ xs: !session ? "inherit" : "none", md: "none" }}
         borderBottom={{ xs: "1px solid darkgray", sm: "none" }}
       >
         <Grid item>

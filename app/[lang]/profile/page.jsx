@@ -19,8 +19,7 @@ function Profile({ params: props }) {
     },
   });
   [];
-  const { localePageContent,currentLoan } = useContext(CurrentLoanContext);
-  console.log(currentLoan);
+  const { localePageContent } = useContext(CurrentLoanContext);
 
   const isMobile = useMediaQuery("(max-width:600px)");
   if (status === "loading")

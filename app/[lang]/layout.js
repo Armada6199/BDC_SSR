@@ -4,7 +4,6 @@ import Header from "./components/layout/Header";
 import Footer from "./components/layout/Footer";
 import { i18n } from "@i18n.config";
 import ResponsiveHeader from "./components/layout/ResponsiveHeader";
-import { Box, Grid } from "@mui/material";
 
 export async function generateStaticParams() {
   return i18n.locales.map((locale) => ({ lang: locale }));
