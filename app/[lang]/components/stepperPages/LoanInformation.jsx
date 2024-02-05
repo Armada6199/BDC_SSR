@@ -23,17 +23,18 @@ import {
   handleSetDefaultLoanValues,
   handleSliderChange,
 } from "@utils/loanCalulation";
+import { useSession } from "next-auth/react";
 function LoanInformation({ register, errors }) {
+  const { data: session } = useSession();
   const {
     currentLoan,
     setCurrentLoan,
     localePageContent: { loanInformation },
     loanDetailsLocale,
   } = useContext(CurrentLoanContext);
-  console.log(currentLoan);
   useEffect(() => {
     handleSetDefaultLoanValues(currentLoan, setCurrentLoan);
-  }, [currentLoan.isStaff]);
+  }, [session]);
 
   const isMobile = useMediaQuery("(max-width:600px)");
   return (

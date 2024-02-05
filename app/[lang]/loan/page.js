@@ -14,18 +14,12 @@ import { useSession } from "next-auth/react";
 import Loader from "../components/Loader.jsx";
 import { handleNext } from "@utils/loanCalulation.js";
 function LoanStepperPage({ params: { lang } }) {
-  const { data: session } = useSession({
-    // required: true,
-    // onUnauthenticated() {
-    //   redirect(`/${lang}`);
-    // },
-  });
+  const { data: session } = useSession({});
   const {
     currentLoan,
     setCurrentLoan,
     activeStep,
     setActiveStep,
-    loans,
     localePageContent,
   } = useContext(CurrentLoanContext);
   const isMobile = useMediaQuery("(max-width:650px)");
@@ -56,10 +50,6 @@ function LoanStepperPage({ params: { lang } }) {
     } else return;
   };
 
-  const handleReset = () => {
-    setCurrentLoan(loans[0]);
-    setActiveStep(0);
-  };
   useEffect(() => {
     if (localStorage.getItem("currentLoan")) {
       const storedData = JSON.parse(localStorage.getItem("currentLoan"));
@@ -215,8 +205,8 @@ function LoanStepperPage({ params: { lang } }) {
               <StepperNavigationButtons
                 handleBack={handleBack}
                 activeStep={activeStep}
-                handleRest={handleReset}
                 navigationContent={localePageContent.navigation}
+                lang={lang}
               />
             </Grid>
           </Box>

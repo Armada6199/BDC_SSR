@@ -1,13 +1,14 @@
 import { CurrentLoanContext } from "@hooks/CurrentLoanProvider";
 import { Grid, Button } from "@mui/material";
+import { useRouter } from "next/navigation";
 import React, { useContext } from "react";
 
-function StepperNavigationButtons({
-  handleRest,
-  handleBack,
-  navigationContent,
-}) {
+function StepperNavigationButtons({ handleBack, navigationContent, lang }) {
   const { activeStep } = useContext(CurrentLoanContext);
+  const { push } = useRouter();
+  const handleReset = () => {
+    push(`/${lang}/`);
+  };
   return (
     <Grid
       container
@@ -20,7 +21,7 @@ function StepperNavigationButtons({
     >
       <Grid container spacing={4} item xs={6}>
         <Grid item xs={6} md={4}>
-          <Button fullWidth onClick={handleRest} variant="outlined">
+          <Button fullWidth onClick={handleReset} variant="outlined">
             {navigationContent.cancelButton}
           </Button>
         </Grid>
