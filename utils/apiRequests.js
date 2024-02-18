@@ -1,10 +1,7 @@
 import { loanDetailsData } from "@public/loans";
 import axios from "axios";
 import { signIn } from "next-auth/react";
-export async function handleStaffLogin(
-  loginCredindtials,
-  setIsLogingin
-) {
+export async function handleStaffLogin(loginCredindtials, setIsLogingin) {
   try {
     setIsLogingin(true);
     const loginResponse = await signIn("credentials", {
@@ -22,22 +19,7 @@ export async function handleStaffLogin(
     console.log(error);
   }
 }
-// export async function handleGuestLogin(setCurrentLoan) {
-//   try {
-//     const loginResponse = await signIn("credentials", {
-//       redirect: false,
-//       isGuest: true,
-//     });
-//     if (loginResponse.error) {
-//       throw new Error("Invalid Login");
-//     } else {
-//       localStorage.removeItem("currentLoan");
-//       setCurrentLoan({ ...loanDetailsData[1], isStaff: false });
-//     }
-//   } catch (error) {
-//     throw new Error(error);
-//   }
-// }
+
 export async function handleSubmitAttatchments(currentLoan, setUploadProgress) {
   const formData = new FormData();
   for (let i = 0; i < currentLoan.loan_attatchments.length; i++) {

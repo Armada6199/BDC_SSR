@@ -12,18 +12,15 @@ import Loader from "./components/Loader";
 import { redirectedPathName } from "@utils/loanCalulation";
 
 function HomeLogin({ params: { lang } }) {
+  const { localePageContent, setLoanInfo } = useContext(CurrentLoanContext);
   const { push } = useRouter();
-  const { setCurrentLoan, localePageContent } = useContext(CurrentLoanContext);
   const [openStaff, setOpenStaff] = React.useState(false);
   const handleOpenStaffLogin = () => setOpenStaff(true);
   const handleCloseStaffLogin = () => setOpenStaff(false);
 
   return localePageContent.loginPage ? (
-    <Grid
-      container
-      height={{ xs: "calc(100% + 100px)", md: "calc(100vh - 120px)" }}
-    >
-      <Grid container height={"100%"} md={12} item>
+    <Grid container>
+      <Grid container md={12} item>
         <Grid
           container
           item
@@ -31,10 +28,9 @@ function HomeLogin({ params: { lang } }) {
           position={"relative"}
           justifyContent={"center"}
           p={4}
-          maxHeight={"100%"}
           alignItems={"center"}
           className="loginBackground"
-          height={"100%"}
+          height={"calc(100vh - 120px)"}
         >
           <Box
             width={"100%"}
@@ -65,6 +61,7 @@ function HomeLogin({ params: { lang } }) {
 
           {/* <Box width={"100%"} component={"img"} src={businessImg}></Box> */}
         </Grid>
+
         <Grid
           container
           item
@@ -101,9 +98,6 @@ function HomeLogin({ params: { lang } }) {
                 boxShadow: "-3px 7px 6px -5px rgba(0,0,0,0.37)",
                 border: "none",
               }}
-              minHeight={"120px"}
-              height={{ xs: "120px" }}
-              maxHeight={{ md: "40%" }}
             >
               <Grid
                 container
@@ -130,6 +124,7 @@ function HomeLogin({ params: { lang } }) {
                 item
                 xs={12}
                 md={8}
+                p={{ md: 4, xl: 8 }}
               >
                 <Typography variant="h6" fontWeight={"500"}>
                   {localePageContent.loginPage.staffOptionText}
@@ -140,12 +135,8 @@ function HomeLogin({ params: { lang } }) {
               container
               item
               md={8}
-              minHeight={"120px"}
-              height={{ xs: "120px" }}
-              maxHeight={"40%"}
               onClick={async () => {
-                setCurrentLoan((prev) => ({ ...prev }));
-                push(redirectedPathName(lang) + "/loan");
+                setLoanInfo({ isClient: true });
               }}
               sx={{
                 cursor: "pointer",
@@ -176,6 +167,7 @@ function HomeLogin({ params: { lang } }) {
                 alignItems={"center"}
                 item
                 md={8}
+                p={{ md: 4, xl: 8 }}
               >
                 <Typography variant="h6" fontWeight={"500"}>
                   {localePageContent.loginPage.clientOptionText}
@@ -217,7 +209,6 @@ function HomeLogin({ params: { lang } }) {
       container
       sx={{
         minHeight: "calc(100vh - 140px)",
-        maxHeight: "calc(100vh - 140px)",
       }}
       item
       md={12}

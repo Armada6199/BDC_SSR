@@ -21,7 +21,7 @@ import { CurrentLoanContext } from "@hooks/CurrentLoanProvider";
 function MonthsSlider({ register, errors, currentLoan, label }) {
   const isMobile = useMediaQuery("(max-width:600px)");
   // const debouncedMonths=useDebounce(currentLoan.numberOfMonths_Input||currentLoan.numberOfMonths_Slider);
-  const { setCurrentLoan } = useContext(CurrentLoanContext);
+  const { setLoanInfo } = useContext(CurrentLoanContext);
   return (
     <FormControl
       fullWidth
@@ -64,7 +64,7 @@ function MonthsSlider({ register, errors, currentLoan, label }) {
                 },
                 validate: (value) => validateGreaterThanSalary(currentLoan),
               })}
-              onChange={(e) => handleSliderChange(e, setCurrentLoan)}
+              onChange={(e) => handleSliderChange(e, setLoanInfo)}
               type="number"
               inputProps={{
                 min: currentLoan.minAmount,
@@ -97,7 +97,7 @@ function MonthsSlider({ register, errors, currentLoan, label }) {
                   : "Kindly Choose Number of Months",
                 validate: (value) => validateGreaterThanSalary(currentLoan),
               })}
-              onChange={(e) => handleSliderChange(e, setCurrentLoan)}
+              onChange={(e) => handleSliderChange(e, setLoanInfo)}
               value={currentLoan.numberOfMonths}
             />
           </Grid>

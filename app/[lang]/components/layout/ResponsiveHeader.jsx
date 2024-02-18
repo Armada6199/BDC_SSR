@@ -6,7 +6,7 @@ import Drawer from "@mui/material/Drawer";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import Toolbar from "@mui/material/Toolbar";
-import { Grid, Typography, useMediaQuery } from "@mui/material";
+import { Button, Grid, Modal, Typography, useMediaQuery } from "@mui/material";
 import { CurrentLoanContext } from "@hooks/CurrentLoanProvider";
 import { useContext, useState } from "react";
 import NagiationsLinks from "./NagiationsLinks";
@@ -16,16 +16,22 @@ import { signOut, useSession } from "next-auth/react";
 import Link from "next/link";
 import { redirectedPathName } from "@utils/loanCalulation";
 import { usePathname } from "next/navigation";
+import Loader from "../Loader";
+import LoginModal from "../LoginModal";
 
 const drawerWidth = 240;
 
 function ResponsiveHeader(props) {
   const { window } = props;
-  const { data: session } = useSession();
+  const { data: session, status } = useSession({});
+
   const [mobileOpen, setMobileOpen] = useState(false);
-  const { localePageContent } = useContext(CurrentLoanContext);
+  const { localePageContent, currentLoan } = useContext(CurrentLoanContext);
   const isMobile = useMediaQuery("(max-width:600px)");
   const pathName = usePathname();
+  const [openStaff, setOpenStaff] = React.useState(false);
+  const handleOpenStaffLogin = () => setOpenStaff(true);
+  const handleCloseStaffLogin = () => setOpenStaff(false);
   const handleDrawerToggle = () => {
     setMobileOpen((prevState) => !prevState);
   };
@@ -51,7 +57,13 @@ function ResponsiveHeader(props) {
 
   const container =
     window !== undefined ? () => window().document.body : undefined;
-
+  if (status == "loading") {
+    return (
+      <Grid container item>
+        <Loader />
+      </Grid>
+    );
+  }
   return localePageContent.heading ? (
     <Box display={"flex"} sx={{ boxSizing: "border-box" }} height={"60px"}>
       <AppBar
@@ -84,7 +96,14 @@ function ResponsiveHeader(props) {
                 />
               )}
             </Grid>
-            <Grid container item md={2} justifyContent={"flex-end"} gap={4}>
+            <Grid
+              container
+              item
+              md={2}
+              justifyContent={"flex-end"}
+              alignItems={"center"}
+              gap={4}
+            >
               <Grid
                 item
                 component={Link}
@@ -100,21 +119,45 @@ function ResponsiveHeader(props) {
                   {localePageContent.switchLanguageLabel}
                 </Typography>
               </Grid>
-              <Grid
-                item
-                sx={{ color: "#fff", cursor: "pointer" }}
-                onClick={() => {
-                  signOut({ callbackUrl: `/${props.lang}` });
-                }}
-                display={{
-                  xs: "none",
-                  md: session ? "grid" : "none",
-                }}
-              >
-                <Typography variant="h6">
-                  {localePageContent.heading.logoutLabel}
-                </Typography>
-              </Grid>
+              {session ? (
+                <Grid
+                  item
+                  sx={{ color: "#fff", cursor: "pointer" }}
+                  onClick={() => {
+                    signOut({ callbackUrl: `/${props.lang}` });
+                  }}
+                  display={{
+                    xs: "none",
+                    md: session ? "grid" : "none",
+                  }}
+                >
+                  <Button
+                    variant="text"
+                    onClick={handleOpenStaffLogin}
+                    sx={{ color: "#fff", fontSize: 20 }}
+                    fullWidth
+                  >
+                    {localePageContent.heading.logoutLabel}
+                  </Button>
+                </Grid>
+              ) : (
+                !currentLoan.isClient && (
+                  <Grid item xs={4} sx={{ color: "#fff", cursor: "pointer" }}>
+                    <Button
+                      variant="contained"
+                      onClick={handleOpenStaffLogin}
+                      sx={{
+                        bgcolor: "secondary.main",
+                        color: "#fff",
+                        fontSize: 20,
+                      }}
+                      fullWidth
+                    >
+                      Login
+                    </Button>
+                  </Grid>
+                )
+              )}
             </Grid>
           </Grid>
         </Toolbar>
@@ -142,6 +185,30 @@ function ResponsiveHeader(props) {
       <Box component="main" sx={{ p: 3 }}>
         <Toolbar />
       </Box>
+      <Modal
+        open={openStaff}
+        onClose={handleCloseStaffLogin}
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <Grid
+          container
+          item
+          xs={12}
+          md={6}
+          xl={4}
+          sx={{ outline: "none", border: "none" }}
+        >
+          <LoginModal
+            handleCloseStaffLogin={handleCloseStaffLogin}
+            localePageContent={localePageContent}
+            lang={props.lang}
+          />
+        </Grid>
+      </Modal>
     </Box>
   ) : (
     <Grid

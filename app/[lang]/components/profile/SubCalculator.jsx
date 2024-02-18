@@ -5,10 +5,7 @@ import { Button, Grid, Typography } from "@mui/material";
 import MonthsSlider from "../loansSlider/MonthsSlider";
 import SubCalculatorTypeNav from "./SubCalculatorTypeNav";
 import { useForm } from "react-hook-form";
-import {
-  handleSetDefaultLoanValues,
-  handleSetEMI,
-} from "@utils/loanCalulation";
+import { handleSetEMI } from "@utils/loanCalulation";
 import Link from "next/link";
 import { glassmorphismStyle } from "@styles/styles";
 import { useSession } from "next-auth/react";
@@ -18,10 +15,9 @@ function SubCalculator({ lang }) {
   const {
     currentLoan,
     loanDetailsLocale,
-    setCurrentLoan,
+    setLoanInfo,
     localePageContent,
     setActiveStep,
-    activeStep,
   } = useContext(CurrentLoanContext);
   const {
     register,
@@ -36,9 +32,9 @@ function SubCalculator({ lang }) {
       currentSalary_Input: currentLoan.currentSalary,
     },
   });
-  useEffect(() => {
-    handleSetDefaultLoanValues(currentLoan, setCurrentLoan);
-  }, []);
+  // useEffect(() => {
+  //   handleSetDefaultLoanValues(currentLoan, setLoanInfo);
+  // }, []);
   return (
     <Grid container sx={glassmorphismStyle} item xs={12} gap={4} p={4}>
       <Grid item xs={12}>
@@ -96,7 +92,7 @@ function SubCalculator({ lang }) {
               fullWidth
               variant="outlined"
               sx={{ fontWeight: 600, fontSize: 16, color: "secondary.dark" }}
-              onClick={() => handleSetEMI(currentLoan, setCurrentLoan, session)}
+              onClick={() => handleSetEMI(currentLoan, setLoanInfo, session)}
             >
               {localePageContent.profilePage.subCalculator.calculateButtonLabel}
             </Button>

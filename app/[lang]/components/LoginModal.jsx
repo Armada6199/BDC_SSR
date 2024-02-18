@@ -19,7 +19,7 @@ import { usePathname } from "next/navigation";
 import { handleStaffLogin } from "@utils/apiRequests";
 import { useRouter } from "next/navigation";
 import { redirectedPathName } from "@utils/loanCalulation";
-function LoginModal({ handleCloseStaffLogin = false, lang }) {
+function LoginModal({ handleCloseStaffLogin, lang }) {
   const [isLoginingIn, setIsLogingin] = useState(false);
   const pathName = usePathname();
   const { push } = useRouter();
@@ -28,7 +28,7 @@ function LoginModal({ handleCloseStaffLogin = false, lang }) {
     password: "",
   });
   const showStaffMessage = pathName === `/${lang}/profile`;
-  const { setCurrentLoan, localePageContent } = useContext(CurrentLoanContext);
+  const { setLoanInfo, localePageContent } = useContext(CurrentLoanContext);
 
   return (
     <Grid
@@ -39,7 +39,6 @@ function LoginModal({ handleCloseStaffLogin = false, lang }) {
       justifyContent={"center"}
       gap={4}
       sx={{ ...glassmorphismStyle, borderRadius: "30px" }}
-      height={{ xs: "90vh", md: "95vh", xl: "80vh" }}
     >
       <ClearIcon
         onClick={handleCloseStaffLogin}
@@ -124,9 +123,10 @@ function LoginModal({ handleCloseStaffLogin = false, lang }) {
         <Grid item xs={10} md={12}>
           <Button
             fullWidth
-            onClick={() => {
-              handleStaffLogin(loginCredindtials, setIsLogingin);
-              push(redirectedPathName(lang) + "/profile");
+            onClick={async () => {
+              await handleStaffLogin(loginCredindtials, setIsLogingin);
+              push(redirectedPathName(lang) + "/loan");
+              handleCloseStaffLogin();
             }}
             disabled={isLoginingIn}
             variant="contained"

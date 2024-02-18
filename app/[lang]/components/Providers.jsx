@@ -7,9 +7,7 @@ function Providers({ children, lang }) {
   return (
     <AuthProvider>
       <TranslationWrapper dir={lang == "ar" ? "rtl" : "ltr"}>
-        <CurrentLoanProvider lang={lang}>
-         {children}
-        </CurrentLoanProvider>
+        <CurrentLoanProvider lang={lang}>{children}</CurrentLoanProvider>
       </TranslationWrapper>
     </AuthProvider>
   );

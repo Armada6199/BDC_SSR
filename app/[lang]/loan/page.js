@@ -15,13 +15,11 @@ import Loader from "../components/Loader.jsx";
 import { handleNext } from "@utils/loanCalulation.js";
 function LoanStepperPage({ params: { lang } }) {
   const { data: session } = useSession({});
-  const {
-    currentLoan,
-    setCurrentLoan,
-    activeStep,
-    setActiveStep,
-    localePageContent,
-  } = useContext(CurrentLoanContext);
+  if (session) {
+    localStorage.setItem("employeeData", JSON.stringify(session));
+  }
+  const { currentLoan, activeStep, setActiveStep, localePageContent } =
+    useContext(CurrentLoanContext);
   const isMobile = useMediaQuery("(max-width:650px)");
   const [uploadProgress, setUploadProgress] = useState({
     started: false,
@@ -50,22 +48,6 @@ function LoanStepperPage({ params: { lang } }) {
     } else return;
   };
 
-  useEffect(() => {
-    if (localStorage.getItem("currentLoan")) {
-      const storedData = JSON.parse(localStorage.getItem("currentLoan"));
-      setCurrentLoan(storedData);
-    } else {
-      setCurrentLoan((prev) => ({
-        ...prev,
-        ...session,
-      }));
-
-      localStorage.setItem(
-        "currentLoan",
-        JSON.stringify({ ...currentLoan, ...session })
-      );
-    }
-  }, []);
   return (
     <form
       noValidate
@@ -73,7 +55,7 @@ function LoanStepperPage({ params: { lang } }) {
         handleNext(
           formData,
           activeStep,
-          setCurrentLoan,
+          setLoanInfo,
           setActiveStep,
           currentLoan
         )
@@ -82,8 +64,6 @@ function LoanStepperPage({ params: { lang } }) {
       {localePageContent.loanInformation ? (
         <Grid
           container
-          maxWidth={"100vw"}
-          minHeight={"100vh"}
           justifyContent={isMobile ? "center" : "flex-start"}
           alignItems={"flex-start"}
           bgcolor={"background.default"}

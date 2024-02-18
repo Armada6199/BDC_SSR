@@ -16,7 +16,7 @@ import { CurrentLoanContext } from "@hooks/CurrentLoanProvider";
 import { useSession } from "next-auth/react";
 function CurrentSalarySlider({ register, currentLoan, errors, label }) {
   const isMobile = useMediaQuery("(max-width:600px)");
-  const { setCurrentLoan } = useContext(CurrentLoanContext);
+  const { setLoanInfo } = useContext(CurrentLoanContext);
   const { data: session } = useSession();
   return (
     <FormControl
@@ -55,7 +55,7 @@ function CurrentSalarySlider({ register, currentLoan, errors, label }) {
               value: currentLoan.currentSalary,
             }}
             {...register("currentSalary_Input", {
-              onChange: (e) => handleSliderChange(e, setCurrentLoan),
+              onChange: (e) => handleSliderChange(e, setLoanInfo),
 
               required:
                 currentLoan.currentSalary == 0
@@ -90,8 +90,8 @@ function CurrentSalarySlider({ register, currentLoan, errors, label }) {
                 currentLoan.currentSalary === 0
                   ? "Kindly Choose Salary amount"
                   : "Kindly Choose Salary amount",
-              onChange: (e) => handleSliderChange(e, setCurrentLoan),
             })}
+            onChange={(e) => handleSliderChange(e, setLoanInfo)}
             disabled={session ? true : false}
             value={currentLoan.currentSalary}
           />

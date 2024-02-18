@@ -9,14 +9,13 @@
   "switchLanguageLabel": "EN",
   "currencyLabel": "دينار",
   "heading": {
-    "navigation":[
-      {"localeContent":"الصفحة الرئيسية","link":""},
-      {"localeContent":"قروضي","link":"/profile"},
-      {"localeContent":"تقديم قرض","link":"/loan"}
+    "navigation": [
+      { "localeContent": "الصفحة الرئيسية", "link": "" },
+      { "localeContent": "قروضي", "link": "/profile" },
+      { "localeContent": "تقديم قرض", "link": "/loan" }
     ],
-    "logoutLabel":"تسجيل الخروج",
-    "changeLanguageLabel":"اللغة"
-
+    "logoutLabel": "تسجيل الخروج",
+    "changeLanguageLabel": "اللغة"
   },
   "stepperTitle": "تقديم القرض",
   "profilePage": {
@@ -36,10 +35,10 @@
       "activeLoansAmountLabel": "مبلغ القروض النشطة",
       "totalLoansAmountLabel": "إجمالي مبلغ القروض"
     },
-    "subCalculator":{
-    "title":"الحاسبة",
-    "calculateButtonLabel":"أحتساب",
-    "loanRedirectButton":"أستكمال القرض"
+    "subCalculator": {
+      "title": "الحاسبة",
+      "calculateButtonLabel": "أحتساب",
+      "loanRedirectButton": "أستكمال القرض"
     },
     "informationTabel": {
       "myLoansLabel": "قروضي",

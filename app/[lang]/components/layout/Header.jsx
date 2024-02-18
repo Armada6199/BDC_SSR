@@ -11,13 +11,13 @@ function Header({ lang }) {
   const pathName = usePathname();
   const { push } = useRouter();
   const { localePageContent } = useContext(CurrentLoanContext);
-  const isProfileActive=pathName===`/${lang}/profile`;
-  const isLoanApplyActive=pathName===`/${lang}/loan`;
-  const redirectedPathName = (locale) => {  
+  const isProfileActive = pathName === `/${lang}/profile`;
+  const isLoanApplyActive = pathName === `/${lang}/loan`;
+  const redirectedPathName = (locale) => {
     if (!pathName) redirect("/");
     const segments = pathName.split("/");
     segments[1] = locale;
-    push(segments.join("/") )
+    push(segments.join("/"));
   };
   return (
     localePageContent && (
@@ -31,7 +31,15 @@ function Header({ lang }) {
         px={4}
         xs={12}
       >
-        <Grid container spacing={4} wrap="nowrap" gap={{xs:8}}  alignItems={"center"} item xs={10}>
+        <Grid
+          container
+          spacing={4}
+          wrap="nowrap"
+          gap={{ xs: 8 }}
+          alignItems={"center"}
+          item
+          xs={10}
+        >
           <Grid
             item
             sx={{ cursor: "pointer" }}
@@ -44,27 +52,33 @@ function Header({ lang }) {
           </Grid>
           <Grid
             item
-            component={isProfileActive?'':Link}
-            style={{textDecoration:'none'}}
+            component={isProfileActive ? "" : Link}
+            style={{ textDecoration: "none" }}
             href={`/${lang}/profile`}
             xs={8}
             md={1}
-            sx={{ cursor:isProfileActive?'':"pointer"}}  
+            sx={{ cursor: isProfileActive ? "" : "pointer" }}
           >
-            <Typography variant="h6" sx={{color:isProfileActive?'secondary.dark':'#fff' }}>
+            <Typography
+              variant="h6"
+              sx={{ color: isProfileActive ? "secondary.dark" : "#fff" }}
+            >
               {localePageContent.heading.headerMyLoansLabel}
             </Typography>
           </Grid>
           <Grid
             item
-            component={isLoanApplyActive?'':Link}
-            style={{textDecoration:'none'}}
+            component={isLoanApplyActive ? "" : Link}
+            style={{ textDecoration: "none" }}
             href={`/${lang}/loan`}
             xs={8}
-            md={2}      
-            sx={{ cursor:isLoanApplyActive?'':"pointer"}}  
+            md={2}
+            sx={{ cursor: isLoanApplyActive ? "" : "pointer" }}
           >
-            <Typography variant="h6" sx={{color:isLoanApplyActive?'secondary.dark':'#fff' }}>
+            <Typography
+              variant="h6"
+              sx={{ color: isLoanApplyActive ? "secondary.dark" : "#fff" }}
+            >
               {localePageContent.heading.applyLoanPageLabel}
             </Typography>
           </Grid>

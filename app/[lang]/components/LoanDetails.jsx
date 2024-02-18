@@ -9,7 +9,7 @@ import { CurrentLoanContext } from "@hooks/CurrentLoanProvider";
 function LoanDetails({ handleClose }) {
   const isMobile = useMediaQuery("(max-width:600px)");
   const { loanDetailsLocale } = useContext(CurrentLoanContext);
-  return (  
+  return (
     <Grid
       container
       item

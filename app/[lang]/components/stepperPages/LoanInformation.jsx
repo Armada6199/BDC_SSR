@@ -28,22 +28,16 @@ function LoanInformation({ register, errors }) {
   const { data: session } = useSession();
   const {
     currentLoan,
-    setCurrentLoan,
+    setLoanInfo,
     localePageContent: { loanInformation },
     loanDetailsLocale,
   } = useContext(CurrentLoanContext);
   useEffect(() => {
-    handleSetDefaultLoanValues(currentLoan, setCurrentLoan);
+    handleSetDefaultLoanValues(currentLoan, setLoanInfo);
   }, [session]);
-
   const isMobile = useMediaQuery("(max-width:600px)");
   return (
-    <Grid
-      container
-      sx={{ height: "calc(100% + 200px)" }}
-      alignItems={"flex-start"}
-      spacing={12}
-    >
+    <Grid container alignItems={"flex-start"} spacing={12}>
       <Grid
         container
         alignItems={"center"}
@@ -69,13 +63,10 @@ function LoanInformation({ register, errors }) {
             {isMobile ? (
               <LoanTypesSlider
                 currentLoan={currentLoan}
-                setCurrentLoan={setCurrentLoan}
+                setLoanInfo={setLoanInfo}
               />
             ) : (
-              <LoanTypes
-                currentLoan={currentLoan}
-                setCurrentLoan={setCurrentLoan}
-              />
+              <LoanTypes currentLoan={currentLoan} setLoanInfo={setLoanInfo} />
             )}
           </Grid>
         </Grid>
@@ -129,12 +120,10 @@ function LoanInformation({ register, errors }) {
               row
               onChange={(e) => {
                 e.target.value == "yes"
-                  ? setCurrentLoan({
-                      ...currentLoan,
+                  ? setLoanInfo({
                       hasPrevLoan: true,
                     })
-                  : setCurrentLoan((prev) => ({
-                      ...prev,
+                  : setLoanInfo({
                       activeLoans: [
                         {
                           activeLoanLeftMonths: 0,
@@ -144,7 +133,7 @@ function LoanInformation({ register, errors }) {
                         },
                       ],
                       hasPrevLoan: false,
-                    }));
+                    });
               }}
             >
               <Grid item md={2}>
@@ -200,7 +189,7 @@ function LoanInformation({ register, errors }) {
                 activeLoan={activeLoan}
                 register={register}
                 currentLoan={currentLoan}
-                setCurrentLoan={setCurrentLoan}
+                setLoanInfo={setLoanInfo}
                 activeFormLocale={loanInformation.activeLoans}
                 lang
               />
@@ -210,7 +199,7 @@ function LoanInformation({ register, errors }) {
       </Grid>
       {!isMobile && (
         <Grid container alignItems={"center"} item md={5}>
-          <LoanDetails currentLoan={currentLoan} />
+          <LoanDetails />
         </Grid>
       )}
     </Grid>

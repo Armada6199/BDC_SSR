@@ -1,6 +1,5 @@
 import Providers from "./components/Providers";
 import "./globals.css";
-import Header from "./components/layout/Header";
 import Footer from "./components/layout/Footer";
 import { i18n } from "@i18n.config";
 import ResponsiveHeader from "./components/layout/ResponsiveHeader";

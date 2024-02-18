@@ -20,15 +20,26 @@ const loanIcons = [
   <DirectionsCarFilledOutlinedIcon />,
   <LandscapeOutlinedIcon />,
 ];
-export default function LoanTypesSlider({
-}) {
+export default function LoanTypesSlider({}) {
   const indecatorIcons = loanIcons.map((icon) => icon);
-  const {setCurrentLoan,localePageContent:{loanInformation:{viewDetailsButtonLabel},loansInformation}}=useContext(CurrentLoanContext)
+  const {
+    setLoanInfo,
+    localePageContent: {
+      loanInformation: { viewDetailsButtonLabel },
+      loansInformation,
+    },
+  } = useContext(CurrentLoanContext);
   return (
     <Carousel
       navButtonsAlwaysInvisible={true}
       height={"230px"}
-      onChange={(e) => handleChangeCurrentLoan(loansInformation[e].enTitle||loansInformation[e].title,setCurrentLoan)}
+      onChange={(e) =>
+        handleChangeCurrentLoan(
+          loansInformation[e].enTitle || loansInformation[e].title,
+          setLoanInfo,
+          currentLoan
+        )
+      }
       autoPlay={false}
       sx={{ width: "100%", backgroundColor: "#fff" }}
       IndicatorIcon={indecatorIcons}
@@ -65,7 +76,7 @@ function Item({ loan, index, viewDetailsButtonLabel }) {
   const clientHeight = window.outerHeight;
   clientHeight;
   const handleClose = () => setDetailsMobileModal(false);
-  const {loanDetailsLocale}=useContext(CurrentLoanContext)
+  const { loanDetailsLocale } = useContext(CurrentLoanContext);
   return (
     <React.Fragment key={loan}>
       <Grid
@@ -81,12 +92,27 @@ function Item({ loan, index, viewDetailsButtonLabel }) {
         minHeight={"200px"}
         justifyContent={"center"}
       >
-           <Grid container direction={'column'} justifyContent={'center'} alignItems={'center'} gap={1} item>
-          <Box sx={{...loanIconContStyle,bgcolor:'secondary.dark',color:'#fff'}}>{loanIcons[index]}</Box>
-          <Typography variant="body1" textAlign={'center'} fontWeight={"bold"}>
-              {loan.title}
-            </Typography>
-          </Grid>
+        <Grid
+          container
+          direction={"column"}
+          justifyContent={"center"}
+          alignItems={"center"}
+          gap={1}
+          item
+        >
+          <Box
+            sx={{
+              ...loanIconContStyle,
+              bgcolor: "secondary.dark",
+              color: "#fff",
+            }}
+          >
+            {loanIcons[index]}
+          </Box>
+          <Typography variant="body1" textAlign={"center"} fontWeight={"bold"}>
+            {loan.title}
+          </Typography>
+        </Grid>
         <Grid container justifyContent={"center"} item xs={8}>
           <Button
             fullWidth
@@ -100,7 +126,7 @@ function Item({ loan, index, viewDetailsButtonLabel }) {
                   color: "white",
                   fontSize: 32,
                   fontWeight: "600",
-                  marginX:1
+                  marginX: 1,
                 }}
               />
             }
@@ -111,9 +137,11 @@ function Item({ loan, index, viewDetailsButtonLabel }) {
       </Grid>
       <Modal open={detailsMobileModal} onClose={handleClose}>
         <Grid container height={"100%"} item xs={12}>
-          <LoanDetails 
-          loanDetailsLocale={loanDetailsLocale}
-          handleClose={handleClose} currentLoan={loan} />
+          <LoanDetails
+            loanDetailsLocale={loanDetailsLocale}
+            handleClose={handleClose}
+            currentLoan={loan}
+          />
         </Grid>
       </Modal>
     </React.Fragment>

@@ -9,10 +9,13 @@ import bankWhite from "@public/assets/Banque_du_caire_Logowhite.svg";
 import Image from "next/image";
 import { Home } from "@mui/icons-material";
 import { signOut, useSession } from "next-auth/react";
+import { useContext } from "react";
+import { CurrentLoanContext } from "@hooks/CurrentLoanProvider";
 const NagiationsLinks = ({ localePageContent, lang, mobileOpen = false }) => {
   const pathName = usePathname();
   const { push } = useRouter();
   const { data: session } = useSession();
+  const { currentLoan } = useContext(CurrentLoanContext);
   const navIcons = [
     <Home sx={{ fontSize: 24 }} />,
     <AccountCircleIcon sx={{ fontSize: 24 }} />,
@@ -33,7 +36,8 @@ const NagiationsLinks = ({ localePageContent, lang, mobileOpen = false }) => {
       <Grid container item xs={12} gap={{ xs: 4, sm: 4 }} md={6} xl={4}>
         {localePageContent.heading.navigation.map(
           (nav, index) =>
-            (nav.link !== "/profile" || session) && (
+            ((nav.link == "/profile" && session) ||
+              (nav.link == "/loan" && (session || currentLoan.isClient))) && (
               <Grid
                 borderBottom={{ xs: "1px solid darkgray", sm: "none" }}
                 sx={{ width: { xs: "100%", sm: "fit-content" } }}

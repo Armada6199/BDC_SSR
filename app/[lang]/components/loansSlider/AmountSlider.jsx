@@ -18,13 +18,12 @@ function AmountSlider({
   currentLoan,
   errors,
   loanDetailsLocale,
-  label
+  label,
 }) {
-
   const isMobile = useMediaQuery("(max-width:600px)");
   const maxAmount =
     currentLoan.maxAmountAfterDeduction || currentLoan.maxAmount;
-    const {setCurrentLoan}=useContext(CurrentLoanContext);
+  const { setLoanInfo } = useContext(CurrentLoanContext);
   return (
     <FormControl
       fullWidth
@@ -65,7 +64,7 @@ function AmountSlider({
                   message: `Maximum Loan Amount is ${maxAmount}`,
                 },
               })}
-              onChange={(e) => handleSliderChange(e,setCurrentLoan)}
+              onChange={(e) => handleSliderChange(e, setLoanInfo)}
               type="number"
               inputProps={{
                 min: currentLoan.minAmount,
@@ -96,8 +95,8 @@ function AmountSlider({
                 required: currentLoan.loanAmount
                   ? false
                   : "Kindly Choose loan amount",
-                })}
-                onChange={(e) => handleSliderChange(e,setCurrentLoan)}
+              })}
+              onChange={(e) => handleSliderChange(e, setLoanInfo)}
               value={currentLoan.loanAmount}
             />
           </Grid>

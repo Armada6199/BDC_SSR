@@ -4,7 +4,6 @@ import {
   TextField,
   MenuItem,
   FormControl,
-  FormControlLabel,
   Select,
 } from "@mui/material";
 import { Box } from "@mui/system";
@@ -14,12 +13,11 @@ import AddIcon from "@mui/icons-material/Add";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import Slide from "@mui/material/Slide";
-import { CurrentLoanContext } from "@hooks/CurrentLoanProvider";
 import { useSession } from "next-auth/react";
 function ActiveLoanForm({
   register,
   currentLoan,
-  setCurrentLoan,
+  setLoanInfo,
   index,
   activeLoan,
   activeFormLocale,
@@ -34,7 +32,7 @@ function ActiveLoanForm({
       activeLoanLayer: 0,
       activeLoanType: 0,
     });
-    setCurrentLoan((prev) => ({ ...prev, activeLoans: newActiveLoans }));
+    setLoanInfo({ activeLoans: newActiveLoans });
   }
   useEffect(() => {
     handleChangeMaxLoanAmount();
@@ -43,12 +41,13 @@ function ActiveLoanForm({
     if (activeLoan.activeLoanType === currentLoan.title) {
       let deductionValue = e?.target.value || activeLoan.activeLoanAmount;
       const maxAmountAfterDeduction = currentLoan.maxAmount - deductionValue;
-      setCurrentLoan((prev) => ({ ...prev, maxAmountAfterDeduction }));
+      setLoanInfo({
+        maxAmountAfterDeduction: maxAmountAfterDeduction,
+      });
     } else {
-      setCurrentLoan((prev) => ({
-        ...prev,
+      setLoanInfo({
         maxAmountAfterDeduction: currentLoan.maxAmount,
-      }));
+      });
     }
   }
   useEffect(() => {
@@ -59,13 +58,13 @@ function ActiveLoanForm({
     name = name.slice(0, name.length - 1);
     const newActiveLoans = currentLoan.activeLoans;
     newActiveLoans[index] = { ...newActiveLoans[index], [name]: value };
-    setCurrentLoan((prev) => ({ ...prev, activeLoans: newActiveLoans }));
+    setLoanInfo({ activeLoans: newActiveLoans });
   }
   function handleDeleteActiveLoan() {
     if (index > 0) {
       const newActiveLoans = currentLoan.activeLoans;
       newActiveLoans.splice(index, 1);
-      setCurrentLoan((prev) => ({ ...prev, activeLoans: newActiveLoans }));
+      setLoanInfo({ activeLoans: newActiveLoans });
     }
   }
   return (

@@ -1,26 +1,22 @@
 import { Box, Grid, IconButton, Paper, Typography } from "@mui/material";
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import "@styles/styles.css";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import LoanAttatchmentsPreview from "../LoanAttatchmentsPreview";
 import { CurrentLoanContext } from "@hooks/CurrentLoanProvider";
-import {
-  handleAddAttatchments,
-  handleDeleteAttatchment,
-} from "@utils/attatchments";
-import { handleSubmitAttatchments } from "@utils/apiRequests";
+import { handleAddAttatchments } from "@utils/attatchments";
 
 function Documents({ register, uploadProgress, setUploadProgress }) {
   const {
     currentLoan,
-    setCurrentLoan,
+    setLoanInfo,
     localePageContent: { documents },
   } = useContext(CurrentLoanContext);
   return (
     <Grid container alignItems={"flex-start"} spacing={12}>
       <Grid
         container
-        alignItems={'flex-start'}
+        alignItems={"flex-start"}
         justifyContent={{
           textAlign: { xs: "center", md: "start" },
           xs: "center",
@@ -60,7 +56,7 @@ function Documents({ register, uploadProgress, setUploadProgress }) {
               {...register("loan_attatchments")}
               multiple
               onChange={(e) =>
-                handleAddAttatchments(e, currentLoan, setCurrentLoan)
+                handleAddAttatchments(e, currentLoan, setLoanInfo)
               }
             />
             <label htmlFor="raised-button-file">
