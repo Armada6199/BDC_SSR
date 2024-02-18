@@ -19,7 +19,6 @@ const CurrentLoanProvider = ({ children, lang }) => {
   }
 
   function setLoanInfo(data) {
-    console.log(data);
     setCurrentLoan((prev) => ({
       ...prev,
       ...data,
@@ -30,10 +29,14 @@ const CurrentLoanProvider = ({ children, lang }) => {
       JSON.stringify({ ...currentLoan, ...data })
     );
   }
-  useEffect(() => {}, []);
   useEffect(() => {
-    localStorage.setItem("currentLoan", JSON.stringify({ ...currentLoan }));
-  }, [currentLoan]);
+    if (localStorage.getItem("currentLoan")) {
+      setCurrentLoan(JSON.parse(localStorage.getItem("currentLoan")));
+    } else {
+      localStorage.setItem("currentLoan", JSON.stringify({ ...currentLoan }));
+    }
+  }, []);
+
   useEffect(() => {
     const getPage = async () => {
       const localizedPagesContent = await getDictionary(lang);

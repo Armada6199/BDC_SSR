@@ -5,7 +5,6 @@ const dmFont = DM_Sans({
   style: ["normal"],
   subsets: ["latin"],
 });
-console.log(dmFont.style.fontFamily);
 const theme = (dir) =>
   createTheme({
     direction: dir,
@@ -20,6 +19,7 @@ const theme = (dir) =>
         styleOverrides: {
           root: {
             height: "50px",
+
             ":hover": {
               borderColor: "#dd752d",
             },

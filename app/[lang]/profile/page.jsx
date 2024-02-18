@@ -19,15 +19,15 @@ function Profile({ params: props }) {
     },
   });
   [];
-  const { localePageContent } = useContext(CurrentLoanContext);
-
-  const isMobile = useMediaQuery("(max-width:600px)");
   if (status === "loading")
     return (
-      <Grid container sx={{ height: "calc(100vh - 120px)" }}>
+      <Grid container sx={{ height: "100vh" }}>
         <Loader />
       </Grid>
     );
+  const { localePageContent } = useContext(CurrentLoanContext);
+
+  const isMobile = useMediaQuery("(max-width:600px)");
 
   return (
     <Grid container bgcolor={"background.default"} p={4}>

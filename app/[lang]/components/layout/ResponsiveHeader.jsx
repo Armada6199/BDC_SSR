@@ -133,8 +133,7 @@ function ResponsiveHeader(props) {
                 >
                   <Button
                     variant="text"
-                    onClick={handleOpenStaffLogin}
-                    sx={{ color: "#fff", fontSize: 20 }}
+                    sx={{ color: "secondary.main", fontSize: 20 }}
                     fullWidth
                   >
                     {localePageContent.heading.logoutLabel}
@@ -144,11 +143,10 @@ function ResponsiveHeader(props) {
                 !currentLoan.isClient && (
                   <Grid item xs={4} sx={{ color: "#fff", cursor: "pointer" }}>
                     <Button
-                      variant="contained"
+                      variant="text"
                       onClick={handleOpenStaffLogin}
                       sx={{
-                        bgcolor: "secondary.main",
-                        color: "#fff",
+                        color: "secondary.main",
                         fontSize: 20,
                       }}
                       fullWidth

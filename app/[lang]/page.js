@@ -137,6 +137,7 @@ function HomeLogin({ params: { lang } }) {
               md={8}
               onClick={async () => {
                 setLoanInfo({ isClient: true });
+                push(`/${lang}/loan`);
               }}
               sx={{
                 cursor: "pointer",

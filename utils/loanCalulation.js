@@ -11,20 +11,7 @@ export function handleSetEMI(currentLoan, setLoanInfo, employeeData = {}) {
       currentLoan.title,
       activeLoans
     );
-  localStorage.setItem(
-    "currentLoan",
-    JSON.stringify({
-      ...currentLoan,
-      loanAmount: loanAmount,
-      numberOfMonths: numberOfMonths,
-      EMI,
-      interestPayable: totalInterests,
-      payPerMonth: EMI / Number(numberOfMonths),
-      totalAppliedLayers: totalInterestLayers,
-      activeLoansDeductions: activeLoansDeductions,
-      ...employeeData,
-    })
-  );
+
   setLoanInfo({
     loanAmount: loanAmount,
     numberOfMonths: numberOfMonths,
