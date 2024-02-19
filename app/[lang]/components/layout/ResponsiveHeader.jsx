@@ -122,6 +122,7 @@ function ResponsiveHeader(props) {
                   sx={{ color: "#fff", cursor: "pointer" }}
                   onClick={() => {
                     signOut({ callbackUrl: `/${props.lang}` });
+                    localStorage.removeItem("currentLoan");
                   }}
                   display={{
                     xs: "none",

@@ -1,4 +1,3 @@
-import { loanDetailsData } from "@public/loans";
 import axios from "axios";
 import { signIn } from "next-auth/react";
 export async function handleStaffLogin(loginCredindtials, setIsLogingin) {
