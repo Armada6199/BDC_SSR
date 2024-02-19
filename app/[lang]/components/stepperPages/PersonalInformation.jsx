@@ -49,7 +49,7 @@ function PersonalInformation({}) {
               helperText={errors.employeeName?.message}
               {...register("employeeName", {
                 required: personalInformation.errors?.personalInfoInput,
-                value: session.employeeName || currentLoan.employeeName,
+                value: session?.employeeName || currentLoan.employeeName,
               })}
               sx={{
                 "& .MuiInputBase-input.Mui-disabled": {
@@ -71,7 +71,7 @@ function PersonalInformation({}) {
               helperText={errors.fileNumber?.message}
               {...register("fileNumber", {
                 required: personalInformation.errors?.personalInfoInput,
-                value: session.fileNumber || currentLoan.fileNumber,
+                value: session?.fileNumber || currentLoan.fileNumber,
               })}
             />
           </Grid>
@@ -94,7 +94,7 @@ function PersonalInformation({}) {
               helperText={errors.jobTitle?.message}
               {...register("jobTitle", {
                 required: personalInformation.errors?.personalInfoInput,
-                value: session.jobTitle || currentLoan.jobTitle,
+                value: session?.jobTitle || currentLoan.jobTitle,
               })}
               sx={{
                 "& .MuiInputBase-input.Mui-disabled": {
@@ -134,7 +134,7 @@ function PersonalInformation({}) {
               helperText={errors.employeeLevel?.message}
               {...register("employeeLevel", {
                 required: personalInformation.errors.personalInfoInput,
-                value: session.employeeLevel || currentLoan.employeeLevel,
+                value: session?.employeeLevel || currentLoan.employeeLevel,
               })}
               sx={{
                 "& .MuiInputBase-input.Mui-disabled": {
@@ -155,7 +155,7 @@ function PersonalInformation({}) {
               helperText={errors.jobLevel?.message}
               {...register("jobLevel", {
                 required: personalInformation.errors.personalInfoInput,
-                value: session.jobLevel || currentLoan.jobLevel,
+                value: session?.jobLevel || currentLoan.jobLevel,
               })}
               sx={{
                 "& .MuiInputBase-input.Mui-disabled": {
@@ -179,7 +179,7 @@ function PersonalInformation({}) {
               helperText={errors.employeeNumber?.message}
               {...register("employeeNumber", {
                 required: personalInformation.errors.personalInfoInput,
-                value: session.employeeNumber || currentLoan.employeeNumber,
+                value: session?.employeeNumber || currentLoan.employeeNumber,
               })}
               sx={{
                 "& .MuiInputBase-input.Mui-disabled": {
@@ -203,7 +203,7 @@ function PersonalInformation({}) {
                 helperText={errors.workPlace?.message}
                 {...register("workPlace", {
                   required: personalInformation.errors.personalInfoInput,
-                  value: session.employeeNumber || currentLoan.workPlace,
+                  value: session?.employeeNumber || currentLoan.workPlace,
                 })}
                 sx={{
                   "& .MuiInputBase-input.Mui-disabled": {
