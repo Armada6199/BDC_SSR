@@ -108,17 +108,7 @@ export const redirectedPathName = (pathName, locale) => {
   return segments.join("/");
 };
 export const handleSetDefaultLoanValues = (currentLoan, setLoanInfo) => {
-  const maxAmount =
-    currentLoan.maxAmountAfterDeduction || currentLoan.maxAmount;
-  const loanAmount = currentLoan.loanAmount
-    ? currentLoan.loanAmount
-    : maxAmount / 2;
-  const numberOfMonths = currentLoan.numberOfMonths
-    ? currentLoan.numberOfMonths
-    : currentLoan.maxMonths / 2;
-  const currentSalary = currentLoan.currentSalary
-    ? currentLoan.currentSalary
-    : 10000 / 2;
+  const { loanAmount, numberOfMonths, currentSalary } = currentLoan;
   setLoanInfo({
     loanAmount,
     numberOfMonths,

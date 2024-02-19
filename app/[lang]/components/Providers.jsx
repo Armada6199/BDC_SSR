@@ -8,6 +8,7 @@ function Providers({ children, lang }) {
   const methods = useForm({
     mode: "onSubmit",
     reValidateMode: "onSubmit",
+    // reValidateMode:'onChange',
   });
   return (
     <FormProvider {...methods}>

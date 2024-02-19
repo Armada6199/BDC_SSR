@@ -36,11 +36,8 @@ function LoanStepperPage({ params: { lang } }) {
       setActiveStep((prevActiveStep) => prevActiveStep - 1);
     } else return;
   };
-  const { handleSubmit, setValue } = useFormContext();
-  useEffect(() => {
-    setValue("currentSalary_Input", currentLoan.currentSalary);
-    setValue("currentSalary_Slider", currentLoan.currentSalary);
-  }, []);
+  const { handleSubmit } = useFormContext();
+
   if (status === "loading") {
     return (
       <Grid container height={"100vh"}>

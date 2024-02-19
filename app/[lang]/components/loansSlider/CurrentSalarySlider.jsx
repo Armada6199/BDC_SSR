@@ -21,9 +21,11 @@ function CurrentSalarySlider({ label }) {
   const {
     register,
     formState: { errors },
+    setValue,
   } = useFormContext();
   const { data: session } = useSession();
-  console.log(currentLoan.currentSalary);
+  setValue("currentSalary_Input", currentLoan.currentSalary);
+  setValue("currentSalary_Slider", currentLoan.currentSalary);
   return (
     <FormControl
       fullWidth
@@ -93,7 +95,7 @@ function CurrentSalarySlider({ label }) {
             step={50}
             {...register("currentSalary_Slider", {
               required:
-                currentLoan.currentSalary == 0 || session.currentSalary == 0
+                currentLoan.currentSalary == 0
                   ? "Kindly Choose Salary amount"
                   : "Kindly Choose Salary amount",
             })}
