@@ -22,19 +22,19 @@ const CurrentLoanProvider = ({ children, lang }) => {
       ...prev,
       ...data,
     }));
-
+    const localData = JSON.parse(localStorage.getItem("currentLoan"));
     localStorage.setItem(
       "currentLoan",
-      JSON.stringify({ ...currentLoan, ...data })
+      JSON.stringify({ ...localData, ...data })
     );
   }
-  useEffect(() => {
-    if (localStorage.getItem("currentLoan")) {
-      setCurrentLoan(JSON.parse(localStorage.getItem("currentLoan")));
-    } else {
-      localStorage.setItem("currentLoan", JSON.stringify({ ...currentLoan }));
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (localStorage.getItem("currentLoan")) {
+  //     setCurrentLoan(JSON.parse(localStorage.getItem("currentLoan")));
+  //   } else {
+  //     localStorage.setItem("currentLoan", JSON.stringify({ ...currentLoan }));
+  //   }
+  // }, []);
 
   useEffect(() => {
     const getPage = async () => {
@@ -48,15 +48,12 @@ const CurrentLoanProvider = ({ children, lang }) => {
     <CurrentLoanContext.Provider
       value={{
         currentLoan,
-        setCurrentLoan,
         changeLoanDetailsLocale,
         loanDetailsLocale,
         localePageContent,
-        setLocalePageContent,
         activeStep,
         setActiveStep,
         loans,
-        setLoans,
         setLoanInfo,
       }}
     >

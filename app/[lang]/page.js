@@ -69,8 +69,6 @@ function HomeLogin({ params: { lang } }) {
               </Typography>
             </Grid>
           </Grid>
-
-          {/* <Box width={"100%"} component={"img"} src={businessImg}></Box> */}
         </Grid>
 
         <Grid
