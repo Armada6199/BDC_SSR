@@ -109,7 +109,7 @@ function PersonalInformation({}) {
               {personalInformation.joiningDateLabel}
             </Typography>
             <CustomDatePicker
-              value={session.joiningDate || currentLoan.joiningDate}
+              value={session?.joiningDate || currentLoan.joiningDate}
               disabled={session ? true : false}
             />
           </Grid>
