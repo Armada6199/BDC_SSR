@@ -9,7 +9,6 @@ import LoginModal from "./components/LoginModal";
 import { CurrentLoanContext } from "@hooks/CurrentLoanProvider";
 import { useRouter } from "next/navigation";
 import Loader from "./components/Loader";
-import { redirectedPathName } from "@utils/loanCalulation";
 import { CustomSnackbar } from "./components/CustomSnackbar";
 
 function HomeLogin({ params: { lang } }) {

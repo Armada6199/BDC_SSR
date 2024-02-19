@@ -132,7 +132,6 @@ function LoginModal({ handleCloseStaffLogin, lang, setOpenSnack }) {
                 message: res.message,
                 status: res.status,
               });
-              console.log(res.status);
               if (res.status == 200) {
                 push(redirectedPathName(lang) + "/loan");
                 handleCloseStaffLogin();

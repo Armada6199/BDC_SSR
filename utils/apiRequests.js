@@ -12,8 +12,6 @@ export async function handleStaffLogin(loginCredindtials, setIsLogingin) {
       return { status: 401, message: "Invalid Credintials" };
     } else {
       setIsLogingin(false);
-
-      localStorage.removeItem("currentLoan");
       return { status: 200, message: "Login Successfull" };
     }
   } catch (error) {

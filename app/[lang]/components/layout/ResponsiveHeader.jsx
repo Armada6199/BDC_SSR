@@ -69,13 +69,7 @@ function ResponsiveHeader(props) {
 
   const container =
     window !== undefined ? () => window().document.body : undefined;
-  if (status == "loading") {
-    return (
-      <Grid container item>
-        <Loader />
-      </Grid>
-    );
-  }
+
   return localePageContent.heading ? (
     <Box display={"flex"} sx={{ boxSizing: "border-box" }} height={"60px"}>
       <AppBar
@@ -121,8 +115,8 @@ function ResponsiveHeader(props) {
                   item
                   sx={{ color: "#fff", cursor: "pointer" }}
                   onClick={() => {
-                    signOut({ callbackUrl: `/${props.lang}` });
                     localStorage.removeItem("currentLoan");
+                    signOut({ callbackUrl: `/${props.lang}` });
                   }}
                   display={{
                     xs: "none",
