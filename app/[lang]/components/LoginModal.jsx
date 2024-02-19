@@ -7,28 +7,25 @@ import {
   Checkbox,
   FormControlLabel,
   Button,
-  Alert,
 } from "@mui/material";
-import Snackbar from "@mui/material/Snackbar";
 import { glassmorphismStyle } from "@styles/styles.js";
 import ClearIcon from "@mui/icons-material/Clear";
 import Image from "next/image";
 import "@/styles/styles.css";
 import { CurrentLoanContext } from "@hooks/CurrentLoanProvider";
-import { usePathname } from "next/navigation";
 import { handleStaffLogin } from "@utils/apiRequests";
 import { useRouter } from "next/navigation";
 import { redirectedPathName } from "@utils/loanCalulation";
-function LoginModal({ handleCloseStaffLogin, lang }) {
+
+function LoginModal({ handleCloseStaffLogin, lang, setOpenSnack }) {
   const [isLoginingIn, setIsLogingin] = useState(false);
-  const pathName = usePathname();
   const { push } = useRouter();
+
   const [loginCredindtials, setLoginCredindtials] = useState({
     username: "",
     password: "",
   });
-  const showStaffMessage = pathName === `/${lang}/profile`;
-  const { setLoanInfo, localePageContent } = useContext(CurrentLoanContext);
+  const { localePageContent } = useContext(CurrentLoanContext);
 
   return (
     <Grid
@@ -124,9 +121,22 @@ function LoginModal({ handleCloseStaffLogin, lang }) {
           <Button
             fullWidth
             onClick={async () => {
-              await handleStaffLogin(loginCredindtials, setIsLogingin);
-              push(redirectedPathName(lang) + "/loan");
-              handleCloseStaffLogin();
+              const res = await handleStaffLogin(
+                loginCredindtials,
+                setIsLogingin,
+                setOpenSnack
+              );
+
+              setOpenSnack({
+                isOpen: true,
+                message: res.message,
+                status: res.status,
+              });
+              console.log(res.status);
+              if (res.status == 200) {
+                push(redirectedPathName(lang) + "/loan");
+                handleCloseStaffLogin();
+              }
             }}
             disabled={isLoginingIn}
             variant="contained"
@@ -141,15 +151,6 @@ function LoginModal({ handleCloseStaffLogin, lang }) {
           </Button>
         </Grid>
       </Grid>
-      {showStaffMessage && (
-        <Snackbar open={true} autoHideDuration={6000} severity="danger">
-          <Alert severity="warning" variant="filled" sx={{ width: "100%" }}>
-            <Typography variant="body1" fontWeight={"500"}>
-              {localePageContent.loginPage.guestWarningMessage}
-            </Typography>
-          </Alert>
-        </Snackbar>
-      )}
     </Grid>
   );
 }

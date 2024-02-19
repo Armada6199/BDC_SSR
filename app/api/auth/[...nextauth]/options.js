@@ -94,6 +94,7 @@ export const options = {
           employeeNumber: userValues.employeeNumber,
           jobLevel: 1,
           workPlace: "Inspire",
+          employeeNumber: 212,
           activeLoans: [
             {
               activeLoanLeftMonths: 10,

@@ -5,7 +5,7 @@ import Stepper from "@mui/material/Stepper";
 import Typography from "@mui/material/Typography";
 import { Grid, useMediaQuery } from "@mui/material";
 import StepperComponentsHOC from "../components/StepperComponentsHOC.jsx";
-import { useForm } from "react-hook-form";
+import { useFormContext } from "react-hook-form";
 import StepperNavigationButtons from "../components/StepperNavigationButtons.jsx";
 import MobileStepper from "@mui/material/MobileStepper";
 import "@styles/styles.css";
@@ -15,9 +15,6 @@ import Loader from "../components/Loader.jsx";
 import { handleNext } from "@utils/loanCalulation.js";
 function LoanStepperPage({ params: { lang } }) {
   const { data: session, status } = useSession({});
-  if (session) {
-    localStorage.setItem("employeeData", JSON.stringify(session));
-  }
 
   const {
     currentLoan,
@@ -33,26 +30,17 @@ function LoanStepperPage({ params: { lang } }) {
     finished: false,
     status: { errs: [] },
   });
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm({
-    mode: "onSubmit",
-    reValidateMode: "onSubmit",
-    // reValidateMode:'onChange',
-    defaultValues: {
-      ...currentLoan,
-      currentSalary_Slider: currentLoan.currentSalary,
-      currentSalary_Input: currentLoan.currentSalary,
-    },
-  });
 
   const handleBack = () => {
     if (activeStep > 0) {
       setActiveStep((prevActiveStep) => prevActiveStep - 1);
     } else return;
   };
+  const { handleSubmit, setValue } = useFormContext();
+  useEffect(() => {
+    setValue("currentSalary_Input", currentLoan.currentSalary);
+    setValue("currentSalary_Slider", currentLoan.currentSalary);
+  }, []);
   if (status === "loading") {
     return (
       <Grid container height={"100vh"}>
@@ -73,7 +61,6 @@ function LoanStepperPage({ params: { lang } }) {
         )
       )}
     >
-      (
       <Grid
         container
         justifyContent={isMobile ? "center" : "flex-start"}
@@ -172,8 +159,6 @@ function LoanStepperPage({ params: { lang } }) {
         >
           <Grid container item md={12}>
             <StepperComponentsHOC
-              register={register}
-              errors={errors}
               uploadProgress={uploadProgress}
               setUploadProgress={setUploadProgress}
               lang={lang}
@@ -203,7 +188,6 @@ function LoanStepperPage({ params: { lang } }) {
           </Grid>
         </Box>
       </Grid>
-      )
     </form>
   );
 }

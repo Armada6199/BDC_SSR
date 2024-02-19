@@ -8,8 +8,10 @@ import {
   Typography,
   FormHelperText,
   useMediaQuery,
+  Snackbar,
+  Alert,
 } from "@mui/material";
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import ActiveLoanForm from "../ActiveLoanForm";
 import LoanDetails from "../LoanDetails";
 import LoanTypes from "../LoanTypes";
@@ -24,8 +26,26 @@ import {
   handleSliderChange,
 } from "@utils/loanCalulation";
 import { useSession } from "next-auth/react";
-function LoanInformation({ register, errors }) {
+import { useFormContext } from "react-hook-form";
+function LoanInformation() {
   const { data: session } = useSession();
+  const [openMinDialog, setOpenMinDialog] = useState(false);
+  const {
+    formState: { errors },
+    register,
+  } = useFormContext();
+  const handleCloseDialog = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setOpenMinDialog(false);
+  };
+  useEffect(() => {
+    if (errors.numberOfMonths_Input || errors.numberOfMonths_Slider)
+      setOpenMinDialog(true);
+    else handleCloseDialog;
+  }, [errors.numberOfMonths_Slider, errors.numberOfMonths_Input]);
   const {
     currentLoan,
     setLoanInfo,
@@ -73,28 +93,20 @@ function LoanInformation({ register, errors }) {
         <Grid container item sm={12} md={10} lg={12} spacing={4} gap={4}>
           <Grid container item sm={12}>
             <AmountSlider
-              currentLoan={currentLoan}
-              register={register}
-              errors={errors}
               loanDetailsLocale={loanDetailsLocale}
               label={loanInformation.loanAmountLabel}
             />
           </Grid>
           <Grid container item>
             <MonthsSlider
-              currentLoan={currentLoan}
-              register={register}
-              errors={errors}
               loanDetailsLocale={loanDetailsLocale}
               label={loanInformation.monthsLabel}
+              setOpenMinDialog={setOpenMinDialog}
             />
           </Grid>
           <Grid container item>
             <CurrentSalarySlider
-              currentLoan={currentLoan}
               handleSliderChange={handleSliderChange}
-              register={register}
-              errors={errors}
               loanDetailsLocale={loanDetailsLocale}
               label={loanInformation.salaryLabel}
             />
@@ -104,7 +116,7 @@ function LoanInformation({ register, errors }) {
           <FormControl
             fullWidth
             disabled={currentLoan.isStaff}
-            error={errors.isCurrentLoan?.message ? true : false}
+            error={errors?.isCurrentLoan?.message ? true : false}
           >
             <FormLabel
               sx={{ textAlign: "start" }}
@@ -177,7 +189,7 @@ function LoanInformation({ register, errors }) {
                 />
               </Grid>
             </RadioGroup>
-            <FormHelperText>{errors.isCurrentLoan?.message}</FormHelperText>
+            <FormHelperText>{errors?.isCurrentLoan?.message}</FormHelperText>
           </FormControl>
         </Grid>
         {currentLoan.hasPrevLoan && (
@@ -196,6 +208,25 @@ function LoanInformation({ register, errors }) {
             ))}
           </Grid>
         )}
+        <Snackbar
+          open={openMinDialog}
+          autoHideDuration={6000}
+          onClose={handleCloseDialog}
+          anchorOrigin={{ vertical: "top", horizontal: "center" }}
+        >
+          <Alert
+            onClose={handleCloseDialog}
+            severity="warning"
+            variant="filled"
+            sx={{ width: "100%" }}
+          >
+            <Typography>
+              {" "}
+              {errors?.numberOfMonths_Input?.message ||
+                errors?.numberOfMonths_Slider?.message}
+            </Typography>
+          </Alert>
+        </Snackbar>
       </Grid>
       {!isMobile && (
         <Grid container alignItems={"center"} item md={5}>

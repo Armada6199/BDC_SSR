@@ -75,14 +75,16 @@ function SubCalculator({ lang }) {
             <Typography variant="body1">
               {localePageContent.loanEligibility.charts.EMIExplainationLabel}
             </Typography>
-            <Typography variant="h5">{currentLoan.EMI + " "} </Typography>
+            <Typography variant="h5">
+              {currentLoan.EMI.toFixed(3) + " "}{" "}
+            </Typography>
           </Grid>
           <Grid item xs={12} textAlign={"center"} md={6}>
             <Typography variant="h6">
               {localePageContent.loanEligibility.interestPayableLabel}
             </Typography>
             <Typography variant="h5">
-              {currentLoan.interestPayable + " "}{" "}
+              {currentLoan.interestPayable.toFixed(3) + " "}{" "}
             </Typography>
           </Grid>
         </Grid>

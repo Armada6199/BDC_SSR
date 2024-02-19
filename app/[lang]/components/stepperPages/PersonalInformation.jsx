@@ -3,14 +3,19 @@ import React, { useContext } from "react";
 import CustomDatePicker from "../CustomDatePicker";
 import { CurrentLoanContext } from "@hooks/CurrentLoanProvider";
 import { useSession } from "next-auth/react";
+import { useFormContext } from "react-hook-form";
 
-function PersonalInformation({ register, errors }) {
+function PersonalInformation({}) {
   const isMobile = useMediaQuery("(max-width:650px)");
   const { data: session } = useSession();
   const {
     currentLoan,
     localePageContent: { personalInformation },
   } = useContext(CurrentLoanContext);
+  const {
+    register,
+    formState: { errors },
+  } = useFormContext();
   return (
     <Grid
       container
@@ -44,7 +49,7 @@ function PersonalInformation({ register, errors }) {
               helperText={errors.employeeName?.message}
               {...register("employeeName", {
                 required: personalInformation.errors?.personalInfoInput,
-                value: currentLoan.employeeName,
+                value: session.employeeName || currentLoan.employeeName,
               })}
               sx={{
                 "& .MuiInputBase-input.Mui-disabled": {
@@ -66,7 +71,7 @@ function PersonalInformation({ register, errors }) {
               helperText={errors.fileNumber?.message}
               {...register("fileNumber", {
                 required: personalInformation.errors?.personalInfoInput,
-                value: currentLoan.fileNumber,
+                value: session.fileNumber || currentLoan.fileNumber,
               })}
             />
           </Grid>
@@ -89,7 +94,7 @@ function PersonalInformation({ register, errors }) {
               helperText={errors.jobTitle?.message}
               {...register("jobTitle", {
                 required: personalInformation.errors?.personalInfoInput,
-                value: currentLoan.jobTitle,
+                value: session.jobTitle || currentLoan.jobTitle,
               })}
               sx={{
                 "& .MuiInputBase-input.Mui-disabled": {
@@ -104,7 +109,7 @@ function PersonalInformation({ register, errors }) {
               {personalInformation.joiningDateLabel}
             </Typography>
             <CustomDatePicker
-              value={currentLoan.joiningDate}
+              value={session.joiningDate || currentLoan.joiningDate}
               disabled={session ? true : false}
             />
           </Grid>
@@ -129,7 +134,7 @@ function PersonalInformation({ register, errors }) {
               helperText={errors.employeeLevel?.message}
               {...register("employeeLevel", {
                 required: personalInformation.errors.personalInfoInput,
-                value: currentLoan.employeeLevel,
+                value: session.employeeLevel || currentLoan.employeeLevel,
               })}
               sx={{
                 "& .MuiInputBase-input.Mui-disabled": {
@@ -150,7 +155,7 @@ function PersonalInformation({ register, errors }) {
               helperText={errors.jobLevel?.message}
               {...register("jobLevel", {
                 required: personalInformation.errors.personalInfoInput,
-                value: currentLoan.jobLevel,
+                value: session.jobLevel || currentLoan.jobLevel,
               })}
               sx={{
                 "& .MuiInputBase-input.Mui-disabled": {
@@ -174,7 +179,7 @@ function PersonalInformation({ register, errors }) {
               helperText={errors.employeeNumber?.message}
               {...register("employeeNumber", {
                 required: personalInformation.errors.personalInfoInput,
-                value: currentLoan.employeeNumber,
+                value: session.employeeNumber || currentLoan.employeeNumber,
               })}
               sx={{
                 "& .MuiInputBase-input.Mui-disabled": {
@@ -198,7 +203,7 @@ function PersonalInformation({ register, errors }) {
                 helperText={errors.workPlace?.message}
                 {...register("workPlace", {
                   required: personalInformation.errors.personalInfoInput,
-                  value: currentLoan.workPlace,
+                  value: session.employeeNumber || currentLoan.workPlace,
                 })}
                 sx={{
                   "& .MuiInputBase-input.Mui-disabled": {

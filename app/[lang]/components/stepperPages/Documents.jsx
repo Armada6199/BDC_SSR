@@ -5,13 +5,15 @@ import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import LoanAttatchmentsPreview from "../LoanAttatchmentsPreview";
 import { CurrentLoanContext } from "@hooks/CurrentLoanProvider";
 import { handleAddAttatchments } from "@utils/attatchments";
+import { useFormContext } from "react-hook-form";
 
-function Documents({ register, uploadProgress, setUploadProgress }) {
+function Documents({ uploadProgress, setUploadProgress }) {
   const {
     currentLoan,
     setLoanInfo,
     localePageContent: { documents },
   } = useContext(CurrentLoanContext);
+  const { register } = useFormContext();
   return (
     <Grid container alignItems={"flex-start"} spacing={12}>
       <Grid

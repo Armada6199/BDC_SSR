@@ -8,7 +8,6 @@ export default function calculateEMI(
 ) {
   let totalInterests = 0;
   // console.trace();
-  console.log("calculation".repeat(20));
 
   let totalAmount = loanAmount;
   let activeLoansDeductions = [];

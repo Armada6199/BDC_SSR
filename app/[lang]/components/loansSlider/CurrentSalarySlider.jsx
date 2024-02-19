@@ -14,16 +14,22 @@ import { loanInfoInputStyle } from "@styles/styles.js";
 import { handleSliderChange } from "@utils/loanCalulation";
 import { CurrentLoanContext } from "@hooks/CurrentLoanProvider";
 import { useSession } from "next-auth/react";
-function CurrentSalarySlider({ register, currentLoan, errors, label }) {
+import { useFormContext } from "react-hook-form";
+function CurrentSalarySlider({ label }) {
   const isMobile = useMediaQuery("(max-width:600px)");
-  const { setLoanInfo } = useContext(CurrentLoanContext);
+  const { setLoanInfo, currentLoan } = useContext(CurrentLoanContext);
+  const {
+    register,
+    formState: { errors },
+  } = useFormContext();
   const { data: session } = useSession();
+  console.log(currentLoan.currentSalary);
   return (
     <FormControl
       fullWidth
       error={
-        errors.currentSalary_Slider?.message &&
-        errors.currentSalary_Input?.message
+        errors?.currentSalary_Slider?.message &&
+        errors?.currentSalary_Input?.message
           ? true
           : false
       }
@@ -87,7 +93,7 @@ function CurrentSalarySlider({ register, currentLoan, errors, label }) {
             step={50}
             {...register("currentSalary_Slider", {
               required:
-                currentLoan.currentSalary === 0
+                currentLoan.currentSalary == 0 || session.currentSalary == 0
                   ? "Kindly Choose Salary amount"
                   : "Kindly Choose Salary amount",
             })}

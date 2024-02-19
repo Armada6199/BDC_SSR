@@ -18,13 +18,25 @@ import { redirectedPathName } from "@utils/loanCalulation";
 import { usePathname } from "next/navigation";
 import Loader from "../Loader";
 import LoginModal from "../LoginModal";
+import { CustomSnackbar } from "../CustomSnackbar";
 
 const drawerWidth = 240;
 
 function ResponsiveHeader(props) {
   const { window } = props;
   const { data: session, status } = useSession({});
+  const [openSnack, setOpenSnack] = useState({
+    message: "",
+    isOpen: false,
+    status: null,
+  });
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
 
+    setOpenSnack(false);
+  };
   const [mobileOpen, setMobileOpen] = useState(false);
   const { localePageContent, currentLoan } = useContext(CurrentLoanContext);
   const isMobile = useMediaQuery("(max-width:600px)");
@@ -104,21 +116,6 @@ function ResponsiveHeader(props) {
               alignItems={"center"}
               gap={4}
             >
-              <Grid
-                item
-                component={Link}
-                color={"inherit"}
-                style={{ textDecoration: "none" }}
-                href={
-                  `/${redirectedPathName(props.lang == "en" ? "ar" : "en")}` +
-                  pathName.split("/").splice(2).join("/")
-                }
-                sx={{ cursor: "pointer" }}
-              >
-                <Typography variant="h6">
-                  {localePageContent.switchLanguageLabel}
-                </Typography>
-              </Grid>
               {session ? (
                 <Grid
                   item
@@ -156,6 +153,21 @@ function ResponsiveHeader(props) {
                   </Grid>
                 )
               )}
+              <Grid
+                item
+                component={Link}
+                color={"inherit"}
+                style={{ textDecoration: "none" }}
+                href={
+                  `/${redirectedPathName(props.lang == "en" ? "ar" : "en")}` +
+                  pathName.split("/").splice(2).join("/")
+                }
+                sx={{ cursor: "pointer" }}
+              >
+                <Typography variant="h6">
+                  {localePageContent.switchLanguageLabel}
+                </Typography>
+              </Grid>
             </Grid>
           </Grid>
         </Toolbar>
@@ -204,9 +216,16 @@ function ResponsiveHeader(props) {
             handleCloseStaffLogin={handleCloseStaffLogin}
             localePageContent={localePageContent}
             lang={props.lang}
+            openSnack={openSnack}
+            setOpenSnack={setOpenSnack}
           />
         </Grid>
       </Modal>
+      <CustomSnackbar
+        handleClose={handleClose}
+        lang={props.lang}
+        openSnack={openSnack}
+      />
     </Box>
   ) : (
     <Grid

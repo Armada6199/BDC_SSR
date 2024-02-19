@@ -1,6 +1,6 @@
 "use client";
 import { Box, Grid, Typography, Modal } from "@mui/material";
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import BusinessCenterOutlinedIcon from "@mui/icons-material/BusinessCenterOutlined";
 import { glassmorphismStyle } from "@styles/styles.js";
 import Person2OutlinedIcon from "@mui/icons-material/Person2Outlined";
@@ -10,6 +10,7 @@ import { CurrentLoanContext } from "@hooks/CurrentLoanProvider";
 import { useRouter } from "next/navigation";
 import Loader from "./components/Loader";
 import { redirectedPathName } from "@utils/loanCalulation";
+import { CustomSnackbar } from "./components/CustomSnackbar";
 
 function HomeLogin({ params: { lang } }) {
   const { localePageContent, setLoanInfo } = useContext(CurrentLoanContext);
@@ -17,7 +18,18 @@ function HomeLogin({ params: { lang } }) {
   const [openStaff, setOpenStaff] = React.useState(false);
   const handleOpenStaffLogin = () => setOpenStaff(true);
   const handleCloseStaffLogin = () => setOpenStaff(false);
+  const [openSnack, setOpenSnack] = useState({
+    message: "",
+    isOpen: false,
+    status: null,
+  });
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
 
+    setOpenSnack(false);
+  };
   return localePageContent.loginPage ? (
     <Grid container>
       <Grid container md={12} item>
@@ -201,9 +213,15 @@ function HomeLogin({ params: { lang } }) {
             handleCloseStaffLogin={handleCloseStaffLogin}
             localePageContent={localePageContent}
             lang={lang}
+            setOpenSnack={setOpenSnack}
           />
         </Grid>
       </Modal>
+      <CustomSnackbar
+        lang={lang}
+        handleClose={handleClose}
+        openSnack={openSnack}
+      />
     </Grid>
   ) : (
     <Grid

@@ -13,17 +13,17 @@ import EditIcon from "@mui/icons-material/Edit";
 import { loanInfoInputStyle } from "@styles/styles.js";
 import { handleSliderChange } from "@utils/loanCalulation";
 import { CurrentLoanContext } from "@hooks/CurrentLoanProvider";
-function AmountSlider({
-  register,
-  currentLoan,
-  errors,
-  loanDetailsLocale,
-  label,
-}) {
+import { useFormContext } from "react-hook-form";
+function AmountSlider({ label }) {
   const isMobile = useMediaQuery("(max-width:600px)");
+  const { setLoanInfo, currentLoan, loanDetailsLocale } =
+    useContext(CurrentLoanContext);
+  const {
+    register,
+    formState: { errors },
+  } = useFormContext();
   const maxAmount =
     currentLoan.maxAmountAfterDeduction || currentLoan.maxAmount;
-  const { setLoanInfo } = useContext(CurrentLoanContext);
   return (
     <FormControl
       fullWidth

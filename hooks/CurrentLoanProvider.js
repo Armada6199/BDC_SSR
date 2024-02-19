@@ -6,7 +6,6 @@ export const CurrentLoanContext = createContext();
 const CurrentLoanProvider = ({ children, lang }) => {
   const [currentLoan, setCurrentLoan] = useState(loanDetailsData[1]);
   const [loanDetailsLocale, setLoanDetailsLocale] = useState("");
-  const [userType, setUserType] = useState("staff");
   const [localePageContent, setLocalePageContent] = useState("");
   const [activeStep, setActiveStep] = useState(0);
   const [loans, setLoans] = useState(loanDetailsData);
@@ -52,8 +51,6 @@ const CurrentLoanProvider = ({ children, lang }) => {
         setCurrentLoan,
         changeLoanDetailsLocale,
         loanDetailsLocale,
-        userType,
-        setUserType,
         localePageContent,
         setLocalePageContent,
         activeStep,

@@ -5,53 +5,25 @@ import PersonalInformation from "./stepperPages/PersonalInformation";
 import Documents from "./stepperPages/Documents";
 import InteractiveAttatchments from "./stepperPages/InteractiveAttatchments";
 import { CurrentLoanContext } from "@hooks/CurrentLoanProvider";
-function StepperComponentsHOC({
-  register,
-  errors,
-  uploadProgress,
-  setUploadProgress,
-  pageContent,
-  lang,
-}) {
+function StepperComponentsHOC({ uploadProgress, setUploadProgress, lang }) {
   const { activeStep } = useContext(CurrentLoanContext);
   switch (activeStep) {
     case 0:
-      return (
-        <LoanInformation register={register} errors={errors} lang={lang} />
-      );
+      return <LoanInformation lang={lang} />;
     case 1:
-      return (
-        <LoanEligibility
-          register={register}
-          lang={lang}
-        />
-      );
+      return <LoanEligibility lang={lang} />;
     case 2:
-      return (
-        <PersonalInformation
-          register={register}
-          errors={errors}
-          lang={lang}
-        />
-      );
+      return <PersonalInformation lang={lang} />;
     case 3:
       return (
         <Documents
-          register={register}
-          errors={errors}
           uploadProgress={uploadProgress}
           setUploadProgress={setUploadProgress}
           lang={lang}
         />
       );
     case 4:
-      return (
-        <InteractiveAttatchments
-          register={register}
-          errors={errors}
-          lang={lang}
-        />
-      );
+      return <InteractiveAttatchments lang={lang} />;
   }
 }
 

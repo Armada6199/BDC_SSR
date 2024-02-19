@@ -8,6 +8,7 @@ import { CustomBarChat } from "../charts/CustomBarChat";
 import { CurrentLoanContext } from "@hooks/CurrentLoanProvider";
 import { loanIcons } from "@public/icons";
 import TestCards from "../Testcards";
+import { useFormContext } from "react-hook-form";
 
 function LoanEligibility({ lang }) {
   const isMobile = useMediaQuery("(max-width:650px)");
@@ -16,6 +17,7 @@ function LoanEligibility({ lang }) {
     localePageContent: { loanEligibility, loanEligibilityTable },
     loanDetailsLocale,
   } = useContext(CurrentLoanContext);
+
   return (
     <Grid
       container
@@ -205,7 +207,7 @@ function LoanEligibility({ lang }) {
                 {loanEligibility.interestPayableLabel}
               </Typography>
               <Typography variant="h5">
-                {currentLoan.interestPayable}
+                {currentLoan.interestPayable.toFixed(3)}
               </Typography>
             </Grid>
           </Grid>

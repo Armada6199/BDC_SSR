@@ -36,7 +36,7 @@ const NagiationsLinks = ({ localePageContent, lang, mobileOpen = false }) => {
       <Grid container item xs={12} gap={{ xs: 4, sm: 4 }} md={6} xl={4}>
         {localePageContent.heading.navigation.map(
           (nav, index) =>
-            ((nav.link == "/profile" && session) ||
+            (("nav.link == /profile" && session) ||
               (nav.link == "/loan" && (session || currentLoan.isClient))) && (
               <Grid
                 borderBottom={{ xs: "1px solid darkgray", sm: "none" }}

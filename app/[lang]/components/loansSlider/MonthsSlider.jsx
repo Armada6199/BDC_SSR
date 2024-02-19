@@ -17,21 +17,18 @@ import {
   validateGreaterThanSalary,
 } from "@utils/loanCalulation";
 import { CurrentLoanContext } from "@hooks/CurrentLoanProvider";
+import { useFormContext } from "react-hook-form";
 
-function MonthsSlider({ register, errors, currentLoan, label }) {
+function MonthsSlider({ label, setOpenMinDialog }) {
   const isMobile = useMediaQuery("(max-width:600px)");
   // const debouncedMonths=useDebounce(currentLoan.numberOfMonths_Input||currentLoan.numberOfMonths_Slider);
-  const { setLoanInfo } = useContext(CurrentLoanContext);
+  const { setLoanInfo, currentLoan } = useContext(CurrentLoanContext);
+  const {
+    register,
+    formState: { errors },
+  } = useFormContext();
   return (
-    <FormControl
-      fullWidth
-      error={
-        errors.numberOfMonths_Input?.message &&
-        errors.numberOfMonths_Slider?.message
-          ? true
-          : false
-      }
-    >
+    <FormControl fullWidth>
       <Grid container item md={12}>
         <Grid
           container
@@ -51,7 +48,7 @@ function MonthsSlider({ register, errors, currentLoan, label }) {
               sx={loanInfoInputStyle}
               id="numberOfMonthsInput"
               {...register("numberOfMonths_Input", {
-                required: currentLoan.numberOfMonthst
+                required: currentLoan.numberOfMonths
                   ? false
                   : "Kindly Choose Number of Months",
                 min: {
