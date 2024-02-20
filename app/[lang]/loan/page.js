@@ -14,7 +14,7 @@ import { useSession } from "next-auth/react";
 import Loader from "../components/Loader.jsx";
 import { handleNext } from "@utils/loanCalulation.js";
 function LoanStepperPage({ params: { lang } }) {
-  const { data: session, status } = useSession({});
+  const { status } = useSession({});
   const {
     currentLoan,
     activeStep,
@@ -43,6 +43,7 @@ function LoanStepperPage({ params: { lang } }) {
       </Grid>
     );
   }
+
   return (
     localePageContent && (
       <form

@@ -28,13 +28,13 @@ const CurrentLoanProvider = ({ children, lang }) => {
       JSON.stringify({ ...localData, ...data })
     );
   }
-  // useEffect(() => {
-  //   if (localStorage.getItem("currentLoan")) {
-  //     setCurrentLoan(JSON.parse(localStorage.getItem("currentLoan")));
-  //   } else {
-  //     localStorage.setItem("currentLoan", JSON.stringify({ ...currentLoan }));
-  //   }
-  // }, []);
+  useEffect(() => {
+    if (localStorage.getItem("currentLoan")) {
+      setCurrentLoan(JSON.parse(localStorage.getItem("currentLoan")));
+    } else {
+      localStorage.setItem("currentLoan", JSON.stringify({ ...currentLoan }));
+    }
+  }, []);
 
   useEffect(() => {
     const getPage = async () => {

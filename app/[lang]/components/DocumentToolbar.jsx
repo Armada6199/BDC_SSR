@@ -41,7 +41,6 @@ function DocumentToolbar({
       xs={12}
       spacing={2}
       height={"50px"}
-      maxHeight={"50px"}
       sx={{
         ...glassmorphismStyle,
         borderBottomLeftRadius: "10px",
@@ -128,13 +127,13 @@ function DocumentToolbar({
             </Button>
           </Grid>
           <Grid container alignItems={"center"} item xs={6} md={6}>
-            <Grid item xs={12} >
+            <Grid item xs={12}>
               {downloading ? (
                 <Grid container justifyContent={"center"} item xs={12}>
                   <div className="download_loader"></div>
                 </Grid>
               ) : (
-                <Grid item xs={12}  >
+                <Grid item xs={12}>
                   <Button
                     fullWidth
                     sx={{
@@ -205,7 +204,7 @@ function DocumentToolbar({
               </Grid>
               <Grid item xs={6}>
                 <Button
-                fullWidth
+                  fullWidth
                   onClick={() => handleAddSignature(sigPad)}
                   sx={{
                     fontWeight: "600",

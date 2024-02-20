@@ -98,6 +98,16 @@ export function handleChangeCurrentLoan(title, setLoanInfo, currentLoan) {
   const targetLoan = loans.find((e) => e.title === title);
   setLoanInfo({
     ...targetLoan,
+    currentSalary: currentLoan.currentSalary,
+    employeeNumber: currentLoan.employeeNumber,
+    fileId: currentLoan.fileId,
+    joiningDate: currentLoan.joiningDate,
+    joiningDate: currentLoan.joiningDate,
+    employeeLevel: currentLoan.employeeLevel,
+    jobLevel: currentLoan.jobLevel,
+    workPlace: currentLoan.workPlace,
+    jobTitle: currentLoan.jobTitle,
+    employeeName: currentLoan.employeeName,
   });
   handleSetDefaultLoanValues(currentLoan, setLoanInfo);
 }
@@ -116,13 +126,13 @@ export const handleSetDefaultLoanValues = (currentLoan, setLoanInfo) => {
   const numberOfMonths = currentLoan.numberOfMonths
     ? currentLoan.numberOfMonths
     : currentLoan.maxMonths / 2;
-  const currentSalary = currentLoan.currentSalary
-    ? currentLoan.currentSalary
-    : 10000 / 2;
+  // const currentSalary = currentLoan.currentSalary
+  //   ? currentLoan.currentSalary
+  //   : 10000 / 2;
   setLoanInfo({
     loanAmount,
     numberOfMonths,
-    currentSalary,
+    // currentSalary,
   });
 };
 export const handleReset = () => {
