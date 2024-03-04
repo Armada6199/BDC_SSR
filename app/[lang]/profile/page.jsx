@@ -18,8 +18,6 @@ function Profile({ params: props }) {
       redirect(`/${props.lang}/`);
     },
   });
-  [];
-
   const { localePageContent } = useContext(CurrentLoanContext);
 
   const isMobile = useMediaQuery("(max-width:600px)");

@@ -26,6 +26,7 @@
     "dayjs": "^1.11.10",
     "downloadjs": "^1.4.7",
     "events": "^3.3.0",
+    "formik": "^2.4.5",
     "i18next": "^23.7.16",
     "jsonwebtoken": "^9.0.2",
     "jss-rtl": "^0.3.0",

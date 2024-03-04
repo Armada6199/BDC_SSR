@@ -1,6 +1,7 @@
 "use client";
 import AuthProvider from "@hooks/AuthProvider";
 import CurrentLoanProvider from "@hooks/CurrentLoanProvider";
+import { Box } from "@mui/material";
 import TranslationWrapper from "@utils/ThemeRegistry";
 import React from "react";
 import { FormProvider, useForm } from "react-hook-form";

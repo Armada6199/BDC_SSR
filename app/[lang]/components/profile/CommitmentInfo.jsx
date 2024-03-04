@@ -21,7 +21,7 @@ const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
     backgroundColor: "#dd752d",
   },
 }));
-function myInformation({}) {
+function CommitmentInfo({}) {
   const { localePageContent } = useContext(CurrentLoanContext);
   const { data: session } = useSession({
     required: true,
@@ -34,7 +34,7 @@ function myInformation({}) {
     session;
   const isMobile = useMediaQuery("(max-width:600px)");
   return (
-    <Grid container item p={4} xs={12} sx={{ ...glassmorphismStyle }} gap={4}>
+    <Grid container item gap={4}>
       <Grid container gap={1} item xs={12}>
         <Grid item>
           <Typography variant="h4" fontWeight={600}>
@@ -48,71 +48,74 @@ function myInformation({}) {
         </Grid>
       </Grid>
       <Grid container item spacing={isMobile ? 4 : 12} xs={12}>
-        <Grid item>
-          <Image
-            src={profileImg}
-            width={82}
-            height={82}
-            alt="profile"
-            style={{ borderRadius: "50%" }}
-          />
+        <Grid container item xs={4} gap={4}>
+          <Grid item>
+            <Image
+              src={profileImg}
+              width={82}
+              height={82}
+              alt="profile"
+              style={{ borderRadius: "50%" }}
+            />
+          </Grid>
+          <Grid item>
+            <Grid item xs={12}>
+              <Typography variant="body1" fontWeight={700}>
+                {employeeName}
+              </Typography>
+            </Grid>
+            <Grid item xs={12}>
+              <Typography variant="body2" fontWeight={"600"} color={"darkgray"}>
+                {jobTitle}
+              </Typography>
+            </Grid>
+            <Grid item xs={12}>
+              <Typography
+                variant="body1"
+                fontWeight={"500"}
+                sx={{ color: "secondary.dark" }}
+              >
+                {workPlace}
+              </Typography>
+            </Grid>
+          </Grid>
         </Grid>
-        <Grid item>
-          <Grid item xs={12}>
-            <Typography variant="body1" fontWeight={700}>
-              {employeeName}
+        <Grid container spacing={2} item xs={8}>
+          <Grid item xs={6}>
+            <Typography variant="h6" fontWeight={600}>
+              2400 {localePageContent.currencyLabel}
+            </Typography>
+            <Typography variant="body2" fontWeight={700} color={"darkgray"}>
+              {myInformation.salaryAfterDeductionsLabel}
             </Typography>
           </Grid>
-          <Grid item xs={12}>
-            <Typography variant="body2" fontWeight={"600"} color={"darkgray"}>
-              {jobTitle}
+          <Grid item xs={6}>
+            <Typography variant="h6" fontWeight={600}>
+              {activeLoans.length}
+            </Typography>
+            <Typography variant="body2" fontWeight={700} color={"darkgray"}>
+              {myInformation.activeLoansLabel}
             </Typography>
           </Grid>
-          <Grid item xs={12}>
-            <Typography
-              variant="body1"
-              fontWeight={"500"}
-              sx={{ color: "secondary.dark" }}
-            >
-              {workPlace}
+          <Grid item xs={6}>
+            <Typography variant="h6" fontWeight={600}>
+              2
+            </Typography>
+            <Typography variant="body2" fontWeight={700} color={"darkgray"}>
+              {myInformation.previousLoansLabel}
+            </Typography>
+          </Grid>
+          <Grid item xs={6}>
+            <Typography variant="h6" fontWeight={600}>
+              {employeeNumber}
+            </Typography>
+            <Typography variant="body2" fontWeight={700} color={"darkgray"}>
+              {myInformation.employeeNumberLabel}
             </Typography>
           </Grid>
         </Grid>
       </Grid>
-      <Grid container spacing={2} item xs={12}>
-        <Grid item xs={6}>
-          <Typography variant="h6" fontWeight={600}>
-            2400 {localePageContent.currencyLabel}
-          </Typography>
-          <Typography variant="body2" fontWeight={700} color={"darkgray"}>
-            {myInformation.salaryAfterDeductionsLabel}
-          </Typography>
-        </Grid>
-        <Grid item xs={6}>
-          <Typography variant="h6" fontWeight={600}>
-            {activeLoans.length}
-          </Typography>
-          <Typography variant="body2" fontWeight={700} color={"darkgray"}>
-            {myInformation.activeLoansLabel}
-          </Typography>
-        </Grid>
-        <Grid item xs={6}>
-          <Typography variant="h6" fontWeight={600}>
-            2
-          </Typography>
-          <Typography variant="body2" fontWeight={700} color={"darkgray"}>
-            {myInformation.previousLoansLabel}
-          </Typography>
-        </Grid>
-        <Grid item xs={6}>
-          <Typography variant="h6" fontWeight={600}>
-            {employeeNumber}
-          </Typography>
-          <Typography variant="body2" fontWeight={700} color={"darkgray"}>
-            {myInformation.employeeNumberLabel}
-          </Typography>
-        </Grid>
-      </Grid>
+
       <Grid container item xs={12} gap={4}>
         <Grid container item xs={12}>
           <Grid item xs={12}>
@@ -185,4 +188,4 @@ function myInformation({}) {
   );
 }
 
-export default myInformation;
+export default CommitmentInfo;
